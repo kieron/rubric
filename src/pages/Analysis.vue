@@ -1,5 +1,5 @@
 <template>
-  <div id="home">
+  <div id="analysis">
     <!-- breadcrumb -->
     <!-- <nav class="text-sm font-semibold mb-6" aria-label="Breadcrumb">
       <ol class="list-none p-0 inline-flex">
@@ -23,58 +23,95 @@
     <!-- breadcrumb end -->
 
     <div class="items-center mb-6">
-      <p class="text-2xl font-semibold mb-3 lg:mb-0 text-gray-800">
-        Hit Search To Get Started!
-      </p>
-      <p class="pt-2 mb-2 lg:mb-0 text-gray-800">
-        This can take up to a minute in some cases!
-      </p>
+      <h1 class="text-3xl font-semibold mb-3 lg:mb-0 text-gray-800">
+        SERP Analysis
+      </h1>
+      <p>Find out who is ranking and why for any given search result.</p>
       <!-- <button
         class="bg-purple hover:bg-purple-light focus:outline-none rounded-lg px-6 py-2 text-white font-semibold shadow duration-150"
       >
         View Logs
       </button> -->
+      <hr class="mt-2" />
     </div>
 
-    <form v-on:submit.prevent="search" class="mb-5">
-      <input
-        type="text"
-        v-model="query"
-        placeholder="Search Keyword"
-        class="bg-white h-10 w-full xl:w-64 px-5 rounded-lg border text-sm focus:outline-none mr-2"
-      />
-      <select
-        class="bg-white h-10 rounded-lg px-2 border text-sm focus:outline-none mr-2"
-        name="cars"
-        id="cars"
-      >
-        <option value="volvo">Desktop</option>
-        <option value="saab">Mobile</option>
-      </select>
+    <div class="bg-gray-200 p-5 rounded">
+      <h2 class="text-2xl pt-2 mb-2 lg:mb-0 text-gray-800">
+        Search Parameters
+      </h2>
+      <p>
+        What kind of search shall we run? This can take up to a minute for
+        larger result sets.
+      </p>
+      <form v-on:submit.prevent="search" class="my-5">
+        <div class="flex mb-5">
+          <input
+            type="text"
+            v-model="query"
+            placeholder="Search Keyword"
+            class="bg-white h-16 w-64 px-5 rounded-lg border text-sm focus:outline-none mr-2 flex flex-grow"
+          />
+          <button
+            type="submit"
+            class="flex items-center h-16 bg-purple hover:bg-purple-light focus:outline-none rounded-lg px-4 text-white font-semibold shadow duration-150 self-center"
+          >
+            <span v-if="!loading">Start Analysis</span>
+            <span v-if="loading">Crunching Data</span>
+            <svg
+              v-if="!loading"
+              class="w-6 h-6 ml-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <img
+              v-if="loading"
+              class="ml-2 h-5 w-5 mx-auto"
+              src="/img/three-dots.svg"
+            />
+          </button>
+        </div>
+        <div>
+          <select
+            class="bg-white h-10 rounded-lg px-3 border text-sm focus:outline-none mr-2"
+            name="cars"
+            id="cars"
+          >
+            <option value="us">United States</option>
+            <option value="other">Other</option>
+          </select>
+          <select
+            class="bg-white h-10 rounded-lg px-3 border text-sm focus:outline-none mr-2"
+            name="cars"
+            id="cars"
+          >
+            <option value="volvo">Desktop</option>
+            <option value="saab">Mobile</option>
+          </select>
 
-      <input
-        class="bg-white h-10 w-24 rounded-lg px-2 border text-sm focus:outline-none mr-5"
-        type="number"
-        id="quantity"
-        name="quantity"
-        placeholder="Amount"
-        min="1"
-        max="5"
-      />
-      <button
-        v-if="!loading"
-        type="submit"
-        class="bg-purple hover:bg-purple-light focus:outline-none rounded-lg px-6 py-2 text-white font-semibold shadow duration-150"
-      >
-        Search
-      </button>
-    </form>
-
-    <div v-if="loading" class="mx-auto">
-      <img class="mx-auto" src="/img/spinner.svg" />
+          <input
+            class="bg-white h-10 w-24 rounded-lg px-2 border text-sm focus:outline-none mr-5"
+            type="number"
+            id="quantity"
+            name="quantity"
+            placeholder="Amount"
+            min="1"
+            max="5"
+          />
+        </div>
+      </form>
     </div>
 
-    <div v-if="loaded && !loading">
+    <div class="mt-5 slide-in-bottom" v-if="loaded && !loading">
+      <h2 class="text-2xl pt-2 mb-2 lg:mb-0 text-gray-800">Results</h2>
       <p class="text-1xl font-semibold mb-2 lg:mb-0 text-gray-800">
         Your search for {{ articles.searchTerm }} had
         {{ articles.totalResults }} results, and took
@@ -243,6 +280,107 @@
                           </div>
                           <div class="text-sm leading-5 text-gray-500">
                             {{ article.url }}
+                          </div>
+                          <div class="flex flex-wrap mt-2">
+                            <div
+                              class="flex flex-no-wrap items-center mr-2 text-gray-600"
+                            >
+                              <svg
+                                class="inline w-6 h-6 mr-1 align-middle"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
+                                ></path>
+                              </svg>
+
+                              <span
+                                title="Wordcount"
+                                class="whitespace-no-wrap align-middle"
+                                >{{ article.wordCount }} Words</span
+                              >
+                            </div>
+
+                            <div
+                              class="flex flex-no-wrap items-center mr-2 text-gray-600"
+                            >
+                              <svg
+                                class="inline w-6 h-6 mr-1 align-middle"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                                ></path>
+                              </svg>
+
+                              <span
+                                title="Header Count"
+                                class="whitespace-no-wrap align-middle"
+                                >{{ article.headerCount }} Headers</span
+                              >
+                            </div>
+
+                            <div
+                              class="flex flex-no-wrap items-center mr-2 text-gray-600"
+                            >
+                              <svg
+                                class="inline w-6 h-6 mr-1 align-middle"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                ></path>
+                              </svg>
+
+                              <span
+                                title="Image Count"
+                                class="whitespace-no-wrap align-middle"
+                                >{{ article.imageCount }} Images</span
+                              >
+                            </div>
+
+                            <div
+                              class="flex flex-no-wrap items-center mr-2 text-gray-600"
+                            >
+                              <svg
+                                class="inline w-6 h-6 mr-1 align-middle"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
+                                ></path>
+                              </svg>
+
+                              <span
+                                title="Paragraph Count"
+                                class="whitespace-no-wrap align-middle"
+                                >{{ article.paragraphCount }} Paragraphs</span
+                              >
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -510,3 +648,48 @@ export default {
   },
 };
 </script>
+
+<style lang="css" scoped>
+.slide-in-bottom {
+  -webkit-animation: slide-in-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: slide-in-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2021-2-13 18:18:31
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation slide-in-bottom
+ * ----------------------------------------
+ */
+@-webkit-keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+    transform: translateY(1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-bottom {
+  0% {
+    -webkit-transform: translateY(1000px);
+    transform: translateY(1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+</style>
