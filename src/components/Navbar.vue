@@ -1,18 +1,18 @@
 <template>
   <div class="sticky top-0 z-40">
     <div
-      class="w-full h-20 px-6 bg-white border-b flex items-center justify-between"
+      class="flex items-center justify-between w-full h-20 px-6 bg-white border-b"
     >
       <!-- left navbar -->
       <div class="flex">
         <!-- mobile hamburger -->
-        <div class="lg:hidden flex items-center mr-4 text-gray-700">
+        <div class="flex items-center mr-4 text-gray-700 lg:hidden">
           <button
             class="hover:text-purple-600 hover:border-white focus:outline-none navbar-burger"
             @click="toggleSidebar()"
           >
             <svg
-              class="h-5 w-5"
+              class="w-5 h-5"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -28,14 +28,14 @@
             type="search"
             name="serch"
             placeholder="Search"
-            class="bg-white h-10 w-full xl:w-64 px-5 rounded-lg border text-sm focus:outline-none"
+            class="w-full h-10 px-5 text-sm bg-white border rounded-lg xl:w-64 focus:outline-none"
           />
           <button
             type="submit"
-            class="absolute right-0 top-0 mt-3 mr-4 focus:outline-none hover:text-purple-600"
+            class="absolute top-0 right-0 mt-3 mr-4 focus:outline-none hover:text-purple-600"
           >
             <svg
-              class="h-4 w-4 fill-current"
+              class="w-4 h-4 fill-current"
               xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink"
               version="1.1"
@@ -57,11 +57,11 @@
       </div>
 
       <!-- right navbar -->
-      <div class="flex items-center relative">
+      <div class="relative flex items-center">
         <button
-          class="p-1 mr-4 rounded-full text-gray-700 hover:bg-purple-100 hover:text-purple duration-150 focus:outline-none"
+          class="p-1 mr-4 text-gray-700 duration-150 rounded-full hover:bg-purple-100 hover:text-purple focus:outline-none"
         >
-          <div class="flex leading-3 px-0">
+          <div class="flex px-0 leading-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="24"
@@ -74,16 +74,16 @@
                 d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"
               />
             </svg>
-            <div class="h-2 w-2 rounded-full bg-pink z-10 -ml-1"></div>
+            <div class="z-10 w-2 h-2 -ml-1 rounded-full bg-pink"></div>
           </div>
         </button>
         <button
-          class="p-0 focus:outline-none duration-150"
+          class="p-0 duration-150 focus:outline-none"
           @click="dropDownOpen = !dropDownOpen"
         >
           <img
             src="https://images.unsplash.com/photo-1552774021-9ebbb764f03e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
-            class="w-10 h-10 rounded-full shadow-lg border-2 border-white hover:border-purple-600 duration-150"
+            class="w-10 h-10 duration-150 border-2 border-white rounded-full shadow-lg hover:border-purple-600"
           />
         </button>
       </div>
@@ -91,7 +91,7 @@
 
     <!-- dropdown menu -->
     <div
-      class="absolute bg-gray-25 border border-t-0 shadow-xl text-gray-700 rounded-b-lg w-48 bottom-10 right-0 mr-6"
+      class="absolute right-0 w-48 mr-6 text-gray-700 border border-t-0 rounded-b-lg shadow-xl bg-gray-25 bottom-10"
       :class="dropDownOpen ? '' : 'hidden'"
     >
       <a href="#" class="block px-4 py-2 hover:bg-gray-200">Account</a>

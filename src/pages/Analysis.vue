@@ -1,12 +1,12 @@
 <template>
   <div id="analysis">
     <!-- breadcrumb -->
-    <!-- <nav class="text-sm font-semibold mb-6" aria-label="Breadcrumb">
-      <ol class="list-none p-0 inline-flex">
+    <!-- <nav class="mb-6 text-sm font-semibold" aria-label="Breadcrumb">
+      <ol class="inline-flex p-0 list-none">
         <li class="flex items-center text-purple">
           <a href="/" class="text-gray-700">Home</a>
           <svg
-            class="fill-current w-3 h-3 mx-3"
+            class="w-3 h-3 mx-3 fill-current"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 320 512"
           >
@@ -23,20 +23,20 @@
     <!-- breadcrumb end -->
 
     <div class="items-center mb-6">
-      <h1 class="text-3xl font-semibold mb-3 lg:mb-0 text-gray-800">
+      <h1 class="mb-3 text-3xl font-semibold text-gray-800 lg:mb-0">
         SERP Analysis
       </h1>
       <p>Find out who is ranking and why for any given search result.</p>
       <!-- <button
-        class="bg-purple hover:bg-purple-light focus:outline-none rounded-lg px-6 py-2 text-white font-semibold shadow duration-150"
+        class="px-6 py-2 font-semibold text-white duration-150 rounded-lg shadow bg-purple hover:bg-purple-light focus:outline-none"
       >
         View Logs
       </button> -->
       <hr class="mt-2" />
     </div>
 
-    <div class="bg-gray-200 p-5 rounded">
-      <h2 class="text-2xl pt-2 mb-2 lg:mb-0 text-gray-800">
+    <div class="p-5 bg-gray-200 rounded">
+      <h2 class="pt-2 mb-2 text-2xl text-gray-800 lg:mb-0">
         Search Parameters
       </h2>
       <p class="text-gray-600">
@@ -44,17 +44,17 @@
         larger result sets.
       </p>
       <form v-on:submit.prevent="search" class="my-5">
-        <div class="sm:flex mb-5">
+        <div class="mb-5 sm:flex">
           <input
             type="text"
             v-model="query"
             placeholder="Keywords"
             required
-            class="bg-white mb-2 h-16 w-full px-6 rounded-lg border flex focus:outline-none flex-grow mr-2"
+            class="flex flex-grow w-full h-16 px-6 mb-2 mr-2 bg-white border rounded-lg focus:outline-none"
           />
           <button
             type="submit"
-            class="flex items-center w-full sm:w-auto h-16 bg-purple hover:bg-purple-light focus:outline-none rounded-lg px-4 text-white font-semibold duration-150 self-center mb-2 flex-grow whitespace-nowrap"
+            class="flex items-center self-center flex-grow w-full h-16 px-4 mb-2 font-semibold text-white duration-150 rounded-lg sm:w-auto bg-purple hover:bg-purple-light focus:outline-none whitespace-nowrap"
           >
             <div class="flex ml-auto mr-auto">
               <span v-if="!loading" class="whitespace-no-wrap"
@@ -91,7 +91,7 @@
           <p class="mb-2 text-gray-600">Optional Parameters</p>
           <div class="sm:flex sm:justify-between">
             <select
-              class="bg-white h-10 w-full sm:w-1/3 rounded-lg px-3 border text-sm focus:outline-none"
+              class="w-full h-10 px-3 text-sm bg-white border rounded-lg sm:w-1/3 focus:outline-none"
               name="cars"
               id="cars"
               required
@@ -102,7 +102,7 @@
               <option value="Canada">Canada</option>
             </select>
             <select
-              class="bg-white h-10 w-full sm:w-1/3 rounded-lg px-3 border text-sm focus:outline-none my-2 sm:my-0 mx-0 sm:mx-2"
+              class="w-full h-10 px-3 mx-0 my-2 text-sm bg-white border rounded-lg sm:w-1/3 focus:outline-none sm:my-0 sm:mx-2"
               name="device"
               id="device"
               required
@@ -114,7 +114,7 @@
             </select>
 
             <input
-              class="bg-white h-10 w-full sm:w-1/3 rounded-lg px-3 border text-sm focus:outline-none"
+              class="w-full h-10 px-3 text-sm bg-white border rounded-lg sm:w-1/3 focus:outline-none"
               type="number"
               id="quantity"
               name="quantity"
@@ -130,24 +130,24 @@
     </div>
 
     <div class="mt-5 slide-in-bottom" v-if="loaded && !loading">
-      <h2 class="text-2xl pt-2 mb-2 lg:mb-0 text-gray-800">Results</h2>
-      <p class="text-1xl font-semibold mb-2 lg:mb-0 text-gray-800">
+      <h2 class="pt-2 mb-2 text-2xl text-gray-800 lg:mb-0">Results</h2>
+      <p class="mb-2 font-semibold text-gray-800 text-1xl lg:mb-0">
         Your search for {{ articles.searchTerm }} had
         {{ articles.totalResults }} results, and took
         {{ articles.timeTaken }} seconds! Here are the results.
       </p>
 
       <!-- Cards -->
-      <div class="flex flex-wrap -mx-3 mb-6 mt-5">
-        <div class="w-1/2 xl:w-1/4 px-3">
+      <div class="flex flex-wrap mt-5 mb-6 -mx-3">
+        <div class="w-1/2 px-3 xl:w-1/4">
           <div
-            class="w-full bg-white border rounded-lg flex items-center p-0 mb-6 xl:mb-0"
+            class="flex items-center w-full p-0 mb-6 bg-white border rounded-lg xl:mb-0"
           >
             <div
-              class="px-3 py-10 lg:px-5 lg:py-5 bg-pink text-white rounded-l-lg"
+              class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-pink"
             >
               <svg
-                class="w-8 h-8 fill-current mx-auto hidden lg:block"
+                class="hidden w-8 h-8 mx-auto fill-current lg:block"
                 viewBox="0 0 20 20"
               >
                 <path
@@ -156,8 +156,8 @@
               </svg>
             </div>
 
-            <div class="text-gray-700 ml-6 leading-6">
-              <p class="font-semibold text-2xl">
+            <div class="ml-6 leading-6 text-gray-700">
+              <p class="text-2xl font-semibold">
                 {{ articles.averageWordCount }}
               </p>
               <p class="text-sm text-gray-600">Average Words</p>
@@ -165,15 +165,15 @@
           </div>
         </div>
 
-        <div class="w-1/2 xl:w-1/4 px-3">
+        <div class="w-1/2 px-3 xl:w-1/4">
           <div
-            class="w-full bg-white border rounded-lg flex items-center p-0 mb-6 xl:mb-0"
+            class="flex items-center w-full p-0 mb-6 bg-white border rounded-lg xl:mb-0"
           >
             <div
-              class="px-3 py-10 lg:px-5 lg:py-5 bg-purple text-white rounded-l-lg"
+              class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-purple"
             >
               <svg
-                class="w-8 h-8 fill-current mx-auto hidden lg:block"
+                class="hidden w-8 h-8 mx-auto fill-current lg:block"
                 viewBox="0 0 20 20"
               >
                 <path
@@ -182,8 +182,8 @@
               </svg>
             </div>
 
-            <div class="text-gray-700 ml-6 leading-6">
-              <p class="font-semibold text-2xl">
+            <div class="ml-6 leading-6 text-gray-700">
+              <p class="text-2xl font-semibold">
                 {{ articles.averageHeaderCount }}
               </p>
               <p class="text-sm text-gray-600">Average Headers</p>
@@ -191,15 +191,15 @@
           </div>
         </div>
 
-        <div class="w-1/2 xl:w-1/4 px-3">
+        <div class="w-1/2 px-3 xl:w-1/4">
           <div
-            class="w-full bg-white border rounded-lg flex items-center p-0 mb-6 xl:mb-0"
+            class="flex items-center w-full p-0 mb-6 bg-white border rounded-lg xl:mb-0"
           >
             <div
-              class="px-3 py-10 lg:px-5 lg:py-5 bg-orange text-white rounded-l-lg"
+              class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-orange"
             >
               <svg
-                class="w-8 h-8 fill-current mx-auto hidden lg:block"
+                class="hidden w-8 h-8 mx-auto fill-current lg:block"
                 viewBox="0 0 20 20"
               >
                 <path
@@ -208,8 +208,8 @@
               </svg>
             </div>
 
-            <div class="text-gray-700 ml-6 leading-6">
-              <p class="font-semibold text-2xl">
+            <div class="ml-6 leading-6 text-gray-700">
+              <p class="text-2xl font-semibold">
                 {{ articles.averageImagesCount }}
               </p>
               <p class="text-sm text-gray-600">Average Images</p>
@@ -217,15 +217,15 @@
           </div>
         </div>
 
-        <div class="w-1/2 xl:w-1/4 px-3">
+        <div class="w-1/2 px-3 xl:w-1/4">
           <div
-            class="w-full bg-white border rounded-lg flex items-center p-0 mb-6 xl:mb-0"
+            class="flex items-center w-full p-0 mb-6 bg-white border rounded-lg xl:mb-0"
           >
             <div
-              class="px-3 py-10 lg:px-5 lg:py-5 bg-green text-white rounded-l-lg"
+              class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-green"
             >
               <svg
-                class="w-8 h-8 fill-current mx-auto hidden lg:block"
+                class="hidden w-8 h-8 mx-auto fill-current lg:block"
                 viewBox="0 0 20 20"
               >
                 <path
@@ -234,8 +234,8 @@
               </svg>
             </div>
 
-            <div class="text-gray-700 ml-6 leading-6">
-              <p class="font-semibold text-2xl">
+            <div class="ml-6 leading-6 text-gray-700">
+              <p class="text-2xl font-semibold">
                 {{ articles.averageParagraphCount }}
               </p>
               <p class="text-sm text-gray-600">Average Paragraphs</p>
@@ -246,29 +246,29 @@
 
       <!-- table -->
       <div
-        class="flex flex-col mb-12 bg-gray-25 rounded-md border border-gray-300"
+        class="flex flex-col mb-12 border border-gray-300 rounded-md bg-gray-25"
       >
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div
-            class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8"
+            class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8"
           >
             <div class="overflow-hidden sm:rounded-lg">
               <table class="min-w-full divide-y divide-gray-200">
                 <thead>
                   <tr>
                     <th
-                      class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
+                      class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-700 uppercase bg-gray-50"
                     >
                       Results
                     </th>
 
                     <th
-                      class="px-6 py-3 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
+                      class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-gray-700 uppercase bg-gray-50"
                     >
                       Domain Authority
                     </th>
                     <!-- <th
-                      class="px-6 py-3 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
+                      class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-gray-700 uppercase bg-gray-50"
                     >
                       Domain Authority
                     </th> -->
@@ -276,7 +276,7 @@
                   </tr>
                 </thead>
                 <tbody
-                  class="bg-white divide-y divide-gray-200 border-t border-gray-300"
+                  class="bg-white border-t border-gray-300 divide-y divide-gray-200"
                 >
                   <tr
                     :key="article.id"
@@ -285,10 +285,10 @@
                   >
                     <td class="px-6 py-4 whitespace-no-wrap">
                       <div class="flex items-center">
-                        <!-- <div class="h-3 w-3 mr-2 rounded-full bg-green"></div> -->
+                        <!-- <div class="w-3 h-3 mr-2 rounded-full bg-green"></div> -->
                         <div class="">
                           <div
-                            class="text-lg leading-5 font-medium text-gray-900 mb-1"
+                            class="mb-1 text-lg font-medium leading-5 text-gray-900"
                           >
                             {{ article.title }}
                           </div>
@@ -402,34 +402,34 @@
                       </div>
                     </td>
 
-                    <td class="px-6 py-4 whitespace-no-wrap text-center">
+                    <td class="px-6 py-4 text-center whitespace-no-wrap">
                       <span
-                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-200 text-green-700"
+                        class="inline-flex px-2 text-xs font-semibold leading-5 text-green-700 bg-green-200 rounded-full"
                       >
                         {{ article.domainAuthority }}
                       </span>
                     </td>
                     <!-- <td
-                      class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500"
+                      class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
                     >
                       <div class="flex overflow-hidden">
                         <img
-                          class="inline-block h-8 w-8 rounded-full text-white shadow-solid"
+                          class="inline-block w-8 h-8 text-white rounded-full shadow-solid"
                           src="https://images.unsplash.com/flagged/photo-1565257669119-6af359b65ea2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
                           alt=""
                         />
                         <img
-                          class="-ml-1 inline-block h-8 w-8 rounded-full text-white shadow-solid"
+                          class="inline-block w-8 h-8 -ml-1 text-white rounded-full shadow-solid"
                           src="https://images.unsplash.com/photo-1542909168-6296a31d7689?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
                           alt=""
                         />
                         <img
-                          class="-ml-1 inline-block h-8 w-8 rounded-full text-white shadow-solid"
+                          class="inline-block w-8 h-8 -ml-1 text-white rounded-full shadow-solid"
                           src="https://images.unsplash.com/flagged/photo-1579500647742-5f34826ec327?ixlib=rb-1.2.1&auto=format&fit=crop&w=676&q=80"
                           alt=""
                         />
                         <img
-                          class="-ml-1 inline-block h-8 w-8 rounded-full text-white shadow-solid"
+                          class="inline-block w-8 h-8 -ml-1 text-white rounded-full shadow-solid"
                           src="https://images.unsplash.com/photo-1571175351749-e8d06f275d85?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80"
                           alt=""
                         />
@@ -440,7 +440,7 @@
                       </div>
                     </td> -->
                     <!-- <td
-                      class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium"
+                      class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap"
                     >
                       <a
                         href="#"
@@ -458,8 +458,8 @@
         </div>
       </div>
 
-      <div class="bg-gray-200 p-5 rounded">
-        <h2 class="text-2xl pt-2 mb-2 lg:mb-0 text-gray-800">
+      <div class="p-5 bg-gray-200 rounded">
+        <h2 class="pt-2 mb-2 text-2xl text-gray-800 lg:mb-0">
           Blueprint Tool (Coming Soon)
         </h2>
         <p>Load these results into the blueprint tool to help your writing.</p>
@@ -467,7 +467,7 @@
           <button
             type="submit"
             disabled
-            class="flex items-center h-16 bg-gray-500 focus:outline-none rounded-lg px-4 text-gray-700 font-semibold shadow duration-150 self-center cursor-not-allowed"
+            class="flex items-center self-center h-16 px-4 font-semibold text-gray-700 duration-150 bg-gray-500 rounded-lg shadow cursor-not-allowed focus:outline-none"
           >
             <span>Load Into Blueprint Tool</span>
             <svg
@@ -486,7 +486,7 @@
             </svg>
             <img
               v-if="loading"
-              class="ml-2 h-5 w-5 mx-auto"
+              class="w-5 h-5 mx-auto ml-2"
               src="/img/three-dots.svg"
             />
           </button>
@@ -495,55 +495,55 @@
 
       <!-- charts -->
       <!-- <div class="flex flex-wrap -mx-3">
-      <div class="w-full xl:w-1/3 px-3">
-        <p class="text-xl font-semibold mb-4 text-gray-700">Recent Sales</p>
+      <div class="w-full px-3 xl:w-1/3">
+        <p class="mb-4 text-xl font-semibold text-gray-700">Recent Sales</p>
 
-        <div class="w-full bg-white border rounded-lg p-4 mb-8 xl:mb-0">
+        <div class="w-full p-4 mb-8 bg-white border rounded-lg xl:mb-0">
           <canvas id="buyers-chart" width="600" height="400"></canvas>
         </div>
       </div>
 
-      <div class="w-full xl:w-1/3 px-3">
-        <p class="text-xl font-semibold mb-4 text-gray-700">Recent Reviews</p>
+      <div class="w-full px-3 xl:w-1/3">
+        <p class="mb-4 text-xl font-semibold text-gray-700">Recent Reviews</p>
 
-        <div class="w-full bg-white border rounded-lg p-4 mb-8 xl:mb-0">
+        <div class="w-full p-4 mb-8 bg-white border rounded-lg xl:mb-0">
           <canvas id="reviews-chart" width="600" height="400"></canvas>
         </div>
       </div>
 
-      <div class="w-full xl:w-1/3 px-3">
-        <p class="text-xl font-semibold mb-4 text-gray-700">
+      <div class="w-full px-3 xl:w-1/3">
+        <p class="mb-4 text-xl font-semibold text-gray-700">
           Recent Transactions
         </p>
-        <div class="w-full bg-white border rounded-lg p-4">
+        <div class="w-full p-4 bg-white border rounded-lg">
           <div
-            class="w-full bg-gray-100 border rounded-lg flex justify-between items-center px-4 py-2 mb-4"
+            class="flex items-center justify-between w-full px-4 py-2 mb-4 bg-gray-100 border rounded-lg"
           >
             <div>
-              <p class="font-semibold text-base text-gray-700">Jhon Doe</p>
+              <p class="text-base font-semibold text-gray-700">Jhon Doe</p>
               <p class="text-sm text-gray-700">Product XYZ-92</p>
             </div>
-            <span class="text-green-600 font-semibold text-lg">$25.00</span>
+            <span class="text-lg font-semibold text-green-600">$25.00</span>
           </div>
 
           <div
-            class="w-full bg-gray-100 border rounded-lg flex justify-between items-center px-4 py-2 mb-4"
+            class="flex items-center justify-between w-full px-4 py-2 mb-4 bg-gray-100 border rounded-lg"
           >
             <div>
-              <p class="font-semibold text-base text-gray-700">Malcom</p>
+              <p class="text-base font-semibold text-gray-700">Malcom</p>
               <p class="text-sm text-gray-700">Product XYZ-92</p>
             </div>
-            <span class="text-pink font-semibold text-lg">$74.99</span>
+            <span class="text-lg font-semibold text-pink">$74.99</span>
           </div>
 
           <div
-            class="w-full bg-gray-100 border rounded-lg flex justify-between items-center px-4 py-2 mb-4"
+            class="flex items-center justify-between w-full px-4 py-2 mb-4 bg-gray-100 border rounded-lg"
           >
             <div>
-              <p class="font-semibold text-base text-gray-700">Jhon Doe</p>
+              <p class="text-base font-semibold text-gray-700">Jhon Doe</p>
               <p class="text-sm text-gray-700">Product XYZ-92</p>
             </div>
-            <span class="text-green-600 font-semibold text-lg">$182.00</span>
+            <span class="text-lg font-semibold text-green-600">$182.00</span>
           </div>
         </div>
       </div>

@@ -1,10 +1,10 @@
 <template>
   <div
-    class="w-full border-t px-8 py-6 lg:flex justify-between items-center text-gray-700"
+    class="items-center justify-between w-full px-8 py-6 text-gray-700 border-t lg:flex"
   >
     <p class="mb-2 lg:mb-0">©RUBRIC Copyright 2021</p>
 
-    <div class="flex text-gray-600 text-sm md:text-base">
+    <div class="flex text-sm text-gray-600 md:text-base">
       <a href="#" class="mr-6 hover:text-gray-900">Terms of Service</a>
       <a href="#" class="mr-6 hover:text-gray-900">Privacy Policy</a>
       <a href="#" class="hover:text-gray-900">About Us</a>

@@ -1,12 +1,12 @@
 <template>
   <div id="home">
     <!-- breadcrumb -->
-    <!-- <nav class="text-sm font-semibold mb-6" aria-label="Breadcrumb">
-      <ol class="list-none p-0 inline-flex">
+    <!-- <nav class="mb-6 text-sm font-semibold" aria-label="Breadcrumb">
+      <ol class="inline-flex p-0 list-none">
         <li class="flex items-center text-purple">
           <a href="/" class="text-gray-700">Home</a>
           <svg
-            class="fill-current w-3 h-3 mx-3"
+            class="w-3 h-3 mx-3 fill-current"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 320 512"
           >
@@ -23,10 +23,10 @@
     <!-- breadcrumb end -->
 
     <div class="items-center mb-6">
-      <h1 class="text-3xl font-semibold mb-3 lg:mb-0 text-gray-800">Home</h1>
+      <h1 class="mb-3 text-3xl font-semibold text-gray-800 lg:mb-0">Home</h1>
       <p>Rubric, Coming soon.</p>
       <!-- <button
-        class="bg-purple hover:bg-purple-light focus:outline-none rounded-lg px-6 py-2 text-white font-semibold shadow duration-150"
+        class="px-6 py-2 font-semibold text-white duration-150 rounded-lg shadow bg-purple hover:bg-purple-light focus:outline-none"
       >
         View Logs
       </button> -->
