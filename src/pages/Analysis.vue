@@ -39,73 +39,92 @@
       <h2 class="text-2xl pt-2 mb-2 lg:mb-0 text-gray-800">
         Search Parameters
       </h2>
-      <p>
-        What kind of search shall we run? This can take up to a minute for
+      <p class="text-gray-600">
+        Simply input your article phrase below. This can take up to a minute for
         larger result sets.
       </p>
       <form v-on:submit.prevent="search" class="my-5">
-        <div class="flex mb-5">
+        <div class="sm:flex mb-5">
           <input
             type="text"
             v-model="query"
-            placeholder="Search Keyword"
-            class="bg-white h-16 w-64 px-5 rounded-lg border text-sm focus:outline-none mr-2 flex flex-grow"
+            placeholder="Keywords"
+            required
+            class="bg-white mb-2 h-16 w-full px-6 rounded-lg border flex focus:outline-none flex-grow mr-2"
           />
           <button
             type="submit"
-            class="flex items-center h-16 bg-purple hover:bg-purple-light focus:outline-none rounded-lg px-4 text-white font-semibold shadow duration-150 self-center"
+            class="flex items-center w-full sm:w-auto h-16 bg-purple hover:bg-purple-light focus:outline-none rounded-lg px-4 text-white font-semibold duration-150 self-center mb-2 flex-grow whitespace-nowrap"
           >
-            <span v-if="!loading">Start Analysis</span>
-            <span v-if="loading">Crunching Data</span>
-            <svg
-              v-if="!loading"
-              class="w-6 h-6 ml-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
+            <div class="flex ml-auto mr-auto">
+              <span v-if="!loading" class="whitespace-no-wrap"
+                >Start Analysis</span
+              >
+              <span v-if="loading" class="whitespace-no-wrap"
+                >Crunching Data</span
+              >
+              <svg
+                v-if="!loading"
+                class="w-6 h-6 ml-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <img
+                v-if="loading"
+                class="w-6 h-6 ml-2 mr-5"
+                src="/img/three-dots.svg"
               />
-            </svg>
-            <img
-              v-if="loading"
-              class="ml-2 h-5 w-5 mx-auto"
-              src="/img/three-dots.svg"
-            />
+            </div>
           </button>
         </div>
-        <div>
-          <select
-            class="bg-white h-10 rounded-lg px-3 border text-sm focus:outline-none mr-2"
-            name="cars"
-            id="cars"
-          >
-            <option value="us">United States</option>
-            <option value="other">Other</option>
-          </select>
-          <select
-            class="bg-white h-10 rounded-lg px-3 border text-sm focus:outline-none mr-2"
-            name="cars"
-            id="cars"
-          >
-            <option value="volvo">Desktop</option>
-            <option value="saab">Mobile</option>
-          </select>
+        <hr class="mb-2" />
+        <div class="">
+          <p class="mb-2 text-gray-600">Optional Parameters</p>
+          <div class="sm:flex sm:justify-between">
+            <select
+              class="bg-white h-10 w-full sm:w-1/3 rounded-lg px-3 border text-sm focus:outline-none"
+              name="cars"
+              id="cars"
+              required
+              v-model="location"
+            >
+              <option value="United States">United States</option>
+              <option value="United Kingdom">United Kingdom</option>
+              <option value="Canada">Canada</option>
+            </select>
+            <select
+              class="bg-white h-10 w-full sm:w-1/3 rounded-lg px-3 border text-sm focus:outline-none my-2 sm:my-0 mx-0 sm:mx-2"
+              name="device"
+              id="device"
+              required
+              v-model="device"
+            >
+              <option selected value="desktop">Desktop</option>
+              <option value="mobile">Mobile</option>
+              <option value="tablet">Tablet</option>
+            </select>
 
-          <input
-            class="bg-white h-10 w-24 rounded-lg px-2 border text-sm focus:outline-none mr-5"
-            type="number"
-            id="quantity"
-            name="quantity"
-            placeholder="Amount"
-            min="1"
-            max="5"
-          />
+            <input
+              class="bg-white h-10 w-full sm:w-1/3 rounded-lg px-3 border text-sm focus:outline-none"
+              type="number"
+              id="quantity"
+              name="quantity"
+              placeholder="Amount"
+              min="10"
+              required
+              max="100"
+              v-model="amount"
+            />
+          </div>
         </div>
       </form>
     </div>
@@ -119,7 +138,7 @@
       </p>
 
       <!-- Cards -->
-      <div class="flex flex-wrap -mx-3 mb-16 mt-5">
+      <div class="flex flex-wrap -mx-3 mb-6 mt-5">
         <div class="w-1/2 xl:w-1/4 px-3">
           <div
             class="w-full bg-white border rounded-lg flex items-center p-0 mb-6 xl:mb-0"
@@ -240,14 +259,9 @@
                     <th
                       class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                     >
-                      Name
+                      Results
                     </th>
 
-                    <th
-                      class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
-                    >
-                      Tags
-                    </th>
                     <th
                       class="px-6 py-3 bg-gray-50 text-center text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider"
                     >
@@ -274,19 +288,21 @@
                         <!-- <div class="h-3 w-3 mr-2 rounded-full bg-green"></div> -->
                         <div class="">
                           <div
-                            class="text-sm leading-5 font-medium text-gray-900"
+                            class="text-lg leading-5 font-medium text-gray-900 mb-1"
                           >
                             {{ article.title }}
                           </div>
                           <div class="text-sm leading-5 text-gray-500">
-                            {{ article.url }}
+                            <a :href="article.url" target="_blank">{{
+                              article.url
+                            }}</a>
                           </div>
                           <div class="flex flex-wrap mt-2">
                             <div
-                              class="flex flex-no-wrap items-center mr-2 text-gray-600"
+                              class="flex flex-no-wrap items-center mr-4 text-gray-600"
                             >
                               <svg
-                                class="inline w-6 h-6 mr-1 align-middle"
+                                class="inline w-5 h-5 mr-1 align-middle"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -301,17 +317,17 @@
                               </svg>
 
                               <span
-                                title="Wordcount"
+                                title="Word Count"
                                 class="whitespace-no-wrap align-middle"
                                 >{{ article.wordCount }} Words</span
                               >
                             </div>
 
                             <div
-                              class="flex flex-no-wrap items-center mr-2 text-gray-600"
+                              class="flex flex-no-wrap items-center mr-4 text-gray-600"
                             >
                               <svg
-                                class="inline w-6 h-6 mr-1 align-middle"
+                                class="inline w-5 h-5 mr-1 align-middle"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -333,10 +349,10 @@
                             </div>
 
                             <div
-                              class="flex flex-no-wrap items-center mr-2 text-gray-600"
+                              class="flex flex-no-wrap items-center mr-4 text-gray-600"
                             >
                               <svg
-                                class="inline w-6 h-6 mr-1 align-middle"
+                                class="inline w-5 h-5 mr-1 align-middle"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -358,10 +374,10 @@
                             </div>
 
                             <div
-                              class="flex flex-no-wrap items-center mr-2 text-gray-600"
+                              class="flex flex-no-wrap items-center mr-4 text-gray-600"
                             >
                               <svg
-                                class="inline w-6 h-6 mr-1 align-middle"
+                                class="inline w-5 h-5 mr-1 align-middle"
                                 fill="none"
                                 stroke="currentColor"
                                 viewBox="0 0 24 24"
@@ -385,16 +401,7 @@
                         </div>
                       </div>
                     </td>
-                    <td class="px-6 py-4 whitespace-no-wrap">
-                      <div class="text-sm leading-5 text-gray-900">
-                        Images: <strong>{{ article.imageCount }}</strong> <br />
-                        Headers: <strong>{{ article.headerCount }}</strong>
-                        <br />
-                        Paragraphs:
-                        <strong>{{ article.paragraphCount }}</strong> <br />
-                        Words: <strong>{{ article.wordCount }}</strong>
-                      </div>
-                    </td>
+
                     <td class="px-6 py-4 whitespace-no-wrap text-center">
                       <span
                         class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-200 text-green-700"
@@ -448,6 +455,41 @@
               </table>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div class="bg-gray-200 p-5 rounded">
+        <h2 class="text-2xl pt-2 mb-2 lg:mb-0 text-gray-800">
+          Blueprint Tool (Coming Soon)
+        </h2>
+        <p>Load these results into the blueprint tool to help your writing.</p>
+        <div class="my-5">
+          <button
+            type="submit"
+            disabled
+            class="flex items-center h-16 bg-gray-500 focus:outline-none rounded-lg px-4 text-gray-700 font-semibold shadow duration-150 self-center cursor-not-allowed"
+          >
+            <span>Load Into Blueprint Tool</span>
+            <svg
+              class="w-6 h-6 ml-2 text-gray-700"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"
+              />
+            </svg>
+            <img
+              v-if="loading"
+              class="ml-2 h-5 w-5 mx-auto"
+              src="/img/three-dots.svg"
+            />
+          </button>
         </div>
       </div>
 
@@ -521,15 +563,19 @@ export default {
       console.log("Search Initiated");
       try {
         console.log("Fetching Initiated");
-        return fetch(`http://localhost:3001?keyword=${this.query}`, {})
+        return fetch(
+          `http://localhost:3001?keyword=${this.query}&amount=${this.amount}&device=${this.device}&location=${this.location}`,
+          {}
+        )
           .then((response) => response.json())
           .then((data) => {
-            //data ? JSON.parse(data) : {};
+            console.log(data);
             this.articles = data;
             this.loaded = true;
             this.loading = false;
           })
           .catch((error) => {
+            this.loading = false;
             console.log(error);
           });
 
@@ -552,6 +598,9 @@ export default {
   data() {
     return {
       query: "",
+      amount: 20,
+      device: "desktop",
+      location: "United States",
       articles: "",
       loaded: false,
       loading: false,
