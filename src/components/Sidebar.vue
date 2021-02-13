@@ -6,7 +6,7 @@
     :class="sideBarOpen ? '' : 'hidden'"
     id="main-nav"
   >
-    <a href="/" class="w-full h-20 flex px-4 items-center mb-8">
+    <router-link to="/" class="w-full h-20 flex px-4 items-center mb-8">
       <svg
         class="w-8 h-8 ml-2 text-purple-light"
         fill="none"
@@ -22,11 +22,11 @@
         ></path>
       </svg>
       <p class="font-semibold text-3xl text-gray-800 pl-4">RUBRIC</p>
-    </a>
+    </router-link>
 
     <div class="mb-4 px-4 text-gray-800">
       <p class="pl-4 text-xs font-semibold mb-4 text-gray-600">MENU</p>
-      <div
+      <router-link to="/analysis"
         class="w-full flex items-center text-gray-800 h-10 pl-4 hover:bg-gray-30 rounded-lg cursor-pointer duration-150"
       >
         <svg
@@ -44,8 +44,8 @@
           />
         </svg>
         <span class="text-gray-800 font-medium">SERP Analysis</span>
-      </div>
-      <div
+      </router-link>
+      <router-link to="/blueprint"
         class="w-full flex items-center text-gray-800 h-10 pl-4 hover:bg-gray-30 rounded-lg cursor-pointer duration-150"
       >
         <svg
@@ -63,7 +63,7 @@
           />
         </svg>
         <span class="text-gray-800 font-medium">Blueprint Tool</span>
-      </div>
+      </router-link>
       <div class="w-full">
         <!-- <button
           class="w-full flex items-center text-gray-800 h-10 pl-4 hover:bg-gray-30 rounded-lg cursor-pointer duration-150 focus:outline-none"
