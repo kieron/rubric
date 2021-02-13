@@ -26,7 +26,8 @@
 
     <div class="mb-4 px-4 text-gray-800">
       <p class="pl-4 text-xs font-semibold mb-4 text-gray-600">MENU</p>
-      <router-link to="/analysis"
+      <router-link
+        to="/analysis"
         class="w-full flex items-center text-gray-800 h-10 pl-4 hover:bg-gray-30 rounded-lg cursor-pointer duration-150"
       >
         <svg
@@ -45,7 +46,8 @@
         </svg>
         <span class="text-gray-800 font-medium">SERP Analysis</span>
       </router-link>
-      <router-link to="/blueprint"
+      <router-link
+        to="/blueprint"
         class="w-full flex items-center text-gray-800 h-10 pl-4 hover:bg-gray-30 rounded-lg cursor-pointer duration-150"
       >
         <svg
@@ -102,7 +104,7 @@
             ></path>
           </svg>
         </button> -->
-        <div
+        <!-- <div
           :class="{ hidden: !dropdownComprasOpen }"
           class="my-1 pl-2 py-1 rounded-lg bg-gray-300"
         >
@@ -145,7 +147,7 @@
             </svg>
             <span class="font-medium">Listar</span>
           </div>
-        </div>
+        </div> -->
       </div>
       <!-- <div
         class="w-full flex items-center text-gray-800 h-10 pl-4 hover:bg-gray-30 rounded-lg cursor-pointer duration-150"
