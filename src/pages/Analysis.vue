@@ -54,6 +54,8 @@
           />
           <button
             type="submit"
+            v-on:click="animate"
+            id="search-results-btn"
             class="flex items-center self-center flex-grow w-full h-16 px-4 mb-2 font-semibold text-white duration-150 rounded-lg sm:w-auto bg-purple hover:bg-purple-light focus:outline-none whitespace-nowrap"
           >
             <div class="flex ml-auto mr-auto">
@@ -86,44 +88,78 @@
             </div>
           </button>
         </div>
-        <hr class="mb-2" />
+        <hr class="mb-3" />
         <div class="">
-          <p class="mb-2 text-gray-600">Optional Parameters</p>
+          <p class="text-gray-600">Optional Parameters</p>
+          <p class="mb-3 text-sm text-gray-600">
+            You don't need to set these, unless you really want too.
+          </p>
           <div class="sm:flex sm:justify-between">
-            <select
-              class="w-full h-10 px-3 text-sm bg-white border rounded-lg sm:w-1/3 focus:outline-none"
-              name="cars"
-              id="cars"
-              required
-              v-model="location"
-            >
-              <option value="United States">United States</option>
-              <option value="United Kingdom">United Kingdom</option>
-              <option value="Canada">Canada</option>
-            </select>
-            <select
-              class="w-full h-10 px-3 mx-0 my-2 text-sm bg-white border rounded-lg sm:w-1/3 focus:outline-none sm:my-0 sm:mx-2"
-              name="device"
-              id="device"
-              required
-              v-model="device"
-            >
-              <option selected value="desktop">Desktop</option>
-              <option value="mobile">Mobile</option>
-              <option value="tablet">Tablet</option>
-            </select>
-
-            <input
-              class="w-full h-10 px-3 text-sm bg-white border rounded-lg sm:w-1/3 focus:outline-none"
-              type="number"
-              id="quantity"
-              name="quantity"
-              placeholder="Amount"
-              min="10"
-              required
-              max="100"
-              v-model="amount"
-            />
+            <div class="relative sm:w-1/3">
+              <select
+                class="w-full h-16 px-3 text-sm bg-white border rounded-lg appearance-none focus:outline-none"
+                name="cars"
+                id="cars"
+                required
+                v-model="location"
+              >
+                <option value="United States">United States</option>
+                <option value="United Kingdom">United Kingdom</option>
+                <option value="Canada">Canada</option>
+              </select>
+              <div
+                class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-600 pointer-events-none"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  class="w-6 h-6 fill-current"
+                >
+                  <path
+                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+            <div class="relative sm:w-1/3 sm:mx-2">
+              <select
+                class="w-full h-16 px-3 mx-0 my-2 text-sm bg-white border rounded-lg appearance-none focus:outline-none sm:my-0"
+                name="device"
+                id="device"
+                required
+                v-model="device"
+              >
+                <option selected value="desktop">Desktop</option>
+                <option value="mobile">Mobile</option>
+                <option value="tablet">Tablet</option>
+              </select>
+              <div
+                class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-600 pointer-events-none"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  class="w-6 h-6 fill-current"
+                >
+                  <path
+                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+            <div class="relative sm:w-1/3">
+              <input
+                class="w-full h-16 px-3 text-sm bg-white border rounded-lg focus:outline-none"
+                type="number"
+                id="quantity"
+                name="quantity"
+                placeholder="Amount"
+                min="10"
+                required
+                max="100"
+                v-model="amount"
+              />
+            </div>
           </div>
         </div>
       </form>
@@ -262,11 +298,11 @@
                       Results
                     </th>
 
-                    <th
+                    <!-- <th
                       class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-gray-700 uppercase bg-gray-50"
                     >
                       Domain Authority
-                    </th>
+                    </th> -->
                     <!-- <th
                       class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-gray-700 uppercase bg-gray-50"
                     >
@@ -283,12 +319,13 @@
                     v-for="article in articles.results"
                     class="border-b border-gray-200"
                   >
-                    <td class="px-6 py-4 whitespace-no-wrap">
+                    <td class="px-6 py-4">
                       <div class="flex items-center">
                         <!-- <div class="w-3 h-3 mr-2 rounded-full bg-green"></div> -->
                         <div class="">
                           <div
                             class="mb-1 text-lg font-medium leading-5 text-gray-900"
+                            v-on:click="openNearest($event)"
                           >
                             {{ article.title }}
                           </div>
@@ -296,6 +333,7 @@
                             <a :href="article.url" target="_blank">{{
                               article.url
                             }}</a>
+                            - SERP Date: {{ article.date }}
                           </div>
                           <div class="flex flex-wrap mt-2">
                             <div
@@ -397,18 +435,59 @@
                                 >{{ article.paragraphCount }} Paragraphs</span
                               >
                             </div>
+
+                            <div
+                              class="flex flex-no-wrap items-center mr-4 text-gray-600"
+                            >
+                              <svg
+                                class="inline w-5 h-5 mr-1 align-middle"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                                ></path>
+                              </svg>
+
+                              <span
+                                title="Domain Authority"
+                                class="whitespace-no-wrap align-middle"
+                                >{{ article.domainAuthority }} Domain
+                                Authority</span
+                              >
+                            </div>
                           </div>
                         </div>
                       </div>
+                      <div
+                        id="sium"
+                        v-if="article.questions.length"
+                        class="p-2 mt-2 additional-info"
+                      >
+                        <h3 class="text-md">Questions Answered</h3>
+                        <ol>
+                          <li
+                            :key="question.id"
+                            v-for="question in article.questions"
+                          >
+                            {{ question }}
+                          </li>
+                        </ol>
+                      </div>
                     </td>
 
-                    <td class="px-6 py-4 text-center whitespace-no-wrap">
+                    <!-- <td class="px-6 py-4 text-center whitespace-no-wrap">
                       <span
                         class="inline-flex px-2 text-xs font-semibold leading-5 text-green-700 bg-green-200 rounded-full"
                       >
                         {{ article.domainAuthority }}
                       </span>
-                    </td>
+                    </td> -->
                     <!-- <td
                       class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
                     >
@@ -559,6 +638,7 @@ export default {
   name: "AnalysisHome",
   methods: {
     search: async function () {
+      document.getElementById("search-results-btn").disabled = true;
       this.loading = true;
       console.log("Search Initiated");
       try {
@@ -569,7 +649,8 @@ export default {
         )
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
+            //console.log(data);
+            document.getElementById("search-results-btn").disabled = false;
             this.articles = data;
             this.loaded = true;
             this.loading = false;
@@ -578,27 +659,38 @@ export default {
             this.loading = false;
             console.log(error);
           });
-
-        //   await fetch(`http://localhost:3001?keyword=${this.query}`, {})
-        //     .then((response) => {
-        //       console.log(response);
-        //       console.log("Got Response");
-        //       response.json();
-        //     })
-        //     .then((data) => {
-        //       console.log("Got Data");
-        //       console.log(data);
-        //       this.articles = data.body;
-        //     });
       } catch (err) {
         console.log(err);
       }
     },
+    animate: function () {
+      if (
+        document
+          .getElementById("search-results-btn")
+          .classList.contains("bounce-top")
+      ) {
+        // something?
+      } else {
+        document
+          .getElementById("search-results-btn")
+          .classList.add("bounce-top");
+        setTimeout(function () {
+          document
+            .getElementById("search-results-btn")
+            .classList.remove("bounce-top");
+        }, 500);
+      }
+    },
+    openNearest: function (event) {
+      const targetId = event.currentTarget.id;
+      //var closestElement = document.getElementById(targetId).closest("additional-info");
+      console.log(targetId);
+    },
   },
   data() {
     return {
-      query: "",
-      amount: 20,
+      query: "ikea karlby battlestation",
+      amount: 12,
       device: "desktop",
       location: "United States",
       articles: "",
@@ -738,6 +830,128 @@ export default {
   100% {
     -webkit-transform: translateY(0);
     transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.bounce-top {
+  -webkit-animation: bounce-top 0.9s both;
+  animation: bounce-top 0.9s both;
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2021-2-14 0:0:16
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation bounce-top
+ * ----------------------------------------
+ */
+@-webkit-keyframes bounce-top {
+  0% {
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    opacity: 1;
+  }
+  24% {
+    opacity: 1;
+  }
+  40% {
+    -webkit-transform: translateY(-6px);
+    transform: translateY(-6px);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  65% {
+    -webkit-transform: translateY(-5px);
+    transform: translateY(-5px);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  82% {
+    -webkit-transform: translateY(-3px);
+    transform: translateY(-3px);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  93% {
+    -webkit-transform: translateY(-2px);
+    transform: translateY(-2px);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  25%,
+  55%,
+  75%,
+  87% {
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+  100% {
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+    opacity: 1;
+  }
+}
+@keyframes bounce-top {
+  0% {
+    -webkit-transform: translateY(-0px);
+    transform: translateY(-6px);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    opacity: 1;
+  }
+  24% {
+    opacity: 1;
+  }
+  40% {
+    -webkit-transform: translateY(-6x);
+    transform: translateY(-6px);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  65% {
+    -webkit-transform: translateY(-5px);
+    transform: translateY(-5px);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  82% {
+    -webkit-transform: translateY(-3px);
+    transform: translateY(-3px);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  93% {
+    -webkit-transform: translateY(-2px);
+    transform: translateY(-2px);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+  25%,
+  55%,
+  75%,
+  87% {
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+  100% {
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
     opacity: 1;
   }
 }
