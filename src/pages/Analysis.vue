@@ -495,7 +495,7 @@
                         class="flex items-center justify-center mt-3 mb-1 align-middle"
                       >
                         <span
-                          class="flex justify-center w-full p-2 text-xs font-semibold text-gray-700 transition duration-300 transform bg-gray-200 border border-gray-300 rounded-lg cursor-pointer md:w-1/2 hover:-translate-y-1"
+                          class="flex justify-center w-full p-2 text-xs font-semibold text-gray-700 transition duration-300 transform bg-gray-100 border border-gray-300 rounded-md cursor-pointer md:w-1/2 hover:-translate-y-1"
                           v-on:click="expandDetails($event)"
                           title="Expand Details"
                         >
@@ -597,7 +597,10 @@
         <h2 class="pt-2 mb-2 text-2xl text-gray-800 lg:mb-0">
           Blueprint Tool (Coming Soon)
         </h2>
-        <p>Load these results into the blueprint tool to help your writing.</p>
+        <p>
+          Load these results into the blueprint tool to help you write, or to
+          give to your writers for a more concise plan.
+        </p>
         <div class="my-5">
           <button
             type="submit"
