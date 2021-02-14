@@ -54,8 +54,10 @@
           />
           <button
             type="submit"
-            v-on:click="animate"
-            id="search-results-btn"
+            :disabled="this.loading == 1"
+            v-on:click="animateSearchBtn($event)"
+            :class="{ 'bounce-top': animatedSearchBtn }"
+            @animationend="animatedSearchBtn = false"
             class="flex items-center self-center flex-grow w-full h-16 px-4 mb-2 font-semibold text-white duration-150 rounded-lg sm:w-auto bg-purple hover:bg-purple-light focus:outline-none whitespace-nowrap"
           >
             <div class="flex ml-auto mr-auto">
@@ -321,7 +323,6 @@
                   >
                     <td class="px-6 py-4">
                       <div class="flex items-center">
-                        <!-- <div class="w-3 h-3 mr-2 rounded-full bg-green"></div> -->
                         <div class="">
                           <div
                             class="mb-1 text-lg font-medium leading-5 text-gray-900"
@@ -488,48 +489,7 @@
                         {{ article.domainAuthority }}
                       </span>
                     </td> -->
-                    <!-- <td
-                      class="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap"
-                    >
-                      <div class="flex overflow-hidden">
-                        <img
-                          class="inline-block w-8 h-8 text-white rounded-full shadow-solid"
-                          src="https://images.unsplash.com/flagged/photo-1565257669119-6af359b65ea2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-                          alt=""
-                        />
-                        <img
-                          class="inline-block w-8 h-8 -ml-1 text-white rounded-full shadow-solid"
-                          src="https://images.unsplash.com/photo-1542909168-6296a31d7689?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80"
-                          alt=""
-                        />
-                        <img
-                          class="inline-block w-8 h-8 -ml-1 text-white rounded-full shadow-solid"
-                          src="https://images.unsplash.com/flagged/photo-1579500647742-5f34826ec327?ixlib=rb-1.2.1&auto=format&fit=crop&w=676&q=80"
-                          alt=""
-                        />
-                        <img
-                          class="inline-block w-8 h-8 -ml-1 text-white rounded-full shadow-solid"
-                          src="https://images.unsplash.com/photo-1571175351749-e8d06f275d85?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80"
-                          alt=""
-                        />
-                        <span
-                          class="my-auto ml-2 text-xs font-semibold text-gray-500"
-                          >+8</span
-                        >
-                      </div>
-                    </td> -->
-                    <!-- <td
-                      class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap"
-                    >
-                      <a
-                        href="#"
-                        class="text-purple .hover:bg-purple-light duration-150"
-                        >Editar</a
-                      >
-                    </td> -->
                   </tr>
-
-                  <!-- More rows... -->
                 </tbody>
               </table>
             </div>
@@ -638,7 +598,6 @@ export default {
   name: "AnalysisHome",
   methods: {
     search: async function () {
-      document.getElementById("search-results-btn").disabled = true;
       this.loading = true;
       console.log("Search Initiated");
       try {
@@ -649,8 +608,6 @@ export default {
         )
           .then((response) => response.json())
           .then((data) => {
-            //console.log(data);
-            document.getElementById("search-results-btn").disabled = false;
             this.articles = data;
             this.loaded = true;
             this.loading = false;
@@ -663,32 +620,17 @@ export default {
         console.log(err);
       }
     },
-    animate: function () {
-      if (
-        document
-          .getElementById("search-results-btn")
-          .classList.contains("bounce-top")
-      ) {
-        // something?
-      } else {
-        document
-          .getElementById("search-results-btn")
-          .classList.add("bounce-top");
-        setTimeout(function () {
-          document
-            .getElementById("search-results-btn")
-            .classList.remove("bounce-top");
-        }, 500);
-      }
+    animateSearchBtn() {
+      this.animatedSearchBtn = true;
     },
     openNearest: function (event) {
       const targetId = event.currentTarget.id;
-      //var closestElement = document.getElementById(targetId).closest("additional-info");
       console.log(targetId);
     },
   },
   data() {
     return {
+      animatedSearchBtn: false,
       query: "ikea karlby battlestation",
       amount: 12,
       device: "desktop",
