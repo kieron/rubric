@@ -656,30 +656,6 @@
                         </div>
                       </div>
 
-                      <!-- <div
-                        class="flex items-center justify-center mt-3 mb-1 align-middle"
-                      >
-                        <span
-                          class="flex justify-center w-full p-2 text-xs font-semibold text-gray-700 transition duration-300 transform bg-gray-100 border border-gray-300 rounded-md cursor-pointer md:w-1/2 hover:-translate-y-1"
-                          v-on:click="expandDetails($event)"
-                          title="Expand Details"
-                        >
-                          <svg
-                            class="w-4 h-4"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M19 13l-7 7-7-7m14-8l-7 7-7-7"
-                            ></path>
-                          </svg>
-                        </span>
-                      </div> -->
                       <div
                         v-if="article.questions.length"
                         class="hidden p-2 mt-2 additional-info slide-in-top"
