@@ -43,7 +43,7 @@
         Simply input your article phrase below. This can take up to a minute for
         larger result sets.
       </p>
-      <form v-on:submit.prevent="search" class="my-5">
+      <form v-on:submit.prevent="search" class="pb-2 my-5">
         <div class="mb-5 sm:flex">
           <input
             type="text"
@@ -96,7 +96,7 @@
           <p class="mb-3 text-sm text-gray-600">
             You don't need to set these, unless you really want too.
           </p>
-          <div class="sm:flex sm:justify-between">
+          <div class="mb-3 sm:flex sm:justify-between">
             <div class="relative sm:w-1/3">
               <select
                 class="w-full h-16 px-3 text-sm bg-white border rounded-lg appearance-none focus:outline-none"
@@ -161,6 +161,17 @@
                 max="100"
                 v-model="amount"
               />
+              <p class="absolute right-0 mt-1 text-xs text-right text-gray-500">
+                This amount of articles could take up to
+                <span v-if="this.amount <= 20">20 seconds</span>
+                <span v-if="this.amount > 20 && this.amount <= 30"
+                  >30 seconds</span
+                >
+                <span v-if="this.amount > 30 && this.amount <= 50"
+                  >50 seconds</span
+                >
+                <span v-if="this.amount > 50">a minute</span> to fetch.
+              </p>
             </div>
           </div>
         </div>
@@ -466,9 +477,8 @@
                         </div>
                       </div>
                       <div
-                        id="sium"
                         v-if="article.questions.length"
-                        class="p-2 mt-2 additional-info"
+                        class="hidden p-2 mt-2 bg-yellow-100 additional-info"
                       >
                         <h3 class="text-md">Questions Answered</h3>
                         <ol>
@@ -482,13 +492,27 @@
                       </div>
                     </td>
 
-                    <!-- <td class="px-6 py-4 text-center whitespace-no-wrap">
+                    <td class="px-6 py-4 text-center whitespace-no-wrap">
                       <span
-                        class="inline-flex px-2 text-xs font-semibold leading-5 text-green-700 bg-green-200 rounded-full"
+                        class="inline-flex p-4 text-xs font-semibold leading-5 text-gray-700 transition duration-300 ease-in-out transform bg-gray-200 rounded cursor-pointer hover:-translate-y-1"
+                        v-on:click="expandDetails($event)"
                       >
-                        {{ article.domainAuthority }}
+                        <svg
+                          class="w-6 h-6"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M19 13l-7 7-7-7m14-8l-7 7-7-7"
+                          ></path>
+                        </svg>
                       </span>
-                    </td> -->
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -623,10 +647,7 @@ export default {
     animateSearchBtn() {
       this.animatedSearchBtn = true;
     },
-    openNearest: function (event) {
-      const targetId = event.currentTarget.id;
-      console.log(targetId);
-    },
+    expandDetails() {},
   },
   data() {
     return {
