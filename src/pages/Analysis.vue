@@ -156,7 +156,7 @@
                 id="quantity"
                 name="quantity"
                 placeholder="Amount"
-                min="10"
+                min="1"
                 required
                 max="100"
                 v-model="amount"
@@ -257,12 +257,15 @@
       </svg>
     </div>
 
-    <div class="mt-5 slide-in-bottom" v-if="loaded && !loading">
+    <div
+      class="mt-5 slide-in-bottom"
+      v-if="loaded && !loading && !apiResponse.errorFromApi"
+    >
       <h2 class="pt-2 mb-2 text-2xl text-gray-800 lg:mb-0">Results</h2>
       <p class="mb-2 font-semibold text-gray-800 text-1xl lg:mb-0">
-        Your search for {{ articles.searchTerm }} had
-        {{ articles.totalResults }} results, and took
-        {{ articles.timeTaken }} seconds! Here are the results.
+        Your search for {{ apiResponse.searchTerm }} had
+        {{ apiResponse.totalResults }} results, and took
+        {{ apiResponse.timeTaken }} seconds! Here are the results.
       </p>
 
       <!-- Cards -->
@@ -292,7 +295,7 @@
 
             <div class="ml-6 leading-6 text-gray-700">
               <p class="text-2xl font-semibold">
-                {{ articles.averageWordCount }}
+                {{ apiResponse.averageWordCount }}
               </p>
               <p class="text-sm text-gray-600">Average Words</p>
             </div>
@@ -324,7 +327,7 @@
 
             <div class="ml-6 leading-6 text-gray-700">
               <p class="text-2xl font-semibold">
-                {{ articles.averageHeaderCount }}
+                {{ apiResponse.averageHeaderCount }}
               </p>
               <p class="text-sm text-gray-600">Average Headers</p>
             </div>
@@ -356,7 +359,7 @@
 
             <div class="ml-6 leading-6 text-gray-700">
               <p class="text-2xl font-semibold">
-                {{ articles.averageImagesCount }}
+                {{ apiResponse.averageImagesCount }}
               </p>
               <p class="text-sm text-gray-600">Average Images</p>
             </div>
@@ -388,7 +391,7 @@
 
             <div class="ml-6 leading-6 text-gray-700">
               <p class="text-2xl font-semibold">
-                {{ articles.averageParagraphCount }}
+                {{ apiResponse.averageParagraphCount }}
               </p>
               <p class="text-sm text-gray-600">Average Paragraphs</p>
             </div>
@@ -420,7 +423,7 @@
                 >
                   <tr
                     :key="article.id"
-                    v-for="article in articles.results"
+                    v-for="article in apiResponse.results"
                     class="border-b border-gray-200"
                   >
                     <td class="px-6 py-4">
@@ -839,6 +842,44 @@
       </div>
     </div> -->
     </div>
+    <div
+      class="flex flex-row items-center p-5 mt-5 bg-red-200 border-b-2 border-red-300 rounded alert swing-in-top-fwd"
+      v-if="error && loading != true"
+    >
+      <div
+        class="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-red-100 border-2 border-red-500 rounded-full alert-icon"
+      >
+        <span class="text-red-500">
+          <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+            <path
+              fill-rule="evenodd"
+              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </span>
+      </div>
+      <div class="ml-4 alert-content">
+        <div class="text-lg font-semibold text-red-800 alert-title">Whoops</div>
+        <div class="text-sm text-red-600 alert-description">
+          {{ errorMessage }}
+          <svg
+            class="inline w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
+          </svg>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -850,7 +891,6 @@ export default {
   methods: {
     search: async function () {
       this.loading = true;
-      console.log("Search Initiated");
       try {
         console.log("Fetching Initiated");
         return fetch(
@@ -859,15 +899,34 @@ export default {
         )
           .then((response) => response.json())
           .then((data) => {
-            this.articles = data;
-            this.loaded = true;
-            this.loading = false;
+            console.log(data);
+            this.apiResponse = data;
+            if (this.apiResponse.results.length >= 1) {
+              this.loaded = true;
+              this.loading = false;
+              this.error = false;
+            } else {
+              this.errorMessage =
+                "That search didn't bring back enough results, try a larger amount of articles.";
+              this.loaded = false;
+              this.loading = false;
+              this.error = true;
+            }
           })
           .catch((error) => {
             this.loading = false;
-            console.log(error);
+            this.error = true;
+            console.log("http error");
+            if (!this.apiResponse.results) {
+              this.errorMessage = this.apiResponse.errorFromApi;
+            } else {
+              this.errorMessage = "X";
+            }
+
+            // console.log(response);
           });
       } catch (err) {
+        console.log("fetch error");
         console.log(err);
       }
     },
@@ -883,7 +942,9 @@ export default {
       amount: 15,
       device: "desktop",
       location: "United States",
-      articles: "",
+      apiResponse: "",
+      error: false,
+      errorMessage: "Something Went Wrong",
       loaded: false,
       loading: false,
       // buyersData: {
@@ -1184,6 +1245,57 @@ export default {
   100% {
     -webkit-transform: translateY(0);
     transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.swing-in-top-fwd {
+  -webkit-animation: swing-in-top-fwd 0.5s
+    cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  animation: swing-in-top-fwd 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2021-2-14 17:17:5
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation swing-in-top-fwd
+ * ----------------------------------------
+ */
+@-webkit-keyframes swing-in-top-fwd {
+  0% {
+    -webkit-transform: rotateX(-100deg);
+    transform: rotateX(-100deg);
+    -webkit-transform-origin: top;
+    transform-origin: top;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    -webkit-transform-origin: top;
+    transform-origin: top;
+    opacity: 1;
+  }
+}
+@keyframes swing-in-top-fwd {
+  0% {
+    -webkit-transform: rotateX(-100deg);
+    transform: rotateX(-100deg);
+    -webkit-transform-origin: top;
+    transform-origin: top;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    -webkit-transform-origin: top;
+    transform-origin: top;
     opacity: 1;
   }
 }
