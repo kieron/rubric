@@ -261,11 +261,15 @@
       class="mt-5 slide-in-bottom"
       v-if="loaded && !loading && !apiResponse.errorFromApi"
     >
-      <h2 class="pt-2 mb-2 text-2xl text-gray-800 lg:mb-0">Results</h2>
-      <p class="mb-2 font-semibold text-gray-800 text-1xl lg:mb-0">
-        Your search for {{ apiResponse.searchTerm }} had
-        {{ apiResponse.totalResults }} results, and took
-        {{ apiResponse.timeTaken }} seconds! Here are the results.
+      <h2 class="pt-2 mb-2 text-2xl font-semibold text-gray-800 lg:mb-0">
+        Results
+      </h2>
+      <p class="mb-2 text-gray-800 font text-1xl lg:mb-0">
+        Your search for <strong>{{ apiResponse.searchTerm }}</strong> had
+        <strong>{{ apiResponse.totalResults }}</strong> results, across
+        <strong>{{ apiResponse.uniqueDomainCount }}</strong> unique domains and
+        took <strong>{{ apiResponse.timeTaken }}</strong> seconds! Here are the
+        results.
       </p>
 
       <!-- Cards -->
