@@ -872,7 +872,6 @@ export default {
         )
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
             this.apiResponse = data;
             if (this.apiResponse.results.length >= 1) {
               this.loaded = true;
@@ -889,7 +888,6 @@ export default {
           .catch((error) => {
             this.loading = false;
             this.error = true;
-            console.log("http error");
             if (!this.apiResponse.results) {
               this.errorMessage = this.apiResponse.errorFromApi;
             } else {
