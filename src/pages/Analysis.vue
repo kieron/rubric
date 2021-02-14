@@ -310,18 +310,6 @@
                     >
                       Results
                     </th>
-
-                    <!-- <th
-                      class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-gray-700 uppercase bg-gray-50"
-                    >
-                      Domain Authority
-                    </th> -->
-                    <!-- <th
-                      class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-center text-gray-700 uppercase bg-gray-50"
-                    >
-                      Domain Authority
-                    </th> -->
-                    <!-- <th class="px-6 py-3 bg-gray-50"></th> -->
                   </tr>
                 </thead>
                 <tbody
@@ -337,15 +325,16 @@
                         <div class="">
                           <div
                             class="mb-1 text-lg font-medium leading-5 text-gray-900"
-                            v-on:click="openNearest($event)"
                           >
                             {{ article.title }}
                           </div>
                           <div class="text-sm leading-5 text-gray-500">
-                            <a :href="article.url" target="_blank">{{
-                              article.url
-                            }}</a>
-                            - SERP Date: {{ article.date }}
+                            <a
+                              :href="article.url"
+                              target="_blank"
+                              class="break-all"
+                              >{{ article.url }}</a
+                            >
                           </div>
                           <div class="flex flex-wrap mt-2">
                             <div
@@ -473,63 +462,128 @@
                                 Authority</span
                               >
                             </div>
+
+                            <div
+                              class="flex flex-no-wrap items-center mr-4 text-gray-600"
+                            >
+                              <svg
+                                class="inline w-5 h-5 mr-1 align-middle"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                ></path>
+                              </svg>
+
+                              <span
+                                title="SERP Date"
+                                class="whitespace-no-wrap align-middle"
+                                >{{ article.date ? article.date : "N/A" }}</span
+                              >
+                            </div>
                           </div>
                         </div>
                       </div>
+
+                      <div
+                        class="flex items-center justify-center mt-3 mb-1 align-middle"
+                      >
+                        <span
+                          class="flex justify-center w-full p-2 text-xs font-semibold text-gray-700 transition duration-300 transform bg-gray-200 border border-gray-300 rounded-lg cursor-pointer md:w-1/2 hover:-translate-y-1"
+                          v-on:click="expandDetails($event)"
+                          title="Expand Details"
+                        >
+                          <svg
+                            class="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M19 13l-7 7-7-7m14-8l-7 7-7-7"
+                            ></path>
+                          </svg>
+                        </span>
+                      </div>
                       <div
                         v-if="article.questions.length"
-                        class="hidden p-2 mt-2 additional-info"
+                        class="hidden p-2 mt-2 additional-info slide-in-top"
                       >
-                        <div>
-                          <hr />
-                          <h3 class="mt-2 font-bold text-md">
-                            Questions Answered
-                          </h3>
-                          <ol>
-                            <li
-                              :key="question.id"
-                              v-for="question in article.questions"
-                            >
-                              - {{ question }}
-                            </li>
-                          </ol>
-                        </div>
+                        <div class="w-full md:flex">
+                          <div
+                            class="w-full px-5 py-3 mt-2 mr-5 border border-gray-300 rounded md:w-1/2"
+                          >
+                            <h3 class="mt-2 font-bold text-md">
+                              Questions Answered
+                            </h3>
+                            <ol>
+                              <li
+                                :key="question.id"
+                                v-for="question in article.questions"
+                              >
+                                - {{ question }}
+                              </li>
+                            </ol>
+                          </div>
 
-                        <div class="mt-2">
-                          <hr />
-                          <h3 class="mt-2 font-bold text-md">Headers</h3>
-                          <ol>
-                            <li
-                              :key="header.id"
-                              v-for="header in article.headers"
-                            >
-                              - {{ header }}
-                            </li>
-                          </ol>
+                          <div
+                            class="w-full px-5 py-3 mt-2 border border-gray-300 rounded md:w-1/2"
+                          >
+                            <h3 class="mt-2 font-bold text-md">Headers</h3>
+                            <ol>
+                              <li
+                                :key="header.id"
+                                v-for="header in article.headers"
+                              >
+                                - {{ header }}
+                              </li>
+                            </ol>
+                          </div>
+                        </div>
+                        <div class="w-full md:flex">
+                          <div
+                            class="w-full px-5 py-3 mt-2 mr-5 border border-gray-300 rounded md:w-1/2"
+                          >
+                            <h3 class="mt-2 font-bold text-md">
+                              Headers containing full keyword
+                            </h3>
+                            <ol>
+                              <li
+                                :key="fullHeader.id"
+                                v-for="fullHeader in article.headersContainingKeyword"
+                              >
+                                - {{ fullHeader }}
+                              </li>
+                            </ol>
+                          </div>
+
+                          <div
+                            class="w-full px-5 py-3 mt-2 border border-gray-300 rounded md:w-1/2"
+                          >
+                            <h3 class="mt-2 font-bold text-md">
+                              Headers containing partial keyword
+                            </h3>
+                            <ol>
+                              <li
+                                :key="partialHeader.id"
+                                v-for="partialHeader in article.headersContainingPartialKeyword"
+                              >
+                                - {{ partialHeader }}
+                              </li>
+                            </ol>
+                          </div>
                         </div>
                       </div>
-                    </td>
-
-                    <td class="px-6 py-4 text-center whitespace-no-wrap">
-                      <span
-                        class="inline-flex p-4 text-xs font-semibold leading-5 text-gray-700 transition duration-300 ease-in-out transform bg-gray-200 rounded cursor-pointer hover:-translate-y-1"
-                        v-on:click="expandDetails($event)"
-                      >
-                        <svg
-                          class="w-6 h-6"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M19 13l-7 7-7-7m14-8l-7 7-7-7"
-                          ></path>
-                        </svg>
-                      </span>
                     </td>
                   </tr>
                 </tbody>
