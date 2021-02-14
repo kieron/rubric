@@ -273,136 +273,166 @@
       </p>
 
       <!-- Cards -->
-      <div class="flex flex-wrap mt-5 mb-6 -mx-3">
-        <div class="w-1/2 px-3 xl:w-1/4">
-          <div
-            class="flex items-center w-full p-0 mb-6 bg-white border rounded-lg xl:mb-0"
-          >
-            <div
-              class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-pink"
-            >
-              <svg
-                class="hidden w-8 h-8 mx-auto lg:block"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-                ></path>
-              </svg>
-            </div>
 
-            <div class="ml-6 leading-6 text-gray-700">
-              <p class="text-2xl font-semibold">
-                {{ apiResponse.averageWordCount }}
-              </p>
-              <p class="text-sm text-gray-600">Average Words</p>
+      <div class="my-8 md:flex">
+        <div class="flex flex-col md:w-1/2 md:mr-3 xl:w-1/3">
+          <p class="mb-4 text-xl font-semibold text-gray-700">Average Values</p>
+          <!-- class="flex h-full md:justify-between md:flex-col" -->
+          <div
+            class="flex flex-wrap -mx-3 md:mx-0 md:flex-no-wrap md:justify-between md:flex-col md:h-full"
+          >
+            <div class="w-1/2 px-3 md:px-0 md:w-full">
+              <div
+                class="flex items-center p-0 mb-6 bg-white border rounded-lg md:mb-0"
+              >
+                <div
+                  class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-pink"
+                >
+                  <svg
+                    class="hidden w-8 h-8 mx-auto lg:block"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
+                    ></path>
+                  </svg>
+                </div>
+
+                <div class="ml-6 leading-6 text-gray-700">
+                  <p class="text-2xl font-semibold">
+                    {{ apiResponse.averageWordCount }}
+                  </p>
+                  <p class="text-sm text-gray-600">Average Words</p>
+                </div>
+              </div>
+            </div>
+            <div class="w-1/2 px-3 md:px-0 md:w-full">
+              <div
+                class="flex items-center p-0 mb-6 bg-white border rounded-lg md:mb-0"
+              >
+                <div
+                  class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-purple"
+                >
+                  <svg
+                    class="hidden w-8 h-8 mx-auto lg:block"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                    ></path>
+                  </svg>
+                </div>
+
+                <div class="ml-6 leading-6 text-gray-700">
+                  <p class="text-2xl font-semibold">
+                    {{ apiResponse.averageHeaderCount }}
+                  </p>
+                  <p class="text-sm text-gray-600">Average Headers</p>
+                </div>
+              </div>
+            </div>
+            <div class="w-1/2 px-3 md:px-0 md:w-full">
+              <div
+                class="flex items-center p-0 mb-6 bg-white border rounded-lg md:mb-0"
+              >
+                <div
+                  class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-orange"
+                >
+                  <svg
+                    class="hidden w-8 h-8 mx-auto lg:block"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    ></path>
+                  </svg>
+                </div>
+
+                <div class="ml-6 leading-6 text-gray-700">
+                  <p class="text-2xl font-semibold">
+                    {{ apiResponse.averageImagesCount }}
+                  </p>
+                  <p class="text-sm text-gray-600">Average Images</p>
+                </div>
+              </div>
+            </div>
+            <div class="w-1/2 px-3 md:px-0 md:w-full">
+              <div
+                class="flex items-center p-0 mb-6 bg-white border rounded-lg md:mb-0"
+              >
+                <div
+                  class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-green"
+                >
+                  <svg
+                    class="hidden w-8 h-8 mx-auto lg:block"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
+                    ></path>
+                  </svg>
+                </div>
+
+                <div class="ml-6 leading-6 text-gray-700">
+                  <p class="text-2xl font-semibold">
+                    {{ apiResponse.averageParagraphCount }}
+                  </p>
+                  <p class="text-sm text-gray-600">Average Paragraphs</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-
-        <div class="w-1/2 px-3 xl:w-1/4">
-          <div
-            class="flex items-center w-full p-0 mb-6 bg-white border rounded-lg xl:mb-0"
-          >
+        <div class="order-last w-full xl:w-2/3 md:mt-0">
+          <p class="mb-4 text-xl font-semibold text-gray-700">
+            Related Questions
+          </p>
+          <div class="w-full p-4 bg-white border rounded-lg">
             <div
-              class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-purple"
+              :key="question.id"
+              v-for="question in apiResponse.relatedQuestions"
+              class="flex items-center justify-between w-full px-4 py-2 my-2 bg-gray-100 border rounded-lg"
             >
-              <svg
-                class="hidden w-8 h-8 mx-auto lg:block"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-                ></path>
-              </svg>
-            </div>
-
-            <div class="ml-6 leading-6 text-gray-700">
-              <p class="text-2xl font-semibold">
-                {{ apiResponse.averageHeaderCount }}
-              </p>
-              <p class="text-sm text-gray-600">Average Headers</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="w-1/2 px-3 xl:w-1/4">
-          <div
-            class="flex items-center w-full p-0 mb-6 bg-white border rounded-lg xl:mb-0"
-          >
-            <div
-              class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-orange"
-            >
-              <svg
-                class="hidden w-8 h-8 mx-auto lg:block"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                ></path>
-              </svg>
-            </div>
-
-            <div class="ml-6 leading-6 text-gray-700">
-              <p class="text-2xl font-semibold">
-                {{ apiResponse.averageImagesCount }}
-              </p>
-              <p class="text-sm text-gray-600">Average Images</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="w-1/2 px-3 xl:w-1/4">
-          <div
-            class="flex items-center w-full p-0 mb-6 bg-white border rounded-lg xl:mb-0"
-          >
-            <div
-              class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-green"
-            >
-              <svg
-                class="hidden w-8 h-8 mx-auto lg:block"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
-                ></path>
-              </svg>
-            </div>
-
-            <div class="ml-6 leading-6 text-gray-700">
-              <p class="text-2xl font-semibold">
-                {{ apiResponse.averageParagraphCount }}
-              </p>
-              <p class="text-sm text-gray-600">Average Paragraphs</p>
+              <div>
+                <p class="text-base font-semibold text-gray-700">
+                  {{ question.question }}
+                </p>
+                <p class="text-sm text-gray-700">{{ question.title }}</p>
+                <a
+                  target="_blank"
+                  :href="question.link"
+                  class="text-sm text-gray-700"
+                  >{{ question.link }}</a
+                >
+              </div>
             </div>
           </div>
         </div>
       </div>
-
       <!-- table -->
       <div
         class="flex flex-col mb-12 border border-gray-300 rounded-md bg-gray-25"
@@ -792,59 +822,22 @@
 
       <!-- charts -->
       <!-- <div class="flex flex-wrap -mx-3">
-      <div class="w-full px-3 xl:w-1/3">
-        <p class="mb-4 text-xl font-semibold text-gray-700">Recent Sales</p>
+        <div class="w-full px-3 xl:w-1/3">
+          <p class="mb-4 text-xl font-semibold text-gray-700">Recent Sales</p>
 
-        <div class="w-full p-4 mb-8 bg-white border rounded-lg xl:mb-0">
-          <canvas id="buyers-chart" width="600" height="400"></canvas>
-        </div>
-      </div>
-
-      <div class="w-full px-3 xl:w-1/3">
-        <p class="mb-4 text-xl font-semibold text-gray-700">Recent Reviews</p>
-
-        <div class="w-full p-4 mb-8 bg-white border rounded-lg xl:mb-0">
-          <canvas id="reviews-chart" width="600" height="400"></canvas>
-        </div>
-      </div>
-
-      <div class="w-full px-3 xl:w-1/3">
-        <p class="mb-4 text-xl font-semibold text-gray-700">
-          Recent Transactions
-        </p>
-        <div class="w-full p-4 bg-white border rounded-lg">
-          <div
-            class="flex items-center justify-between w-full px-4 py-2 mb-4 bg-gray-100 border rounded-lg"
-          >
-            <div>
-              <p class="text-base font-semibold text-gray-700">Jhon Doe</p>
-              <p class="text-sm text-gray-700">Product XYZ-92</p>
-            </div>
-            <span class="text-lg font-semibold text-green-600">$25.00</span>
-          </div>
-
-          <div
-            class="flex items-center justify-between w-full px-4 py-2 mb-4 bg-gray-100 border rounded-lg"
-          >
-            <div>
-              <p class="text-base font-semibold text-gray-700">Malcom</p>
-              <p class="text-sm text-gray-700">Product XYZ-92</p>
-            </div>
-            <span class="text-lg font-semibold text-pink">$74.99</span>
-          </div>
-
-          <div
-            class="flex items-center justify-between w-full px-4 py-2 mb-4 bg-gray-100 border rounded-lg"
-          >
-            <div>
-              <p class="text-base font-semibold text-gray-700">Jhon Doe</p>
-              <p class="text-sm text-gray-700">Product XYZ-92</p>
-            </div>
-            <span class="text-lg font-semibold text-green-600">$182.00</span>
+          <div class="w-full p-4 mb-8 bg-white border rounded-lg xl:mb-0">
+            <canvas id="buyers-chart" width="600" height="400"></canvas>
           </div>
         </div>
-      </div>
-    </div> -->
+
+        <div class="w-full px-3 xl:w-1/3">
+          <p class="mb-4 text-xl font-semibold text-gray-700">Recent Reviews</p>
+
+          <div class="w-full p-4 mb-8 bg-white border rounded-lg xl:mb-0">
+            <canvas id="reviews-chart" width="600" height="400"></canvas>
+          </div>
+        </div>
+      </div> -->
     </div>
     <div
       class="flex flex-row items-center p-5 mt-5 bg-red-200 border-b-2 border-red-300 rounded alert swing-in-top-fwd"
@@ -898,7 +891,7 @@ export default {
       try {
         console.log("Fetching Initiated");
         return fetch(
-          `http://localhost:3001?keyword=${this.query}&amount=${this.amount}&device=${this.device}&location=${this.location}`,
+          `http://localhost:3001/serp-results?keyword=${this.query}&amount=${this.amount}&device=${this.device}&location=${this.location}`,
           {}
         )
           .then((response) => response.json())
