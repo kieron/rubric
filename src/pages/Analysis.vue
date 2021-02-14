@@ -162,20 +162,99 @@
                 v-model="amount"
               />
               <p class="absolute right-0 mt-1 text-xs text-right text-gray-500">
-                This amount of articles could take up to
-                <span v-if="this.amount <= 20">20 seconds</span>
+                This amount of articles could take around
+                <span v-if="this.amount <= 20"
+                  ><strong>20 seconds</strong></span
+                >
                 <span v-if="this.amount > 20 && this.amount <= 30"
-                  >30 seconds</span
+                  ><strong>30 seconds</strong></span
                 >
                 <span v-if="this.amount > 30 && this.amount <= 50"
-                  >50 seconds</span
+                  ><strong>50 seconds</strong></span
                 >
-                <span v-if="this.amount > 50">a minute</span> to fetch.
+                <span v-if="this.amount > 50"><strong>a minute</strong></span>
+                to fetch.
               </p>
             </div>
           </div>
         </div>
       </form>
+    </div>
+
+    <div class="flex justify-center my-20 text-purple-900" v-if="loading">
+      <svg
+        width="120"
+        height="30"
+        xmlns="http://www.w3.org/2000/svg"
+        class="fill-current"
+      >
+        <circle cx="15" cy="15" r="15">
+          <animate
+            attributeName="r"
+            from="15"
+            to="15"
+            begin="0s"
+            dur="0.8s"
+            values="15;9;15"
+            calcMode="linear"
+            repeatCount="indefinite"
+          />
+          <animate
+            attributeName="fill-opacity"
+            from="1"
+            to="1"
+            begin="0s"
+            dur="0.8s"
+            values="1;.5;1"
+            calcMode="linear"
+            repeatCount="indefinite"
+          />
+        </circle>
+        <circle cx="60" cy="15" r="9" fill-opacity=".3">
+          <animate
+            attributeName="r"
+            from="9"
+            to="9"
+            begin="0s"
+            dur="0.8s"
+            values="9;15;9"
+            calcMode="linear"
+            repeatCount="indefinite"
+          />
+          <animate
+            attributeName="fill-opacity"
+            from=".5"
+            to=".5"
+            begin="0s"
+            dur="0.8s"
+            values=".5;1;.5"
+            calcMode="linear"
+            repeatCount="indefinite"
+          />
+        </circle>
+        <circle cx="105" cy="15" r="15">
+          <animate
+            attributeName="r"
+            from="15"
+            to="15"
+            begin="0s"
+            dur="0.8s"
+            values="15;9;15"
+            calcMode="linear"
+            repeatCount="indefinite"
+          />
+          <animate
+            attributeName="fill-opacity"
+            from="1"
+            to="1"
+            begin="0s"
+            dur="0.8s"
+            values="1;.5;1"
+            calcMode="linear"
+            repeatCount="indefinite"
+          />
+        </circle>
+      </svg>
     </div>
 
     <div class="mt-5 slide-in-bottom" v-if="loaded && !loading">
@@ -196,11 +275,17 @@
               class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-pink"
             >
               <svg
-                class="hidden w-8 h-8 mx-auto fill-current lg:block"
-                viewBox="0 0 20 20"
+                class="hidden w-8 h-8 mx-auto lg:block"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M17.35,2.219h-5.934c-0.115,0-0.225,0.045-0.307,0.128l-8.762,8.762c-0.171,0.168-0.171,0.443,0,0.611l5.933,5.934c0.167,0.171,0.443,0.169,0.612,0l8.762-8.763c0.083-0.083,0.128-0.192,0.128-0.307V2.651C17.781,2.414,17.587,2.219,17.35,2.219M16.916,8.405l-8.332,8.332l-5.321-5.321l8.333-8.332h5.32V8.405z M13.891,4.367c-0.957,0-1.729,0.772-1.729,1.729c0,0.957,0.771,1.729,1.729,1.729s1.729-0.772,1.729-1.729C15.619,5.14,14.848,4.367,13.891,4.367 M14.502,6.708c-0.326,0.326-0.896,0.326-1.223,0c-0.338-0.342-0.338-0.882,0-1.224c0.342-0.337,0.881-0.337,1.223,0C14.84,5.826,14.84,6.366,14.502,6.708"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
                 ></path>
               </svg>
             </div>
@@ -222,11 +307,17 @@
               class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-purple"
             >
               <svg
-                class="hidden w-8 h-8 mx-auto fill-current lg:block"
-                viewBox="0 0 20 20"
+                class="hidden w-8 h-8 mx-auto lg:block"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M17.35,2.219h-5.934c-0.115,0-0.225,0.045-0.307,0.128l-8.762,8.762c-0.171,0.168-0.171,0.443,0,0.611l5.933,5.934c0.167,0.171,0.443,0.169,0.612,0l8.762-8.763c0.083-0.083,0.128-0.192,0.128-0.307V2.651C17.781,2.414,17.587,2.219,17.35,2.219M16.916,8.405l-8.332,8.332l-5.321-5.321l8.333-8.332h5.32V8.405z M13.891,4.367c-0.957,0-1.729,0.772-1.729,1.729c0,0.957,0.771,1.729,1.729,1.729s1.729-0.772,1.729-1.729C15.619,5.14,14.848,4.367,13.891,4.367 M14.502,6.708c-0.326,0.326-0.896,0.326-1.223,0c-0.338-0.342-0.338-0.882,0-1.224c0.342-0.337,0.881-0.337,1.223,0C14.84,5.826,14.84,6.366,14.502,6.708"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
                 ></path>
               </svg>
             </div>
@@ -248,11 +339,17 @@
               class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-orange"
             >
               <svg
-                class="hidden w-8 h-8 mx-auto fill-current lg:block"
-                viewBox="0 0 20 20"
+                class="hidden w-8 h-8 mx-auto lg:block"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M17.35,2.219h-5.934c-0.115,0-0.225,0.045-0.307,0.128l-8.762,8.762c-0.171,0.168-0.171,0.443,0,0.611l5.933,5.934c0.167,0.171,0.443,0.169,0.612,0l8.762-8.763c0.083-0.083,0.128-0.192,0.128-0.307V2.651C17.781,2.414,17.587,2.219,17.35,2.219M16.916,8.405l-8.332,8.332l-5.321-5.321l8.333-8.332h5.32V8.405z M13.891,4.367c-0.957,0-1.729,0.772-1.729,1.729c0,0.957,0.771,1.729,1.729,1.729s1.729-0.772,1.729-1.729C15.619,5.14,14.848,4.367,13.891,4.367 M14.502,6.708c-0.326,0.326-0.896,0.326-1.223,0c-0.338-0.342-0.338-0.882,0-1.224c0.342-0.337,0.881-0.337,1.223,0C14.84,5.826,14.84,6.366,14.502,6.708"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                 ></path>
               </svg>
             </div>
@@ -274,11 +371,17 @@
               class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-green"
             >
               <svg
-                class="hidden w-8 h-8 mx-auto fill-current lg:block"
-                viewBox="0 0 20 20"
+                class="hidden w-8 h-8 mx-auto lg:block"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M17.35,2.219h-5.934c-0.115,0-0.225,0.045-0.307,0.128l-8.762,8.762c-0.171,0.168-0.171,0.443,0,0.611l5.933,5.934c0.167,0.171,0.443,0.169,0.612,0l8.762-8.763c0.083-0.083,0.128-0.192,0.128-0.307V2.651C17.781,2.414,17.587,2.219,17.35,2.219M16.916,8.405l-8.332,8.332l-5.321-5.321l8.333-8.332h5.32V8.405z M13.891,4.367c-0.957,0-1.729,0.772-1.729,1.729c0,0.957,0.771,1.729,1.729,1.729s1.729-0.772,1.729-1.729C15.619,5.14,14.848,4.367,13.891,4.367 M14.502,6.708c-0.326,0.326-0.896,0.326-1.223,0c-0.338-0.342-0.338-0.882,0-1.224c0.342-0.337,0.881-0.337,1.223,0C14.84,5.826,14.84,6.366,14.502,6.708"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
                 ></path>
               </svg>
             </div>
@@ -324,10 +427,11 @@
                       <div class="flex items-center">
                         <div class="">
                           <div
-                            class="mb-1 text-lg font-medium leading-5 text-gray-900"
+                            class="mb-1 mr-8 text-lg font-medium leading-5 text-gray-900"
                           >
                             {{ article.title }}
                           </div>
+
                           <div class="text-sm leading-5 text-gray-500">
                             <a
                               :href="article.url"
@@ -477,6 +581,30 @@
                                   stroke-linecap="round"
                                   stroke-linejoin="round"
                                   stroke-width="2"
+                                  d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                ></path>
+                              </svg>
+                              <span
+                                title="Domain Authority"
+                                class="whitespace-no-wrap align-middle"
+                                >{{ article.questions.length }} Questions</span
+                              >
+                            </div>
+
+                            <div
+                              class="flex flex-no-wrap items-center mr-4 text-gray-600"
+                            >
+                              <svg
+                                class="inline w-5 h-5 mr-1 align-middle"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
                                   d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                                 ></path>
                               </svg>
@@ -491,7 +619,7 @@
                         </div>
                       </div>
 
-                      <div
+                      <!-- <div
                         class="flex items-center justify-center mt-3 mb-1 align-middle"
                       >
                         <span
@@ -514,10 +642,10 @@
                             ></path>
                           </svg>
                         </span>
-                      </div>
+                      </div> -->
                       <div
                         v-if="article.questions.length"
-                        class="hidden p-2 mt-2 additional-info slide-in-top"
+                        class="p-2 mt-2 additional-info slide-in-top"
                       >
                         <div class="w-full md:flex">
                           <div
@@ -553,6 +681,7 @@
                         <div class="w-full md:flex">
                           <div
                             class="w-full px-5 py-3 mt-2 mr-5 border border-gray-300 rounded md:w-1/2"
+                            v-if="article.headersContainingKeyword.length"
                           >
                             <h3 class="mt-2 font-bold text-md">
                               Headers containing full keyword
@@ -569,6 +698,9 @@
 
                           <div
                             class="w-full px-5 py-3 mt-2 border border-gray-300 rounded md:w-1/2"
+                            v-if="
+                              article.headersContainingPartialKeyword.length
+                            "
                           >
                             <h3 class="mt-2 font-bold text-md">
                               Headers containing partial keyword
@@ -585,6 +717,26 @@
                         </div>
                       </div>
                     </td>
+                    <span
+                      class="absolute right-0 p-2 mt-2 mr-2 text-xs font-semibold text-gray-500 transition duration-300 transform border-gray-300 rounded-md cursor-pointer hover:-translate-y-1"
+                      v-on:click="expandDetails($event)"
+                      title="Expand Details"
+                    >
+                      <svg
+                        class="w-8 h-8"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M19 9l-7 7-7-7"
+                        ></path>
+                      </svg>
+                    </span>
                   </tr>
                 </tbody>
               </table>
