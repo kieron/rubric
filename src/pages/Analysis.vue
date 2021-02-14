@@ -645,7 +645,7 @@
                       </div> -->
                       <div
                         v-if="article.questions.length"
-                        class="p-2 mt-2 additional-info slide-in-top"
+                        class="hidden p-2 mt-2 additional-info slide-in-top"
                       >
                         <div class="w-full md:flex">
                           <div
