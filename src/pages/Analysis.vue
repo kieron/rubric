@@ -879,8 +879,8 @@ export default {
   data() {
     return {
       animatedSearchBtn: false,
-      query: "ikea karlby battlestation",
-      amount: 12,
+      query: "best fishing rod for beginners",
+      amount: 15,
       device: "desktop",
       location: "United States",
       articles: "",
