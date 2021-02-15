@@ -457,7 +457,7 @@
                 >
                   <tr
                     :key="article.id"
-                    v-for="article in apiResponse.results"
+                    v-for="(article, articleIndex) in apiResponse.results"
                     class="border-b border-gray-200"
                   >
                     <td class="px-6 py-4">
@@ -658,7 +658,8 @@
 
                       <div
                         v-if="article.questions.length"
-                        class="hidden p-2 mt-2 additional-info slide-in-top"
+								class="p-2 mt-2 additional-info slide-in-top"
+								:class="{'hidden': !expandedArticles.includes(articleIndex)}"
                       >
                         <div class="w-full md:flex">
                           <div
@@ -731,8 +732,9 @@
                       </div>
                     </td>
                     <span
+                      v-if="article.questions.length"
                       class="absolute right-0 p-2 mt-2 mr-2 text-xs font-semibold text-gray-500 transition duration-300 transform border-gray-300 rounded-md cursor-pointer hover:-translate-y-1"
-                      v-on:click="expandDetails($event)"
+                      @click="onClickExpand(articleIndex)"
                       title="Expand Details"
                     >
                       <svg
@@ -862,6 +864,11 @@
 export default {
   name: "AnalysisHome",
   methods: {
+	onClickExpand(index){
+		if(this.expandedArticles.includes(index))
+			this.expandedArticles = this.expandedArticles.filter(i => i !== index)
+		else this.expandedArticles.push(index)
+	},
     search: async function () {
       this.loading = true;
       try {
@@ -918,6 +925,7 @@ export default {
       errorMessage: "Something Went Wrong",
       loaded: false,
       loading: false,
+		expandedArticles: []
       // buyersData: {
       //   type: "line",
       //   data: {
