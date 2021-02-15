@@ -275,13 +275,28 @@
       <!-- Cards -->
 
       <div class="my-8 md:flex">
-        <div class="flex flex-col md:w-1/2 md:mr-3 xl:w-1/3">
+        <div
+          :class="{
+            'md:w-1/2 md:mr-3 xl:w-1/3': apiResponse.relatedQuestions,
+            'w-full': !apiResponse.relatedQuestions,
+          }"
+          class="flex flex-col"
+        >
           <p class="mb-4 text-xl font-semibold text-gray-700">Average Values</p>
-          <!-- class="flex h-full md:justify-between md:flex-col" -->
           <div
-            class="flex flex-wrap -mx-3 md:mx-0 md:flex-no-wrap md:justify-between md:flex-col md:h-full"
+            :class="{
+              'md:flex-col md:flex-no-wrap': apiResponse.relatedQuestions,
+              '': !apiResponse.relatedQuestions,
+            }"
+            class="flex flex-wrap -mx-3 md:mx-0 md:justify-between md:h-full"
           >
-            <div class="w-1/2 px-3 md:px-0 md:w-full">
+            <div
+              :class="{
+                'md:px-0 md:w-full': apiResponse.relatedQuestions,
+                '': !apiResponse.relatedQuestions,
+              }"
+              class="w-1/2 px-3 mb-2"
+            >
               <div
                 class="flex items-center p-0 mb-6 bg-white border rounded-lg md:mb-0"
               >
@@ -312,7 +327,13 @@
                 </div>
               </div>
             </div>
-            <div class="w-1/2 px-3 md:px-0 md:w-full">
+            <div
+              :class="{
+                'md:px-0 md:w-full': apiResponse.relatedQuestions,
+                '': !apiResponse.relatedQuestions,
+              }"
+              class="w-1/2 px-3 mb-2"
+            >
               <div
                 class="flex items-center p-0 mb-6 bg-white border rounded-lg md:mb-0"
               >
@@ -343,7 +364,13 @@
                 </div>
               </div>
             </div>
-            <div class="w-1/2 px-3 md:px-0 md:w-full">
+            <div
+              :class="{
+                'md:px-0 md:w-full': apiResponse.relatedQuestions,
+                '': !apiResponse.relatedQuestions,
+              }"
+              class="w-1/2 px-3 mb-2"
+            >
               <div
                 class="flex items-center p-0 mb-6 bg-white border rounded-lg md:mb-0"
               >
@@ -374,7 +401,13 @@
                 </div>
               </div>
             </div>
-            <div class="w-1/2 px-3 md:px-0 md:w-full">
+            <div
+              :class="{
+                'md:px-0 md:w-full': apiResponse.relatedQuestions,
+                '': !apiResponse.relatedQuestions,
+              }"
+              class="w-1/2 px-3 mb-2"
+            >
               <div
                 class="flex items-center p-0 mb-6 bg-white border rounded-lg md:mb-0"
               >
@@ -407,10 +440,14 @@
             </div>
           </div>
         </div>
-        <div class="order-last w-full xl:w-2/3 md:mt-0">
+        <div
+          v-if="apiResponse.relatedQuestions"
+          class="order-last w-full xl:w-2/3 md:mt-0"
+        >
           <p class="mb-4 text-xl font-semibold text-gray-700">
-            Related Questions
+            People Also Ask
           </p>
+
           <div class="w-full p-4 bg-white border rounded-lg">
             <div
               :key="question.id"
@@ -657,13 +694,21 @@
                       </div>
 
                       <div
-                        v-if="article.questions.length"
-								class="p-2 mt-2 additional-info slide-in-top"
-								:class="{'hidden': !expandedArticles.includes(articleIndex)}"
+                        v-if="
+                          article.questions.length ||
+                          article.headers.length ||
+                          article.headersContainingKeyword.length ||
+                          article.headersContainingPartialKeyword.length
+                        "
+                        class="p-2 mt-3 bg-gray-200 rounded additional-info swing-in-top-fwd"
+                        :class="{
+                          hidden: !expandedArticles.includes(articleIndex),
+                        }"
                       >
-                        <div class="w-full md:flex">
+                        <div class="flex-wrap w-full md:flex">
                           <div
-                            class="w-full px-5 py-3 mt-2 mr-5 border border-gray-300 rounded md:w-1/2"
+                            class="flex-grow p-8 mt-2 bg-gray-100 border rounded"
+                            v-if="article.questions.length"
                           >
                             <h3 class="mt-2 font-bold text-md">
                               Questions Answered
@@ -679,7 +724,7 @@
                           </div>
 
                           <div
-                            class="w-full px-5 py-3 mt-2 border border-gray-300 rounded md:w-1/2"
+                            class="flex-grow p-8 mt-2 bg-gray-100 border rounded"
                           >
                             <h3 class="mt-2 font-bold text-md">Headers</h3>
                             <ol>
@@ -691,10 +736,10 @@
                               </li>
                             </ol>
                           </div>
-                        </div>
-                        <div class="w-full md:flex">
+                          <!-- </div>
+                        <div class="justify-between w-full md:flex"> -->
                           <div
-                            class="w-full px-5 py-3 mt-2 mr-5 border border-gray-300 rounded md:w-1/2"
+                            class="flex-grow p-8 mt-2 bg-gray-100 border rounded"
                             v-if="article.headersContainingKeyword.length"
                           >
                             <h3 class="mt-2 font-bold text-md">
@@ -711,7 +756,7 @@
                           </div>
 
                           <div
-                            class="w-full px-5 py-3 mt-2 border border-gray-300 rounded md:w-1/2"
+                            class="flex-grow p-8 mt-2 bg-gray-100 border rounded"
                             v-if="
                               article.headersContainingPartialKeyword.length
                             "
@@ -732,7 +777,12 @@
                       </div>
                     </td>
                     <span
-                      v-if="article.questions.length"
+                      v-if="
+                        article.questions.length ||
+                        article.headers.length ||
+                        article.headersContainingKeyword.length ||
+                        article.headersContainingPartialKeyword.length
+                      "
                       class="absolute right-0 p-2 mt-2 mr-2 text-xs font-semibold text-gray-500 transition duration-300 transform border-gray-300 rounded-md cursor-pointer hover:-translate-y-1"
                       @click="onClickExpand(articleIndex)"
                       title="Expand Details"
@@ -864,48 +914,42 @@
 export default {
   name: "AnalysisHome",
   methods: {
-	onClickExpand(index){
-		if(this.expandedArticles.includes(index))
-			this.expandedArticles = this.expandedArticles.filter(i => i !== index)
-		else this.expandedArticles.push(index)
-	},
+    onClickExpand(index) {
+      if (this.expandedArticles.includes(index))
+        this.expandedArticles = this.expandedArticles.filter(
+          (i) => i !== index
+        );
+      else this.expandedArticles.push(index);
+    },
     search: async function () {
       this.loading = true;
       try {
         console.log("Fetching Initiated");
         return fetch(
-          `http://localhost:3001/serp-results?keyword=${this.query}&amount=${this.amount}&device=${this.device}&location=${this.location}`,
+          `https://rubricseo-api.herokuapp.com/serp-results?keyword=${this.query}&amount=${this.amount}&device=${this.device}&location=${this.location}`,
           {}
         )
           .then((response) => response.json())
           .then((data) => {
-            this.apiResponse = data;
-            if (this.apiResponse.results.length >= 1) {
-              this.loaded = true;
-              this.loading = false;
-              this.error = false;
-            } else {
-              this.errorMessage =
-                "That search didn't bring back enough results, try a larger amount of articles.";
+            if (data.error) {
+              this.errorMessage = data.error.message;
               this.loaded = false;
               this.loading = false;
               this.error = true;
+            } else {
+              this.apiResponse = data;
+              this.loaded = true;
+              this.loading = false;
+              this.error = false;
             }
           })
           .catch((error) => {
             this.loading = false;
             this.error = true;
-            if (!this.apiResponse.results) {
-              this.errorMessage = this.apiResponse.errorFromApi;
-            } else {
-              this.errorMessage = "X";
-            }
-
-            // console.log(response);
+            this.errorMessage = error.message + ". Are you connected?";
           });
       } catch (err) {
-        console.log("fetch error");
-        console.log(err);
+        this.errorMessage = "Something went wrong!";
       }
     },
     animateSearchBtn() {
@@ -925,7 +969,7 @@ export default {
       errorMessage: "Something Went Wrong",
       loaded: false,
       loading: false,
-		expandedArticles: []
+      expandedArticles: [],
       // buyersData: {
       //   type: "line",
       //   data: {
@@ -1236,6 +1280,57 @@ export default {
 
 /* ----------------------------------------------
  * Generated by Animista on 2021-2-14 17:17:5
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation swing-in-top-fwd
+ * ----------------------------------------
+ */
+@-webkit-keyframes swing-in-top-fwd {
+  0% {
+    -webkit-transform: rotateX(-100deg);
+    transform: rotateX(-100deg);
+    -webkit-transform-origin: top;
+    transform-origin: top;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    -webkit-transform-origin: top;
+    transform-origin: top;
+    opacity: 1;
+  }
+}
+@keyframes swing-in-top-fwd {
+  0% {
+    -webkit-transform: rotateX(-100deg);
+    transform: rotateX(-100deg);
+    -webkit-transform-origin: top;
+    transform-origin: top;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    -webkit-transform-origin: top;
+    transform-origin: top;
+    opacity: 1;
+  }
+}
+
+.swing-in-top-fwd {
+  -webkit-animation: swing-in-top-fwd 0.8s
+    cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  animation: swing-in-top-fwd 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2021-2-15 19:10:22
  * Licensed under FreeBSD License.
  * See http://animista.net/license for more info. 
  * w: http://animista.net, t: @cssanimista
