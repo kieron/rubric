@@ -910,6 +910,12 @@
 
 <script>
 //import Chart from "chart.js";
+let api_url = "";
+if (process.env.NODE_ENV === "production") {
+  api_url = "https://rubricseo-api.herokuapp.com/";
+} else {
+  api_url = "http://localhost:3001/";
+}
 
 export default {
   name: "AnalysisHome",
@@ -926,7 +932,7 @@ export default {
       try {
         console.log("Fetching Initiated");
         return fetch(
-          `https://rubricseo-api.herokuapp.com/serp-results?keyword=${this.query}&amount=${this.amount}&device=${this.device}&location=${this.location}`,
+          `${api_url}serp-results?keyword=${this.query}&amount=${this.amount}&device=${this.device}&location=${this.location}`,
           {}
         )
           .then((response) => response.json())
