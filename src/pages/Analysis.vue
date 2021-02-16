@@ -158,7 +158,7 @@
                 placeholder="Amount"
                 min="1"
                 required
-                max="40"
+                max="30"
                 v-model="amount"
               />
               <p class="absolute right-0 mt-1 text-xs text-right text-gray-500">
