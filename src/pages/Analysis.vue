@@ -292,13 +292,13 @@
           >
             <div
               :class="{
-                'md:px-0 md:w-full': apiResponse.relatedQuestions,
-                '': !apiResponse.relatedQuestions,
+                'md:px-0 md:w-full px-3': apiResponse.relatedQuestions,
+                'px-3 md:px-0 md:pr-1 xl:w-1/4': !apiResponse.relatedQuestions,
               }"
-              class="w-1/2 px-3 mb-2"
+              class="w-1/2 md:mb-2"
             >
               <div
-                class="flex items-center p-0 mb-6 bg-white border rounded-lg md:mb-0"
+                class="flex items-center p-0 mb-2 bg-white border rounded-lg md:mb-0"
               >
                 <div
                   class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-pink"
@@ -329,13 +329,13 @@
             </div>
             <div
               :class="{
-                'md:px-0 md:w-full': apiResponse.relatedQuestions,
-                '': !apiResponse.relatedQuestions,
+                'md:px-0 md:w-full px-3': apiResponse.relatedQuestions,
+                'px-3 md:px-0 xl:px-1 xl:w-1/4 pl-1 ': !apiResponse.relatedQuestions,
               }"
-              class="w-1/2 px-3 mb-2"
+              class="w-1/2 md:mb-2"
             >
               <div
-                class="flex items-center p-0 mb-6 bg-white border rounded-lg md:mb-0"
+                class="flex items-center p-0 mb-2 bg-white border rounded-lg md:mb-0"
               >
                 <div
                   class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-purple"
@@ -366,13 +366,13 @@
             </div>
             <div
               :class="{
-                'md:px-0 md:w-full': apiResponse.relatedQuestions,
-                '': !apiResponse.relatedQuestions,
+                'md:px-0 md:w-full px-3 ': apiResponse.relatedQuestions,
+                'px-3 md:pl-0 md:pr-1 xl:px-1 xl:w-1/4 ': !apiResponse.relatedQuestions,
               }"
-              class="w-1/2 px-3 mb-2"
+              class="w-1/2 md:mb-2"
             >
               <div
-                class="flex items-center p-0 mb-6 bg-white border rounded-lg md:mb-0"
+                class="flex items-center p-0 mb-2 bg-white border rounded-lg md:mb-0"
               >
                 <div
                   class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-orange"
@@ -403,13 +403,13 @@
             </div>
             <div
               :class="{
-                'md:px-0 md:w-full': apiResponse.relatedQuestions,
-                '': !apiResponse.relatedQuestions,
+                'md:px-0 md:w-full mb-0 px-3': apiResponse.relatedQuestions,
+                'md:mb-2 px-3 md:pr-0 pl-1 xl:w-1/4': !apiResponse.relatedQuestions,
               }"
-              class="w-1/2 px-3 mb-2"
+              class="w-1/2"
             >
               <div
-                class="flex items-center p-0 mb-6 bg-white border rounded-lg md:mb-0"
+                class="flex items-center p-0 mb-2 bg-white border rounded-lg md:mb-0"
               >
                 <div
                   class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-green"
@@ -442,17 +442,21 @@
         </div>
         <div
           v-if="apiResponse.relatedQuestions"
-          class="order-last w-full xl:w-2/3 md:mt-0"
+          class="order-last w-full mt-5 xl:w-2/3 md:mt-0"
         >
           <p class="mb-4 text-xl font-semibold text-gray-700">
             People Also Ask
           </p>
 
-          <div class="w-full p-4 bg-white border rounded-lg">
+          <div class="w-full">
             <div
               :key="question.id"
-              v-for="question in apiResponse.relatedQuestions"
-              class="flex items-center justify-between w-full px-4 py-2 my-2 bg-gray-100 border rounded-lg"
+              v-for="(question, index) in apiResponse.relatedQuestions"
+              class="flex items-center justify-between w-full px-4 py-2 bg-gray-100 border rounded-lg"
+              :class="{
+                'mt-2': index == apiResponse.relatedQuestions.length - 1,
+                'my-2': index != apiResponse.relatedQuestions.length - 1,
+              }"
             >
               <div>
                 <p class="text-base font-semibold text-gray-700">
@@ -659,7 +663,7 @@
                                 ></path>
                               </svg>
                               <span
-                                title="Domain Authority"
+                                title="Questions Answered"
                                 class="whitespace-no-wrap align-middle"
                                 >{{ article.questions.length }} Questions</span
                               >
@@ -700,23 +704,24 @@
                           article.headersContainingKeyword.length ||
                           article.headersContainingPartialKeyword.length
                         "
-                        class="p-2 mt-3 bg-gray-200 rounded additional-info swing-in-top-fwd"
+                        class="p-2 mt-3 rounded additional-info swing-in-top-fwd"
                         :class="{
                           hidden: !expandedArticles.includes(articleIndex),
                         }"
                       >
                         <div class="flex-wrap w-full md:flex">
                           <div
-                            class="flex-grow p-8 mt-2 bg-gray-100 border rounded"
+                            class="flex-grow px-4 py-3 mx-1 mt-2 bg-gray-100 border rounded"
                             v-if="article.questions.length"
                           >
-                            <h3 class="mt-2 font-bold text-md">
+                            <h3 class="font-bold text-gray-700 text-md">
                               Questions Answered
                             </h3>
                             <ol>
                               <li
                                 :key="question.id"
                                 v-for="question in article.questions"
+                                class="text-gray-700"
                               >
                                 - {{ question }}
                               </li>
@@ -724,13 +729,16 @@
                           </div>
 
                           <div
-                            class="flex-grow p-8 mt-2 bg-gray-100 border rounded"
+                            class="flex-grow px-4 py-3 mx-1 mt-2 bg-gray-100 border rounded"
                           >
-                            <h3 class="mt-2 font-bold text-md">Headers</h3>
+                            <h3 class="font-bold text-gray-700 text-md">
+                              Headers
+                            </h3>
                             <ol>
                               <li
                                 :key="header.id"
                                 v-for="header in article.headers"
+                                class="text-gray-700"
                               >
                                 - {{ header }}
                               </li>
@@ -739,16 +747,17 @@
                           <!-- </div>
                         <div class="justify-between w-full md:flex"> -->
                           <div
-                            class="flex-grow p-8 mt-2 bg-gray-100 border rounded"
+                            class="flex-grow px-4 py-3 mx-1 mt-2 bg-gray-100 border rounded"
                             v-if="article.headersContainingKeyword.length"
                           >
-                            <h3 class="mt-2 font-bold text-md">
+                            <h3 class="font-bold text-gray-700 text-md">
                               Headers containing full keyword
                             </h3>
                             <ol>
                               <li
                                 :key="fullHeader.id"
                                 v-for="fullHeader in article.headersContainingKeyword"
+                                class="text-gray-700"
                               >
                                 - {{ fullHeader }}
                               </li>
@@ -756,17 +765,18 @@
                           </div>
 
                           <div
-                            class="flex-grow p-8 mt-2 bg-gray-100 border rounded"
+                            class="flex-grow px-4 py-3 mx-1 mt-2 bg-gray-100 border rounded"
                             v-if="
                               article.headersContainingPartialKeyword.length
                             "
                           >
-                            <h3 class="mt-2 font-bold text-md">
+                            <h3 class="font-bold text-gray-700 text-md">
                               Headers containing partial keyword
                             </h3>
                             <ol>
                               <li
                                 :key="partialHeader.id"
+                                class="text-gray-700"
                                 v-for="partialHeader in article.headersContainingPartialKeyword"
                               >
                                 - {{ partialHeader }}
@@ -930,7 +940,6 @@ export default {
     search: async function () {
       this.loading = true;
       try {
-        console.log("Fetching Initiated");
         return fetch(
           `${api_url}serp-results?keyword=${this.query}&amount=${this.amount}&device=${this.device}&location=${this.location}`,
           {}
