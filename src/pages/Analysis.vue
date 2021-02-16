@@ -704,14 +704,14 @@
                           article.headersContainingKeyword.length ||
                           article.headersContainingPartialKeyword.length
                         "
-                        class="p-2 mt-3 rounded additional-info swing-in-top-fwd"
+                        class="mt-5 rounded additional-info swing-in-top-fwd"
                         :class="{
                           hidden: !expandedArticles.includes(articleIndex),
                         }"
                       >
                         <div class="flex-wrap w-full md:flex">
                           <div
-                            class="flex-grow px-4 py-3 mx-1 mt-2 bg-gray-100 border rounded"
+                            class="flex-grow px-4 py-3 mt-2 bg-gray-100 border rounded lg:mx-1"
                             v-if="article.questions.length"
                           >
                             <h3 class="font-bold text-gray-700 text-md">
@@ -729,7 +729,7 @@
                           </div>
 
                           <div
-                            class="flex-grow px-4 py-3 mx-1 mt-2 bg-gray-100 border rounded"
+                            class="flex-grow px-4 py-3 mt-2 bg-gray-100 border rounded lg:mx-1"
                           >
                             <h3 class="font-bold text-gray-700 text-md">
                               Headers
@@ -747,7 +747,7 @@
                           <!-- </div>
                         <div class="justify-between w-full md:flex"> -->
                           <div
-                            class="flex-grow px-4 py-3 mx-1 mt-2 bg-gray-100 border rounded"
+                            class="flex-grow px-4 py-3 mt-2 bg-gray-100 border rounded lg:mx-1"
                             v-if="article.headersContainingKeyword.length"
                           >
                             <h3 class="font-bold text-gray-700 text-md">
@@ -765,7 +765,7 @@
                           </div>
 
                           <div
-                            class="flex-grow px-4 py-3 mx-1 mt-2 bg-gray-100 border rounded"
+                            class="flex-grow px-4 py-3 mt-2 bg-gray-100 border rounded lg:mx-1"
                             v-if="
                               article.headersContainingPartialKeyword.length
                             "
