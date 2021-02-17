@@ -1,9 +1,12 @@
 <template>
   <!-- give the sidebar z-50 class so its higher than the navbar if you want to see the logo -->
   <!-- you will need to add a little "X" button next to the logo in order to close it though -->
+
   <div
-    class="fixed z-30 w-3/4 h-screen transition duration-500 ease-in-out border-r md:w-1/3 lg:w-64 md:top-0 md:left-0 lg:block bg-gray-25"
-    :class="sideBarOpen ? '' : 'hidden'"
+    class="fixed z-30 w-3/4 h-screen border-r md:w-1/3 lg:w-64 md:top-0 md:left-0 lg:block bg-gray-25 sidebar"
+    :class="{
+      hidden: !sideBarOpen,
+    }"
     id="main-nav"
   >
     <router-link to="/" class="flex items-center w-full h-20 px-4 mb-8">
@@ -46,10 +49,8 @@
         </svg>
         <span class="font-medium text-gray-800">SERP Analysis</span>
       </router-link>
-      <router-link
-        to="/blueprint"
-        :disabled="true"
-        :event="disabled ? 'click' : ''"
+      <a
+        href="/"
         title="Coming Soon"
         class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-not-allowed hover:bg-gray-30"
       >
@@ -68,112 +69,10 @@
           />
         </svg>
         <span class="font-medium text-gray-800">Blueprint Tool</span>
-      </router-link>
-      <div class="w-full">
-        <!-- <button
-          class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-pointer hover:bg-gray-30 focus:outline-none"
-          @click="dropdownCompras"
-        >
-          <svg
-            class="w-6 h-6 mr-2 text-gray-700"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"
-            ></path>
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"
-            ></path>
-          </svg>
-          <span class="font-medium text-gray-800">Compras</span>
-          <svg
-            class="hidden w-4 h-4 ml-16 text-gray-600 lg:flex"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 9l-7 7-7-7"
-            ></path>
-          </svg>
-        </button> -->
-        <!-- <div
-          :class="{ hidden: !dropdownComprasOpen }"
-          class="py-1 pl-2 my-1 bg-gray-300 rounded-lg"
-        >
-          <a
-            href="#"
-            class="flex items-center h-10 pl-5 text-gray-600 transition duration-500 ease-in-out rounded-lg cursor-pointer hover:text-gray-900 animated focus:outline-none"
-          >
-            <svg
-              class="w-6 h-6 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-              ></path>
-            </svg>
-            <span class="font-medium">Agregar</span>
-          </a>
-          <div
-            class="flex items-center h-10 pl-5 text-gray-600 duration-150 rounded-lg cursor-pointer hover:text-gray-900"
-          >
-            <svg
-              class="w-6 h-6 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 10h16M4 14h16M4 18h16"
-              ></path>
-            </svg>
-            <span class="font-medium">Listar</span>
-          </div>
-        </div> -->
-      </div>
-      <!-- <div
-        class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-pointer hover:bg-gray-30"
-      >
-        <svg
-          class="w-6 h-6 mr-2 text-gray-700"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-          ></path>
-        </svg>
-        <span class="font-medium text-gray-800">Ventas</span>
-      </div> -->
+      </a>
     </div>
-    <!-- <div class="px-4 mt-5 mb-4 text-gray-800">
-      <p class="pl-4 mb-4 text-xs font-semibold text-gray-600">SEGURIDAD</p>
+    <div class="px-4 mt-5 mb-4 text-gray-800">
+      <p class="pl-4 mb-4 text-xs font-semibold text-gray-600">SOMETHING</p>
       <div
         class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-pointer hover:bg-gray-30"
       >
@@ -191,12 +90,12 @@
             d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"
           ></path>
         </svg>
-        <span class="font-medium text-gray-800">Accesos</span>
+        <span class="font-medium text-gray-800">Something</span>
       </div>
-    </div> -->
+    </div>
 
-    <!-- <div class="px-4 mt-5 mb-4 text-gray-800">
-      <p class="pl-4 mb-4 text-xs font-semibold text-gray-600">MONITOREO</p>
+    <div class="px-4 mt-5 mb-4 text-gray-800">
+      <p class="pl-4 mb-4 text-xs font-semibold text-gray-600">SOMETHING</p>
       <div
         class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-pointer hover:bg-gray-30"
       >
@@ -214,31 +113,9 @@
             d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
           ></path>
         </svg>
-        <span class="font-medium text-gray-800">Reportes</span>
+        <span class="font-medium text-gray-800">Something</span>
       </div>
-    </div> -->
-
-    <!-- <div class="px-4 mt-5 mb-4 text-gray-800">
-      <p class="pl-4 mb-4 text-xs font-semibold text-gray-600">NEWS</p>
-      <div
-        class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-pointer hover:bg-gray-30"
-      >
-        <div class="w-2 h-2 mr-4 rounded-full bg-orange"></div>
-        <span class="font-medium text-gray-800">Hacer el inventari...</span>
-      </div>
-      <div
-        class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-pointer hover:bg-gray-30"
-      >
-        <div class="w-2 h-2 mr-4 rounded-full bg-green"></div>
-        <span class="font-medium text-gray-800">Verificar las ventas...</span>
-      </div>
-      <div
-        class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-pointer hover:bg-gray-30"
-      >
-        <div class="w-2 h-2 mr-4 rounded-full bg-purple"></div>
-        <span class="font-medium text-gray-800">Corte de caja</span>
-      </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -262,3 +139,48 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.slide-in-left {
+  -webkit-animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2021-2-17 18:12:4
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation slide-in-left
+ * ----------------------------------------
+ */
+@-webkit-keyframes slide-in-left {
+  0% {
+    -webkit-transform: translateX(-1000px);
+    transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-left {
+  0% {
+    -webkit-transform: translateX(-1000px);
+    transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+</style>
