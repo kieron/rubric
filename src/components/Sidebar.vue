@@ -48,7 +48,10 @@
       </router-link>
       <router-link
         to="/blueprint"
-        class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-pointer hover:bg-gray-30"
+        :disabled="true"
+        :event="disabled ? 'click' : ''"
+        title="Coming Soon"
+        class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-not-allowed hover:bg-gray-30"
       >
         <svg
           class="w-6 h-6 mr-2 text-gray-700"
