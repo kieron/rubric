@@ -102,143 +102,181 @@
           </div>
         </editor-menu-bubble>
         <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
-          <div class="p-5 mb-5 bg-gray-100 border-2 rounded menubar">
+          <div
+            class="flex flex-wrap justify-center p-4 mb-5 bg-gray-100 border-2 rounded md:justify-start space-between menubar"
+          >
             <button
-              class="p-2 mx-1 border-4 border-gray-900 rounded menubar__button"
+              class="p-2 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
               :class="{ 'is-active': isActive.bold() }"
               @click="commands.bold"
               title="Bold"
             >
-              <img src="@/assets/icons/bold.svg" class="w-8 h-8" />
+              <img
+                src="@/assets/icons/bold.svg"
+                class="w-6 h-6 md:w-8 md:h-8"
+              />
             </button>
 
             <button
-              class="p-2 mx-1 border-4 border-gray-900 rounded menubar__button"
+              class="p-2 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
               :class="{ 'is-active': isActive.italic() }"
               @click="commands.italic"
               title="Italic"
             >
-              <img src="@/assets/icons/italic.svg" class="w-8 h-8" />
+              <img
+                src="@/assets/icons/italic.svg"
+                class="w-6 h-6 md:w-8 md:h-8"
+              />
             </button>
 
             <button
-              class="p-2 mx-1 border-4 border-gray-900 rounded menubar__button"
+              class="p-2 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
               :class="{ 'is-active': isActive.strike() }"
               @click="commands.strike"
               title="Strikethrough"
             >
-              <img src="@/assets/icons/strike.svg" class="w-8 h-8" />
+              <img
+                src="@/assets/icons/strike.svg"
+                class="w-6 h-6 md:w-8 md:h-8"
+              />
             </button>
 
             <button
-              class="p-2 mx-1 border-4 border-gray-900 rounded menubar__button"
+              class="p-2 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
               :class="{ 'is-active': isActive.underline() }"
               @click="commands.underline"
               title="Underline"
             >
-              <img src="@/assets/icons/underline.svg" class="w-8 h-8" />
+              <img
+                src="@/assets/icons/underline.svg"
+                class="w-6 h-6 md:w-8 md:h-8"
+              />
             </button>
 
             <button
-              class="p-2 mx-1 border-4 border-gray-900 rounded menubar__button"
+              class="p-2 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
               :class="{ 'is-active': isActive.code() }"
               @click="commands.code"
               title="Code"
             >
-              <img src="@/assets/icons/code.svg" class="w-8 h-8" />
+              <img
+                src="@/assets/icons/code.svg"
+                class="w-6 h-6 md:w-8 md:h-8"
+              />
             </button>
 
             <button
-              class="p-2 mx-1 border-4 border-gray-900 rounded menubar__button"
+              class="p-2 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
               :class="{ 'is-active': isActive.paragraph() }"
               @click="commands.paragraph"
               title="Paragraph"
             >
-              <img src="@/assets/icons/paragraph.svg" class="w-8 h-8" />
+              <img
+                src="@/assets/icons/paragraph.svg"
+                class="w-6 h-6 md:w-8 md:h-8"
+              />
             </button>
 
             <button
-              class="p-2 mx-1 border-4 border-gray-900 rounded menubar__button"
+              class="p-2 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
               :class="{ 'is-active': isActive.heading({ level: 1 }) }"
               @click="commands.heading({ level: 1 })"
             >
-              <div class="w-8 h-8"><span class="text-3xl">H1</span></div>
+              <div class="w-6 h-6 md:w-8 md:h-8">
+                <span class="text-xl md:text-3xl">H1</span>
+              </div>
             </button>
 
             <button
-              class="p-2 mx-1 border-4 border-gray-900 rounded menubar__button"
+              class="p-2 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
               :class="{ 'is-active': isActive.heading({ level: 2 }) }"
               @click="commands.heading({ level: 2 })"
             >
-              <div class="w-8 h-8"><span class="text-3xl">H2</span></div>
+              <div class="w-6 h-6 md:w-8 md:h-8">
+                <span class="text-xl md:text-3xl">H2</span>
+              </div>
             </button>
 
             <button
-              class="p-2 mx-1 border-4 border-gray-900 rounded menubar__button"
+              class="p-2 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
               :class="{ 'is-active': isActive.heading({ level: 3 }) }"
               @click="commands.heading({ level: 3 })"
             >
-              <div class="w-8 h-8"><span class="text-3xl">H3</span></div>
+              <div class="w-6 h-6 md:w-8 md:h-8">
+                <span class="text-xl md:text-3xl">H3</span>
+              </div>
             </button>
 
             <button
-              class="p-2 mx-1 border-4 border-gray-900 rounded menubar__button"
+              class="p-2 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
               :class="{ 'is-active': isActive.bullet_list() }"
               @click="commands.bullet_list"
               title="Bullet List"
             >
-              <img src="@/assets/icons/ul.svg" class="w-8 h-8" />
+              <img src="@/assets/icons/ul.svg" class="w-6 h-6 md:w-8 md:h-8" />
             </button>
 
             <button
-              class="p-2 mx-1 border-4 border-gray-900 rounded menubar__button"
+              class="p-2 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
               :class="{ 'is-active': isActive.ordered_list() }"
               @click="commands.ordered_list"
               title="Ordered List"
             >
-              <img src="@/assets/icons/ol.svg" class="w-8 h-8" />
+              <img src="@/assets/icons/ol.svg" class="w-6 h-6 md:w-8 md:h-8" />
             </button>
 
             <button
-              class="p-2 mx-1 border-4 border-gray-900 rounded menubar__button"
+              class="p-2 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
               :class="{ 'is-active': isActive.blockquote() }"
               @click="commands.blockquote"
               title="Block Quote"
             >
-              <img src="@/assets/icons/quote.svg" class="w-8 h-8" />
+              <img
+                src="@/assets/icons/quote.svg"
+                class="w-6 h-6 md:w-8 md:h-8"
+              />
             </button>
 
             <button
-              class="p-2 mx-1 border-4 border-gray-900 rounded menubar__button"
+              class="p-2 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
               :class="{ 'is-active': isActive.code_block() }"
               @click="commands.code_block"
               title="Code Block"
             >
-              <img src="@/assets/icons/code.svg" class="w-8 h-8" />
+              <img
+                src="@/assets/icons/code.svg"
+                class="w-6 h-6 md:w-8 md:h-8"
+              />
             </button>
 
             <button
-              class="p-2 mx-1 border-4 border-gray-900 rounded menubar__button"
+              class="p-2 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
               @click="commands.horizontal_rule"
               title="Horizontal Rule"
             >
-              <img src="@/assets/icons/hr.svg" class="w-8 h-8" />
+              <img src="@/assets/icons/hr.svg" class="w-6 h-6 md:w-8 md:h-8" />
             </button>
 
             <button
-              class="p-2 mx-1 border-4 border-gray-900 rounded menubar__button"
+              class="p-2 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
               @click="commands.undo"
               title="Undo"
             >
-              <img src="@/assets/icons/undo.svg" class="w-8 h-8" />
+              <img
+                src="@/assets/icons/undo.svg"
+                class="w-6 h-6 md:w-8 md:h-8"
+              />
             </button>
 
             <button
-              class="p-2 mx-1 border-4 border-gray-900 rounded menubar__button"
+              class="p-2 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
               @click="commands.redo"
               title="Redo"
             >
-              <img src="@/assets/icons/redo.svg" class="w-8 h-8" />
+              <img
+                src="@/assets/icons/redo.svg"
+                class="w-6 h-6 md:w-8 md:h-8"
+              />
             </button>
           </div>
         </editor-menu-bar>
