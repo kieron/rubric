@@ -82,6 +82,7 @@
           <router-link
             to="/blueprint"
             title="Coming Soon"
+            v-on:click.native="mobNavOpen = false"
             class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-pointer hover:bg-gray-30"
           >
             <svg
