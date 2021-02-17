@@ -1,5 +1,153 @@
 <template>
   <div class="sticky top-0 z-40">
+    <transition
+      enter-active-class="slide-in-left"
+      leave-active-class="slide-out-left"
+    >
+      <div
+        class="fixed z-30 w-full h-screen border-r bg-gray-25 md:w-1/3 lg:w-64 md:top-0 md:left-0 lg:hidden"
+        id="mobile-nav"
+        v-if="mobNavOpen"
+      >
+        <div class="flex items-center">
+          <router-link
+            active-class="bg-gray-25"
+            to="/"
+            v-on:click.native="mobNavOpen = false"
+            class="flex items-center w-full h-20 px-4"
+          >
+            <svg
+              class="w-8 h-8 ml-2 text-purple-light"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+              ></path>
+            </svg>
+            <p class="pl-4 text-3xl font-semibold text-gray-800">RUBRIC</p>
+          </router-link>
+
+          <!-- Close Menu -->
+          <button
+            v-on:click="(mobNavOpen = !mobNavOpen), animateClose()"
+            class="flex align-middle"
+            id="mobCloseBtn"
+          >
+            <svg
+              class="w-12 h-12 mr-2 text-gray-700"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+        <div class="px-4 mt-8 mb-4 text-gray-800">
+          <p class="pl-4 mb-4 text-xs font-semibold text-gray-600">MENU</p>
+          <router-link
+            to="/analysis"
+            class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-pointer hover:bg-gray-30"
+            v-on:click.native="mobNavOpen = false"
+          >
+            <svg
+              class="w-6 h-6 mr-2 text-gray-700"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
+            </svg>
+            <span class="font-medium text-gray-800">SERP Analysis</span>
+          </router-link>
+          <a
+            href="/"
+            title="Coming Soon"
+            class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-not-allowed hover:bg-gray-30"
+          >
+            <svg
+              class="w-6 h-6 mr-2 text-gray-700"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"
+              />
+            </svg>
+            <span class="font-medium text-gray-800">Blueprint Tool</span>
+          </a>
+        </div>
+        <div class="px-4 mt-5 mb-4 text-gray-800">
+          <p class="pl-4 mb-4 text-xs font-semibold text-gray-600">SOMETHING</p>
+          <div
+            class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-pointer hover:bg-gray-30"
+          >
+            <svg
+              class="w-6 h-6 mr-2 text-gray-700"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"
+              ></path>
+            </svg>
+            <span class="font-medium text-gray-800">Something</span>
+          </div>
+        </div>
+
+        <div class="px-4 mt-5 mb-4 text-gray-800">
+          <p class="pl-4 mb-4 text-xs font-semibold text-gray-600">SOMETHING</p>
+          <div
+            class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-pointer hover:bg-gray-30"
+          >
+            <svg
+              class="w-6 h-6 mr-2 text-gray-700"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"
+              ></path>
+            </svg>
+            <span class="font-medium text-gray-800">Something</span>
+          </div>
+        </div>
+      </div>
+    </transition>
     <div
       class="flex items-center justify-between w-full h-20 px-6 bg-white border-b"
     >
@@ -9,51 +157,27 @@
         <div class="flex items-center mr-4 text-gray-700 lg:hidden">
           <button
             class="hover:text-purple-600 hover:border-white focus:outline-none navbar-burger"
-            @click="toggleSidebar()"
+            v-on:click="mobNavOpen = !mobNavOpen"
           >
             <svg
-              class="w-5 h-5"
-              viewBox="0 0 20 20"
+              class="w-10 h-10"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <title>Menu</title>
-              <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h7"
+              ></path>
             </svg>
           </button>
         </div>
 
         <!-- search bar -->
-        <div class="relative text-gray-500">
-          <input
-            type="search"
-            name="serch"
-            placeholder="Search"
-            class="w-full h-10 px-5 text-sm bg-white border rounded-lg xl:w-64 focus:outline-none"
-          />
-          <button
-            type="submit"
-            class="absolute top-0 right-0 mt-3 mr-4 focus:outline-none hover:text-purple-600"
-          >
-            <svg
-              class="w-4 h-4 fill-current"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink"
-              version="1.1"
-              id="Capa_1"
-              x="0px"
-              y="0px"
-              viewBox="0 0 56.966 56.966"
-              style="enable-background: new 0 0 56.966 56.966"
-              xml:space="preserve"
-              width="512px"
-              height="512px"
-            >
-              <path
-                d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23  s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17  s-17-7.626-17-17S14.61,6,23.984,6z"
-              />
-            </svg>
-          </button>
-        </div>
+        <div class="relative text-gray-500"></div>
       </div>
 
       <!-- right navbar -->
@@ -103,21 +227,34 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+// import { mapState } from "vuex";
 
 export default {
   name: "Navbar",
-  computed: {
-    ...mapState(["sideBarOpen"]),
-  },
+  // computed: {
+  //   ...mapState(["sideBarOpen"]),
+  // },
+  components: {},
   data() {
     return {
       dropDownOpen: false,
+      mobNavOpen: false,
+      animatedCloseBtn: true,
     };
   },
   methods: {
     toggleSidebar() {
-      this.$store.dispatch("toggleSidebar");
+      this.mobNavOpen = true;
+      // this.$store.dispatch("toggleSidebar");
+    },
+    animateClose() {
+      document.getElementById("mobCloseBtn").classList.add("rotate-center");
+      setTimeout(function () {
+        if (document.getElementById("mobCloseBtn"))
+          document
+            .getElementById("mobCloseBtn")
+            .classList.remove("rotate-center");
+      }, 3000);
     },
   },
   mounted() {
@@ -131,3 +268,129 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.slide-in-left {
+  -webkit-animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2021-2-17 18:12:4
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation slide-in-left
+ * ----------------------------------------
+ */
+@-webkit-keyframes slide-in-left {
+  0% {
+    -webkit-transform: translateX(-1000px);
+    transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-left {
+  0% {
+    -webkit-transform: translateX(-1000px);
+    transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-out-left {
+  -webkit-animation: slide-out-left 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53)
+    both;
+  animation: slide-out-left 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2021-2-17 21:4:17
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation slide-out-left
+ * ----------------------------------------
+ */
+@-webkit-keyframes slide-out-left {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateX(-1000px);
+    transform: translateX(-1000px);
+    opacity: 0;
+  }
+}
+@keyframes slide-out-left {
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateX(-1000px);
+    transform: translateX(-1000px);
+    opacity: 0;
+  }
+}
+
+.rotate-center {
+  -webkit-animation: rotate-center 0.3s ease-in-out both;
+  animation: rotate-center 0.3s ease-in-out both;
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2021-2-17 21:13:36
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation rotate-center
+ * ----------------------------------------
+ */
+@-webkit-keyframes rotate-center {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotate-center {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+</style>

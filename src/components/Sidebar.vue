@@ -3,13 +3,14 @@
   <!-- you will need to add a little "X" button next to the logo in order to close it though -->
 
   <div
-    class="fixed z-30 w-3/4 h-screen border-r md:w-1/3 lg:w-64 md:top-0 md:left-0 lg:block bg-gray-25 sidebar"
-    :class="{
-      hidden: !sideBarOpen,
-    }"
+    class="z-50 hidden w-3/4 h-screen border-r lg:fixed md:w-1/3 lg:w-64 md:top-0 md:left-0 lg:block bg-gray-25 sidebar"
     id="main-nav"
   >
-    <router-link to="/" class="flex items-center w-full h-20 px-4 mb-8">
+    <router-link
+      active-class="bg-gray-25"
+      to="/"
+      class="flex items-center w-full h-20 px-4 mb-8"
+    >
       <svg
         class="w-8 h-8 ml-2 text-purple-light"
         fill="none"
@@ -120,23 +121,23 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+// import { mapState } from "vuex";
 
 export default {
   name: "Sidebar",
   data() {
     return {
-      dropdownComprasOpen: false,
+      // dropdownComprasOpen: false,
     };
   },
-  computed: {
-    ...mapState(["sideBarOpen"]),
-  },
-  methods: {
-    dropdownCompras() {
-      this.dropdownComprasOpen = !this.dropdownComprasOpen;
-    },
-  },
+  // computed: {
+  //   ...mapState(["sideBarOpen"]),
+  // },
+  // methods: {
+  //   // dropdownCompras() {
+  //   //   this.dropdownComprasOpen = !this.dropdownComprasOpen;
+  //   // },
+  // },
 };
 </script>
 
