@@ -50,10 +50,10 @@
         </svg>
         <span class="font-medium text-gray-800">SERP Analysis</span>
       </router-link>
-      <a
-        href="/"
+      <router-link
+        to="/blueprint"
         title="Coming Soon"
-        class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-not-allowed hover:bg-gray-30"
+        class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-pointer hover:bg-gray-30"
       >
         <svg
           class="w-6 h-6 mr-2 text-gray-700"
@@ -70,7 +70,7 @@
           />
         </svg>
         <span class="font-medium text-gray-800">Blueprint Tool</span>
-      </a>
+      </router-link>
     </div>
     <div class="px-4 mt-5 mb-4 text-gray-800">
       <p class="pl-4 mb-4 text-xs font-semibold text-gray-600">SOMETHING</p>

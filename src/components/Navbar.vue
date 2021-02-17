@@ -5,7 +5,7 @@
       leave-active-class="slide-out-left"
     >
       <div
-        class="fixed z-30 w-full h-screen border-r bg-gray-25 md:w-1/3 lg:w-64 md:top-0 md:left-0 lg:hidden"
+        class="fixed z-30 w-full h-screen border-r bg-gray-25 md:w-2/3 lg:w-64 md:top-0 md:left-0 lg:hidden"
         id="mobile-nav"
         v-if="mobNavOpen"
       >
@@ -40,7 +40,7 @@
             id="mobCloseBtn"
           >
             <svg
-              class="w-12 h-12 mr-2 text-gray-700"
+              class="w-12 h-12 mr-4 text-gray-700"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -79,10 +79,10 @@
             </svg>
             <span class="font-medium text-gray-800">SERP Analysis</span>
           </router-link>
-          <a
-            href="/"
+          <router-link
+            to="/blueprint"
             title="Coming Soon"
-            class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-not-allowed hover:bg-gray-30"
+            class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-pointer hover:bg-gray-30"
           >
             <svg
               class="w-6 h-6 mr-2 text-gray-700"
@@ -99,7 +99,7 @@
               />
             </svg>
             <span class="font-medium text-gray-800">Blueprint Tool</span>
-          </a>
+          </router-link>
         </div>
         <div class="px-4 mt-5 mb-4 text-gray-800">
           <p class="pl-4 mb-4 text-xs font-semibold text-gray-600">SOMETHING</p>
