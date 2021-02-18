@@ -12,7 +12,7 @@
       class="flex items-center w-full h-20 px-4 mb-8"
     >
       <svg
-        class="w-8 h-8 ml-2 text-purple-light"
+        class="w-8 h-8 ml-2 text-indigo-600"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -32,7 +32,7 @@
       <p class="pl-4 mb-4 text-xs font-semibold text-gray-600">MENU</p>
       <router-link
         to="/analysis"
-        class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-pointer hover:bg-gray-30"
+        class="flex items-center w-full h-10 pl-4 mb-2 text-gray-800 duration-150 rounded-lg cursor-pointer hover:bg-gray-30"
       >
         <svg
           class="w-6 h-6 mr-2 text-gray-700"

@@ -58,7 +58,7 @@
             v-on:click="animateSearchBtn($event)"
             :class="{ 'bounce-top': animatedSearchBtn }"
             @animationend="animatedSearchBtn = false"
-            class="flex items-center self-center flex-grow w-full h-16 px-4 mb-2 font-semibold text-white duration-150 rounded-lg sm:w-auto bg-purple hover:bg-purple-light focus:outline-none whitespace-nowrap"
+            class="flex items-center self-center flex-grow w-full h-16 px-4 mb-2 font-semibold text-white duration-150 bg-indigo-600 rounded-lg sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
           >
             <div class="flex ml-auto mr-auto">
               <span v-if="!loading" class="whitespace-no-wrap"
@@ -85,7 +85,7 @@
               <img
                 v-if="loading"
                 class="w-6 h-6 ml-2 mr-5"
-                src="/img/three-dots.svg"
+                src="@/assets/img/three-dots.svg"
               />
             </div>
           </button>
@@ -181,7 +181,7 @@
       </form>
     </div>
 
-    <div class="flex justify-center my-20 text-purple-900" v-if="loading">
+    <div class="flex justify-center my-20 text-indigo-600" v-if="loading">
       <svg
         width="120"
         height="30"
@@ -852,7 +852,7 @@
             <img
               v-if="loading"
               class="w-5 h-5 mx-auto ml-2"
-              src="/img/three-dots.svg"
+              src="@/assets/img/three-dots.svg"
             />
           </button>
         </div>

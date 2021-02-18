@@ -17,7 +17,7 @@
             class="flex items-center w-full h-20 px-4"
           >
             <svg
-              class="w-8 h-8 ml-2 text-purple-light"
+              class="w-8 h-8 ml-2 text-indigo-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -40,7 +40,7 @@
             id="mobCloseBtn"
           >
             <svg
-              class="w-12 h-12 mr-4 text-gray-700"
+              class="w-12 h-12 mr-4 text-gray-700 hover:text-indigo-600"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -157,7 +157,7 @@
         <!-- mobile hamburger -->
         <div class="flex items-center mr-4 text-gray-700 lg:hidden">
           <button
-            class="hover:text-purple-600 hover:border-white focus:outline-none navbar-burger"
+            class="hover:text-indigo-600 hover:border-white focus:outline-none navbar-burger"
             v-on:click="mobNavOpen = !mobNavOpen"
           >
             <svg
