@@ -35,6 +35,7 @@ const routes = [
         path: "/blueprint",
         name: "Blueprint",
         component: view("Blueprint"),
+        props: true,
       },
       { path: "*", name: "PageNotFound", component: view("PageNotFound") },
     ],

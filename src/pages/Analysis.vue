@@ -855,14 +855,14 @@
           give to your writers for a more concise plan.
         </p>
         <div class="my-5">
-          <button
-            type="submit"
-            disabled
-            class="flex items-center self-center h-16 px-4 font-semibold text-gray-700 duration-150 bg-gray-500 rounded-lg shadow cursor-not-allowed focus:outline-none"
+          <router-link
+            to="/blueprint"
+            tag="button"
+            class="flex items-center self-center flex-initial h-16 px-4 font-semibold text-gray-100 duration-150 bg-gray-500 rounded-lg shadow focus:outline-none"
           >
             <span>Load Into Blueprint Tool</span>
             <svg
-              class="w-6 h-6 ml-2 text-gray-700"
+              class="w-6 h-6 ml-2 text-gray-100"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -880,7 +880,7 @@
               class="w-5 h-5 mx-auto ml-2"
               src="@/assets/img/three-dots.svg"
             />
-          </button>
+          </router-link>
         </div>
       </div>
 
@@ -946,6 +946,8 @@
 
 <script>
 //import Chart from "chart.js";
+import { mapState } from "vuex";
+
 let api_url = "";
 if (process.env.NODE_ENV === "production") {
   api_url = "https://rubricseo-api.herokuapp.com/";
@@ -954,6 +956,9 @@ if (process.env.NODE_ENV === "production") {
 }
 
 export default {
+  computed: {
+    ...mapState(["blueprintData"]),
+  },
   name: "AnalysisHome",
   methods: {
     onClickExpand(index) {
@@ -979,6 +984,7 @@ export default {
               this.error = true;
             } else {
               this.apiResponse = data;
+              this.$store.dispatch("addBluePrintData", data);
               this.loaded = true;
               this.loading = false;
               this.error = false;
