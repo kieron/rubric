@@ -186,7 +186,7 @@
       <!-- right navbar -->
       <div class="relative flex items-center">
         <button
-          class="p-1 mr-4 text-gray-700 duration-150 rounded-full hover:bg-purple-100 hover:text-purple focus:outline-none"
+          class="p-1 mr-4 text-gray-700 duration-150 rounded-full hover:bg-indigo-100 hover:text-indigo-600 focus:outline-none"
         >
           <div class="flex px-0 leading-3">
             <svg
@@ -210,7 +210,7 @@
         >
           <img
             src="https://images.unsplash.com/photo-1552774021-9ebbb764f03e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
-            class="w-10 h-10 duration-150 border-2 border-white rounded-full shadow-lg hover:border-purple-600"
+            class="w-10 h-10 duration-150 border-2 border-white rounded-full shadow-lg hover:border-indigo-600"
           />
         </button>
       </div>
