@@ -73,8 +73,9 @@
       </router-link>
     </div>
     <div class="px-4 mt-5 mb-4 text-gray-800">
-      <p class="pl-4 mb-4 text-xs font-semibold text-gray-600">SOMETHING</p>
-      <div
+      <p class="pl-4 mb-4 text-xs font-semibold text-gray-600">HELP</p>
+      <a
+        href="mailto:hello@kieron.io?subject=Feedback%20-%20Rubric%20SEO"
         class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-pointer hover:bg-gray-30"
       >
         <svg
@@ -88,11 +89,12 @@
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"
+            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
           ></path>
         </svg>
-        <span class="font-medium text-gray-800">Something</span>
-      </div>
+
+        <span class="font-medium text-gray-800">Provide Feedback</span>
+      </a>
     </div>
 
     <div class="px-4 mt-5 mb-4 text-gray-800">
