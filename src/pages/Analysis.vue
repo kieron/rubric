@@ -321,7 +321,7 @@
 
                 <div class="ml-6 leading-6 text-gray-700">
                   <p class="text-2xl font-semibold">
-                    {{ apiResponse.averageWordCount }}
+                    {{ apiResponse.averageValues.averageWordCount }}
                   </p>
                   <p class="text-sm text-gray-600">Average Words</p>
                 </div>
@@ -358,7 +358,7 @@
 
                 <div class="ml-6 leading-6 text-gray-700">
                   <p class="text-2xl font-semibold">
-                    {{ apiResponse.averageHeaderCount }}
+                    {{ apiResponse.averageValues.averageHeaderCount }}
                   </p>
                   <p class="text-sm text-gray-600">Average Headers</p>
                 </div>
@@ -395,7 +395,7 @@
 
                 <div class="ml-6 leading-6 text-gray-700">
                   <p class="text-2xl font-semibold">
-                    {{ apiResponse.averageImagesCount }}
+                    {{ apiResponse.averageValues.averageImagesCount }}
                   </p>
                   <p class="text-sm text-gray-600">Average Images</p>
                 </div>
@@ -432,7 +432,7 @@
 
                 <div class="ml-6 leading-6 text-gray-700">
                   <p class="text-2xl font-semibold">
-                    {{ apiResponse.averageParagraphCount }}
+                    {{ apiResponse.averageValues.averageParagraphCount }}
                   </p>
                   <p class="text-sm text-gray-600">Average Paragraphs</p>
                 </div>
@@ -565,7 +565,7 @@
                               <span
                                 title="Header Count"
                                 class="whitespace-no-wrap align-middle"
-                                >{{ article.headerCount }} Headers</span
+                                >{{ article.headers.length }} Headers</span
                               >
                             </div>
 
