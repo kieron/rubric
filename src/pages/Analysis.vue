@@ -21,6 +21,32 @@
       </ol>
     </nav> -->
     <!-- breadcrumb end -->
+    <div
+      class="flex flex-row items-center p-5 mb-8 bg-blue-200 border-b-2 border-blue-300 rounded alert"
+    >
+      <div
+        class="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-blue-100 border-2 border-blue-500 rounded-full alert-icon"
+      >
+        <span class="text-blue-500">
+          <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+            <path
+              fill-rule="evenodd"
+              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </span>
+      </div>
+      <div class="ml-4 alert-content">
+        <div class="text-lg font-semibold text-blue-800 alert-title">Info</div>
+        <div class="text-sm text-blue-600 alert-description">
+          Hey! Thanks for looking at Rubric! It is still in the very early
+          stages of development & I would really appreciate your feedback on the
+          project, and naturally, stuff may break or may not even work at all
+          yet! Thanks.
+        </div>
+      </div>
+    </div>
 
     <div class="items-center mb-6">
       <h1 class="mb-3 text-3xl font-semibold text-gray-800 lg:mb-0">
