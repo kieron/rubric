@@ -1,5 +1,5 @@
 <template>
-  <div class="sticky top-0 z-40">
+  <div :class="{ sticky: this.$route.name !== 'Blueprint' }" class="top-0 z-40">
     <transition
       enter-active-class="slide-in-left"
       leave-active-class="slide-out-left"
