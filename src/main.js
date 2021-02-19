@@ -46,6 +46,9 @@ const router = new Router({
   mode: "history",
   routes,
   linkActiveClass: "bg-gray-30",
+  scrollBehavior(_, __, savedPosition) {
+    return savedPosition || { x: 0, y: 0 };
+  },
 });
 
 new Vue({

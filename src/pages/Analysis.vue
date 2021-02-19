@@ -282,610 +282,617 @@
         </circle>
       </svg>
     </div>
+    <div id="results">
+      <div
+        class="mt-5 slide-in-bottom"
+        v-if="loaded && !loading && !apiResponse.errorFromApi"
+      >
+        <h2 class="pt-2 mb-2 text-2xl font-semibold text-gray-800 lg:mb-0">
+          Results
+        </h2>
+        <p class="mb-2 text-gray-800 font text-1xl lg:mb-0">
+          Your search for <strong>{{ apiResponse.searchTerm }}</strong> had
+          <strong>{{ apiResponse.totalResults }}</strong> results, across
+          <strong>{{ apiResponse.uniqueDomainCount }}</strong> unique domains
+          and took <strong>{{ apiResponse.timeTaken }}</strong> seconds! Here
+          are the results.
+        </p>
 
-    <div
-      class="mt-5 slide-in-bottom"
-      v-if="loaded && !loading && !apiResponse.errorFromApi"
-    >
-      <h2 class="pt-2 mb-2 text-2xl font-semibold text-gray-800 lg:mb-0">
-        Results
-      </h2>
-      <p class="mb-2 text-gray-800 font text-1xl lg:mb-0">
-        Your search for <strong>{{ apiResponse.searchTerm }}</strong> had
-        <strong>{{ apiResponse.totalResults }}</strong> results, across
-        <strong>{{ apiResponse.uniqueDomainCount }}</strong> unique domains and
-        took <strong>{{ apiResponse.timeTaken }}</strong> seconds! Here are the
-        results.
-      </p>
+        <!-- Cards -->
 
-      <!-- Cards -->
-
-      <div class="my-8 md:flex">
-        <div
-          :class="{
-            'md:w-1/2 md:mr-3 xl:w-1/3': apiResponse.relatedQuestions,
-            'w-full': !apiResponse.relatedQuestions,
-          }"
-          class="flex flex-col"
-        >
-          <p class="mb-4 text-xl font-semibold text-gray-700">Average Values</p>
+        <div class="my-8 md:flex">
           <div
             :class="{
-              'md:flex-col md:flex-no-wrap': apiResponse.relatedQuestions,
-              '': !apiResponse.relatedQuestions,
+              'md:w-1/2 md:mr-3 xl:w-1/3': apiResponse.relatedQuestions,
+              'w-full': !apiResponse.relatedQuestions,
             }"
-            class="flex flex-wrap -mx-3 md:mx-0 md:justify-between md:h-full"
+            class="flex flex-col"
           >
+            <p class="mb-4 text-xl font-semibold text-gray-700">
+              Average Values
+            </p>
             <div
               :class="{
-                'md:px-0 md:w-full px-3': apiResponse.relatedQuestions,
-                'px-3 md:px-0 md:pr-1 xl:w-1/4': !apiResponse.relatedQuestions,
+                'md:flex-col md:flex-no-wrap': apiResponse.relatedQuestions,
+                '': !apiResponse.relatedQuestions,
               }"
-              class="w-1/2 md:mb-2"
+              class="flex flex-wrap -mx-3 md:mx-0 md:justify-between md:h-full"
             >
               <div
-                class="flex items-center p-0 mb-2 bg-white border rounded-lg md:mb-0"
+                :class="{
+                  'md:px-0 md:w-full px-3': apiResponse.relatedQuestions,
+                  'px-3 md:px-0 md:pr-1 xl:w-1/4': !apiResponse.relatedQuestions,
+                }"
+                class="w-1/2 md:mb-2"
               >
                 <div
-                  class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-pink"
+                  class="flex items-center p-0 mb-2 bg-white border rounded-lg md:mb-0"
                 >
-                  <svg
-                    class="hidden w-8 h-8 mx-auto lg:block"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
+                  <div
+                    class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-pink"
                   >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-                    ></path>
-                  </svg>
-                </div>
-
-                <div class="ml-6 leading-6 text-gray-700">
-                  <p class="text-2xl font-semibold">
-                    {{ apiResponse.averageValues.averageWordCount }}
-                  </p>
-                  <p class="text-sm text-gray-600">Average Words</p>
-                </div>
-              </div>
-            </div>
-            <div
-              :class="{
-                'md:px-0 md:w-full px-3': apiResponse.relatedQuestions,
-                'px-3 md:px-0 xl:px-1 xl:w-1/4 pl-1 ': !apiResponse.relatedQuestions,
-              }"
-              class="w-1/2 md:mb-2"
-            >
-              <div
-                class="flex items-center p-0 mb-2 bg-white border rounded-lg md:mb-0"
-              >
-                <div
-                  class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-purple"
-                >
-                  <svg
-                    class="hidden w-8 h-8 mx-auto lg:block"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-                    ></path>
-                  </svg>
-                </div>
-
-                <div class="ml-6 leading-6 text-gray-700">
-                  <p class="text-2xl font-semibold">
-                    {{ apiResponse.averageValues.averageHeaderCount }}
-                  </p>
-                  <p class="text-sm text-gray-600">Average Headers</p>
-                </div>
-              </div>
-            </div>
-            <div
-              :class="{
-                'md:px-0 md:w-full px-3 ': apiResponse.relatedQuestions,
-                'px-3 md:pl-0 md:pr-1 xl:px-1 xl:w-1/4 ': !apiResponse.relatedQuestions,
-              }"
-              class="w-1/2 md:mb-2"
-            >
-              <div
-                class="flex items-center p-0 mb-2 bg-white border rounded-lg md:mb-0"
-              >
-                <div
-                  class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-orange"
-                >
-                  <svg
-                    class="hidden w-8 h-8 mx-auto lg:block"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    ></path>
-                  </svg>
-                </div>
-
-                <div class="ml-6 leading-6 text-gray-700">
-                  <p class="text-2xl font-semibold">
-                    {{ apiResponse.averageValues.averageImagesCount }}
-                  </p>
-                  <p class="text-sm text-gray-600">Average Images</p>
-                </div>
-              </div>
-            </div>
-            <div
-              :class="{
-                'md:px-0 md:w-full mb-0 px-3': apiResponse.relatedQuestions,
-                'md:mb-2 px-3 md:pr-0 pl-1 xl:w-1/4': !apiResponse.relatedQuestions,
-              }"
-              class="w-1/2"
-            >
-              <div
-                class="flex items-center p-0 mb-2 bg-white border rounded-lg md:mb-0"
-              >
-                <div
-                  class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-green"
-                >
-                  <svg
-                    class="hidden w-8 h-8 mx-auto lg:block"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
-                    ></path>
-                  </svg>
-                </div>
-
-                <div class="ml-6 leading-6 text-gray-700">
-                  <p class="text-2xl font-semibold">
-                    {{ apiResponse.averageValues.averageParagraphCount }}
-                  </p>
-                  <p class="text-sm text-gray-600">Average Paragraphs</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          v-if="apiResponse.relatedQuestions"
-          class="order-last w-full mt-5 xl:w-2/3 md:mt-0"
-        >
-          <p class="mb-4 text-xl font-semibold text-gray-700">
-            People Also Ask
-          </p>
-
-          <div class="w-full">
-            <div
-              :key="question.id"
-              v-for="(question, index) in apiResponse.relatedQuestions"
-              class="flex items-center justify-between w-full px-4 py-2 bg-gray-100 border rounded-lg"
-              :class="{
-                'mt-2': index == apiResponse.relatedQuestions.length - 1,
-                'my-2': index != apiResponse.relatedQuestions.length - 1,
-              }"
-            >
-              <div>
-                <p class="text-base font-semibold text-gray-700">
-                  {{ question.question }}
-                </p>
-                <p class="text-sm text-gray-700">{{ question.title }}</p>
-                <a
-                  target="_blank"
-                  :href="question.link"
-                  class="text-sm text-gray-700"
-                  >{{ question.link }}</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- table -->
-      <div
-        class="flex flex-col mb-12 border border-gray-300 rounded-md bg-gray-25"
-      >
-        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div
-            class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8"
-          >
-            <div class="overflow-hidden sm:rounded-lg">
-              <table class="min-w-full divide-y divide-gray-200">
-                <thead>
-                  <tr>
-                    <th
-                      class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-700 uppercase bg-gray-50"
+                    <svg
+                      class="hidden w-8 h-8 mx-auto lg:block"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      Results
-                    </th>
-                  </tr>
-                </thead>
-                <tbody
-                  class="bg-white border-t border-gray-300 divide-y divide-gray-200"
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
+                      ></path>
+                    </svg>
+                  </div>
+
+                  <div class="ml-6 leading-6 text-gray-700">
+                    <p class="text-2xl font-semibold">
+                      {{ apiResponse.averageValues.averageWordCount }}
+                    </p>
+                    <p class="text-sm text-gray-600">Average Words</p>
+                  </div>
+                </div>
+              </div>
+              <div
+                :class="{
+                  'md:px-0 md:w-full px-3': apiResponse.relatedQuestions,
+                  'px-3 md:px-0 xl:px-1 xl:w-1/4 pl-1 ': !apiResponse.relatedQuestions,
+                }"
+                class="w-1/2 md:mb-2"
+              >
+                <div
+                  class="flex items-center p-0 mb-2 bg-white border rounded-lg md:mb-0"
                 >
-                  <tr
-                    :key="article.id"
-                    v-for="(article, articleIndex) in apiResponse.results"
-                    class="border-b border-gray-200"
+                  <div
+                    class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-purple"
                   >
-                    <td class="px-6 py-4">
-                      <div class="flex items-center">
-                        <div class="">
-                          <div
-                            class="mb-1 mr-8 text-lg font-medium leading-5 text-gray-900"
-                          >
-                            {{ article.title }}
-                          </div>
+                    <svg
+                      class="hidden w-8 h-8 mx-auto lg:block"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                      ></path>
+                    </svg>
+                  </div>
 
-                          <div class="text-sm leading-5 text-gray-500">
-                            <a
-                              :href="article.url"
-                              target="_blank"
-                              class="break-all"
-                              >{{ article.url }}</a
-                            >
-                          </div>
-                          <div class="flex flex-wrap mt-2">
+                  <div class="ml-6 leading-6 text-gray-700">
+                    <p class="text-2xl font-semibold">
+                      {{ apiResponse.averageValues.averageHeaderCount }}
+                    </p>
+                    <p class="text-sm text-gray-600">Average Headers</p>
+                  </div>
+                </div>
+              </div>
+              <div
+                :class="{
+                  'md:px-0 md:w-full px-3 ': apiResponse.relatedQuestions,
+                  'px-3 md:pl-0 md:pr-1 xl:px-1 xl:w-1/4 ': !apiResponse.relatedQuestions,
+                }"
+                class="w-1/2 md:mb-2"
+              >
+                <div
+                  class="flex items-center p-0 mb-2 bg-white border rounded-lg md:mb-0"
+                >
+                  <div
+                    class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-orange"
+                  >
+                    <svg
+                      class="hidden w-8 h-8 mx-auto lg:block"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      ></path>
+                    </svg>
+                  </div>
+
+                  <div class="ml-6 leading-6 text-gray-700">
+                    <p class="text-2xl font-semibold">
+                      {{ apiResponse.averageValues.averageImagesCount }}
+                    </p>
+                    <p class="text-sm text-gray-600">Average Images</p>
+                  </div>
+                </div>
+              </div>
+              <div
+                :class="{
+                  'md:px-0 md:w-full mb-0 px-3': apiResponse.relatedQuestions,
+                  'md:mb-2 px-3 md:pr-0 pl-1 xl:w-1/4': !apiResponse.relatedQuestions,
+                }"
+                class="w-1/2"
+              >
+                <div
+                  class="flex items-center p-0 mb-2 bg-white border rounded-lg md:mb-0"
+                >
+                  <div
+                    class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-green"
+                  >
+                    <svg
+                      class="hidden w-8 h-8 mx-auto lg:block"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
+                      ></path>
+                    </svg>
+                  </div>
+
+                  <div class="ml-6 leading-6 text-gray-700">
+                    <p class="text-2xl font-semibold">
+                      {{ apiResponse.averageValues.averageParagraphCount }}
+                    </p>
+                    <p class="text-sm text-gray-600">Average Paragraphs</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            v-if="apiResponse.relatedQuestions"
+            class="order-last w-full mt-5 xl:w-2/3 md:mt-0"
+          >
+            <p class="mb-4 text-xl font-semibold text-gray-700">
+              People Also Ask
+            </p>
+
+            <div class="w-full">
+              <div
+                :key="question.id"
+                v-for="(question, index) in apiResponse.relatedQuestions"
+                class="flex items-center justify-between w-full px-4 py-2 bg-gray-100 border rounded-lg"
+                :class="{
+                  'mt-2': index == apiResponse.relatedQuestions.length - 1,
+                  'my-2': index != apiResponse.relatedQuestions.length - 1,
+                }"
+              >
+                <div>
+                  <p class="text-base font-semibold text-gray-700">
+                    {{ question.question }}
+                  </p>
+                  <p class="text-sm text-gray-700">{{ question.title }}</p>
+                  <a
+                    target="_blank"
+                    :href="question.link"
+                    class="text-sm text-gray-700"
+                    >{{ question.link }}</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- table -->
+        <div
+          class="flex flex-col mb-12 border border-gray-300 rounded-md bg-gray-25"
+        >
+          <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div
+              class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8"
+            >
+              <div class="overflow-hidden sm:rounded-lg">
+                <table class="min-w-full divide-y divide-gray-200">
+                  <thead>
+                    <tr>
+                      <th
+                        class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-700 uppercase bg-gray-50"
+                      >
+                        Results
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="bg-white border-t border-gray-300 divide-y divide-gray-200"
+                  >
+                    <tr
+                      :key="article.id"
+                      v-for="(article, articleIndex) in apiResponse.results"
+                      class="border-b border-gray-200"
+                    >
+                      <td class="px-6 py-4">
+                        <div class="flex items-center">
+                          <div class="">
                             <div
-                              class="flex flex-no-wrap items-center mr-4 text-gray-600"
+                              class="mb-1 mr-8 text-lg font-medium leading-5 text-gray-900"
                             >
-                              <svg
-                                class="inline w-5 h-5 mr-1 align-middle"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"
-                                  d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-                                ></path>
-                              </svg>
-
-                              <span
-                                title="Word Count"
-                                class="whitespace-no-wrap align-middle"
-                                >{{ article.wordCount }} Words</span
-                              >
+                              {{ article.title }}
                             </div>
 
-                            <div
-                              class="flex flex-no-wrap items-center mr-4 text-gray-600"
-                            >
-                              <svg
-                                class="inline w-5 h-5 mr-1 align-middle"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"
-                                  d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-                                ></path>
-                              </svg>
-
-                              <span
-                                title="Header Count"
-                                class="whitespace-no-wrap align-middle"
-                                >{{ article.headers.length }} Headers</span
+                            <div class="text-sm leading-5 text-gray-500">
+                              <a
+                                :href="article.url"
+                                target="_blank"
+                                class="break-all"
+                                >{{ article.url }}</a
                               >
                             </div>
+                            <div class="flex flex-wrap mt-2">
+                              <div
+                                class="flex flex-no-wrap items-center mr-4 text-gray-600"
+                              >
+                                <svg
+                                  class="inline w-5 h-5 mr-1 align-middle"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
+                                  ></path>
+                                </svg>
 
-                            <div
-                              class="flex flex-no-wrap items-center mr-4 text-gray-600"
-                            >
-                              <svg
-                                class="inline w-5 h-5 mr-1 align-middle"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"
-                                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                ></path>
-                              </svg>
+                                <span
+                                  title="Word Count"
+                                  class="whitespace-no-wrap align-middle"
+                                  >{{ article.wordCount }} Words</span
+                                >
+                              </div>
 
-                              <span
-                                title="Image Count"
-                                class="whitespace-no-wrap align-middle"
-                                >{{ article.imageCount }} Images</span
+                              <div
+                                class="flex flex-no-wrap items-center mr-4 text-gray-600"
                               >
-                            </div>
+                                <svg
+                                  class="inline w-5 h-5 mr-1 align-middle"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                                  ></path>
+                                </svg>
 
-                            <div
-                              class="flex flex-no-wrap items-center mr-4 text-gray-600"
-                            >
-                              <svg
-                                class="inline w-5 h-5 mr-1 align-middle"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"
-                                  d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
-                                ></path>
-                              </svg>
+                                <span
+                                  title="Header Count"
+                                  class="whitespace-no-wrap align-middle"
+                                  >{{ article.headers.length }} Headers</span
+                                >
+                              </div>
 
-                              <span
-                                title="Paragraph Count"
-                                class="whitespace-no-wrap align-middle"
-                                >{{ article.paragraphCount }} Paragraphs</span
+                              <div
+                                class="flex flex-no-wrap items-center mr-4 text-gray-600"
                               >
-                            </div>
+                                <svg
+                                  class="inline w-5 h-5 mr-1 align-middle"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                  ></path>
+                                </svg>
 
-                            <div
-                              class="flex flex-no-wrap items-center mr-4 text-gray-600"
-                            >
-                              <svg
-                                class="inline w-5 h-5 mr-1 align-middle"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"
-                                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                                ></path>
-                              </svg>
+                                <span
+                                  title="Image Count"
+                                  class="whitespace-no-wrap align-middle"
+                                  >{{ article.imageCount }} Images</span
+                                >
+                              </div>
 
-                              <span
-                                title="Domain Authority"
-                                class="whitespace-no-wrap align-middle"
-                                >{{ article.domainAuthority }} Domain
-                                Authority</span
+                              <div
+                                class="flex flex-no-wrap items-center mr-4 text-gray-600"
                               >
-                            </div>
+                                <svg
+                                  class="inline w-5 h-5 mr-1 align-middle"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
+                                  ></path>
+                                </svg>
 
-                            <div
-                              class="flex flex-no-wrap items-center mr-4 text-gray-600"
-                            >
-                              <svg
-                                class="inline w-5 h-5 mr-1 align-middle"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                              >
-                                <path
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"
-                                  d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                                ></path>
-                              </svg>
-                              <span
-                                title="Questions Answered"
-                                class="whitespace-no-wrap align-middle"
-                                >{{ article.questions.length }} Questions</span
-                              >
-                            </div>
+                                <span
+                                  title="Paragraph Count"
+                                  class="whitespace-no-wrap align-middle"
+                                  >{{ article.paragraphCount }} Paragraphs</span
+                                >
+                              </div>
 
-                            <div
-                              class="flex flex-no-wrap items-center mr-4 text-gray-600"
-                            >
-                              <svg
-                                class="inline w-5 h-5 mr-1 align-middle"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
+                              <div
+                                class="flex flex-no-wrap items-center mr-4 text-gray-600"
                               >
-                                <path
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"
-                                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                ></path>
-                              </svg>
+                                <svg
+                                  class="inline w-5 h-5 mr-1 align-middle"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                                  ></path>
+                                </svg>
 
-                              <span
-                                title="SERP Date"
-                                class="whitespace-no-wrap align-middle"
-                                >{{ article.date ? article.date : "N/A" }}</span
+                                <span
+                                  title="Domain Authority"
+                                  class="whitespace-no-wrap align-middle"
+                                  >{{ article.domainAuthority }} Domain
+                                  Authority</span
+                                >
+                              </div>
+
+                              <div
+                                class="flex flex-no-wrap items-center mr-4 text-gray-600"
                               >
+                                <svg
+                                  class="inline w-5 h-5 mr-1 align-middle"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                                  ></path>
+                                </svg>
+                                <span
+                                  title="Questions Answered"
+                                  class="whitespace-no-wrap align-middle"
+                                  >{{
+                                    article.questions.length
+                                  }}
+                                  Questions</span
+                                >
+                              </div>
+
+                              <div
+                                class="flex flex-no-wrap items-center mr-4 text-gray-600"
+                              >
+                                <svg
+                                  class="inline w-5 h-5 mr-1 align-middle"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                                  ></path>
+                                </svg>
+
+                                <span
+                                  title="SERP Date"
+                                  class="whitespace-no-wrap align-middle"
+                                  >{{
+                                    article.date ? article.date : "N/A"
+                                  }}</span
+                                >
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
 
-                      <div
+                        <div
+                          v-if="
+                            article.questions.length ||
+                            article.headers.length ||
+                            article.headersContainingKeyword.length ||
+                            article.headersContainingPartialKeyword.length
+                          "
+                          class="mt-5 rounded additional-info swing-in-top-fwd"
+                          :class="{
+                            hidden: !expandedArticles.includes(articleIndex),
+                          }"
+                        >
+                          <div class="flex-wrap w-full md:flex">
+                            <div
+                              class="flex-grow px-4 py-3 mt-2 bg-gray-100 border rounded lg:mx-1"
+                              v-if="article.questions.length"
+                            >
+                              <h3 class="font-bold text-gray-700 text-md">
+                                Questions Answered
+                              </h3>
+                              <ol>
+                                <li
+                                  :key="question.id"
+                                  v-for="question in article.questions"
+                                  class="text-gray-700"
+                                >
+                                  - {{ question }}
+                                </li>
+                              </ol>
+                            </div>
+
+                            <div
+                              class="flex-grow px-4 py-3 mt-2 bg-gray-100 border rounded lg:mx-1"
+                            >
+                              <h3 class="font-bold text-gray-700 text-md">
+                                Headers
+                              </h3>
+                              <ol>
+                                <li
+                                  :key="header.id"
+                                  v-for="header in article.headers"
+                                  class="text-gray-700"
+                                >
+                                  - {{ header }}
+                                </li>
+                              </ol>
+                            </div>
+                            <!-- </div>
+                        <div class="justify-between w-full md:flex"> -->
+                            <div
+                              class="flex-grow px-4 py-3 mt-2 bg-gray-100 border rounded lg:mx-1"
+                              v-if="article.headersContainingKeyword.length"
+                            >
+                              <h3 class="font-bold text-gray-700 text-md">
+                                Headers containing full keyword
+                              </h3>
+                              <ol>
+                                <li
+                                  :key="fullHeader.id"
+                                  v-for="fullHeader in article.headersContainingKeyword"
+                                  class="text-gray-700"
+                                >
+                                  - {{ fullHeader }}
+                                </li>
+                              </ol>
+                            </div>
+
+                            <div
+                              class="flex-grow px-4 py-3 mt-2 bg-gray-100 border rounded lg:mx-1"
+                              v-if="
+                                article.headersContainingPartialKeyword.length
+                              "
+                            >
+                              <h3 class="font-bold text-gray-700 text-md">
+                                Headers containing partial keyword
+                              </h3>
+                              <ol>
+                                <li
+                                  :key="partialHeader.id"
+                                  class="text-gray-700"
+                                  v-for="partialHeader in article.headersContainingPartialKeyword"
+                                >
+                                  - {{ partialHeader }}
+                                </li>
+                              </ol>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <span
                         v-if="
                           article.questions.length ||
                           article.headers.length ||
                           article.headersContainingKeyword.length ||
                           article.headersContainingPartialKeyword.length
                         "
-                        class="mt-5 rounded additional-info swing-in-top-fwd"
-                        :class="{
-                          hidden: !expandedArticles.includes(articleIndex),
-                        }"
+                        class="absolute right-0 p-2 mt-2 mr-2 text-xs font-semibold text-gray-500 transition duration-300 transform border-gray-300 rounded-md cursor-pointer hover:-translate-y-1"
+                        @click="onClickExpand(articleIndex)"
+                        title="Expand Details"
                       >
-                        <div class="flex-wrap w-full md:flex">
-                          <div
-                            class="flex-grow px-4 py-3 mt-2 bg-gray-100 border rounded lg:mx-1"
-                            v-if="article.questions.length"
-                          >
-                            <h3 class="font-bold text-gray-700 text-md">
-                              Questions Answered
-                            </h3>
-                            <ol>
-                              <li
-                                :key="question.id"
-                                v-for="question in article.questions"
-                                class="text-gray-700"
-                              >
-                                - {{ question }}
-                              </li>
-                            </ol>
-                          </div>
-
-                          <div
-                            class="flex-grow px-4 py-3 mt-2 bg-gray-100 border rounded lg:mx-1"
-                          >
-                            <h3 class="font-bold text-gray-700 text-md">
-                              Headers
-                            </h3>
-                            <ol>
-                              <li
-                                :key="header.id"
-                                v-for="header in article.headers"
-                                class="text-gray-700"
-                              >
-                                - {{ header }}
-                              </li>
-                            </ol>
-                          </div>
-                          <!-- </div>
-                        <div class="justify-between w-full md:flex"> -->
-                          <div
-                            class="flex-grow px-4 py-3 mt-2 bg-gray-100 border rounded lg:mx-1"
-                            v-if="article.headersContainingKeyword.length"
-                          >
-                            <h3 class="font-bold text-gray-700 text-md">
-                              Headers containing full keyword
-                            </h3>
-                            <ol>
-                              <li
-                                :key="fullHeader.id"
-                                v-for="fullHeader in article.headersContainingKeyword"
-                                class="text-gray-700"
-                              >
-                                - {{ fullHeader }}
-                              </li>
-                            </ol>
-                          </div>
-
-                          <div
-                            class="flex-grow px-4 py-3 mt-2 bg-gray-100 border rounded lg:mx-1"
-                            v-if="
-                              article.headersContainingPartialKeyword.length
-                            "
-                          >
-                            <h3 class="font-bold text-gray-700 text-md">
-                              Headers containing partial keyword
-                            </h3>
-                            <ol>
-                              <li
-                                :key="partialHeader.id"
-                                class="text-gray-700"
-                                v-for="partialHeader in article.headersContainingPartialKeyword"
-                              >
-                                - {{ partialHeader }}
-                              </li>
-                            </ol>
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <span
-                      v-if="
-                        article.questions.length ||
-                        article.headers.length ||
-                        article.headersContainingKeyword.length ||
-                        article.headersContainingPartialKeyword.length
-                      "
-                      class="absolute right-0 p-2 mt-2 mr-2 text-xs font-semibold text-gray-500 transition duration-300 transform border-gray-300 rounded-md cursor-pointer hover:-translate-y-1"
-                      @click="onClickExpand(articleIndex)"
-                      title="Expand Details"
-                    >
-                      <svg
-                        class="w-8 h-8"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M19 9l-7 7-7-7"
-                        ></path>
-                      </svg>
-                    </span>
-                  </tr>
-                </tbody>
-              </table>
+                        <svg
+                          class="w-8 h-8"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M19 9l-7 7-7-7"
+                          ></path>
+                        </svg>
+                      </span>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="p-5 bg-gray-200 rounded">
-        <h2 class="pt-2 mb-2 text-2xl text-gray-800 lg:mb-0">
-          Blueprint Tool (Coming Soon)
-        </h2>
-        <p>
-          Load these results into the blueprint tool to help you write, or to
-          give to your writers for a more concise plan.
-        </p>
-        <div class="my-5">
-          <router-link
-            to="/blueprint"
-            tag="button"
-            class="flex items-center self-center flex-initial h-16 px-4 font-semibold text-gray-100 duration-150 bg-gray-500 rounded-lg shadow focus:outline-none"
-          >
-            <span>Load Into Blueprint Tool</span>
-            <svg
-              class="w-6 h-6 ml-2 text-gray-100"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
+        <div class="p-5 bg-gray-200 rounded">
+          <h2 class="pt-2 mb-2 text-2xl text-gray-800 lg:mb-0">
+            Blueprint Tool (Coming Soon)
+          </h2>
+          <p>
+            Load these results into the blueprint tool to help you write, or to
+            give to your writers for a more concise plan.
+          </p>
+          <div class="my-5">
+            <router-link
+              to="/blueprint"
+              tag="button"
+              class="flex items-center self-center flex-initial h-16 px-4 font-semibold text-gray-100 duration-150 bg-gray-500 rounded-lg shadow focus:outline-none"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"
+              <span>Load Into Blueprint Tool</span>
+              <svg
+                class="w-6 h-6 ml-2 text-gray-100"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"
+                />
+              </svg>
+              <img
+                v-if="loading"
+                class="w-5 h-5 mx-auto ml-2"
+                src="@/assets/img/three-dots.svg"
               />
-            </svg>
-            <img
-              v-if="loading"
-              class="w-5 h-5 mx-auto ml-2"
-              src="@/assets/img/three-dots.svg"
-            />
-          </router-link>
+            </router-link>
+          </div>
         </div>
-      </div>
 
-      <!-- charts -->
-      <!-- <div class="flex flex-wrap -mx-3">
+        <!-- charts -->
+        <!-- <div class="flex flex-wrap -mx-3">
         <div class="w-full px-3 xl:w-1/3">
           <p class="mb-4 text-xl font-semibold text-gray-700">Recent Sales</p>
 
@@ -902,6 +909,7 @@
           </div>
         </div>
       </div> -->
+      </div>
     </div>
     <div
       class="flex flex-row items-center p-5 mt-5 bg-red-200 border-b-2 border-red-300 rounded alert swing-in-top-fwd"
@@ -948,6 +956,7 @@
 //import Chart from "chart.js";
 import { mapState } from "vuex";
 import store from "../store";
+var VueScrollTo = require("vue-scrollto");
 
 let api_url = "";
 if (process.env.NODE_ENV === "production") {
@@ -989,6 +998,9 @@ export default {
               this.loaded = true;
               this.loading = false;
               this.error = false;
+              this.$nextTick(() =>
+                VueScrollTo.scrollTo("#results", { offset: -90 })
+              );
             }
           })
           .catch((error) => {
