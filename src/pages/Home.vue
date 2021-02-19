@@ -33,7 +33,7 @@
       >
         <div
           class="object-cover h-full"
-          style="background-image: url(./img/bg.png)"
+          style="background-image: url(/img/bg.png)"
         >
           <div class="h-full bg-black opacity-25"></div>
         </div>

@@ -15,18 +15,12 @@
 </template>
 
 <script>
-// import { mapState } from "vuex";
-
 import Sidebar from "@/components/Sidebar";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export default {
   name: "DefaultLayout",
-
-  // computed: {
-  //   ...mapState(["sideBarOpen"]),
-  // },
   components: {
     Sidebar,
     Navbar,
