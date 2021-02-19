@@ -7,13 +7,13 @@
       <div
         class="fixed z-30 w-full h-screen border-r bg-gray-25 md:w-2/3 lg:w-64 md:top-0 md:left-0 lg:hidden"
         id="mobile-nav"
-        v-if="mobNavOpen"
+        v-if="sideBarOpen"
       >
         <div class="flex items-center">
           <router-link
             active-class="bg-gray-25"
             to="/"
-            v-on:click.native="mobNavOpen = false"
+            @click.native="toggleSidebar()"
             class="flex items-center w-full h-20 px-4"
           >
             <svg
@@ -35,7 +35,7 @@
 
           <!-- Close Menu -->
           <button
-            v-on:click="(mobNavOpen = !mobNavOpen), animateClose()"
+            @click="toggleSidebar(), animateClose()"
             class="flex align-middle"
             id="mobCloseBtn"
           >
@@ -64,11 +64,11 @@
     >
       <!-- left navbar -->
       <div class="flex">
-        <!-- mobile hamburger -->
+        <!-- mobile hamburger OPEN -->
         <div class="flex items-center mr-4 text-gray-700 lg:hidden">
           <button
             class="hover:text-indigo-600 hover:border-white focus:outline-none navbar-burger"
-            v-on:click="mobNavOpen = !mobNavOpen"
+            @click="toggleSidebar()"
           >
             <svg
               class="w-10 h-10"
@@ -139,22 +139,26 @@
 
 <script>
 import MenuItems from "@/components/MenuItems";
+import { mapState } from "vuex";
 
 export default {
   name: "Navbar",
+  computed: {
+    ...mapState(["sideBarOpen"]),
+  },
   components: {
     MenuItems,
   },
   data() {
     return {
       dropDownOpen: false,
-      mobNavOpen: false,
+      // mobNavOpen: false,
       animatedCloseBtn: true,
     };
   },
   methods: {
     toggleSidebar() {
-      this.mobNavOpen = true;
+      this.$store.dispatch("toggleSidebar");
     },
     animateClose() {
       document.getElementById("mobCloseBtn").classList.add("rotate-center");

@@ -5,7 +5,7 @@
       <router-link
         to="/analysis"
         class="flex items-center w-full h-10 pl-4 mb-2 text-gray-800 duration-150 rounded-lg cursor-pointer hover:bg-gray-30"
-        v-on:click.native="mobNavOpen = false"
+        @click.native="toggleSidebar()"
       >
         <svg
           class="w-6 h-6 mr-2 text-gray-700"
@@ -26,7 +26,7 @@
       <router-link
         to="/blueprint"
         title="Coming Soon"
-        v-on:click.native="mobNavOpen = false"
+        @click.native="toggleSidebar()"
         class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-pointer hover:bg-gray-30"
       >
         <svg
@@ -96,7 +96,17 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "MenuItems",
+  computed: {
+    ...mapState(["sideBarOpen"]),
+  },
+  methods: {
+    toggleSidebar() {
+      this.$store.dispatch("toggleSidebar");
+    },
+  },
 };
 </script>
