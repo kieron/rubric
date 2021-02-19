@@ -8,8 +8,6 @@ export default new Vuex.Store({
   mutations: {
     addBlueprint: (state, data) => {
       state.blueprintData = data;
-      console.log("Added Data:", data);
-      console.log("data", state.blueprintData);
     },
   },
   actions: {

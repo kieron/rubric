@@ -947,6 +947,7 @@
 <script>
 //import Chart from "chart.js";
 import { mapState } from "vuex";
+import store from "../store";
 
 let api_url = "";
 if (process.env.NODE_ENV === "production") {
@@ -1011,10 +1012,12 @@ export default {
       amount: 15,
       device: "desktop",
       location: "United States",
-      apiResponse: "",
+      apiResponse: Object.keys(store.getters.getBlueprint).length
+        ? store.getters.getBlueprint
+        : [],
       error: false,
       errorMessage: "Something Went Wrong",
-      loaded: false,
+      loaded: Object.keys(store.getters.getBlueprint).length ? true : false,
       loading: false,
       expandedArticles: [],
       // buyersData: {
