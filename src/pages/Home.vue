@@ -9,9 +9,10 @@
             Welcome to <span class="text-indigo-600">Rubric</span>
           </h2>
           <p class="mt-2 text-sm text-gray-500 md:text-base">
-            Rubric is an SEO tool, designed to help you maximise your efficiency
-            when coming up with winning content. Perform you're first SERP
-            Analysis now!
+            If you are a content creator, Rubric can help you create SEO winning
+            content for your website. It's designed to help you maximise your
+            efficiency even if you are not an expert in SEO. Perform you're
+            first SERP Analysis now!
           </p>
           <div class="flex justify-center mt-6 lg:justify-start">
             <router-link
