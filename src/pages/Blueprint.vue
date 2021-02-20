@@ -412,165 +412,48 @@
         <editor-content
           class="p-5 border-2 border-gray-200 rounded editor__content"
           :editor="editor"
+          id="editor"
+          ref="editor"
+          innerRef="editor"
         />
       </div>
       <div
         class="sticky top-0 flex-grow w-1/3 h-full p-5 ml-2 bg-gray-100 border-2 border-gray-200 rounded"
       >
         <h2 class="text-2xl bold">Blueprint Data</h2>
-        <div class="py-3">
+        <div v-if="!headers.length && !questions.length">
+          <p class="mt-2">You haven't loaded any data from a SERP analysis.</p>
+          <router-link
+            to="/analysis"
+            tag="button"
+            class="flex items-center self-center justify-center flex-initial w-full h-16 px-4 mt-3 font-semibold text-gray-100 duration-150 bg-indigo-600 rounded-lg shadow hover:bg-indigo-500 focus:outline-none"
+          >
+            <span>Load SERP Analysis</span>
+          </router-link>
+        </div>
+        <div class="py-3" v-if="headers.length">
           <h3 class="text-xs font-bold">HEADERS</h3>
           <!-- This is the tags container -->
           <div class="flex flex-wrap my-3 -m-1">
             <span
+              v-for="item in headers"
+              @click="insertHeader(item)"
+              :key="item.header"
               class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#winter</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#stark</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#gameofthrones</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#battle</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#jhonsnow</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#kinglandings</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#winter</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#stark</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#gameofthrones</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#battle</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#jhonsnow</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#kinglandings</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#winter</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#stark</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#gameofthrones</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#battle</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#jhonsnow</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#kinglandings</span
+              >{{ item }}</span
             >
           </div>
         </div>
-        <div class="py-3">
+        <div class="py-3" v-if="questions.length">
           <h3 class="text-xs font-bold">QUESTIONS</h3>
           <!-- This is the tags container -->
           <div class="flex flex-wrap my-3 -m-1">
             <span
+              @click="insertQuestion(item)"
+              v-for="item in questions"
+              :key="item.question"
               class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#winter</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#stark</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#gameofthrones</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#battle</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#jhonsnow</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#kinglandings</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#winter</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#stark</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#gameofthrones</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#battle</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#jhonsnow</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#kinglandings</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#winter</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#stark</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#gameofthrones</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#battle</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#jhonsnow</span
-            >
-            <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >#kinglandings</span
+              >{{ item }}</span
             >
           </div>
         </div>
@@ -604,8 +487,13 @@ import {
 } from "tiptap-extensions";
 export default {
   name: "Blueprint",
+
   computed: {
-    ...mapGetters({ retrieveBlueprint: "getBlueprint" }),
+    ...mapGetters({
+      blueprintData: "getBlueprint",
+      questions: "getQuestions",
+      headers: "getHeaders",
+    }),
   },
   components: {
     EditorContent,
@@ -615,6 +503,8 @@ export default {
   data() {
     return {
       blueprintSidebarOpen: false,
+      // questions: store.getters.getQuestions || "null",
+      // headers: store.getters.getheaders || "null",
       editor: new Editor({
         extensions: [
           new Blockquote(),
@@ -635,31 +525,26 @@ export default {
           new Underline(),
           new History(),
         ],
-        content: `<h1><strong>${store.getters.getBlueprint.searchTerm}</strong></h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p></br>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p></br>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p></br>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p></br>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p></br>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p></br>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p></br>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p></br>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>`,
+        content: `<h1><strong>${store.getters.getBlueprint.searchTerm}</strong></h1>`,
       }),
     };
   },
   methods: {
     toggleBlueprintData: function () {
       this.blueprintSidebarOpen = !this.blueprintSidebarOpen;
+    },
+    insertHeader: function (item) {
+      const transaction = this.editor.state.tr.insertText(item.trim());
+      this.editor.view.dispatch(transaction);
+      this.focusEditor();
+    },
+    insertQuestion: function (item) {
+      const transaction = this.editor.state.tr.insertText(item.trim());
+      this.editor.view.dispatch(transaction);
+      this.focusEditor();
+    },
+    focusEditor() {
+      this.$refs.editor.focus();
     },
   },
   beforeDestroy() {

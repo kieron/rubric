@@ -11,6 +11,31 @@ export default new Vuex.Store({
     getBlueprint: (state) => {
       return state.blueprintData;
     },
+    getQuestions: (state) => {
+      var questions = [];
+      if (Object.keys(state.blueprintData).length) {
+        for (const result of state.blueprintData.results) {
+          for (const question of result.questions) {
+            questions.push(question);
+          }
+        }
+        // for (const question of state.blueprintData.relatedQuestions) {
+        //   test.push(question.question);
+        // }
+      }
+      return questions.filter(onlyUnique);
+    },
+    getHeaders: (state) => {
+      var headers = [];
+      if (Object.keys(state.blueprintData).length) {
+        for (const result of state.blueprintData.results) {
+          for (const header of result.headers) {
+            headers.push(header);
+          }
+        }
+      }
+      return headers.filter(onlyUnique);
+    },
     sideBarOpen: (state) => {
       return state.sideBarOpen;
     },
@@ -32,3 +57,7 @@ export default new Vuex.Store({
     },
   },
 });
+
+function onlyUnique(value, index, self) {
+  return self.indexOf(value) === index;
+}

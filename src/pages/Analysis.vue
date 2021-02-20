@@ -856,7 +856,7 @@
 
         <div class="p-5 bg-gray-200 rounded">
           <h2 class="pt-2 mb-2 text-2xl text-gray-800 lg:mb-0">
-            Blueprint Tool (Coming Soon)
+            Blueprint Tool
           </h2>
           <p>
             Load these results into the blueprint tool to help you write, or to
