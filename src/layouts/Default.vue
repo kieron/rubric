@@ -5,7 +5,7 @@
       <main class="w-full pl-0 bg-white lg:pl-64" id="main-content">
         <Navbar />
 
-        <div class="p-6 mb-20 bg-white">
+        <div class="container p-6 mx-auto mb-20 bg-white">
           <router-view />
         </div>
       </main>

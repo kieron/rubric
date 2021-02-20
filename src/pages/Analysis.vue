@@ -61,7 +61,7 @@
       <hr class="mt-2" />
     </div>
 
-    <div class="p-5 bg-gray-200 rounded">
+    <div class="p-5 rounded bg-gray-25">
       <h2 class="pt-2 mb-2 text-2xl text-gray-800 lg:mb-0">
         Search Parameters
       </h2>
@@ -184,7 +184,7 @@
                 placeholder="Amount"
                 min="1"
                 required
-                max="30"
+                max="50"
                 v-model="amount"
               />
               <p class="absolute right-0 mt-1 text-xs text-right text-gray-500">

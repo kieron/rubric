@@ -126,7 +126,7 @@
 
     <!-- dropdown menu -->
     <div
-      class="absolute right-0 w-48 mr-6 text-gray-700 border border-t-0 rounded-b-lg shadow-xl bg-gray-25 bottom-10"
+      class="absolute right-0 w-48 mr-6 text-gray-700 border border-t-0 rounded-b-lg shadow-xl bg-gray-25"
       :class="dropDownOpen ? '' : 'hidden'"
     >
       <a href="#" class="block px-4 py-2 hover:bg-gray-200">Account</a>

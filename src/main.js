@@ -45,7 +45,7 @@ const routes = [
 const router = new Router({
   mode: "history",
   routes,
-  linkActiveClass: "bg-gray-30",
+  linkActiveClass: "bg-gray-30 border-l-8 border-indigo-600",
   scrollBehavior(_, __, savedPosition) {
     return savedPosition || { x: 0, y: 0 };
   },

@@ -415,7 +415,7 @@
         />
       </div>
       <div
-        class="sticky top-0 flex-grow w-1/3 h-full p-5 ml-2 bg-indigo-300 border-2 border-gray-200 rounded"
+        class="sticky top-0 flex-grow w-1/3 h-full p-5 ml-2 bg-gray-100 border-2 border-gray-200 rounded"
       >
         <h2 class="text-2xl bold">Blueprint Data</h2>
         <div class="py-3">
@@ -423,75 +423,75 @@
           <!-- This is the tags container -->
           <div class="flex flex-wrap my-3 -m-1">
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#winter</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#stark</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#gameofthrones</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#battle</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#jhonsnow</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#kinglandings</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#winter</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#stark</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#gameofthrones</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#battle</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#jhonsnow</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#kinglandings</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#winter</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#stark</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#gameofthrones</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#battle</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#jhonsnow</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#kinglandings</span
             >
           </div>
@@ -501,75 +501,75 @@
           <!-- This is the tags container -->
           <div class="flex flex-wrap my-3 -m-1">
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#winter</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#stark</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#gameofthrones</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#battle</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#jhonsnow</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#kinglandings</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#winter</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#stark</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#gameofthrones</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#battle</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#jhonsnow</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#kinglandings</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#winter</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#stark</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#gameofthrones</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#battle</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#jhonsnow</span
             >
             <span
-              class="px-2 m-1 text-sm font-bold leading-loose bg-gray-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
               >#kinglandings</span
             >
           </div>
