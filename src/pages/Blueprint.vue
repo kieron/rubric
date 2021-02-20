@@ -57,11 +57,7 @@
         Coming soon. Create blueprints for your content faster & easier than
         before.
       </p>
-      <!-- <button
-        class="px-6 py-2 font-semibold text-white duration-150 rounded-lg shadow bg-purple hover:bg-purple-light focus:outline-none"
-      >
-        View Logs
-      </button> -->
+
       <hr class="mt-2" />
     </div>
     <div class="flex">
@@ -292,20 +288,7 @@
                 class="flex flex-wrap justify-center p-3 mt-2 border-2 rounded md:justify-start space-between menubar"
               >
                 <div class="flex flex-no-wrap items-center mr-4 text-gray-600">
-                  <svg
-                    class="inline w-5 h-5 mr-1 align-middle"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-                    ></path>
-                  </svg>
+                  <AnnotationIcon class="inline w-5 h-5 mr-1 align-middle" />
 
                   <span
                     title="Word Count"
@@ -315,20 +298,7 @@
                 </div>
 
                 <div class="flex flex-no-wrap items-center mr-4 text-gray-600">
-                  <svg
-                    class="inline w-5 h-5 mr-1 align-middle"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-                    ></path>
-                  </svg>
+                  <NewspaperIcon class="inline w-5 h-5 mr-1 align-middle" />
 
                   <span
                     title="Header Count"
@@ -338,20 +308,7 @@
                 </div>
 
                 <div class="flex flex-no-wrap items-center mr-4 text-gray-600">
-                  <svg
-                    class="inline w-5 h-5 mr-1 align-middle"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    ></path>
-                  </svg>
+                  <PhotographIcon class="inline w-5 h-5 mr-1 align-middle" />
 
                   <span
                     title="Image Count"
@@ -361,20 +318,7 @@
                 </div>
 
                 <div class="flex flex-no-wrap items-center mr-4 text-gray-600">
-                  <svg
-                    class="inline w-5 h-5 mr-1 align-middle"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
-                    ></path>
-                  </svg>
+                  <TemplateIcon class="inline w-5 h-5 mr-1 align-middle" />
 
                   <span
                     title="Paragraph Count"
@@ -384,20 +328,9 @@
                 </div>
 
                 <div class="flex flex-no-wrap items-center mr-4 text-gray-600">
-                  <svg
+                  <QuestionMarkCircleIcon
                     class="inline w-5 h-5 mr-1 align-middle"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    ></path>
-                  </svg>
+                  />
                   <span
                     title="Questions Answered"
                     class="whitespace-no-wrap align-middle"
@@ -433,7 +366,6 @@
         </div>
         <div class="py-3" v-if="headers.length">
           <h3 class="text-xs font-bold">HEADERS</h3>
-          <!-- This is the tags container -->
           <div class="flex flex-wrap my-3 -m-1">
             <span
               v-for="item in headers"
@@ -446,7 +378,6 @@
         </div>
         <div class="py-3" v-if="questions.length">
           <h3 class="text-xs font-bold">QUESTIONS</h3>
-          <!-- This is the tags container -->
           <div class="flex flex-wrap my-3 -m-1">
             <span
               @click="insertQuestion(item)"
@@ -464,6 +395,13 @@
 
 <script>
 import { Editor, EditorContent, EditorMenuBar, EditorMenuBubble } from "tiptap";
+import {
+  QuestionMarkCircleIcon,
+  TemplateIcon,
+  AnnotationIcon,
+  NewspaperIcon,
+  PhotographIcon,
+} from "@vue-hero-icons/outline";
 import { mapGetters } from "vuex";
 import store from "../store";
 import {
@@ -499,6 +437,11 @@ export default {
     EditorContent,
     EditorMenuBar,
     EditorMenuBubble,
+    QuestionMarkCircleIcon,
+    TemplateIcon,
+    AnnotationIcon,
+    NewspaperIcon,
+    PhotographIcon,
   },
   data() {
     return {

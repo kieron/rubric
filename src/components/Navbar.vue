@@ -16,20 +16,8 @@
             @click.native="toggleSidebar()"
             class="flex items-center w-full h-20 px-4"
           >
-            <svg
-              class="w-8 h-8 ml-2 text-indigo-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
-              ></path>
-            </svg>
+            <EmojiHappyIcon class="w-8 h-8 ml-2 text-indigo-600" />
+
             <p class="pl-4 text-3xl font-semibold text-gray-800">RUBRIC</p>
           </router-link>
 
@@ -39,20 +27,7 @@
             class="flex align-middle"
             id="mobCloseBtn"
           >
-            <svg
-              class="w-12 h-12 mr-4 text-gray-700 hover:text-indigo-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M6 18L18 6M6 6l12 12"
-              ></path>
-            </svg>
+            <XIcon class="w-12 h-12 mr-4 text-gray-700 hover:text-indigo-600" />
           </button>
         </div>
 
@@ -70,20 +45,7 @@
             class="hover:text-indigo-600 hover:border-white focus:outline-none navbar-burger"
             @click="toggleSidebar()"
           >
-            <svg
-              class="w-10 h-10"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h7"
-              ></path>
-            </svg>
+            <MenuAlt2Icon class="w-10 h-10" />
           </button>
         </div>
 
@@ -97,18 +59,7 @@
           class="p-1 mr-4 text-gray-700 duration-150 rounded-full hover:bg-indigo-100 hover:text-indigo-600 focus:outline-none"
         >
           <div class="flex px-0 leading-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="24"
-              viewBox="0 0 24 24"
-              width="24"
-              class="fill-current"
-            >
-              <path d="M0 0h24v24H0z" fill="none" />
-              <path
-                d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.07-1.63-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.64 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2zm-2 1H8v-6c0-2.48 1.51-4.5 4-4.5s4 2.02 4 4.5v6z"
-              />
-            </svg>
+            <BellIcon />
             <div class="z-10 w-2 h-2 -ml-1 rounded-full bg-pink"></div>
           </div>
         </button>
@@ -138,6 +89,12 @@
 </template>
 
 <script>
+import {
+  EmojiHappyIcon,
+  XIcon,
+  MenuAlt2Icon,
+  BellIcon,
+} from "@vue-hero-icons/outline";
 import MenuItems from "@/components/MenuItems";
 import { mapState } from "vuex";
 
@@ -148,6 +105,10 @@ export default {
   },
   components: {
     MenuItems,
+    EmojiHappyIcon,
+    XIcon,
+    MenuAlt2Icon,
+    BellIcon,
   },
   data() {
     return {

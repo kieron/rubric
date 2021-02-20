@@ -28,13 +28,7 @@
         class="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-blue-100 border-2 border-blue-500 rounded-full alert-icon"
       >
         <span class="text-blue-500">
-          <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
-            <path
-              fill-rule="evenodd"
-              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
+          <InformationCircleIcon class="w-6 h-6" />
         </span>
       </div>
       <div class="ml-4 alert-content">
@@ -53,11 +47,6 @@
         SERP Analysis
       </h1>
       <p>Find out who is ranking and why for any given search result.</p>
-      <!-- <button
-        class="px-6 py-2 font-semibold text-white duration-150 rounded-lg shadow bg-purple hover:bg-purple-light focus:outline-none"
-      >
-        View Logs
-      </button> -->
       <hr class="mt-2" />
     </div>
 
@@ -93,25 +82,10 @@
               <span v-if="loading" class="whitespace-no-wrap"
                 >Crunching Data</span
               >
-              <svg
-                v-if="!loading"
-                class="w-6 h-6 ml-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <img
+              <ArrowCircleRightIcon class="w-6 h-6 ml-2" v-if="!loading" />
+              <LoadingSpinner
+                class="flex items-center w-6 h-6 ml-3 fill-current"
                 v-if="loading"
-                class="w-6 h-6 ml-2 mr-5"
-                src="@/assets/img/three-dots.svg"
               />
             </div>
           </button>
@@ -138,15 +112,7 @@
               <div
                 class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-600 pointer-events-none"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  class="w-6 h-6 fill-current"
-                >
-                  <path
-                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                  ></path>
-                </svg>
+                <ChevronDownIcon class="w-6 h-6" />
               </div>
             </div>
             <div class="relative sm:w-1/3 sm:mx-2">
@@ -164,15 +130,7 @@
               <div
                 class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-600 pointer-events-none"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  class="w-6 h-6 fill-current"
-                >
-                  <path
-                    d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                  ></path>
-                </svg>
+                <ChevronDownIcon class="w-6 h-6" />
               </div>
             </div>
             <div class="relative sm:w-1/3">
@@ -208,79 +166,9 @@
     </div>
 
     <div class="flex justify-center my-20 text-indigo-600" v-if="loading">
-      <svg
-        width="120"
-        height="30"
-        xmlns="http://www.w3.org/2000/svg"
-        class="fill-current"
-      >
-        <circle cx="15" cy="15" r="15">
-          <animate
-            attributeName="r"
-            from="15"
-            to="15"
-            begin="0s"
-            dur="0.8s"
-            values="15;9;15"
-            calcMode="linear"
-            repeatCount="indefinite"
-          />
-          <animate
-            attributeName="fill-opacity"
-            from="1"
-            to="1"
-            begin="0s"
-            dur="0.8s"
-            values="1;.5;1"
-            calcMode="linear"
-            repeatCount="indefinite"
-          />
-        </circle>
-        <circle cx="60" cy="15" r="9" fill-opacity=".3">
-          <animate
-            attributeName="r"
-            from="9"
-            to="9"
-            begin="0s"
-            dur="0.8s"
-            values="9;15;9"
-            calcMode="linear"
-            repeatCount="indefinite"
-          />
-          <animate
-            attributeName="fill-opacity"
-            from=".5"
-            to=".5"
-            begin="0s"
-            dur="0.8s"
-            values=".5;1;.5"
-            calcMode="linear"
-            repeatCount="indefinite"
-          />
-        </circle>
-        <circle cx="105" cy="15" r="15">
-          <animate
-            attributeName="r"
-            from="15"
-            to="15"
-            begin="0s"
-            dur="0.8s"
-            values="15;9;15"
-            calcMode="linear"
-            repeatCount="indefinite"
-          />
-          <animate
-            attributeName="fill-opacity"
-            from="1"
-            to="1"
-            begin="0s"
-            dur="0.8s"
-            values="1;.5;1"
-            calcMode="linear"
-            repeatCount="indefinite"
-          />
-        </circle>
-      </svg>
+      <LoadingSpinner
+        class="flex justify-center w-40 ml-auto mr-auto text-center fill-current"
+      />
     </div>
     <div id="results">
       <div
@@ -332,20 +220,7 @@
                   <div
                     class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-pink"
                   >
-                    <svg
-                      class="hidden w-8 h-8 mx-auto lg:block"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-                      ></path>
-                    </svg>
+                    <AnnotationIcon class="hidden w-8 h-8 mx-auto lg:block" />
                   </div>
 
                   <div class="ml-6 leading-6 text-gray-700">
@@ -369,20 +244,7 @@
                   <div
                     class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-purple"
                   >
-                    <svg
-                      class="hidden w-8 h-8 mx-auto lg:block"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-                      ></path>
-                    </svg>
+                    <NewspaperIcon class="hidden w-8 h-8 mx-auto lg:block" />
                   </div>
 
                   <div class="ml-6 leading-6 text-gray-700">
@@ -406,20 +268,7 @@
                   <div
                     class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-orange"
                   >
-                    <svg
-                      class="hidden w-8 h-8 mx-auto lg:block"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                      ></path>
-                    </svg>
+                    <PhotographIcon class="hidden w-8 h-8 mx-auto lg:block" />
                   </div>
 
                   <div class="ml-6 leading-6 text-gray-700">
@@ -443,20 +292,7 @@
                   <div
                     class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-green"
                   >
-                    <svg
-                      class="hidden w-8 h-8 mx-auto lg:block"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
-                      ></path>
-                    </svg>
+                    <TemplateIcon class="hidden w-8 h-8 mx-auto lg:block" />
                   </div>
 
                   <div class="ml-6 leading-6 text-gray-700">
@@ -551,20 +387,9 @@
                               <div
                                 class="flex flex-no-wrap items-center mr-4 text-gray-600"
                               >
-                                <svg
+                                <AnnotationIcon
                                   class="inline w-5 h-5 mr-1 align-middle"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
-                                  ></path>
-                                </svg>
+                                />
 
                                 <span
                                   title="Word Count"
@@ -576,20 +401,9 @@
                               <div
                                 class="flex flex-no-wrap items-center mr-4 text-gray-600"
                               >
-                                <svg
+                                <NewspaperIcon
                                   class="inline w-5 h-5 mr-1 align-middle"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-                                  ></path>
-                                </svg>
+                                />
 
                                 <span
                                   title="Header Count"
@@ -601,20 +415,9 @@
                               <div
                                 class="flex flex-no-wrap items-center mr-4 text-gray-600"
                               >
-                                <svg
+                                <PhotographIcon
                                   class="inline w-5 h-5 mr-1 align-middle"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                  ></path>
-                                </svg>
+                                />
 
                                 <span
                                   title="Image Count"
@@ -626,20 +429,9 @@
                               <div
                                 class="flex flex-no-wrap items-center mr-4 text-gray-600"
                               >
-                                <svg
+                                <TemplateIcon
                                   class="inline w-5 h-5 mr-1 align-middle"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"
-                                  ></path>
-                                </svg>
+                                />
 
                                 <span
                                   title="Paragraph Count"
@@ -651,20 +443,9 @@
                               <div
                                 class="flex flex-no-wrap items-center mr-4 text-gray-600"
                               >
-                                <svg
+                                <ShieldCheckIcon
                                   class="inline w-5 h-5 mr-1 align-middle"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                                  ></path>
-                                </svg>
+                                />
 
                                 <span
                                   title="Domain Authority"
@@ -677,20 +458,10 @@
                               <div
                                 class="flex flex-no-wrap items-center mr-4 text-gray-600"
                               >
-                                <svg
+                                <QuestionMarkCircleIcon
                                   class="inline w-5 h-5 mr-1 align-middle"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                                  ></path>
-                                </svg>
+                                />
+
                                 <span
                                   title="Questions Answered"
                                   class="whitespace-no-wrap align-middle"
@@ -704,20 +475,9 @@
                               <div
                                 class="flex flex-no-wrap items-center mr-4 text-gray-600"
                               >
-                                <svg
+                                <CalendarIcon
                                   class="inline w-5 h-5 mr-1 align-middle"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                                  ></path>
-                                </svg>
+                                />
 
                                 <span
                                   title="SERP Date"
@@ -778,8 +538,7 @@
                                 </li>
                               </ol>
                             </div>
-                            <!-- </div>
-                        <div class="justify-between w-full md:flex"> -->
+
                             <div
                               class="flex-grow px-4 py-3 mt-2 bg-gray-100 border rounded lg:mx-1"
                               v-if="article.headersContainingKeyword.length"
@@ -831,20 +590,7 @@
                         @click="onClickExpand(articleIndex)"
                         title="Expand Details"
                       >
-                        <svg
-                          class="w-8 h-8"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M19 9l-7 7-7-7"
-                          ></path>
-                        </svg>
+                        <ChevronDownIcon class="w-8 h-8" />
                       </span>
                     </tr>
                   </tbody>
@@ -869,47 +615,10 @@
               class="flex items-center self-center flex-initial h-16 px-4 font-semibold text-gray-100 duration-150 bg-gray-500 rounded-lg shadow focus:outline-none"
             >
               <span>Load Into Blueprint Tool</span>
-              <svg
-                class="w-6 h-6 ml-2 text-gray-100"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"
-                />
-              </svg>
-              <img
-                v-if="loading"
-                class="w-5 h-5 mx-auto ml-2"
-                src="@/assets/img/three-dots.svg"
-              />
+              <CubeTransparentIcon class="w-6 h-6 ml-2 text-gray-100" />
             </router-link>
           </div>
         </div>
-
-        <!-- charts -->
-        <!-- <div class="flex flex-wrap -mx-3">
-        <div class="w-full px-3 xl:w-1/3">
-          <p class="mb-4 text-xl font-semibold text-gray-700">Recent Sales</p>
-
-          <div class="w-full p-4 mb-8 bg-white border rounded-lg xl:mb-0">
-            <canvas id="buyers-chart" width="600" height="400"></canvas>
-          </div>
-        </div>
-
-        <div class="w-full px-3 xl:w-1/3">
-          <p class="mb-4 text-xl font-semibold text-gray-700">Recent Reviews</p>
-
-          <div class="w-full p-4 mb-8 bg-white border rounded-lg xl:mb-0">
-            <canvas id="reviews-chart" width="600" height="400"></canvas>
-          </div>
-        </div>
-      </div> -->
       </div>
     </div>
     <div
@@ -920,33 +629,14 @@
         class="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-red-100 border-2 border-red-500 rounded-full alert-icon"
       >
         <span class="text-red-500">
-          <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
-            <path
-              fill-rule="evenodd"
-              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-              clip-rule="evenodd"
-            ></path>
-          </svg>
+          <XIcon class="w-6 h-6" />
         </span>
       </div>
       <div class="ml-4 alert-content">
         <div class="text-lg font-semibold text-red-800 alert-title">Whoops</div>
         <div class="text-sm text-red-600 alert-description">
           {{ errorMessage }}
-          <svg
-            class="inline w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            ></path>
-          </svg>
+          <EmojiSadIcon class="inline w-4 h-4" />
         </div>
       </div>
     </div>
@@ -954,9 +644,24 @@
 </template>
 
 <script>
-//import Chart from "chart.js";
 import { mapState } from "vuex";
 import store from "../store";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import {
+  XIcon,
+  EmojiSadIcon,
+  CubeTransparentIcon,
+  ChevronDownIcon,
+  AnnotationIcon,
+  NewspaperIcon,
+  PhotographIcon,
+  TemplateIcon,
+  ShieldCheckIcon,
+  QuestionMarkCircleIcon,
+  CalendarIcon,
+  ArrowCircleRightIcon,
+  InformationCircleIcon,
+} from "@vue-hero-icons/outline";
 var VueScrollTo = require("vue-scrollto");
 
 let api_url = "";
@@ -969,6 +674,22 @@ if (process.env.NODE_ENV === "production") {
 export default {
   computed: {
     ...mapState(["blueprintData"]),
+  },
+  components: {
+    LoadingSpinner,
+    XIcon,
+    EmojiSadIcon,
+    CubeTransparentIcon,
+    ChevronDownIcon,
+    AnnotationIcon,
+    NewspaperIcon,
+    PhotographIcon,
+    TemplateIcon,
+    ShieldCheckIcon,
+    QuestionMarkCircleIcon,
+    CalendarIcon,
+    ArrowCircleRightIcon,
+    InformationCircleIcon,
   },
   name: "AnalysisHome",
   methods: {
@@ -1037,97 +758,9 @@ export default {
       loaded: Object.keys(store.getters.getBlueprint).length ? true : false,
       loading: false,
       expandedArticles: [],
-      // buyersData: {
-      //   type: "line",
-      //   data: {
-      //     labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-      //     datasets: [
-      //       {
-      //         backgroundColor: "rgba(70,20,237,0.4)",
-      //         strokeColor: "#63b3ed",
-      //         pointColor: "#fff",
-      //         pointStrokeColor: "#63b3ed",
-      //         data: [203, 156, 99, 251, 305, 247, 256],
-      //       },
-      //       {
-      //         backgroundColor: "rgba(60,60,248,0.4)",
-      //         strokeColor: "#f7fafc",
-      //         pointColor: "#fff",
-      //         pointStrokeColor: "#f7fafc",
-      //         data: [86, 97, 144, 114, 94, 108, 156],
-      //       },
-      //     ],
-      //   },
-      //   options: {
-      //     legend: {
-      //       display: false,
-      //     },
-      //     scales: {
-      //       yAxes: [
-      //         {
-      //           gridLines: {
-      //             display: false,
-      //           },
-      //           ticks: {
-      //             display: false,
-      //           },
-      //         },
-      //       ],
-      //       xAxes: [
-      //         {
-      //           gridLines: {
-      //             display: false,
-      //           },
-      //         },
-      //       ],
-      //     },
-      //   },
-      // },
-      // reviewsData: {
-      //   type: "bar",
-      //   data: {
-      //     labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-      //     datasets: [
-      //       {
-      //         backgroundColor: "rgba(40,100,255,0.8)",
-      //         strokeColor: "#63b3ed",
-      //         pointColor: "#fff",
-      //         pointStrokeColor: "#63b3ed",
-      //         data: [203, 156, 99, 251, 305, 247, 256],
-      //       },
-      //     ],
-      //   },
-      //   options: {
-      //     legend: {
-      //       display: false,
-      //     },
-      //     scales: {
-      //       yAxes: [
-      //         {
-      //           gridLines: {
-      //             display: false,
-      //           },
-      //           ticks: {
-      //             display: false,
-      //           },
-      //         },
-      //       ],
-      //       xAxes: [
-      //         {
-      //           gridLines: {
-      //             display: false,
-      //           },
-      //         },
-      //       ],
-      //     },
-      //   },
-      // },
     };
   },
-  mounted() {
-    //new Chart(document.getElementById("buyers-chart"), this.buyersData);
-    //new Chart(document.getElementById("reviews-chart"), this.reviewsData);
-  },
+  mounted() {},
 };
 </script>
 
@@ -1138,18 +771,6 @@ export default {
   animation: slide-in-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-/* ----------------------------------------------
- * Generated by Animista on 2021-2-13 18:18:31
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
-
-/**
- * ----------------------------------------
- * animation slide-in-bottom
- * ----------------------------------------
- */
 @-webkit-keyframes slide-in-bottom {
   0% {
     -webkit-transform: translateY(1000px);
@@ -1180,18 +801,6 @@ export default {
   animation: bounce-top 0.9s both;
 }
 
-/* ----------------------------------------------
- * Generated by Animista on 2021-2-14 0:0:16
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
-
-/**
- * ----------------------------------------
- * animation bounce-top
- * ----------------------------------------
- */
 @-webkit-keyframes bounce-top {
   0% {
     -webkit-transform: translateY(0px);
@@ -1302,18 +911,6 @@ export default {
   animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-/* ----------------------------------------------
- * Generated by Animista on 2021-2-14 12:25:8
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
-
-/**
- * ----------------------------------------
- * animation slide-in-top
- * ----------------------------------------
- */
 @-webkit-keyframes slide-in-top {
   0% {
     -webkit-transform: translateY(-1000px);
@@ -1345,18 +942,6 @@ export default {
   animation: swing-in-top-fwd 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
 }
 
-/* ----------------------------------------------
- * Generated by Animista on 2021-2-14 17:17:5
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
-
-/**
- * ----------------------------------------
- * animation swing-in-top-fwd
- * ----------------------------------------
- */
 @-webkit-keyframes swing-in-top-fwd {
   0% {
     -webkit-transform: rotateX(-100deg);
@@ -1396,18 +981,6 @@ export default {
   animation: swing-in-top-fwd 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
 }
 
-/* ----------------------------------------------
- * Generated by Animista on 2021-2-15 19:10:22
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
-
-/**
- * ----------------------------------------
- * animation swing-in-top-fwd
- * ----------------------------------------
- */
 @-webkit-keyframes swing-in-top-fwd {
   0% {
     -webkit-transform: rotateX(-100deg);
