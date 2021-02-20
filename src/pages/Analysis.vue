@@ -126,8 +126,8 @@
             <div class="relative sm:w-1/3">
               <select
                 class="w-full h-16 px-3 text-sm bg-white border rounded-lg appearance-none focus:outline-none"
-                name="cars"
-                id="cars"
+                name="location"
+                id="location"
                 required
                 v-model="location"
               >
@@ -184,7 +184,7 @@
                 placeholder="Amount"
                 min="1"
                 required
-                max="50"
+                max="45"
                 v-model="amount"
               />
               <p class="absolute right-0 mt-1 text-xs text-right text-gray-500">
