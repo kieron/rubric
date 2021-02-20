@@ -19,9 +19,7 @@ export default new Vuex.Store({
             questions.push(question);
           }
         }
-        // for (const question of state.blueprintData.relatedQuestions) {
-        //   test.push(question.question);
-        // }
+        // Still need to add Google's questions here
       }
       return questions.filter(onlyUnique);
     },
