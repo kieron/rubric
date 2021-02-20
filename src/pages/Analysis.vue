@@ -292,7 +292,8 @@
         </h2>
         <p class="mb-2 text-gray-800 font text-1xl lg:mb-0">
           Your search for <strong>{{ apiResponse.searchTerm }}</strong> had
-          <strong>{{ apiResponse.totalResults }}</strong> results, across
+          <strong>{{ apiResponse.totalResults.toLocaleString() }}</strong>
+          results, across
           <strong>{{ apiResponse.uniqueDomainCount }}</strong> unique domains
           and took <strong>{{ timeTaken }}</strong> seconds! Here are the
           results.
@@ -1027,9 +1028,10 @@ export default {
       timeTaken: 0,
       device: "desktop",
       location: "United States",
-      apiResponse: Object.keys(store.getters.getBlueprint).length
-        ? store.getters.getBlueprint
-        : [],
+      apiResponse:
+        Object.keys(store.getters.getBlueprint).length && this.error !== true
+          ? store.getters.getBlueprint
+          : [],
       error: false,
       errorMessage: "Something Went Wrong",
       loaded: Object.keys(store.getters.getBlueprint).length ? true : false,
