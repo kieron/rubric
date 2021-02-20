@@ -1,5 +1,10 @@
 module.exports = {
-  purge: ["./src/**/*.html", "./src/**/*.vue", "./src/**/*.jsx"],
+  purge: [
+    "./src/**/*.html",
+    "./src/**/*.vue",
+    "./src/**/*.jsx",
+    "./src/main.js",
+  ],
   theme: {
     extend: {
       zIndex: {
