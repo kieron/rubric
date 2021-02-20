@@ -294,8 +294,8 @@
           Your search for <strong>{{ apiResponse.searchTerm }}</strong> had
           <strong>{{ apiResponse.totalResults }}</strong> results, across
           <strong>{{ apiResponse.uniqueDomainCount }}</strong> unique domains
-          and took <strong>{{ apiResponse.timeTaken }}</strong> seconds! Here
-          are the results.
+          and took <strong>{{ timeTaken }}</strong> seconds! Here are the
+          results.
         </p>
 
         <!-- Cards -->
@@ -979,6 +979,7 @@ export default {
       else this.expandedArticles.push(index);
     },
     search: async function () {
+      var t0 = performance.now();
       this.loading = true;
       try {
         return fetch(
@@ -1001,6 +1002,7 @@ export default {
               this.$nextTick(() =>
                 VueScrollTo.scrollTo("#results", { offset: -90 })
               );
+              this.timeTaken = Math.round((performance.now() - t0) / 1000);
             }
           })
           .catch((error) => {
@@ -1022,6 +1024,7 @@ export default {
       animatedSearchBtn: false,
       query: "best fishing rod for beginners",
       amount: 15,
+      timeTaken: 0,
       device: "desktop",
       location: "United States",
       apiResponse: Object.keys(store.getters.getBlueprint).length
