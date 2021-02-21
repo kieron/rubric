@@ -52,7 +52,7 @@
 
     <div class="p-5 rounded bg-gray-25">
       <h2 class="pt-2 mb-2 text-2xl text-gray-800 lg:mb-0">
-        Search Parameters
+        Search Parameters {{ idFromDb }}
       </h2>
       <p class="text-gray-600">
         Simply input your article phrase below. This can take up to a minute for
@@ -79,7 +79,10 @@
               <span v-if="!loading" class="whitespace-no-wrap"
                 >Start Analysis</span
               >
-              <span v-if="loading" class="whitespace-no-wrap"
+              <span v-if="loading && idFromDb === ''" class="whitespace-no-wrap"
+                >Fetching SERPs</span
+              >
+              <span v-if="loading && idFromDb !== ''" class="whitespace-no-wrap"
                 >Crunching Data</span
               >
               <ArrowCircleRightIcon class="w-6 h-6 ml-2" v-if="!loading" />
@@ -142,22 +145,13 @@
                 placeholder="Amount"
                 min="1"
                 required
-                max="45"
+                max="100"
                 v-model="amount"
+                @change="estimateDuration"
               />
               <p class="absolute right-0 mt-1 text-xs text-right text-gray-500">
                 This amount of articles could take around
-                <span v-if="this.amount <= 20"
-                  ><strong>20 seconds</strong></span
-                >
-                <span v-if="this.amount > 20 && this.amount <= 30"
-                  ><strong>30 seconds</strong></span
-                >
-                <span v-if="this.amount > 30 && this.amount <= 50"
-                  ><strong>50 seconds</strong></span
-                >
-                <span v-if="this.amount > 50"><strong>a minute</strong></span>
-                to fetch.
+                {{ estimateDuration("rounded") }} seconds to fetch.
               </p>
             </div>
           </div>
@@ -171,10 +165,8 @@
       />
     </div>
     <div id="results">
-      <div
-        class="mt-5 slide-in-bottom"
-        v-if="loaded && !loading && !apiResponse.errorFromApi"
-      >
+      <div class="mt-5 slide-in-bottom" v-if="loaded && !loading">
+        <!--this.retrieve(data.id); .-->
         <h2 class="pt-2 mb-2 text-2xl font-semibold text-gray-800 lg:mb-0">
           Results
         </h2>
@@ -327,12 +319,14 @@
                   <p class="text-base font-semibold text-gray-700">
                     {{ question.question }}
                   </p>
-                  <p class="text-sm text-gray-700">{{ question.title }}</p>
+                  <p class="text-sm text-gray-700">
+                    {{ question.source.title }}
+                  </p>
                   <a
                     target="_blank"
-                    :href="question.link"
+                    :href="question.source.link"
                     class="text-sm text-gray-700"
-                    >{{ question.link }}</a
+                    >{{ question.source.link }}</a
                   >
                 </div>
               </div>
@@ -701,39 +695,58 @@ export default {
       else this.expandedArticles.push(index);
     },
     search: async function () {
-      var t0 = performance.now();
+      this.timeStart = performance.now();
       this.loading = true;
       try {
-        return fetch(
-          `${api_url}serp-results?keyword=${this.query}&amount=${this.amount}&device=${this.device}&location=${this.location}`,
-          {}
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.error) {
-              this.errorMessage = data.error.message;
-              this.loaded = false;
-              this.loading = false;
-              this.error = true;
-            } else {
-              this.apiResponse = data;
-              this.$store.dispatch("addBluePrintData", data);
-              this.loaded = true;
-              this.loading = false;
-              this.error = false;
-              this.$nextTick(() =>
-                VueScrollTo.scrollTo("#results", { offset: -90 })
-              );
-              this.timeTaken = Math.round((performance.now() - t0) / 1000);
-            }
-          })
-          .catch((error) => {
+        let response = await fetch(
+          `${api_url}serp-results?keyword=${this.query}&amount=${this.amount}&device=${this.device}&location=${this.location}`
+        );
+        let data = await response.json();
+        this.idFromDb = data.id;
+        setTimeout(() => {
+          this.retrieve(data.id);
+        }, this.estimateDuration());
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    retrieve: async function (id) {
+      try {
+        let response = await fetch(`${api_url}check-serp?id=${id}`);
+        let data = await response.json();
+
+        if (data.error) {
+          if (data.error.message === "No Results") {
+            console.log("Need To Try Again");
+          } else {
+            this.errorMessage = data.error.message;
+            this.loaded = false;
             this.loading = false;
             this.error = true;
-            this.errorMessage = error.message + ". Are you connected?";
-          });
+          }
+        } else {
+          this.apiResponse = data[0];
+          this.$store.dispatch("addBluePrintData", data[0]);
+          this.loaded = true;
+          this.loading = false;
+          this.error = false;
+          this.$nextTick(() =>
+            VueScrollTo.scrollTo("#results", { offset: -90 })
+          );
+          this.timeTaken = Math.round(
+            (performance.now() - this.timeStart) / 1000
+          );
+        }
       } catch (err) {
         this.errorMessage = "Something went wrong!";
+      }
+    },
+    estimateDuration(flag) {
+      if (flag === "rounded") {
+        return this.amount * 0.9;
+      } else {
+        console.log(`Guessing: ${this.amount * 0.9 * 1000}`);
+        return this.amount * 0.9 * 1000;
       }
     },
     animateSearchBtn() {
@@ -747,8 +760,10 @@ export default {
       query: "best fishing rod for beginners",
       amount: 15,
       timeTaken: 0,
+      idFromDb: "",
       device: "desktop",
       location: "United States",
+      timeStart: 0,
       apiResponse:
         Object.keys(store.getters.getBlueprint).length && this.error !== true
           ? store.getters.getBlueprint
