@@ -147,11 +147,11 @@
                 required
                 max="100"
                 v-model="amount"
-                @change="estimateDuration"
               />
               <p class="absolute right-0 mt-1 text-xs text-right text-gray-500">
                 This amount of articles could take around
-                {{ estimateDuration("rounded") }} seconds to fetch.
+                <strong> {{ Math.round(this.amount * 0.75 + 5) }}</strong>
+                seconds to fetch.
               </p>
             </div>
           </div>
@@ -165,7 +165,10 @@
       />
     </div>
     <div id="results">
-      <div class="mt-5 slide-in-bottom" v-if="loaded && !loading">
+      <div
+        class="mt-5 slide-in-bottom"
+        v-if="loaded && !loading && !apiResponse.error"
+      >
         <!--this.retrieve(data.id); .-->
         <h2 class="pt-2 mb-2 text-2xl font-semibold text-gray-800 lg:mb-0">
           Results
@@ -702,22 +705,34 @@ export default {
           `${api_url}serp-results?keyword=${this.query}&amount=${this.amount}&device=${this.device}&location=${this.location}`
         );
         let data = await response.json();
-        this.idFromDb = data.id;
-        setTimeout(() => {
-          this.retrieve(data.id);
-        }, this.estimateDuration());
+        if (data.error) {
+          this.errorMessage = data.error.message;
+          this.loaded = false;
+          this.loading = false;
+          this.error = true;
+        } else {
+          this.idFromDb = data.id;
+          setTimeout(() => {
+            this.retrieve(data.id);
+          }, this.amount * 0.75 * 1000);
+        }
       } catch (err) {
         console.log(err);
       }
     },
-    retrieve: async function (id) {
+    retrieve: async function (id, retry) {
+      if (retry) {
+        console.log("Data not ready - Retrying");
+      }
       try {
         let response = await fetch(`${api_url}check-serp?id=${id}`);
         let data = await response.json();
 
         if (data.error) {
-          if (data.error.message === "No Results") {
-            console.log("Need To Try Again");
+          if ((data.error.message = "Data Not Ready [checkSerp.js - 36]")) {
+            setTimeout(() => {
+              this.retrieve(id, (retry = true));
+            }, 2500);
           } else {
             this.errorMessage = data.error.message;
             this.loaded = false;
@@ -741,14 +756,6 @@ export default {
         this.errorMessage = "Something went wrong!";
       }
     },
-    estimateDuration(flag) {
-      if (flag === "rounded") {
-        return this.amount * 0.9;
-      } else {
-        console.log(`Guessing: ${this.amount * 0.9 * 1000}`);
-        return this.amount * 0.9 * 1000;
-      }
-    },
     animateSearchBtn() {
       this.animatedSearchBtn = true;
     },
@@ -763,6 +770,7 @@ export default {
       idFromDb: "",
       device: "desktop",
       location: "United States",
+      roundedTimeGuess: 0,
       timeStart: 0,
       apiResponse:
         Object.keys(store.getters.getBlueprint).length && this.error !== true
