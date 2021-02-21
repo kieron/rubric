@@ -52,7 +52,7 @@
 
     <div class="p-5 rounded bg-gray-25">
       <h2 class="pt-2 mb-2 text-2xl text-gray-800 lg:mb-0">
-        Search Parameters {{ idFromDb }}
+        Search Parameters
       </h2>
       <p class="text-gray-600">
         Simply input your article phrase below. This can take up to a minute for
