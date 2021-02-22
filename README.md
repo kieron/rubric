@@ -4,7 +4,7 @@ Front end of Rubric built using [TailwindCSS](https://tailwindcss.com) & [Vue.js
 
 #### Screenshot
 
-<!-- ![alt text](./capture.png) -->
+![Rubric SEO Screenshot](./capture.png)
 
 #### Project setup
 
