@@ -52,5 +52,11 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+
+  "engines": {
+    "node": "~15.5.1",
+    "npm": "~7.3.0"
+  }
+
 }
