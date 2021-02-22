@@ -1,46 +1,9 @@
 <template>
   <div id="analysis">
-    <!-- breadcrumb -->
-    <!-- <nav class="mb-6 text-sm font-semibold" aria-label="Breadcrumb">
-      <ol class="inline-flex p-0 list-none">
-        <li class="flex items-center text-purple">
-          <a href="/" class="text-gray-700">Home</a>
-          <svg
-            class="w-3 h-3 mx-3 fill-current"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 320 512"
-          >
-            <path
-              d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"
-            />
-          </svg>
-        </li>
-        <li class="flex items-center">
-          <a href="/dashboard" class="text-gray-600">SERP Analysis</a>
-        </li>
-      </ol>
-    </nav> -->
-    <!-- breadcrumb end -->
-    <div
+    <Breadcrumb />
+    <BetaMessage
       class="flex flex-row items-center p-5 mb-8 bg-blue-200 border-b-2 border-blue-300 rounded alert"
-    >
-      <div
-        class="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-blue-100 border-2 border-blue-500 rounded-full alert-icon"
-      >
-        <span class="text-blue-500">
-          <InformationCircleIcon class="w-6 h-6" />
-        </span>
-      </div>
-      <div class="ml-4 alert-content">
-        <div class="text-lg font-semibold text-blue-800 alert-title">Info</div>
-        <div class="text-sm text-blue-600 alert-description">
-          Hey! Thanks for looking at Rubric! Though still in the very early
-          stages of development- I would really appreciate your feedback on the
-          project, and naturally, stuff may break or may not even work at all
-          yet! Thanks.
-        </div>
-      </div>
-    </div>
+    />
 
     <div class="items-center mb-6">
       <h1 class="mb-3 text-3xl font-semibold text-gray-800 lg:mb-0">
@@ -169,7 +132,6 @@
         class="mt-5 slide-in-bottom"
         v-if="loaded && !loading && !apiResponse.error"
       >
-        <!--this.retrieve(data.id); .-->
         <h2 class="pt-2 mb-2 text-2xl font-semibold text-gray-800 lg:mb-0">
           Results
         </h2>
@@ -181,8 +143,6 @@
           and took <strong>{{ timeTaken }}</strong> seconds! Here are the
           results.
         </p>
-
-        <!-- Cards -->
 
         <div class="my-8 md:flex">
           <div
@@ -618,25 +578,11 @@
         </div>
       </div>
     </div>
-    <div
+    <ErrorMessage
       class="flex flex-row items-center p-5 mt-5 bg-red-200 border-b-2 border-red-300 rounded alert swing-in-top-fwd"
       v-if="error && loading != true"
-    >
-      <div
-        class="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-red-100 border-2 border-red-500 rounded-full alert-icon"
-      >
-        <span class="text-red-500">
-          <XIcon class="w-6 h-6" />
-        </span>
-      </div>
-      <div class="ml-4 alert-content">
-        <div class="text-lg font-semibold text-red-800 alert-title">Whoops</div>
-        <div class="text-sm text-red-600 alert-description">
-          {{ errorMessage }}
-          <EmojiSadIcon class="inline w-4 h-4" />
-        </div>
-      </div>
-    </div>
+      v-bind:message="errorMessage"
+    />
   </div>
 </template>
 
@@ -644,9 +590,11 @@
 import { mapState } from "vuex";
 import store from "../store";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import BetaMessage from "@/components/BetaMessage";
+import ErrorMessage from "@/components/ErrorMessage";
+import Breadcrumb from "@/components/Breadcrumb";
+var VueScrollTo = require("vue-scrollto");
 import {
-  XIcon,
-  EmojiSadIcon,
   CubeTransparentIcon,
   ChevronDownIcon,
   AnnotationIcon,
@@ -657,16 +605,7 @@ import {
   QuestionMarkCircleIcon,
   CalendarIcon,
   ArrowCircleRightIcon,
-  InformationCircleIcon,
 } from "@vue-hero-icons/outline";
-var VueScrollTo = require("vue-scrollto");
-
-let api_url = "";
-if (process.env.NODE_ENV === "production") {
-  api_url = "https://rubricseo-api.herokuapp.com/";
-} else {
-  api_url = "http://localhost:3001/";
-}
 
 export default {
   computed: {
@@ -674,8 +613,9 @@ export default {
   },
   components: {
     LoadingSpinner,
-    XIcon,
-    EmojiSadIcon,
+    Breadcrumb,
+    BetaMessage,
+    ErrorMessage,
     CubeTransparentIcon,
     ChevronDownIcon,
     AnnotationIcon,
@@ -686,7 +626,6 @@ export default {
     QuestionMarkCircleIcon,
     CalendarIcon,
     ArrowCircleRightIcon,
-    InformationCircleIcon,
   },
   name: "AnalysisHome",
   data() {
@@ -709,6 +648,10 @@ export default {
       loaded: Object.keys(store.getters.getBlueprint).length ? true : false,
       loading: false,
       expandedArticles: [],
+      api_url:
+        process.env.API_URL === "production"
+          ? "https://rubricseo-api.herokuapp.com/"
+          : "http://localhost:3001/",
     };
   },
   methods: {
@@ -724,7 +667,7 @@ export default {
       this.loading = true;
       try {
         let response = await fetch(
-          `${api_url}serp-results?keyword=${this.query}&amount=${this.amount}&device=${this.device}&location=${this.location}`
+          `${this.api_url}serp-results?keyword=${this.query}&amount=${this.amount}&device=${this.device}&location=${this.location}`
         );
         let data = await response.json();
         if (data.error) {
@@ -745,7 +688,7 @@ export default {
         console.log("Data not ready - Retrying");
       }
       try {
-        let response = await fetch(`${api_url}check-serp?id=${id}`);
+        let response = await fetch(`${this.api_url}check-serp?id=${id}`);
         let data = await response.json();
 
         if (data.error) {
