@@ -28,12 +28,12 @@ const routes = [
       },
       {
         path: "/analysis",
-        name: "Analysis",
+        name: "SERP Analysis",
         component: view("Analysis"),
       },
       {
         path: "/blueprint",
-        name: "Blueprint",
+        name: "Blueprint Editor",
         component: view("Blueprint"),
         props: true,
       },
@@ -45,7 +45,7 @@ const routes = [
 const router = new Router({
   mode: "history",
   routes,
-  linkActiveClass: "bg-gray-30 border-l-8 border-indigo-600",
+
   scrollBehavior(_, __, savedPosition) {
     return savedPosition || { x: 0, y: 0 };
   },

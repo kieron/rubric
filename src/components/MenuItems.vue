@@ -4,6 +4,7 @@
       <p class="pl-4 mb-4 text-xs font-semibold text-gray-600">TOOLS</p>
       <router-link
         to="/analysis"
+        active-class="border-l-8 border-indigo-600 bg-gray-30"
         class="flex items-center w-full h-10 pl-4 mb-2 text-gray-800 duration-150 rounded-lg cursor-pointer hover:bg-gray-30"
         @click.native="toggleSidebar()"
       >
@@ -12,6 +13,7 @@
         <span class="font-medium text-gray-800">SERP Analysis</span>
       </router-link>
       <router-link
+        active-class="border-l-8 border-indigo-600 bg-gray-30"
         to="/blueprint"
         title="Coming Soon"
         @click.native="toggleSidebar()"
@@ -23,6 +25,7 @@
       </router-link>
       <router-link
         to="/nowhere"
+        active-class="border-l-8 border-indigo-600 bg-gray-30"
         title="Coming Soon"
         @click.native="toggleSidebar()"
         class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-pointer hover:bg-gray-30"
