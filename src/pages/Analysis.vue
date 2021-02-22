@@ -704,6 +704,7 @@ export default {
           this.apiResponse = data[0];
           this.$store.dispatch("addBluePrintData", data[0]);
           this.setLoading(true, false, false);
+          this.idFromDb = "";
           this.$nextTick(() =>
             VueScrollTo.scrollTo("#results", { offset: -90 })
           );
