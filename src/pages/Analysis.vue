@@ -689,78 +689,6 @@ export default {
     InformationCircleIcon,
   },
   name: "AnalysisHome",
-  methods: {
-    onClickExpand(index) {
-      if (this.expandedArticles.includes(index))
-        this.expandedArticles = this.expandedArticles.filter(
-          (i) => i !== index
-        );
-      else this.expandedArticles.push(index);
-    },
-    search: async function () {
-      this.timeStart = performance.now();
-      this.loading = true;
-      try {
-        let response = await fetch(
-          `${api_url}serp-results?keyword=${this.query}&amount=${this.amount}&device=${this.device}&location=${this.location}`
-        );
-        let data = await response.json();
-        if (data.error) {
-          this.errorMessage = data.error.message;
-          this.loaded = false;
-          this.loading = false;
-          this.error = true;
-        } else {
-          this.idFromDb = data.id;
-          setTimeout(() => {
-            this.retrieve(data.id);
-          }, this.amount * 0.75 * 1000);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    },
-    retrieve: async function (id, retry) {
-      if (retry) {
-        console.log("Data not ready - Retrying");
-      }
-      try {
-        let response = await fetch(`${api_url}check-serp?id=${id}`);
-        let data = await response.json();
-
-        if (data.error) {
-          if ((data.error.message = "Data Not Ready [checkSerp.js - 36]")) {
-            setTimeout(() => {
-              this.retrieve(id, (retry = true));
-            }, 2500);
-          } else {
-            this.errorMessage = data.error.message;
-            this.loaded = false;
-            this.loading = false;
-            this.error = true;
-          }
-        } else {
-          this.apiResponse = data[0];
-          this.$store.dispatch("addBluePrintData", data[0]);
-          this.loaded = true;
-          this.loading = false;
-          this.error = false;
-          this.$nextTick(() =>
-            VueScrollTo.scrollTo("#results", { offset: -90 })
-          );
-          this.timeTaken = Math.round(
-            (performance.now() - this.timeStart) / 1000
-          );
-        }
-      } catch (err) {
-        this.errorMessage = "Something went wrong!";
-      }
-    },
-    animateSearchBtn() {
-      this.animatedSearchBtn = true;
-    },
-    expandDetails() {},
-  },
   data() {
     return {
       animatedSearchBtn: false,
@@ -782,6 +710,77 @@ export default {
       loading: false,
       expandedArticles: [],
     };
+  },
+  methods: {
+    onClickExpand(index) {
+      if (this.expandedArticles.includes(index))
+        this.expandedArticles = this.expandedArticles.filter(
+          (i) => i !== index
+        );
+      else this.expandedArticles.push(index);
+    },
+    search: async function () {
+      this.timeStart = performance.now();
+      this.loading = true;
+      try {
+        let response = await fetch(
+          `${api_url}serp-results?keyword=${this.query}&amount=${this.amount}&device=${this.device}&location=${this.location}`
+        );
+        let data = await response.json();
+        if (data.error) {
+          this.errorMessage = data.error.message;
+          this.setLoading(false, false, true);
+        } else {
+          this.idFromDb = data.id;
+          setTimeout(() => {
+            this.retrieve(data.id);
+          }, this.amount * 0.75 * 1000);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    retrieve: async function (id, retry) {
+      if (retry) {
+        console.log("Data not ready - Retrying");
+      }
+      try {
+        let response = await fetch(`${api_url}check-serp?id=${id}`);
+        let data = await response.json();
+
+        if (data.error) {
+          if (data.error.message === "Data Not Ready [checkSerp.js - 36]") {
+            setTimeout(() => {
+              this.retrieve(id, (retry = true));
+            }, 2500);
+          } else {
+            this.errorMessage = data.error.message;
+            this.setLoading(false, false, true);
+          }
+        } else {
+          this.apiResponse = data[0];
+          this.$store.dispatch("addBluePrintData", data[0]);
+          this.setLoading(true, false, false);
+          this.$nextTick(() =>
+            VueScrollTo.scrollTo("#results", { offset: -90 })
+          );
+          this.timeTaken = Math.round(
+            (performance.now() - this.timeStart) / 1000
+          );
+        }
+      } catch (err) {
+        this.errorMessage = "Something went wrong!";
+      }
+    },
+    animateSearchBtn() {
+      this.animatedSearchBtn = true;
+    },
+    expandDetails() {},
+    setLoading(loaded, loading, error) {
+      this.loaded = loaded;
+      this.loading = loading;
+      this.error = error;
+    },
   },
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="px-4 mt-8 mb-4 text-gray-800">
-      <p class="pl-4 mb-4 text-xs font-semibold text-gray-600">MENU</p>
+      <p class="pl-4 mb-4 text-xs font-semibold text-gray-600">TOOLS</p>
       <router-link
         to="/analysis"
         class="flex items-center w-full h-10 pl-4 mb-2 text-gray-800 duration-150 rounded-lg cursor-pointer hover:bg-gray-30"
@@ -15,11 +15,21 @@
         to="/blueprint"
         title="Coming Soon"
         @click.native="toggleSidebar()"
-        class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-pointer hover:bg-gray-30"
+        class="flex items-center w-full h-10 pl-4 mb-2 text-gray-800 duration-150 rounded-lg cursor-pointer hover:bg-gray-30"
       >
         <CubeTransparentIcon class="w-6 h-6 mr-2 text-gray-700" />
 
-        <span class="font-medium text-gray-800">Blueprint Tool</span>
+        <span class="font-medium text-gray-800">Blueprint Editor</span>
+      </router-link>
+      <router-link
+        to="/nowhere"
+        title="Coming Soon"
+        @click.native="toggleSidebar()"
+        class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-pointer hover:bg-gray-30"
+      >
+        <BriefcaseIcon class="w-6 h-6 mr-2 text-gray-700" />
+
+        <span class="font-medium text-gray-800">Page Audit</span>
       </router-link>
     </div>
     <div class="px-4 mt-5 mb-4 text-gray-800">
@@ -52,6 +62,7 @@ import {
   CubeTransparentIcon,
   PresentationChartLineIcon,
   ChartSquareBarIcon,
+  BriefcaseIcon,
   ChatIcon,
 } from "@vue-hero-icons/outline";
 
@@ -64,6 +75,7 @@ export default {
     CubeTransparentIcon,
     ChartSquareBarIcon,
     ChatIcon,
+    BriefcaseIcon,
     PresentationChartLineIcon,
   },
   methods: {
