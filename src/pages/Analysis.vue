@@ -34,8 +34,8 @@
       <div class="ml-4 alert-content">
         <div class="text-lg font-semibold text-blue-800 alert-title">Info</div>
         <div class="text-sm text-blue-600 alert-description">
-          Hey! Thanks for looking at Rubric! It is still in the very early
-          stages of development & I would really appreciate your feedback on the
+          Hey! Thanks for looking at Rubric! Though still in the very early
+          stages of development- I would really appreciate your feedback on the
           project, and naturally, stuff may break or may not even work at all
           yet! Thanks.
         </div>
