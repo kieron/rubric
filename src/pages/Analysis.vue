@@ -783,7 +783,6 @@ export default {
       expandedArticles: [],
     };
   },
-  mounted() {},
 };
 </script>
 
