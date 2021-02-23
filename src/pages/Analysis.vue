@@ -118,44 +118,6 @@
               </p>
             </div>
           </div>
-          <div class="my-12 sm:flex">
-            <label class="flex items-start justify-start mx-2">
-              <div
-                class="flex items-center justify-center flex-shrink-0 w-6 h-6 mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"
-              >
-                <input type="checkbox" checked class="absolute opacity-0" />
-                <CheckIcon
-                  class="hidden w-5 h-5 text-indigo-500 pointer-events-none"
-                />
-              </div>
-              <div class="text-gray-500 select-none">People Also Ask</div>
-            </label>
-            <label class="flex items-start justify-start mx-2">
-              <div
-                class="flex items-center justify-center flex-shrink-0 w-6 h-6 mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"
-              >
-                <input type="checkbox" checked class="absolute opacity-0" />
-                <CheckIcon
-                  class="hidden w-5 h-5 text-indigo-500 pointer-events-none"
-                />
-              </div>
-              <div class="text-gray-500 select-none">Fetch Questions</div>
-            </label>
-            <label
-              class="flex items-start justify-start mx-2"
-              title="Domain Authority by OpenRank.io"
-            >
-              <div
-                class="flex items-center justify-center flex-shrink-0 w-6 h-6 mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"
-              >
-                <input type="checkbox" checked class="absolute opacity-0" />
-                <CheckIcon
-                  class="hidden w-5 h-5 text-indigo-500 pointer-events-none"
-                />
-              </div>
-              <div class="text-gray-500 select-none">Domain Authority</div>
-            </label>
-          </div>
         </div>
       </form>
     </div>
@@ -364,7 +326,7 @@
                         <div class="flex items-center">
                           <div class="">
                             <div
-                              class="mb-1 mr-8 font-medium leading-5 text-gray-900 md:text-lg"
+                              class="mb-1 mr-16 font-medium leading-5 text-gray-900 md:text-lg"
                             >
                               {{ article.title }}
                             </div>
@@ -532,21 +494,29 @@
                           </div>
                         </div>
                       </td>
-                      <span
-                        v-if="
-                          article.questions.length ||
-                          article.headers.length ||
-                          article.headersContainingKeyword.length ||
-                          article.headersContainingPartialKeyword.length
-                        "
-                        class="absolute right-0 p-2 mt-2 mr-2 text-xs font-semibold text-gray-500 transition duration-300 transform border-gray-300 rounded-md cursor-pointer hover:-translate-y-1"
-                        @click="onClickExpand(articleIndex)"
-                        title="Expand Details"
-                      >
-                        <ChevronDownIcon
-                          class="w-8 h-8 hover:text-indigo-600"
-                        />
-                      </span>
+                      <div class="absolute right-0 flex mt-1 text-gray-500">
+                        <button
+                          @click="deleteItem(articleIndex)"
+                          class="p-1 transition duration-300 transform hover:text-red-600 hover:-translate-y-1"
+                        >
+                          <XCircleIcon class="w-6 h-6" />
+                        </button>
+                        <button
+                          v-if="
+                            article.questions.length ||
+                            article.headers.length ||
+                            article.headersContainingKeyword.length ||
+                            article.headersContainingPartialKeyword.length
+                          "
+                          class="p-1 mr-2 transition duration-300 transform hover:-translate-y-1"
+                          @click="onClickExpand(articleIndex)"
+                          title="Expand Details"
+                        >
+                          <ChevronDownIcon
+                            class="w-8 h-8 hover:text-indigo-600"
+                          />
+                        </button>
+                      </div>
                     </tr>
                   </tbody>
                 </table>
@@ -599,6 +569,7 @@ import {
   AnnotationIcon,
   NewspaperIcon,
   PhotographIcon,
+  XCircleIcon,
   TemplateIcon,
   ShieldCheckIcon,
   CheckIcon,
@@ -617,6 +588,7 @@ export default {
     Breadcrumb,
     BetaMessage,
     ErrorMessage,
+    XCircleIcon,
     CubeTransparentIcon,
     CheckIcon,
     ChevronDownIcon,
@@ -729,6 +701,10 @@ export default {
       this.loaded = loaded;
       this.loading = loading;
       this.error = error;
+    },
+    deleteItem(index) {
+      // this.$delete(this.items, index);
+      this.apiResponse.results.splice(index, 1);
     },
   },
 };
