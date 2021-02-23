@@ -182,7 +182,9 @@
                     <p class="text-2xl font-semibold">
                       {{ apiResponse.averageValues.averageWordCount }}
                     </p>
-                    <p class="text-sm text-gray-600">Average Words</p>
+                    <p class="text-sm text-gray-600">
+                      Average Words [{{ averageWords }}]
+                    </p>
                   </div>
                 </div>
               </div>
@@ -573,7 +575,6 @@ import {
   XCircleIcon,
   TemplateIcon,
   ShieldCheckIcon,
-  CheckIcon,
   QuestionMarkCircleIcon,
   CalendarIcon,
   ArrowCircleRightIcon,
@@ -591,7 +592,6 @@ export default {
     ErrorMessage,
     XCircleIcon,
     CubeTransparentIcon,
-    CheckIcon,
     ChevronDownIcon,
     AnnotationIcon,
     NewspaperIcon,
@@ -621,6 +621,7 @@ export default {
         Object.keys(store.getters.getBlueprint).length && this.error !== true
           ? store.getters.getBlueprint
           : [],
+      averageWords: 0,
       error: false,
       errorMessage: "Something Went Wrong",
       loaded: Object.keys(store.getters.getBlueprint).length ? true : false,
@@ -664,6 +665,8 @@ export default {
     retrieve: async function (id, retry) {
       if (retry) {
         console.log("Data not ready - Retrying");
+      } else {
+        console.log("Fetching Data");
       }
       try {
         let response = await fetch(`${this.api_url}retrieve?id=${id}`);
@@ -679,6 +682,7 @@ export default {
             this.setLoading(false, false, true);
           }
         } else {
+          this.massage(data[0]);
           this.apiResponse = data[0];
           this.$store.dispatch("addBluePrintData", data[0]);
           this.setLoading(true, false, false);
@@ -706,15 +710,25 @@ export default {
     deleteItem(index) {
       this.apiResponse.results.splice(index, 1);
     },
+    massage(apiResponse) {
+      console.log("Massaging");
+      //Average Word Count
+      const countsNotZero = apiResponse.results.filter(
+        (entry) => entry.wordCount !== 0
+      );
+      this.averageWords =
+        countsNotZero.length === 0
+          ? null
+          : Math.round(
+              countsNotZero.reduce((p, c) => (p += c.wordCount), 0) /
+                countsNotZero.length
+            );
+    },
   },
 };
 </script>
 
 <style lang="css" scoped>
-input:checked + svg {
-  display: block;
-}
-
 .slide-in-bottom {
   -webkit-animation: slide-in-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     both;
