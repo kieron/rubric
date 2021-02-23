@@ -10,8 +10,22 @@ module.exports = {
       zIndex: {
         "-10": "-10",
       },
+      colors: {
+        transparent: "transparent",
+        current: "currentColor",
+        orange: {
+          DEFAULT: "#ff5a1f",
+        },
+        purple: {
+          DEFAULT: "#7e3af2",
+        },
+      },
     },
   },
-  variants: {},
+  variants: {
+    extend: {
+      fontWeight: ["hover", "focus"],
+    },
+  },
   plugins: [],
 };

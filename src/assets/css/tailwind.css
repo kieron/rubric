@@ -30,7 +30,7 @@ body::-webkit-scrollbar {
     .overlay {
         position: relative; 
     }
-    
+
     .overlay:after {
         content: " ";
         z-index: 29;
@@ -87,7 +87,7 @@ body::-webkit-scrollbar {
 .bg-orange {
     background-color: var(--orange);
 }
-.text-orange {
+.text-orange, .text-orange:hover {
     color: var(--orange);
 }
 

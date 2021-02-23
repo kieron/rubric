@@ -118,6 +118,44 @@
               </p>
             </div>
           </div>
+          <div class="my-12 sm:flex">
+            <label class="flex items-start justify-start mx-2">
+              <div
+                class="flex items-center justify-center flex-shrink-0 w-6 h-6 mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"
+              >
+                <input type="checkbox" checked class="absolute opacity-0" />
+                <CheckIcon
+                  class="hidden w-5 h-5 text-indigo-500 pointer-events-none"
+                />
+              </div>
+              <div class="text-gray-500 select-none">People Also Ask</div>
+            </label>
+            <label class="flex items-start justify-start mx-2">
+              <div
+                class="flex items-center justify-center flex-shrink-0 w-6 h-6 mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"
+              >
+                <input type="checkbox" checked class="absolute opacity-0" />
+                <CheckIcon
+                  class="hidden w-5 h-5 text-indigo-500 pointer-events-none"
+                />
+              </div>
+              <div class="text-gray-500 select-none">Fetch Questions</div>
+            </label>
+            <label
+              class="flex items-start justify-start mx-2"
+              title="Domain Authority by OpenRank.io"
+            >
+              <div
+                class="flex items-center justify-center flex-shrink-0 w-6 h-6 mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"
+              >
+                <input type="checkbox" checked class="absolute opacity-0" />
+                <CheckIcon
+                  class="hidden w-5 h-5 text-indigo-500 pointer-events-none"
+                />
+              </div>
+              <div class="text-gray-500 select-none">Domain Authority</div>
+            </label>
+          </div>
         </div>
       </form>
     </div>
@@ -268,14 +306,13 @@
               People Also Ask
             </p>
 
-            <div class="w-full">
+            <div class="flex flex-col justify-evenly">
               <div
                 :key="question.id"
                 v-for="(question, index) in apiResponse.relatedQuestions"
-                class="flex items-center justify-between w-full px-4 py-2 bg-gray-100 border rounded-lg"
+                class="items-center px-4 py-2 bg-gray-100 border rounded-lg"
                 :class="{
-                  'mt-2': index == apiResponse.relatedQuestions.length - 1,
-                  'my-2': index != apiResponse.relatedQuestions.length - 1,
+                  'mb-2': index != apiResponse.relatedQuestions.length - 1,
                 }"
               >
                 <div>
@@ -344,7 +381,7 @@
                             </div>
                             <div class="flex flex-wrap mt-2">
                               <div
-                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 md:text-sm"
+                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 hover:text-pink-700 hover:font-bold md:text-sm"
                               >
                                 <AnnotationIcon
                                   class="inline w-4 h-4 mr-1 align-middle md:w-5 md:h-5"
@@ -358,7 +395,7 @@
                               </div>
 
                               <div
-                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 md:text-sm"
+                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 hover:text-purple hover:font-bold md:text-sm"
                               >
                                 <NewspaperIcon
                                   class="inline w-4 h-4 mr-1 align-middle md:w-5 md:h-5"
@@ -372,10 +409,10 @@
                               </div>
 
                               <div
-                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 md:text-sm"
+                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 hover:text-orange hover:font-bold md:text-sm"
                               >
                                 <PhotographIcon
-                                  class="inline w-4 h-4 align-middle md:w-5 md:h-5mr-1"
+                                  class="inline w-4 h-4 mr-1 align-middle md:w-5 md:h-5"
                                 />
 
                                 <span
@@ -386,7 +423,7 @@
                               </div>
 
                               <div
-                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 md:text-sm"
+                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 hover:font-bold hover:text-green-500 md:text-sm"
                               >
                                 <TemplateIcon
                                   class="inline w-4 h-4 mr-1 align-middle md:w-5 md:h-5"
@@ -400,7 +437,7 @@
                               </div>
 
                               <div
-                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 md:text-sm"
+                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 md:text-sm hover:text-pink-700 hover:font-bold"
                               >
                                 <ShieldCheckIcon
                                   class="inline w-4 h-4 mr-1 align-middle md:w-5 md:h-5"
@@ -415,7 +452,7 @@
                               </div>
 
                               <div
-                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 md:text-sm"
+                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 hover:font-bold md:text-sm hover:text-purple"
                               >
                                 <QuestionMarkCircleIcon
                                   class="inline w-4 h-4 mr-1 align-middle md:w-5 md:h-5"
@@ -432,7 +469,7 @@
                               </div>
 
                               <div
-                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 md:text-sm"
+                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 hover:font-bold hover:text-orange md:text-sm"
                               >
                                 <CalendarIcon
                                   class="inline w-4 h-4 mr-1 align-middle md:w-5 md:h-5"
@@ -506,7 +543,9 @@
                         @click="onClickExpand(articleIndex)"
                         title="Expand Details"
                       >
-                        <ChevronDownIcon class="w-8 h-8" />
+                        <ChevronDownIcon
+                          class="w-8 h-8 hover:text-indigo-600"
+                        />
                       </span>
                     </tr>
                   </tbody>
@@ -562,6 +601,7 @@ import {
   PhotographIcon,
   TemplateIcon,
   ShieldCheckIcon,
+  CheckIcon,
   QuestionMarkCircleIcon,
   CalendarIcon,
   ArrowCircleRightIcon,
@@ -578,6 +618,7 @@ export default {
     BetaMessage,
     ErrorMessage,
     CubeTransparentIcon,
+    CheckIcon,
     ChevronDownIcon,
     AnnotationIcon,
     NewspaperIcon,
@@ -597,6 +638,9 @@ export default {
       timeTaken: 0,
       idFromDb: "",
       device: "desktop",
+      peopleAlsoAsk: true,
+      fetchQuestions: true,
+      domainAuthority: true,
       location: "United States",
       roundedTimeGuess: 0,
       timeStart: 0,
@@ -628,7 +672,7 @@ export default {
       this.loading = true;
       try {
         let response = await fetch(
-          `${this.api_url}serp-results?keyword=${this.query}&amount=${this.amount}&device=${this.device}&location=${this.location}`
+          `${this.api_url}generate?keyword=${this.query}&amount=${this.amount}&device=${this.device}&location=${this.location}&peopleAlsoAsk=${this.peopleAlsoAsk}&fetchQuestions=${this.fetchQuestions}&domainAuthority=${this.domainAuthority}`
         );
         let data = await response.json();
         if (data.error) {
@@ -649,7 +693,7 @@ export default {
         console.log("Data not ready - Retrying");
       }
       try {
-        let response = await fetch(`${this.api_url}check-serp?id=${id}`);
+        let response = await fetch(`${this.api_url}retrieve?id=${id}`);
         let data = await response.json();
 
         if (data.error) {
@@ -691,6 +735,10 @@ export default {
 </script>
 
 <style lang="css" scoped>
+input:checked + svg {
+  display: block;
+}
+
 .slide-in-bottom {
   -webkit-animation: slide-in-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     both;
