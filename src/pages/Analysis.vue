@@ -610,7 +610,7 @@ export default {
       loading: false,
       expandedArticles: [],
       api_url:
-        process.env.node_env === "production"
+        process.env.NODE_ENV === "production"
           ? "https://rubricseo-api.herokuapp.com/"
           : "http://localhost:3001/",
     };
