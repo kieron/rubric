@@ -22,12 +22,15 @@ body::-webkit-scrollbar {
     display: none;
 }
 
-.overlay {
-    position: relative; 
-}
+
+
 
 /* 1024 -1 so it doesnt show when it hits 1024px */
 @media only screen and (max-width: 1023px) {
+    .overlay {
+        position: relative; 
+    }
+    
     .overlay:after {
         content: " ";
         z-index: 29;

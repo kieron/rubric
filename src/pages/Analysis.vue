@@ -462,79 +462,36 @@
                             hidden: !expandedArticles.includes(articleIndex),
                           }"
                         >
-                          <div class="flex-wrap w-full md:flex">
-                            <div
-                              class="flex-grow px-4 py-3 mt-2 bg-gray-100 border rounded lg:mx-1"
+                          <div class="flex flex-wrap">
+                            <HeaderQuestions
                               v-if="article.questions.length"
-                            >
-                              <h3 class="font-bold text-gray-700 text-md">
-                                Questions Answered
-                              </h3>
-                              <ol>
-                                <li
-                                  :key="question.id"
-                                  v-for="question in article.questions"
-                                  class="text-gray-700"
-                                >
-                                  - {{ question }}
-                                </li>
-                              </ol>
-                            </div>
+                              v-bind:articleData="article.questions"
+                              title="Questions"
+                            />
 
-                            <div
-                              class="flex-grow px-4 py-3 mt-2 bg-gray-100 border rounded lg:mx-1"
-                            >
-                              <h3 class="font-bold text-gray-700 text-md">
-                                Headers
-                              </h3>
-                              <ol>
-                                <li
-                                  :key="header.id"
-                                  v-for="header in article.headers"
-                                  class="text-gray-700"
-                                >
-                                  - {{ header }}
-                                </li>
-                              </ol>
-                            </div>
+                            <HeaderQuestions
+                              v-if="article.headers.length"
+                              v-bind:articleData="article.headers"
+                              title="Headers"
+                            />
 
-                            <div
-                              class="flex-grow px-4 py-3 mt-2 bg-gray-100 border rounded lg:mx-1"
+                            <HeaderQuestions
                               v-if="article.headersContainingKeyword.length"
-                            >
-                              <h3 class="font-bold text-gray-700 text-md">
-                                Headers containing full keyword
-                              </h3>
-                              <ol>
-                                <li
-                                  :key="fullHeader.id"
-                                  v-for="fullHeader in article.headersContainingKeyword"
-                                  class="text-gray-700"
-                                >
-                                  - {{ fullHeader }}
-                                </li>
-                              </ol>
-                            </div>
+                              v-bind:articleData="
+                                article.headersContainingKeyword
+                              "
+                              title="Keyword Headers"
+                            />
 
-                            <div
-                              class="flex-grow px-4 py-3 mt-2 bg-gray-100 border rounded lg:mx-1"
+                            <HeaderQuestions
                               v-if="
                                 article.headersContainingPartialKeyword.length
                               "
-                            >
-                              <h3 class="font-bold text-gray-700 text-md">
-                                Headers containing partial keyword
-                              </h3>
-                              <ol>
-                                <li
-                                  :key="partialHeader.id"
-                                  class="text-gray-700"
-                                  v-for="partialHeader in article.headersContainingPartialKeyword"
-                                >
-                                  - {{ partialHeader }}
-                                </li>
-                              </ol>
-                            </div>
+                              v-bind:articleData="
+                                article.headersContainingPartialKeyword
+                              "
+                              title="Partial Keyword Headers"
+                            />
                           </div>
                         </div>
                       </td>
@@ -595,6 +552,7 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import BetaMessage from "@/components/BetaMessage";
 import ErrorMessage from "@/components/ErrorMessage";
 import Breadcrumb from "@/components/Breadcrumb";
+import HeaderQuestions from "@/components/HeaderQuestions";
 var VueScrollTo = require("vue-scrollto");
 import {
   CubeTransparentIcon,
@@ -614,6 +572,7 @@ export default {
     ...mapState(["blueprintData"]),
   },
   components: {
+    HeaderQuestions,
     LoadingSpinner,
     Breadcrumb,
     BetaMessage,
