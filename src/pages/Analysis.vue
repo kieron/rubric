@@ -496,6 +496,7 @@
                       </td>
                       <div class="absolute right-0 flex mt-1 text-gray-500">
                         <button
+                          title="Delete Item"
                           @click="deleteItem(articleIndex)"
                           class="p-1 transition duration-300 transform hover:text-red-600 hover:-translate-y-1"
                         >
@@ -703,7 +704,6 @@ export default {
       this.error = error;
     },
     deleteItem(index) {
-      // this.$delete(this.items, index);
       this.apiResponse.results.splice(index, 1);
     },
   },
