@@ -113,7 +113,7 @@
               />
               <p class="absolute right-0 mt-1 text-xs text-right text-gray-500">
                 This amount of articles could take around
-                <strong> {{ Math.round(this.amount * 0.75 + 5) }}</strong>
+                <strong> {{ Math.round(this.amount * 1.1) }}</strong>
                 seconds to fetch.
               </p>
             </div>
@@ -327,12 +327,14 @@
                         <div class="flex items-center">
                           <div class="">
                             <div
-                              class="mb-1 mr-8 text-lg font-medium leading-5 text-gray-900"
+                              class="mb-1 mr-8 font-medium leading-5 text-gray-900 md:text-lg"
                             >
                               {{ article.title }}
                             </div>
 
-                            <div class="text-sm leading-5 text-gray-500">
+                            <div
+                              class="text-xs leading-5 text-gray-500 md:text-sm"
+                            >
                               <a
                                 :href="article.url"
                                 target="_blank"
@@ -342,24 +344,24 @@
                             </div>
                             <div class="flex flex-wrap mt-2">
                               <div
-                                class="flex flex-no-wrap items-center mr-4 text-gray-600"
+                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 md:text-sm"
                               >
                                 <AnnotationIcon
-                                  class="inline w-5 h-5 mr-1 align-middle"
+                                  class="inline w-4 h-4 mr-1 align-middle md:w-5 md:h-5"
                                 />
 
                                 <span
                                   title="Word Count"
-                                  class="whitespace-no-wrap align-middle"
+                                  class="text-xs whitespace-no-wrap align-middle md:text-sm"
                                   >{{ article.wordCount }} Words</span
                                 >
                               </div>
 
                               <div
-                                class="flex flex-no-wrap items-center mr-4 text-gray-600"
+                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 md:text-sm"
                               >
                                 <NewspaperIcon
-                                  class="inline w-5 h-5 mr-1 align-middle"
+                                  class="inline w-4 h-4 mr-1 align-middle md:w-5 md:h-5"
                                 />
 
                                 <span
@@ -370,10 +372,10 @@
                               </div>
 
                               <div
-                                class="flex flex-no-wrap items-center mr-4 text-gray-600"
+                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 md:text-sm"
                               >
                                 <PhotographIcon
-                                  class="inline w-5 h-5 mr-1 align-middle"
+                                  class="inline w-4 h-4 align-middle md:w-5 md:h-5mr-1"
                                 />
 
                                 <span
@@ -384,10 +386,10 @@
                               </div>
 
                               <div
-                                class="flex flex-no-wrap items-center mr-4 text-gray-600"
+                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 md:text-sm"
                               >
                                 <TemplateIcon
-                                  class="inline w-5 h-5 mr-1 align-middle"
+                                  class="inline w-4 h-4 mr-1 align-middle md:w-5 md:h-5"
                                 />
 
                                 <span
@@ -398,10 +400,10 @@
                               </div>
 
                               <div
-                                class="flex flex-no-wrap items-center mr-4 text-gray-600"
+                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 md:text-sm"
                               >
                                 <ShieldCheckIcon
-                                  class="inline w-5 h-5 mr-1 align-middle"
+                                  class="inline w-4 h-4 mr-1 align-middle md:w-5 md:h-5"
                                 />
 
                                 <span
@@ -413,10 +415,10 @@
                               </div>
 
                               <div
-                                class="flex flex-no-wrap items-center mr-4 text-gray-600"
+                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 md:text-sm"
                               >
                                 <QuestionMarkCircleIcon
-                                  class="inline w-5 h-5 mr-1 align-middle"
+                                  class="inline w-4 h-4 mr-1 align-middle md:w-5 md:h-5"
                                 />
 
                                 <span
@@ -430,10 +432,10 @@
                               </div>
 
                               <div
-                                class="flex flex-no-wrap items-center mr-4 text-gray-600"
+                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 md:text-sm"
                               >
                                 <CalendarIcon
-                                  class="inline w-5 h-5 mr-1 align-middle"
+                                  class="inline w-4 h-4 mr-1 align-middle md:w-5 md:h-5"
                                 />
 
                                 <span
@@ -649,7 +651,7 @@ export default {
       loading: false,
       expandedArticles: [],
       api_url:
-        process.env.API_URL === "production"
+        process.env.node_env === "production"
           ? "https://rubricseo-api.herokuapp.com/"
           : "http://localhost:3001/",
     };

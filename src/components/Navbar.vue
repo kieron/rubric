@@ -5,7 +5,7 @@
       leave-active-class="slide-out-left"
     >
       <div
-        class="fixed z-30 w-full h-screen border-r bg-gray-25 md:w-2/3 lg:w-64 md:top-0 md:left-0 lg:hidden"
+        class="fixed z-30 w-3/4 h-screen border-r bg-gray-25 md:w-2/3 lg:w-64 md:top-0 md:left-0 lg:hidden"
         id="mobile-nav"
         v-if="sideBarOpen"
       >
