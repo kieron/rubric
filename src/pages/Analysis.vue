@@ -300,6 +300,7 @@
         <!-- table -->
         <div
           class="flex flex-col mb-12 border border-gray-300 rounded-md bg-gray-25"
+          v-if="apiResponse.results.length"
         >
           <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div
