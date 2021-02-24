@@ -152,6 +152,12 @@
               'w-full': !apiResponse.relatedQuestions,
             }"
             class="flex flex-col"
+            v-if="
+              averageWordCount ||
+              averageParagraphCount ||
+              averageImageCount ||
+              averageHeaderCount
+            "
           >
             <p class="mb-4 text-xl font-semibold text-gray-700">
               Average Values
@@ -169,6 +175,7 @@
                   'px-3 md:px-0 md:pr-1 xl:w-1/4': !apiResponse.relatedQuestions,
                 }"
                 class="w-1/2 md:mb-2"
+                v-if="averageWordCount"
               >
                 <div
                   class="flex items-center p-0 mb-2 bg-white border rounded-lg md:mb-0"
@@ -193,6 +200,7 @@
                   'px-3 md:px-0 xl:px-1 xl:w-1/4 pl-1 ': !apiResponse.relatedQuestions,
                 }"
                 class="w-1/2 md:mb-2"
+                v-if="averageHeaderCount"
               >
                 <div
                   class="flex items-center p-0 mb-2 bg-white border rounded-lg md:mb-0"
@@ -217,6 +225,7 @@
                   'px-3 md:pl-0 md:pr-1 xl:px-1 xl:w-1/4 ': !apiResponse.relatedQuestions,
                 }"
                 class="w-1/2 md:mb-2"
+                v-if="averageImageCount"
               >
                 <div
                   class="flex items-center p-0 mb-2 bg-white border rounded-lg md:mb-0"
@@ -241,6 +250,7 @@
                   'md:mb-2 px-3 md:pr-0 pl-1 xl:w-1/4': !apiResponse.relatedQuestions,
                 }"
                 class="w-1/2"
+                v-if="averageParagraphCount"
               >
                 <div
                   class="flex items-center p-0 mb-2 bg-white border rounded-lg md:mb-0"
@@ -263,7 +273,7 @@
           </div>
           <div
             v-if="apiResponse.relatedQuestions"
-            class="order-last w-full mt-5 xl:w-2/3 md:mt-0"
+            class="flex-grow order-last w-full mt-5 xl:w-2/3 md:mt-0"
           >
             <p class="mb-4 text-xl font-semibold text-gray-700">
               People Also Ask
