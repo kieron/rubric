@@ -121,7 +121,7 @@
         </div>
       </form>
     </div>
-
+    <vue-topprogress ref="topProgress" color="#4f46e5"></vue-topprogress>
     <div class="flex justify-center my-20 text-indigo-600" v-if="loading">
       <LoadingSpinner
         class="flex justify-center w-40 ml-auto mr-auto text-center fill-current"
@@ -138,10 +138,11 @@
         <p class="mb-2 text-gray-800 font text-1xl lg:mb-0">
           Your search for <strong>{{ apiResponse.searchTerm }}</strong> had
           <strong>{{ apiResponse.totalResults.toLocaleString() }}</strong>
-          results, across
+          results, we brought back
+          <strong>{{ apiResponse.results.length }}</strong> of them. There are
           <strong>{{ apiResponse.uniqueDomainCount }}</strong> unique domains
-          and took <strong>{{ timeTaken }}</strong> seconds! Here are the
-          results.
+          and this search took <strong>{{ timeTaken }}</strong> seconds! Here
+          are the results.
         </p>
 
         <div class="my-8 md:flex">
@@ -180,11 +181,9 @@
 
                   <div class="ml-6 leading-6 text-gray-700">
                     <p class="text-2xl font-semibold">
-                      {{ apiResponse.averageValues.averageWordCount }}
+                      {{ averageWordCount }}
                     </p>
-                    <p class="text-sm text-gray-600">
-                      Average Words [{{ averageWords }}]
-                    </p>
+                    <p class="text-sm text-gray-600">Average Words</p>
                   </div>
                 </div>
               </div>
@@ -206,7 +205,7 @@
 
                   <div class="ml-6 leading-6 text-gray-700">
                     <p class="text-2xl font-semibold">
-                      {{ apiResponse.averageValues.averageHeaderCount }}
+                      {{ averageHeaderCount }}
                     </p>
                     <p class="text-sm text-gray-600">Average Headers</p>
                   </div>
@@ -230,7 +229,7 @@
 
                   <div class="ml-6 leading-6 text-gray-700">
                     <p class="text-2xl font-semibold">
-                      {{ apiResponse.averageValues.averageImagesCount }}
+                      {{ averageImageCount }}
                     </p>
                     <p class="text-sm text-gray-600">Average Images</p>
                   </div>
@@ -254,7 +253,7 @@
 
                   <div class="ml-6 leading-6 text-gray-700">
                     <p class="text-2xl font-semibold">
-                      {{ apiResponse.averageValues.averageParagraphCount }}
+                      {{ averageParagraphCount }}
                     </p>
                     <p class="text-sm text-gray-600">Average Paragraphs</p>
                   </div>
@@ -325,7 +324,7 @@
                       v-for="(article, articleIndex) in apiResponse.results"
                       class="border-b border-gray-200"
                     >
-                      <td class="px-6 py-4">
+                      <td class="px-3 py-3 md:px-6 md:py-4">
                         <div class="flex items-center">
                           <div class="">
                             <div
@@ -534,8 +533,8 @@
             Blueprint Tool
           </h2>
           <p>
-            Load these results into the blueprint tool to help you write, or to
-            give to your writers for a more concise plan.
+            Load this data into the blueprint tool to help you write, or to give
+            to your writers for a more concise plan.
           </p>
           <div class="my-5">
             <router-link
@@ -567,6 +566,8 @@ import ErrorMessage from "@/components/ErrorMessage";
 import Breadcrumb from "@/components/Breadcrumb";
 import HeaderQuestions from "@/components/HeaderQuestions";
 var VueScrollTo = require("vue-scrollto");
+import { vueTopprogress } from "vue-top-progress";
+
 import {
   CubeTransparentIcon,
   ChevronDownIcon,
@@ -585,10 +586,14 @@ export default {
   computed: {
     ...mapState(["blueprintData"]),
   },
+  mounted() {
+    this.massage();
+  },
   components: {
     HeaderQuestions,
     LoadingSpinner,
     Breadcrumb,
+    vueTopprogress,
     BetaMessage,
     ErrorMessage,
     XCircleIcon,
@@ -608,7 +613,7 @@ export default {
     return {
       animatedSearchBtn: false,
       query: "best fishing rod for beginners",
-      amount: 15,
+      amount: 5,
       timeTaken: 0,
       idFromDb: "",
       device: "desktop",
@@ -622,7 +627,10 @@ export default {
         Object.keys(store.getters.getBlueprint).length && this.error !== true
           ? store.getters.getBlueprint
           : [],
-      averageWords: 0,
+      averageWordCount: 0,
+      averageHeaderCount: 0,
+      averageImageCount: 0,
+      averageParagraphCount: 0,
       error: false,
       errorMessage: "Something Went Wrong",
       loaded: Object.keys(store.getters.getBlueprint).length ? true : false,
@@ -644,6 +652,7 @@ export default {
     },
     search: async function () {
       this.timeStart = performance.now();
+      this.$refs.topProgress.start();
       this.loading = true;
       try {
         let response = await fetch(
@@ -657,7 +666,7 @@ export default {
           this.idFromDb = data.id;
           setTimeout(() => {
             this.retrieve(data.id);
-          }, this.amount * 0.75 * 1000);
+          }, this.amount * 0.65 * 1000);
         }
       } catch (err) {
         console.log(err);
@@ -683,11 +692,12 @@ export default {
             this.setLoading(false, false, true);
           }
         } else {
-          this.massage(data[0]);
           this.apiResponse = data[0];
+          this.massage();
           this.$store.dispatch("addBluePrintData", data[0]);
           this.setLoading(true, false, false);
           this.idFromDb = "";
+          this.$refs.topProgress.done();
           this.$nextTick(() =>
             VueScrollTo.scrollTo("#results", { offset: -90 })
           );
@@ -710,19 +720,55 @@ export default {
     },
     deleteItem(index) {
       this.apiResponse.results.splice(index, 1);
+      this.massage();
     },
-    massage(apiResponse) {
-      console.log("Massaging");
+    massage() {
       //Average Word Count
-      const countsNotZero = apiResponse.results.filter(
+      const countsNotZero = this.apiResponse.results.filter(
         (entry) => entry.wordCount !== 0
       );
-      this.averageWords =
+      this.averageWordCount =
         countsNotZero.length === 0
           ? null
           : Math.round(
               countsNotZero.reduce((p, c) => (p += c.wordCount), 0) /
                 countsNotZero.length
+            );
+
+      //Average Header Count
+      const headersNotZero = this.apiResponse.results.filter(
+        (entry) => entry.headers.length !== 0
+      );
+      this.averageHeaderCount =
+        headersNotZero.length === 0
+          ? null
+          : Math.round(
+              headersNotZero.reduce((p, c) => (p += c.headers.length), 0) /
+                headersNotZero.length
+            );
+
+      //Average Image Count
+      const imagesNotZero = this.apiResponse.results.filter(
+        (entry) => entry.imageCount !== 0
+      );
+      this.averageImageCount =
+        imagesNotZero.length === 0
+          ? null
+          : Math.round(
+              imagesNotZero.reduce((p, c) => (p += c.imageCount), 0) /
+                imagesNotZero.length
+            );
+
+      //Average Paragraph Count
+      const paragraphsNotZero = this.apiResponse.results.filter(
+        (entry) => entry.paragraphCount !== 0
+      );
+      this.averageParagraphCount =
+        paragraphsNotZero.length === 0
+          ? null
+          : Math.round(
+              paragraphsNotZero.reduce((p, c) => (p += c.paragraphCount), 0) /
+                paragraphsNotZero.length
             );
     },
   },
