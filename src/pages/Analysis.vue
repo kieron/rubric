@@ -106,14 +106,14 @@
                 id="quantity"
                 name="quantity"
                 placeholder="Amount"
-                min="1"
+                min="5"
                 required
                 max="100"
                 v-model="amount"
               />
               <p class="absolute right-0 mt-1 text-xs text-right text-gray-500">
                 This amount of articles could take around
-                <strong> {{ Math.round(this.amount * 1.1) }}</strong>
+                <strong> {{ Math.round(this.amount / 3) }}</strong>
                 seconds to fetch.
               </p>
             </div>
@@ -587,7 +587,7 @@ export default {
     ...mapState(["blueprintData"]),
   },
   mounted() {
-    this.massage();
+    if (this.apiResponse.results) this.massage();
   },
   components: {
     HeaderQuestions,
@@ -613,7 +613,7 @@ export default {
     return {
       animatedSearchBtn: false,
       query: "best fishing rod for beginners",
-      amount: 5,
+      amount: 20,
       timeTaken: 0,
       idFromDb: "",
       device: "desktop",
@@ -666,7 +666,7 @@ export default {
           this.idFromDb = data.id;
           setTimeout(() => {
             this.retrieve(data.id);
-          }, this.amount * 0.65 * 1000);
+          }, 5000);
         }
       } catch (err) {
         console.log(err);
