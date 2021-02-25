@@ -623,7 +623,7 @@ export default {
     return {
       animatedSearchBtn: false,
       query: "best fishing rod for beginners",
-      amount: 20,
+      amount: 50,
       timeTaken: 0,
       idFromDb: "",
       device: "desktop",

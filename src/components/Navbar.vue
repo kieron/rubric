@@ -18,7 +18,7 @@
           >
             <DocumentTextIcon class="w-8 h-8 ml-2 text-indigo-600" />
 
-            <p class="pl-2 text-3xl font-semibold text-gray-800">RUBRICz</p>
+            <p class="pl-2 text-3xl font-semibold text-gray-800">RUBRIC</p>
           </router-link>
 
           <!-- Close Menu -->
