@@ -16,9 +16,9 @@
             @click.native="toggleSidebar()"
             class="flex items-center w-full h-20 px-4"
           >
-            <EmojiHappyIcon class="w-8 h-8 ml-2 text-indigo-600" />
+            <DocumentTextIcon class="w-8 h-8 ml-2 text-indigo-600" />
 
-            <p class="pl-4 text-3xl font-semibold text-gray-800">RUBRIC</p>
+            <p class="pl-2 text-3xl font-semibold text-gray-800">RUBRICz</p>
           </router-link>
 
           <!-- Close Menu -->
@@ -90,7 +90,7 @@
 
 <script>
 import {
-  EmojiHappyIcon,
+  DocumentTextIcon,
   XIcon,
   MenuAlt2Icon,
   BellIcon,
@@ -105,7 +105,7 @@ export default {
   },
   components: {
     MenuItems,
-    EmojiHappyIcon,
+    DocumentTextIcon,
     XIcon,
     MenuAlt2Icon,
     BellIcon,

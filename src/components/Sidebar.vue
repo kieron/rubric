@@ -8,9 +8,9 @@
       to="/"
       class="flex items-center w-full h-20 px-4 mb-8"
     >
-      <EmojiHappyIcon class="w-8 h-8 ml-2 text-indigo-600" />
+      <DocumentTextIcon class="w-8 h-8 ml-2 text-indigo-600" />
 
-      <p class="pl-4 text-3xl font-semibold text-gray-800">RUBRIC</p>
+      <p class="pl-2 text-3xl font-semibold text-gray-800">RUBRIC</p>
     </router-link>
     <MenuItems />
   </div>
@@ -18,12 +18,12 @@
 
 <script>
 import MenuItems from "@/components/MenuItems";
-import { EmojiHappyIcon } from "@vue-hero-icons/outline";
+import { DocumentTextIcon } from "@vue-hero-icons/outline";
 export default {
   name: "Sidebar",
   components: {
     MenuItems,
-    EmojiHappyIcon,
+    DocumentTextIcon,
   },
   data() {
     return {};
