@@ -18,7 +18,11 @@
           >
             <DocumentTextIcon class="w-8 h-8 ml-2 text-indigo-600" />
 
-            <p class="pl-2 text-3xl font-semibold text-gray-800">RUBRIC</p>
+            <p
+              class="pl-2 text-3xl font-semibold text-gray-800 hover:text-indigo-600"
+            >
+              RUBRIC
+            </p>
           </router-link>
 
           <!-- Close Menu -->
@@ -55,11 +59,11 @@
 
       <!-- right navbar -->
       <div class="relative flex items-center">
-        <button
-          class="p-1 mr-4 text-gray-700 duration-150 rounded-full hover:bg-indigo-100 hover:text-indigo-600 focus:outline-none"
-        >
+        <button class="p-1 mr-4 text-gray-700 duration-150 focus:outline-none">
           <div class="flex px-0 leading-3">
-            <BellIcon />
+            <BellIcon
+              class="w-8 h-8 text-gray-600 duration-150 hover:text-indigo-600"
+            />
             <div class="z-10 w-2 h-2 -ml-1 rounded-full bg-pink"></div>
           </div>
         </button>
@@ -67,9 +71,8 @@
           class="p-0 duration-150 focus:outline-none"
           @click="dropDownOpen = !dropDownOpen"
         >
-          <img
-            src="https://images.unsplash.com/photo-1552774021-9ebbb764f03e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80"
-            class="w-10 h-10 duration-150 border-2 border-white rounded-full shadow-lg hover:border-indigo-600"
+          <UserCircleIcon
+            class="w-8 h-8 text-gray-600 duration-150 hover:text-indigo-600"
           />
         </button>
       </div>
@@ -91,6 +94,7 @@
 <script>
 import {
   DocumentTextIcon,
+  UserCircleIcon,
   XIcon,
   MenuAlt2Icon,
   BellIcon,
@@ -107,6 +111,7 @@ export default {
     MenuItems,
     DocumentTextIcon,
     XIcon,
+    UserCircleIcon,
     MenuAlt2Icon,
     BellIcon,
   },

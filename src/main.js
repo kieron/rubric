@@ -27,6 +27,21 @@ const routes = [
         component: Home,
       },
       {
+        path: "/login",
+        name: "Login",
+        component: view("Login"),
+      },
+      {
+        path: "/register",
+        name: "Register",
+        component: view("Register"),
+      },
+      {
+        path: "/forgotten",
+        name: "Forgotten Password",
+        component: view("ForgottenPassword"),
+      },
+      {
         path: "/analysis",
         name: "SERP Analysis",
         component: view("Analysis"),

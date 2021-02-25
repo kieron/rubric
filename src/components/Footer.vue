@@ -7,7 +7,6 @@
     <div class="flex text-sm text-gray-600 md:text-base">
       <a href="#" class="mr-6 hover:text-gray-900">Terms of Service</a>
       <a href="#" class="mr-6 hover:text-gray-900">Privacy Policy</a>
-      <a href="#" class="hover:text-gray-900">About Us</a>
     </div>
   </div>
 </template>

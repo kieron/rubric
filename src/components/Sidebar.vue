@@ -6,11 +6,15 @@
     <router-link
       active-class="bg-gray-25"
       to="/"
-      class="flex items-center w-full h-20 px-4 mb-8"
+      class="flex items-center w-full h-20 px-4 mb-8 text-gray-800 hover:text-indigo-600"
     >
       <DocumentTextIcon class="w-8 h-8 ml-2 text-indigo-600" />
 
-      <p class="pl-2 text-3xl font-semibold text-gray-800">RUBRIC</p>
+      <p
+        class="pl-2 text-3xl font-semibold text-gray-800 hover:text-indigo-600"
+      >
+        RUBRIC
+      </p>
     </router-link>
     <MenuItems />
   </div>
