@@ -153,10 +153,10 @@
             }"
             class="flex flex-col"
             v-if="
-              averageWordCount ||
-              averageParagraphCount ||
-              averageImageCount ||
-              averageHeaderCount
+              averageValues.averageWordCount.value ||
+              averageValues.averageParagraphCount.value ||
+              averageValues.averageImageCount.value ||
+              averageValues.averageHeaderCount.value
             "
           >
             <p class="mb-4 text-xl font-semibold text-gray-700">
@@ -167,105 +167,36 @@
                 'md:flex-col md:flex-no-wrap': apiResponse.relatedQuestions,
                 '': !apiResponse.relatedQuestions,
               }"
-              class="flex flex-wrap -mx-3 md:mx-0 md:justify-between md:h-full"
+              class="flex flex-wrap -mx-3 md:flex-col md:mx-0 md:justify-between"
             >
               <div
                 :class="{
                   'md:px-0 md:w-full px-3': apiResponse.relatedQuestions,
                   'px-3 md:px-0 md:pr-1 xl:w-1/4': !apiResponse.relatedQuestions,
+                  'mb-0': index == averageValues.length - 1,
                 }"
-                class="w-1/2 md:mb-2"
-                v-if="averageWordCount"
+                class="w-1/2 mb-2"
+                v-for="(average, index) in averageValues"
+                v-bind:key="average.id"
               >
-                <div
-                  class="flex items-center p-0 mb-2 bg-white border rounded-lg md:mb-0"
-                >
+                <div class="flex items-center p-0 bg-white border rounded-lg">
                   <div
                     class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-pink"
+                    :class="[average.bg]"
                   >
-                    <AnnotationIcon class="hidden w-8 h-8 mx-auto lg:block" />
+                    <component
+                      :is="average.icon"
+                      class="hidden w-8 h-8 mx-auto lg:block"
+                    />
                   </div>
 
                   <div class="ml-6 leading-6 text-gray-700">
                     <p class="text-2xl font-semibold">
-                      {{ averageWordCount }}
+                      {{ average.value }}
                     </p>
-                    <p class="text-sm text-gray-600">Average Words</p>
-                  </div>
-                </div>
-              </div>
-              <div
-                :class="{
-                  'md:px-0 md:w-full px-3': apiResponse.relatedQuestions,
-                  'px-3 md:px-0 xl:px-1 xl:w-1/4 pl-1 ': !apiResponse.relatedQuestions,
-                }"
-                class="w-1/2 md:mb-2"
-                v-if="averageHeaderCount"
-              >
-                <div
-                  class="flex items-center p-0 mb-2 bg-white border rounded-lg md:mb-0"
-                >
-                  <div
-                    class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-purple"
-                  >
-                    <NewspaperIcon class="hidden w-8 h-8 mx-auto lg:block" />
-                  </div>
-
-                  <div class="ml-6 leading-6 text-gray-700">
-                    <p class="text-2xl font-semibold">
-                      {{ averageHeaderCount }}
+                    <p class="text-sm text-gray-600">
+                      Average {{ average.label }}
                     </p>
-                    <p class="text-sm text-gray-600">Average Headers</p>
-                  </div>
-                </div>
-              </div>
-              <div
-                :class="{
-                  'md:px-0 md:w-full px-3 ': apiResponse.relatedQuestions,
-                  'px-3 md:pl-0 md:pr-1 xl:px-1 xl:w-1/4 ': !apiResponse.relatedQuestions,
-                }"
-                class="w-1/2 md:mb-2"
-                v-if="averageImageCount"
-              >
-                <div
-                  class="flex items-center p-0 mb-2 bg-white border rounded-lg md:mb-0"
-                >
-                  <div
-                    class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-orange"
-                  >
-                    <PhotographIcon class="hidden w-8 h-8 mx-auto lg:block" />
-                  </div>
-
-                  <div class="ml-6 leading-6 text-gray-700">
-                    <p class="text-2xl font-semibold">
-                      {{ averageImageCount }}
-                    </p>
-                    <p class="text-sm text-gray-600">Average Images</p>
-                  </div>
-                </div>
-              </div>
-              <div
-                :class="{
-                  'md:px-0 md:w-full mb-0 px-3': apiResponse.relatedQuestions,
-                  'md:mb-2 px-3 md:pr-0 pl-1 xl:w-1/4': !apiResponse.relatedQuestions,
-                }"
-                class="w-1/2"
-                v-if="averageParagraphCount"
-              >
-                <div
-                  class="flex items-center p-0 mb-2 bg-white border rounded-lg md:mb-0"
-                >
-                  <div
-                    class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-green"
-                  >
-                    <TemplateIcon class="hidden w-8 h-8 mx-auto lg:block" />
-                  </div>
-
-                  <div class="ml-6 leading-6 text-gray-700">
-                    <p class="text-2xl font-semibold">
-                      {{ averageParagraphCount }}
-                    </p>
-                    <p class="text-sm text-gray-600">Average Paragraphs</p>
                   </div>
                 </div>
               </div>
@@ -273,17 +204,17 @@
           </div>
           <div
             v-if="apiResponse.relatedQuestions"
-            class="flex-grow order-last w-full mt-5 xl:w-2/3 md:mt-0"
+            class="flex flex-col flex-grow order-last w-full mt-5 xl:w-2/3 md:mt-0"
           >
             <p class="mb-4 text-xl font-semibold text-gray-700">
               People Also Ask
             </p>
 
-            <div class="flex flex-col justify-evenly">
+            <div class="flex flex-col justify-between h-full">
               <div
                 :key="question.id"
                 v-for="(question, index) in apiResponse.relatedQuestions"
-                class="items-center px-4 py-2 bg-gray-100 border rounded-lg"
+                class="items-center flex-grow px-4 py-2 bg-gray-100 border rounded-lg"
                 :class="{
                   'mb-2': index != apiResponse.relatedQuestions.length - 1,
                 }"
@@ -637,10 +568,32 @@ export default {
         Object.keys(store.getters.getBlueprint).length && this.error !== true
           ? store.getters.getBlueprint
           : [],
-      averageWordCount: 0,
-      averageHeaderCount: 0,
-      averageImageCount: 0,
-      averageParagraphCount: 0,
+      averageValues: {
+        averageWordCount: {
+          icon: "AnnotationIcon",
+          value: 0,
+          label: "Words",
+          bg: "bg-pink",
+        },
+        averageHeaderCount: {
+          icon: "NewspaperIcon",
+          value: 0,
+          label: "Headers",
+          bg: "bg-purple",
+        },
+        averageImageCount: {
+          icon: "PhotographIcon",
+          value: 0,
+          label: "Images",
+          bg: "bg-orange",
+        },
+        averageParagraphCount: {
+          icon: "TemplateIcon",
+          value: 0,
+          label: "Paragraphs",
+          bg: "bg-green",
+        },
+      },
       error: false,
       errorMessage: "Something Went Wrong",
       loaded: Object.keys(store.getters.getBlueprint).length ? true : false,
@@ -737,7 +690,7 @@ export default {
       const countsNotZero = this.apiResponse.results.filter(
         (entry) => entry.wordCount !== 0
       );
-      this.averageWordCount =
+      this.averageValues.averageWordCount.value =
         countsNotZero.length === 0
           ? null
           : Math.round(
@@ -749,7 +702,7 @@ export default {
       const headersNotZero = this.apiResponse.results.filter(
         (entry) => entry.headers.length !== 0
       );
-      this.averageHeaderCount =
+      this.averageValues.averageHeaderCount.value =
         headersNotZero.length === 0
           ? null
           : Math.round(
@@ -761,7 +714,7 @@ export default {
       const imagesNotZero = this.apiResponse.results.filter(
         (entry) => entry.imageCount !== 0
       );
-      this.averageImageCount =
+      this.averageValues.averageImageCount.value =
         imagesNotZero.length === 0
           ? null
           : Math.round(
@@ -773,7 +726,7 @@ export default {
       const paragraphsNotZero = this.apiResponse.results.filter(
         (entry) => entry.paragraphCount !== 0
       );
-      this.averageParagraphCount =
+      this.averageValues.averageParagraphCount.value =
         paragraphsNotZero.length === 0
           ? null
           : Math.round(
