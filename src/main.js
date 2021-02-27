@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import Router from "vue-router";
 import store from "./store";
+import LoadScript from "vue-plugin-load-script";
 
 // Layouts
 import Default from "@/layouts/Default";
@@ -12,9 +13,19 @@ const view = (name) => () => import(`@/pages/${name}.vue`);
 
 import "@/assets/css/tailwind.css";
 
-Vue.config.productionTip = false;
-
+Vue.config.productionTip = true;
+Vue.use(LoadScript);
 Vue.use(Router);
+
+// Analytics for Live Site
+if (process.env.NODE_ENV === "production") {
+  Vue.loadScript("https://analytics.alderaan.network/js/plausible.js");
+}
+
+// Visual Tailwind Breakpoints
+if (process.env.NODE_ENV !== "production") {
+  Vue.loadScript("https://awesomecdn.netlify.app/tw.js");
+}
 
 const routes = [
   {

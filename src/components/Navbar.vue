@@ -136,15 +136,6 @@ export default {
       }, 3000);
     },
   },
-  mounted() {
-    //breakpoint sizing
-    if (process.env.NODE_ENV !== "production") {
-      const plugin = document.createElement("script");
-      plugin.setAttribute("src", "https://awesomecdn.netlify.app/tw.js");
-      plugin.async = true;
-      document.head.appendChild(plugin);
-    }
-  },
 };
 </script>
 
