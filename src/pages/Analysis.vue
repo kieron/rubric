@@ -286,109 +286,64 @@
                               >
                             </div>
                             <div class="flex flex-wrap mt-2">
-                              <div
-                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 hover:text-pink-700 hover:font-bold md:text-sm"
-                              >
-                                <AnnotationIcon
-                                  class="inline w-4 h-4 mr-1 align-middle md:w-5 md:h-5"
-                                />
+                              <ResultCount
+                                icon="AnnotationIcon"
+                                v-bind:label="article.wordCount + ' Words'"
+                                hoverColour="hover:text-pink-700"
+                                title="Word Count"
+                              />
 
-                                <span
-                                  title="Word Count"
-                                  class="text-xs whitespace-no-wrap align-middle md:text-sm"
-                                  >{{ article.wordCount }} Words</span
-                                >
-                              </div>
+                              <ResultCount
+                                icon="NewspaperIcon"
+                                v-bind:label="
+                                  article.headers.length + ' Headers'
+                                "
+                                hoverColour="hover:text-purple"
+                                title="Header Count"
+                              />
 
-                              <div
-                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 hover:text-purple hover:font-bold md:text-sm"
-                              >
-                                <NewspaperIcon
-                                  class="inline w-4 h-4 mr-1 align-middle md:w-5 md:h-5"
-                                />
+                              <ResultCount
+                                icon="PhotographIcon"
+                                v-bind:label="article.imageCount + ' Images'"
+                                hoverColour="hover:text-orange"
+                                title="Image Count"
+                              />
 
-                                <span
-                                  title="Header Count"
-                                  class="whitespace-no-wrap align-middle"
-                                  >{{ article.headers.length }} Headers</span
-                                >
-                              </div>
+                              <ResultCount
+                                icon="TemplateIcon"
+                                v-bind:label="
+                                  article.paragraphCount + ' Paragraphs'
+                                "
+                                hoverColour="hover:text-green-500"
+                                title="Paragraph Count"
+                              />
 
-                              <div
-                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 hover:text-orange hover:font-bold md:text-sm"
-                              >
-                                <PhotographIcon
-                                  class="inline w-4 h-4 mr-1 align-middle md:w-5 md:h-5"
-                                />
+                              <ResultCount
+                                icon="ShieldCheckIcon"
+                                v-bind:label="
+                                  article.domainAuthority + ' Domain Authority'
+                                "
+                                hoverColour="hover:text-pink-700"
+                                title="Domain Authority"
+                              />
 
-                                <span
-                                  title="Image Count"
-                                  class="whitespace-no-wrap align-middle"
-                                  >{{ article.imageCount }} Images</span
-                                >
-                              </div>
+                              <ResultCount
+                                icon="QuestionMarkCircleIcon"
+                                v-bind:label="
+                                  article.questions.length + ' Questions'
+                                "
+                                hoverColour="hover:text-purple"
+                                title="Questions Answered"
+                              />
 
-                              <div
-                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 hover:font-bold hover:text-green-500 md:text-sm"
-                              >
-                                <TemplateIcon
-                                  class="inline w-4 h-4 mr-1 align-middle md:w-5 md:h-5"
-                                />
-
-                                <span
-                                  title="Paragraph Count"
-                                  class="whitespace-no-wrap align-middle"
-                                  >{{ article.paragraphCount }} Paragraphs</span
-                                >
-                              </div>
-
-                              <div
-                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 md:text-sm hover:text-pink-700 hover:font-bold"
-                              >
-                                <ShieldCheckIcon
-                                  class="inline w-4 h-4 mr-1 align-middle md:w-5 md:h-5"
-                                />
-
-                                <span
-                                  title="Domain Authority"
-                                  class="whitespace-no-wrap align-middle"
-                                  >{{ article.domainAuthority }} Domain
-                                  Authority</span
-                                >
-                              </div>
-
-                              <div
-                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 hover:font-bold md:text-sm hover:text-purple"
-                              >
-                                <QuestionMarkCircleIcon
-                                  class="inline w-4 h-4 mr-1 align-middle md:w-5 md:h-5"
-                                />
-
-                                <span
-                                  title="Questions Answered"
-                                  class="whitespace-no-wrap align-middle"
-                                  >{{
-                                    article.questions.length
-                                  }}
-                                  Questions</span
-                                >
-                              </div>
-
-                              <div
-                                class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 hover:font-bold hover:text-orange md:text-sm"
-                              >
-                                <CalendarIcon
-                                  class="inline w-4 h-4 mr-1 align-middle md:w-5 md:h-5"
-                                />
-
-                                <span
-                                  title="SERP Date"
-                                  class="whitespace-no-wrap align-middle"
-                                  >{{
-                                    article.date ? article.date : "N/A"
-                                  }}</span
-                                >
-                              </div>
+                              <ResultCount
+                                icon="CalendarIcon"
+                                v-bind:label="
+                                  article.date ? article.date : 'N/A'
+                                "
+                                hoverColour="hover:text-orange"
+                                title="SERP Date"
+                              />
                             </div>
                           </div>
                         </div>
@@ -507,6 +462,7 @@ import BetaMessage from "@/components/BetaMessage";
 import ErrorMessage from "@/components/ErrorMessage";
 import Breadcrumb from "@/components/Breadcrumb";
 import HeaderQuestions from "@/components/HeaderQuestions";
+import ResultCount from "@/components/ResultCount";
 var VueScrollTo = require("vue-scrollto");
 import { vueTopprogress } from "vue-top-progress";
 
@@ -536,6 +492,7 @@ export default {
     LoadingSpinner,
     Breadcrumb,
     vueTopprogress,
+    ResultCount,
     BetaMessage,
     ErrorMessage,
     XCircleIcon,
