@@ -30,17 +30,6 @@
           </div>
         </div>
       </div>
-      <div
-        class="hidden lg:block lg:w-1/2"
-        style="clip-path: polygon(10% 0, 100% 0%, 100% 100%, 0 100%)"
-      >
-        <div
-          class="object-cover h-full"
-          style="background-image: url(/img/bg.png)"
-        >
-          <div class="h-full bg-black opacity-25"></div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
