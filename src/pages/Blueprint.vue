@@ -27,16 +27,15 @@
       </div>
     </transition>
     <Breadcrumb />
-
+    <BetaMessage
+      class="flex flex-row items-center p-5 mb-8 bg-blue-200 border-b-2 border-blue-300 rounded alert"
+    />
     <div class="items-center mb-6">
       <h1 class="mb-3 text-3xl font-semibold text-gray-800 lg:mb-0">
         Blueprint Editor
       </h1>
 
-      <p>
-        Coming soon. Create blueprints for your content faster & easier than
-        before.
-      </p>
+      <p>Create blueprints for your content faster & easier than before.</p>
 
       <hr class="mt-2" />
     </div>
@@ -384,6 +383,7 @@ import {
 } from "@vue-hero-icons/outline";
 import { mapGetters } from "vuex";
 import Breadcrumb from "@/components/Breadcrumb";
+import BetaMessage from "@/components/BetaMessage";
 
 import store from "../store";
 import {
@@ -416,6 +416,7 @@ export default {
     }),
   },
   components: {
+    BetaMessage,
     Breadcrumb,
     EditorContent,
     EditorMenuBar,
@@ -451,7 +452,9 @@ export default {
           new Underline(),
           new History(),
         ],
-        content: `<h1><strong>${store.getters.getBlueprint.searchTerm}</strong></h1>`,
+        content: `<h1><strong>${
+          store.getters.getBlueprint.searchTerm || "Your Amazing Article Title"
+        }</strong></h1>`,
       }),
     };
   },

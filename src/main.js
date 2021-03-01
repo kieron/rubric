@@ -8,7 +8,7 @@ import LoadScript from "vue-plugin-load-script";
 import Default from "@/layouts/Default";
 
 // Views
-import Home from "@/pages/Home";
+import Dashboard from "@/pages/Dashboard";
 const view = (name) => () => import(`@/pages/${name}.vue`);
 
 import "@/assets/css/tailwind.css";
@@ -33,12 +33,12 @@ const routes = [
     component: Default,
     children: [
       {
-        path: "",
-        name: "Home",
-        component: Home,
+        path: "/dashboard",
+        name: "Dashboard",
+        component: Dashboard,
       },
       {
-        path: "/login",
+        path: "",
         name: "Login",
         component: view("Login"),
       },
@@ -61,6 +61,12 @@ const routes = [
         path: "/blueprint",
         name: "Blueprint Editor",
         component: view("Blueprint"),
+        props: true,
+      },
+      {
+        path: "/page-audit",
+        name: "Page Audit",
+        component: view("Audit"),
         props: true,
       },
       { path: "*", name: "PageNotFound", component: view("PageNotFound") },

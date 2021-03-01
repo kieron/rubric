@@ -24,7 +24,7 @@
         <span class="font-medium text-gray-800">Blueprint Editor</span>
       </router-link>
       <router-link
-        to="/nowhere"
+        to="/page-audit"
         active-class="border-l-8 border-indigo-600 bg-gray-30"
         title="Coming Soon"
         @click.native="toggleSidebar()"

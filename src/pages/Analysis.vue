@@ -21,7 +21,8 @@
         Simply input your article phrase below. This can take up to a minute for
         larger result sets.
       </p>
-      <form v-on:submit.prevent="search" class="pb-2 my-5">
+      <!-- v-on:submit.prevent="retrieve('ba32d5dbd709d0de993a9292415e8ab0')" -->
+      <form v-on:submit.prevent="search()" class="pb-2 my-5">
         <div class="mb-5 sm:flex">
           <input
             type="text"
@@ -167,7 +168,7 @@
                 'md:flex-col md:flex-no-wrap': apiResponse.relatedQuestions,
                 '': !apiResponse.relatedQuestions,
               }"
-              class="flex flex-wrap -mx-3 md:flex-col md:mx-0 md:justify-between"
+              class="flex flex-wrap h-full -mx-3 md:flex-col md:mx-0 md:justify-between"
             >
               <div
                 v-for="(average, key, index) in averageValues"
@@ -237,6 +238,14 @@
               </div>
             </div>
           </div>
+        </div>
+
+        <div class="flex w-full my-5">
+          <PopularQuestions
+            v-if="apiResponse.popularHeaders"
+            v-bind:data="apiResponse.popularHeaders"
+            title="Popular Headers"
+          />
         </div>
         <!-- table -->
         <div
@@ -461,6 +470,7 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import BetaMessage from "@/components/BetaMessage";
 import ErrorMessage from "@/components/ErrorMessage";
 import Breadcrumb from "@/components/Breadcrumb";
+import PopularQuestions from "@/components/PopularQuestions";
 import HeaderQuestions from "@/components/HeaderQuestions";
 import ResultCount from "@/components/ResultCount";
 var VueScrollTo = require("vue-scrollto");
@@ -492,6 +502,7 @@ export default {
     LoadingSpinner,
     Breadcrumb,
     vueTopprogress,
+    PopularQuestions,
     ResultCount,
     BetaMessage,
     ErrorMessage,
