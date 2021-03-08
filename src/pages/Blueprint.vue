@@ -265,6 +265,7 @@
               </button>
               <div
                 class="flex flex-wrap justify-center p-3 mt-2 border-2 rounded md:justify-start space-between menubar"
+                v-if="blueprintData.averageValues"
               >
                 <div class="flex flex-no-wrap items-center mr-4 text-gray-600">
                   <AnnotationIcon class="inline w-5 h-5 mr-1 align-middle" />
@@ -272,7 +273,10 @@
                   <span
                     title="Word Count"
                     class="whitespace-no-wrap align-middle"
-                    >300/1600 Words</span
+                    >0/{{
+                      blueprintData.averageValues.averageWordCount.value
+                    }}
+                    Words</span
                   >
                 </div>
 
@@ -282,7 +286,10 @@
                   <span
                     title="Header Count"
                     class="whitespace-no-wrap align-middle"
-                    >1/7 Headers</span
+                    >0/{{
+                      blueprintData.averageValues.averageHeaderCount.value
+                    }}
+                    Headers</span
                   >
                 </div>
 
@@ -292,7 +299,10 @@
                   <span
                     title="Image Count"
                     class="whitespace-no-wrap align-middle"
-                    >0/17 Images</span
+                    >0/{{
+                      blueprintData.averageValues.averageImageCount.value
+                    }}
+                    Images</span
                   >
                 </div>
 
@@ -302,11 +312,14 @@
                   <span
                     title="Paragraph Count"
                     class="whitespace-no-wrap align-middle"
-                    >1/24 Paragraphs</span
+                    >0/{{
+                      blueprintData.averageValues.averageParagraphCount.value
+                    }}
+                    Paragraphs</span
                   >
                 </div>
 
-                <div class="flex flex-no-wrap items-center mr-4 text-gray-600">
+                <!-- <div class="flex flex-no-wrap items-center mr-4 text-gray-600">
                   <QuestionMarkCircleIcon
                     class="inline w-5 h-5 mr-1 align-middle"
                   />
@@ -315,7 +328,7 @@
                     class="whitespace-no-wrap align-middle"
                     >0/26 Questions</span
                   >
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -333,7 +346,7 @@
         class="sticky top-0 flex-grow w-1/3 h-full p-5 ml-2 bg-gray-100 border-2 border-gray-200 rounded"
       >
         <h2 class="text-2xl bold">Blueprint Data</h2>
-        <div v-if="!headers.length && !questions.length">
+        <div v-if="!Object.keys(blueprintData).length && !questions.length">
           <p class="mt-2">You haven't loaded any data from a SERP analysis.</p>
           <router-link
             to="/analysis"
@@ -343,15 +356,15 @@
             <span>Load SERP Analysis</span>
           </router-link>
         </div>
-        <div class="py-3" v-if="headers.length">
+        <div class="py-3" v-if="blueprintData.popularHeaders">
           <h3 class="text-xs font-bold">HEADERS</h3>
           <div class="flex flex-wrap my-3 -m-1">
             <span
-              v-for="item in headers"
-              @click="insertHeader(item)"
+              v-for="item in weightedHeaders"
+              @click="insertHeader(item.header)"
               :key="item.header"
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
-              >{{ item }}</span
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded cursor-pointer hover:bg-indigo-400"
+              >{{ item.header }}</span
             >
           </div>
         </div>
@@ -362,7 +375,7 @@
               @click="insertQuestion(item)"
               v-for="item in questions"
               :key="item.question"
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded-full cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded cursor-pointer hover:bg-gray-300"
               >{{ item }}</span
             >
           </div>
@@ -375,7 +388,7 @@
 <script>
 import { Editor, EditorContent, EditorMenuBar, EditorMenuBubble } from "tiptap";
 import {
-  QuestionMarkCircleIcon,
+  // QuestionMarkCircleIcon,
   TemplateIcon,
   AnnotationIcon,
   NewspaperIcon,
@@ -414,6 +427,11 @@ export default {
       questions: "getQuestions",
       headers: "getHeaders",
     }),
+    weightedHeaders: function () {
+      return this.blueprintData.popularHeaders.filter(function (item) {
+        return item.weight === true;
+      });
+    },
   },
   components: {
     BetaMessage,
@@ -421,7 +439,7 @@ export default {
     EditorContent,
     EditorMenuBar,
     EditorMenuBubble,
-    QuestionMarkCircleIcon,
+    // QuestionMarkCircleIcon,
     TemplateIcon,
     AnnotationIcon,
     NewspaperIcon,
@@ -463,11 +481,17 @@ export default {
       this.blueprintSidebarOpen = !this.blueprintSidebarOpen;
     },
     insertHeader: function (item) {
+      var editorHtml = this.editor.getHTML();
+      editorHtml += "<br>";
+      this.editor.setContent(editorHtml);
       const transaction = this.editor.state.tr.insertText(item.trim());
       this.editor.view.dispatch(transaction);
       this.focusEditor();
     },
     insertQuestion: function (item) {
+      var editorHtml = this.editor.getHTML();
+      editorHtml += "<br>";
+      this.editor.setContent(editorHtml);
       const transaction = this.editor.state.tr.insertText(item.trim());
       this.editor.view.dispatch(transaction);
       this.focusEditor();

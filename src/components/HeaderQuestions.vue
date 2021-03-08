@@ -8,7 +8,7 @@
       <span
         v-for="question in articleData"
         :key="question.id"
-        class="p-1 m-1 text-sm font-bold leading-loose border border-indigo-200 rounded"
+        class="py-0.5 px-1 m-1 text-sm font-bold leading-loose bg-indigo-100 border border-indigo-200 rounded"
         >{{ question }}</span
       >
     </div>

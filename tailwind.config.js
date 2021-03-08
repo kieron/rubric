@@ -20,11 +20,19 @@ module.exports = {
           DEFAULT: "#7e3af2",
         },
       },
+      transitionProperty: {
+        width: "width",
+      },
+      // screens: {
+      //   "2xl": "1600px",
+      // },
     },
   },
   variants: {
     extend: {
       fontWeight: ["hover", "focus"],
+      margin: ["hover", "focus"],
+      padding: ["hover"],
     },
   },
   plugins: [],

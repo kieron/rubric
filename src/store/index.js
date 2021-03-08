@@ -6,8 +6,19 @@ export default new Vuex.Store({
   state: {
     blueprintData: {},
     sideBarOpen: false,
+    containerFull: false,
+    accessToken: null,
+    auth: {
+      loggedIn: false,
+      loggedOut: true,
+      currentUser: {
+        email: null,
+      },
+    },
   },
   getters: {
+    loggedIn: ({ loggedIn }) => loggedIn,
+
     getBlueprint: (state) => {
       return state.blueprintData;
     },
@@ -37,6 +48,9 @@ export default new Vuex.Store({
     sideBarOpen: (state) => {
       return state.sideBarOpen;
     },
+    containerFull: (state) => {
+      return state.containerFull;
+    },
   },
   mutations: {
     addBlueprint: (state, data) => {
@@ -45,6 +59,9 @@ export default new Vuex.Store({
     toggleSidebar(state) {
       state.sideBarOpen = !state.sideBarOpen;
     },
+    toggleContainer(state) {
+      state.containerFull = !state.containerFull;
+    },
   },
   actions: {
     async addBluePrintData({ commit }, data) {
@@ -52,6 +69,12 @@ export default new Vuex.Store({
     },
     toggleSidebar(context) {
       context.commit("toggleSidebar");
+    },
+    toggleContainer(context) {
+      context.commit("toggleContainer");
+    },
+    login() {
+      //Stuff
     },
   },
 });

@@ -21,38 +21,48 @@
         Simply input your article phrase below. This can take up to a minute for
         larger result sets.
       </p>
-      <!-- v-on:submit.prevent="retrieve('ba32d5dbd709d0de993a9292415e8ab0')" -->
-      <form v-on:submit.prevent="search()" class="pb-2 my-5">
+      <!-- <form
+        v-on:submit.prevent="retrieve('ba32d5dbd709d0de993a9292415e8ab0')"
+        class="pb-2 my-5"
+      > -->
+      <form v-on:submit.prevent="generate()" class="pb-2 my-5">
         <div class="mb-5 sm:flex">
           <input
             type="text"
-            v-model="query"
+            v-model="search.query"
             placeholder="Keywords"
             required
             class="flex flex-grow w-full h-16 px-6 mb-2 mr-2 bg-white border rounded-lg focus:outline-none"
           />
           <button
             type="submit"
-            :disabled="this.loading == 1"
+            :disabled="this.loader.loading == 1"
             v-on:click="animateSearchBtn($event)"
-            :class="{ 'bounce-top': animatedSearchBtn }"
-            @animationend="animatedSearchBtn = false"
+            :class="{ 'bounce-top': search.animatedSearchBtn }"
+            @animationend="search.animatedSearchBtn = false"
             class="flex items-center self-center flex-grow w-full h-16 px-4 mb-2 font-semibold text-white duration-150 bg-indigo-600 rounded-lg sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
           >
             <div class="flex ml-auto mr-auto">
-              <span v-if="!loading" class="whitespace-no-wrap"
+              <span v-if="!loader.loading" class="whitespace-no-wrap"
                 >Start Analysis</span
               >
-              <span v-if="loading && idFromDb === ''" class="whitespace-no-wrap"
+              <span
+                v-if="loader.loading && search.idFromDb === ''"
+                class="whitespace-no-wrap"
                 >Fetching SERPs</span
               >
-              <span v-if="loading && idFromDb !== ''" class="whitespace-no-wrap"
+              <span
+                v-if="loader.loading && search.idFromDb !== ''"
+                class="whitespace-no-wrap"
                 >Crunching Data</span
               >
-              <ArrowCircleRightIcon class="w-6 h-6 ml-2" v-if="!loading" />
+              <ArrowCircleRightIcon
+                class="w-6 h-6 ml-2"
+                v-if="!loader.loading"
+              />
               <LoadingSpinner
                 class="flex items-center w-6 h-6 ml-3 fill-current"
-                v-if="loading"
+                v-if="loader.loading"
               />
             </div>
           </button>
@@ -70,7 +80,7 @@
                 name="location"
                 id="location"
                 required
-                v-model="location"
+                v-model="search.location"
               >
                 <option value="United States">United States</option>
                 <option value="United Kingdom">United Kingdom</option>
@@ -88,7 +98,7 @@
                 name="device"
                 id="device"
                 required
-                v-model="device"
+                v-model="search.device"
               >
                 <option selected value="desktop">Desktop</option>
                 <option value="mobile">Mobile</option>
@@ -110,11 +120,11 @@
                 min="5"
                 required
                 max="100"
-                v-model="amount"
+                v-model="search.amount"
               />
               <p class="absolute right-0 mt-1 text-xs text-right text-gray-500">
                 This amount of articles could take around
-                <strong> {{ Math.round(this.amount / 3) }}</strong>
+                <strong> {{ Math.round(this.search.amount / 3) }}</strong>
                 seconds to fetch.
               </p>
             </div>
@@ -123,7 +133,10 @@
       </form>
     </div>
     <vue-topprogress ref="topProgress" color="#4f46e5"></vue-topprogress>
-    <div class="flex justify-center my-20 text-indigo-600" v-if="loading">
+    <div
+      class="flex justify-center my-20 text-indigo-600"
+      v-if="loader.loading"
+    >
       <LoadingSpinner
         class="flex justify-center w-40 ml-auto mr-auto text-center fill-current"
       />
@@ -131,33 +144,33 @@
     <div id="results">
       <div
         class="mt-5 slide-in-bottom"
-        v-if="loaded && !loading && !apiResponse.error"
+        v-if="loader.loaded && !loader.loading && !serpData.error"
       >
         <h2 class="pt-2 mb-2 text-2xl font-semibold text-gray-800 lg:mb-0">
           Results
         </h2>
         <p class="mb-2 text-gray-800 font text-1xl lg:mb-0">
-          Your search for <strong>{{ apiResponse.searchTerm }}</strong> had
-          <strong>{{ apiResponse.totalResults.toLocaleString() }}</strong>
+          Your search for <strong>{{ serpData.searchTerm }}</strong> had
+          <strong>{{ serpData.totalResults.toLocaleString() }}</strong>
           results, we brought back
-          <strong>{{ apiResponse.results.length }}</strong> of them. There are
-          <strong>{{ apiResponse.uniqueDomainCount }}</strong> unique domains
-          and this search took <strong>{{ timeTaken }}</strong> seconds! Here
+          <strong>{{ serpData.results.length }}</strong> of them. There are
+          <strong>{{ serpData.uniqueDomainCount }}</strong> unique domains and
+          this search took <strong>{{ search.timeTaken }}</strong> seconds! Here
           are the results.
         </p>
 
         <div class="my-8 md:flex">
           <div
             :class="{
-              'md:w-1/2 md:mr-3 xl:w-1/3': apiResponse.relatedQuestions,
-              'w-full': !apiResponse.relatedQuestions,
+              'md:w-1/2 md:mr-3 xl:w-1/3': serpData.relatedQuestions,
+              'w-full': !serpData.relatedQuestions,
             }"
             class="flex flex-col"
             v-if="
-              averageValues.averageWordCount.value ||
-              averageValues.averageParagraphCount.value ||
-              averageValues.averageImageCount.value ||
-              averageValues.averageHeaderCount.value
+              serpData.averageValues.averageWordCount.value ||
+              serpData.averageValues.averageParagraphCount.value ||
+              serpData.averageValues.averageImageCount.value ||
+              serpData.averageValues.averageHeaderCount.value
             "
           >
             <p class="mb-4 text-xl font-semibold text-gray-700">
@@ -165,19 +178,21 @@
             </p>
             <div
               :class="{
-                'md:flex-col md:flex-no-wrap': apiResponse.relatedQuestions,
-                '': !apiResponse.relatedQuestions,
+                'md:flex-col md:flex-no-wrap': serpData.relatedQuestions,
+                '': !serpData.relatedQuestions,
               }"
               class="flex flex-wrap h-full -mx-3 md:flex-col md:mx-0 md:justify-between"
             >
               <div
-                v-for="(average, key, index) in averageValues"
+                v-for="(average, key, index) in serpData.averageValues"
                 v-bind:key="average.label"
                 :class="{
-                  'md:px-0 md:w-full px-3': apiResponse.relatedQuestions,
-                  'px-3 md:px-0 md:pr-1 xl:w-1/4': !apiResponse.relatedQuestions,
-                  'mb-0': index == Object.keys(averageValues).length - 1,
-                  'mb-2': index != Object.keys(averageValues).length - 1,
+                  'md:px-0 md:w-full px-3': serpData.relatedQuestions,
+                  'px-3 md:px-0 md:pr-1 xl:w-1/4': !serpData.relatedQuestions,
+                  'mb-0':
+                    index == Object.keys(serpData.averageValues).length - 1,
+                  'mb-2':
+                    index != Object.keys(serpData.averageValues).length - 1,
                 }"
                 class="w-1/2"
               >
@@ -205,7 +220,7 @@
             </div>
           </div>
           <div
-            v-if="apiResponse.relatedQuestions"
+            v-if="serpData.relatedQuestions"
             class="flex flex-col flex-grow order-last w-full mt-5 xl:w-2/3 md:mt-0"
           >
             <p class="mb-4 text-xl font-semibold text-gray-700">
@@ -215,10 +230,10 @@
             <div class="flex flex-col justify-between h-full">
               <div
                 :key="question.id"
-                v-for="(question, index) in apiResponse.relatedQuestions"
+                v-for="(question, index) in serpData.relatedQuestions"
                 class="items-center flex-grow px-4 py-2 bg-gray-100 border rounded-lg"
                 :class="{
-                  'mb-2': index != apiResponse.relatedQuestions.length - 1,
+                  'mb-2': index != serpData.relatedQuestions.length - 1,
                 }"
               >
                 <div>
@@ -242,15 +257,15 @@
 
         <div class="flex w-full my-5">
           <PopularQuestions
-            v-if="apiResponse.popularHeaders"
-            v-bind:data="apiResponse.popularHeaders"
+            v-if="serpData.popularHeaders"
+            v-bind:data="serpData.popularHeaders"
             title="Popular Headers"
           />
         </div>
         <!-- table -->
         <div
           class="flex flex-col mb-12 border border-gray-300 rounded-md bg-gray-25"
-          v-if="apiResponse.results.length"
+          v-if="serpData.results.length"
         >
           <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div
@@ -272,7 +287,7 @@
                   >
                     <tr
                       :key="article.id"
-                      v-for="(article, articleIndex) in apiResponse.results"
+                      v-for="(article, articleIndex) in serpData.results"
                       class="border-b border-gray-200"
                     >
                       <td class="px-3 py-3 md:px-6 md:py-4">
@@ -366,7 +381,9 @@
                           "
                           class="mt-5 rounded additional-info swing-in-top-fwd"
                           :class="{
-                            hidden: !expandedArticles.includes(articleIndex),
+                            hidden: !serpData.expandedArticles.includes(
+                              articleIndex
+                            ),
                           }"
                         >
                           <div class="flex flex-wrap">
@@ -457,8 +474,8 @@
     </div>
     <ErrorMessage
       class="flex flex-row items-center p-5 mt-5 bg-red-200 border-b-2 border-red-300 rounded alert swing-in-top-fwd"
-      v-if="error && loading != true"
-      v-bind:message="errorMessage"
+      v-if="errorHandler.error && loader.loading != true"
+      v-bind:message="errorHandler.errorMessage"
     />
   </div>
 </template>
@@ -495,7 +512,7 @@ export default {
     ...mapState(["blueprintData"]),
   },
   mounted() {
-    if (this.apiResponse.results) this.massage();
+    if (this.serpData.results) this.massage();
   },
   components: {
     HeaderQuestions,
@@ -518,84 +535,95 @@ export default {
     CalendarIcon,
     ArrowCircleRightIcon,
   },
-  name: "AnalysisHome",
+  name: "Analysis",
   data() {
     return {
-      animatedSearchBtn: false,
-      query: "best fishing rod for beginners",
-      amount: 50,
-      timeTaken: 0,
-      idFromDb: "",
-      device: "desktop",
-      peopleAlsoAsk: true,
-      fetchQuestions: true,
-      domainAuthority: true,
-      location: "United States",
-      roundedTimeGuess: 0,
-      timeStart: 0,
-      apiResponse:
+      search: {
+        query: "best fishing rod for beginners",
+        amount: 50,
+        device: "desktop",
+        location: "United States",
+        idFromDb: "",
+        peopleAlsoAsk: true,
+        fetchQuestions: true,
+        domainAuthority: true,
+        timeStart: 0,
+        timeTaken: 0,
+        animatedSearchBtn: false,
+        api_url:
+          process.env.NODE_ENV === "production"
+            ? "https://rubricseo-api.herokuapp.com/"
+            : "http://localhost:3001/",
+      },
+
+      errorHandler: {
+        error: false,
+        errorMessage: "Something Went Wrong",
+      },
+
+      loader: {
+        loaded: Object.keys(store.getters.getBlueprint).length ? true : false,
+        loading: false,
+      },
+
+      serpData:
         Object.keys(store.getters.getBlueprint).length && this.error !== true
           ? store.getters.getBlueprint
-          : [],
-      averageValues: {
-        averageWordCount: {
-          icon: "AnnotationIcon",
-          value: 0,
-          label: "Words",
-          bg: "bg-pink",
-        },
-        averageHeaderCount: {
-          icon: "NewspaperIcon",
-          value: 0,
-          label: "Headers",
-          bg: "bg-purple",
-        },
-        averageImageCount: {
-          icon: "PhotographIcon",
-          value: 0,
-          label: "Images",
-          bg: "bg-orange",
-        },
-        averageParagraphCount: {
-          icon: "TemplateIcon",
-          value: 0,
-          label: "Paragraphs",
-          bg: "bg-green",
-        },
-      },
-      error: false,
-      errorMessage: "Something Went Wrong",
-      loaded: Object.keys(store.getters.getBlueprint).length ? true : false,
-      loading: false,
-      expandedArticles: [],
-      api_url:
-        process.env.NODE_ENV === "production"
-          ? "https://rubricseo-api.herokuapp.com/"
-          : "http://localhost:3001/",
+          : {
+              averageValues: {
+                averageWordCount: {
+                  icon: "AnnotationIcon",
+                  value: 0,
+                  label: "Words",
+                  bg: "bg-pink",
+                },
+                averageHeaderCount: {
+                  icon: "NewspaperIcon",
+                  value: 0,
+                  label: "Headers",
+                  bg: "bg-purple",
+                },
+                averageImageCount: {
+                  icon: "PhotographIcon",
+                  value: 0,
+                  label: "Images",
+                  bg: "bg-orange",
+                },
+                averageParagraphCount: {
+                  icon: "TemplateIcon",
+                  value: 0,
+                  label: "Paragraphs",
+                  bg: "bg-green",
+                },
+              },
+              expandedArticles: [],
+            },
     };
   },
   methods: {
     onClickExpand(index) {
-      if (this.expandedArticles.includes(index))
-        this.expandedArticles = this.expandedArticles.filter(
+      if (this.serpData.expandedArticles.includes(index))
+        this.serpData.expandedArticles = this.serpData.expandedArticles.filter(
           (i) => i !== index
         );
-      else this.expandedArticles.push(index);
+      else this.serpData.expandedArticles.push(index);
     },
-    search: async function () {
-      this.timeStart = performance.now();
+    generate: async function () {
+      this.search.timeStart = performance.now();
       this.$refs.topProgress.start();
-      this.loading = true;
+      this.loader.loading = true;
       try {
         let response = await fetch(
-          `${this.api_url}generate?keyword=${this.query}&amount=${this.amount}&device=${this.device}&location=${this.location}&peopleAlsoAsk=${this.peopleAlsoAsk}&fetchQuestions=${this.fetchQuestions}&domainAuthority=${this.domainAuthority}`
+          `${this.search.api_url}generate?keyword=${this.search.query}&amount=${this.search.amount}&device=${this.search.device}&location=${this.search.location}&peopleAlsoAsk=${this.search.peopleAlsoAsk}&fetchQuestions=${this.search.fetchQuestions}&domainAuthority=${this.search.domainAuthority}`
         );
         let data = await response.json();
         if (data.error) {
-          this.errorMessage = data.error.message;
-          this.setLoading(false, false, true);
+          this.errorHandler.errorMessage = data.error.message;
+          this.errorHandler.error = true;
+          this.loader.loaded = false;
+          this.loader.loading = false;
         } else {
-          this.idFromDb = data.id;
+          this.search.idFromDb = data.id;
           setTimeout(() => {
             this.retrieve(data.id);
           }, 5000);
@@ -611,7 +639,7 @@ export default {
         console.log("Fetching Data");
       }
       try {
-        let response = await fetch(`${this.api_url}retrieve?id=${id}`);
+        let response = await fetch(`${this.search.api_url}retrieve?id=${id}`);
         let data = await response.json();
 
         if (data.error) {
@@ -620,46 +648,46 @@ export default {
               this.retrieve(id, (retry = true));
             }, 2500);
           } else {
-            this.errorMessage = data.error.message;
-            this.setLoading(false, false, true);
+            this.errorHandler.errorMessage = data.error.message;
+            this.loader.loaded = false;
+            this.loader.loading = false;
+            this.errorHandler.error = true;
           }
         } else {
-          this.apiResponse = data[0];
+          this.serpData = { ...this.serpData, ...data[0] };
           this.massage();
-          this.$store.dispatch("addBluePrintData", data[0]);
-          this.setLoading(true, false, false);
-          this.idFromDb = "";
+          this.$store.dispatch("addBluePrintData", {
+            ...this.serpData,
+            ...data[0],
+          });
+          this.loader.loading = false;
+          this.loader.loaded = true;
+          this.search.idFromDb = "";
           this.$refs.topProgress.done();
           this.$nextTick(() =>
             VueScrollTo.scrollTo("#results", { offset: -90 })
           );
-          this.timeTaken = Math.round(
-            (performance.now() - this.timeStart) / 1000
+          this.search.timeTaken = Math.round(
+            (performance.now() - this.search.timeStart) / 1000
           );
         }
       } catch (err) {
-        this.errorMessage = "Something went wrong!";
+        this.errorHandler.errorMessage = "Something went wrong!";
       }
     },
     animateSearchBtn() {
-      this.animatedSearchBtn = true;
-    },
-    expandDetails() {},
-    setLoading(loaded, loading, error) {
-      this.loaded = loaded;
-      this.loading = loading;
-      this.error = error;
+      this.search.animatedSearchBtn = true;
     },
     deleteItem(index) {
-      this.apiResponse.results.splice(index, 1);
+      this.serpData.results.splice(index, 1);
       this.massage();
     },
     massage() {
       //Average Word Count
-      const countsNotZero = this.apiResponse.results.filter(
+      const countsNotZero = this.serpData.results.filter(
         (entry) => entry.wordCount !== 0
       );
-      this.averageValues.averageWordCount.value =
+      this.serpData.averageValues.averageWordCount.value =
         countsNotZero.length === 0
           ? null
           : Math.round(
@@ -668,10 +696,10 @@ export default {
             );
 
       //Average Header Count
-      const headersNotZero = this.apiResponse.results.filter(
+      const headersNotZero = this.serpData.results.filter(
         (entry) => entry.headers.length !== 0
       );
-      this.averageValues.averageHeaderCount.value =
+      this.serpData.averageValues.averageHeaderCount.value =
         headersNotZero.length === 0
           ? null
           : Math.round(
@@ -680,10 +708,10 @@ export default {
             );
 
       //Average Image Count
-      const imagesNotZero = this.apiResponse.results.filter(
+      const imagesNotZero = this.serpData.results.filter(
         (entry) => entry.imageCount !== 0
       );
-      this.averageValues.averageImageCount.value =
+      this.serpData.averageValues.averageImageCount.value =
         imagesNotZero.length === 0
           ? null
           : Math.round(
@@ -692,10 +720,10 @@ export default {
             );
 
       //Average Paragraph Count
-      const paragraphsNotZero = this.apiResponse.results.filter(
+      const paragraphsNotZero = this.serpData.results.filter(
         (entry) => entry.paragraphCount !== 0
       );
-      this.averageValues.averageParagraphCount.value =
+      this.serpData.averageValues.averageParagraphCount.value =
         paragraphsNotZero.length === 0
           ? null
           : Math.round(

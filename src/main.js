@@ -38,7 +38,7 @@ const routes = [
         component: Dashboard,
       },
       {
-        path: "",
+        path: "/login",
         name: "Login",
         component: view("Login"),
       },
@@ -68,6 +68,11 @@ const routes = [
         name: "Page Audit",
         component: view("Audit"),
         props: true,
+      },
+      {
+        path: "/privacy",
+        name: "Privacy Policy",
+        component: view("Privacy"),
       },
       { path: "*", name: "PageNotFound", component: view("PageNotFound") },
     ],
