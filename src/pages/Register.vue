@@ -5,7 +5,7 @@
         <h1 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
           Create account
         </h1>
-        <form @submit.prevent="formSubmit">
+        <form @submit.prevent="register">
           <label class="block text-sm">
             <span class="text-gray-700 dark:text-gray-400">Email</span>
             <input
@@ -13,6 +13,7 @@
               placeholder="Jane Doe"
               type="email"
               required
+              v-model="username"
             />
           </label>
           <label class="block mt-4 text-sm">
@@ -22,6 +23,7 @@
               placeholder="***************"
               type="password"
               required
+              v-model="password"
             />
           </label>
           <label class="block mt-4 text-sm">
@@ -76,10 +78,53 @@
 
 <script>
 export default {
-  name: "Login",
+  name: "Register",
+  data() {
+    return {
+      email: "",
+      password: "",
+      password_confirmation: "",
+      is_admin: null,
+      api_url:
+        process.env.NODE_ENV === "production"
+          ? "https://rubricseo-api.herokuapp.com/"
+          : "http://localhost:3001/",
+    };
+  },
   methods: {
-    formSubmit() {
-      alert("Registration Form Submitted!");
+    // register: async function () {
+    //   try {
+    //     const rawResponse = await fetch(`${this.api_url}register`, {
+    //       method: "POST",
+    //       headers: {
+    //         Accept: "application/json",
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify({
+    //         user: {
+    //           email: `${this.username}`,
+    //           password: `${this.password}`,
+    //         },
+    //       }),
+    //     });
+    //     const content = await rawResponse.json();
+
+    //     console.log(content);
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // },
+    register: function () {
+      let data = {
+        name: this.name,
+        email: this.email,
+        password: this.password,
+        is_admin: this.is_admin,
+      };
+      this.$store
+        .dispatch("register", data)
+        .then(() => this.$router.push("/"))
+        .catch((err) => console.log(err));
     },
   },
 };

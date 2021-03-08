@@ -8,13 +8,14 @@
           >
             Login
           </h1>
-          <form @submit.prevent="formSubmit">
+          <form @submit.prevent="login">
             <label class="block text-sm">
               <span class="text-gray-700 dark:text-gray-400">Email</span>
               <input
                 class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                 placeholder="Jane Doe"
                 type="email"
+                v-model="username"
                 required
               />
             </label>
@@ -24,6 +25,7 @@
                 class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                 placeholder="***************"
                 type="password"
+                v-model="password"
                 required
               />
             </label>
@@ -63,9 +65,46 @@
 <script>
 export default {
   name: "Login",
+  data() {
+    return {
+      username: "test333@gmail.com",
+      password: "sdkjhfdgdfgf4fuhfe",
+      api_url:
+        process.env.NODE_ENV === "production"
+          ? "https://rubricseo-api.herokuapp.com/"
+          : "http://localhost:3001/",
+    };
+  },
   methods: {
-    formSubmit() {
-      alert("Login Form Submitted!");
+    // login: async function () {
+    //   try {
+    //     const rawResponse = await fetch(`${this.api_url}login`, {
+    //       method: "POST",
+    //       headers: {
+    //         Accept: "application/json",
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify({
+    //         user: {
+    //           email: `${this.username}`,
+    //           password: `${this.password}`,
+    //         },
+    //       }),
+    //     });
+    //     const content = await rawResponse.json();
+
+    //     console.log(content);
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // },
+    login: function () {
+      let email = this.email;
+      let password = this.password;
+      this.$store
+        .dispatch("login", { email, password })
+        .then(() => this.$router.push("/"))
+        .catch((err) => console.log(err));
     },
   },
 };

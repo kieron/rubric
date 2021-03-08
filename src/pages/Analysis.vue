@@ -21,11 +21,11 @@
         Simply input your article phrase below. This can take up to a minute for
         larger result sets.
       </p>
-      <!-- <form
-        v-on:submit.prevent="retrieve('ba32d5dbd709d0de993a9292415e8ab0')"
+      <form
+        v-on:submit.prevent="retrieve('faed9a2f37d1d9d9f15609a482a5c749')"
         class="pb-2 my-5"
-      > -->
-      <form v-on:submit.prevent="generate()" class="pb-2 my-5">
+      >
+        <!-- <form v-on:submit.prevent="generate()" class="pb-2 my-5"> -->
         <div class="mb-5 sm:flex">
           <input
             type="text"
@@ -641,7 +641,6 @@ export default {
       try {
         let response = await fetch(`${this.search.api_url}retrieve?id=${id}`);
         let data = await response.json();
-        console.log(data);
         if (data.error) {
           if (data.error.message === "Data Not Ready [checkSerp.js - 36]") {
             setTimeout(() => {

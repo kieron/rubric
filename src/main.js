@@ -62,6 +62,9 @@ const routes = [
         name: "Blueprint Editor",
         component: view("Blueprint"),
         props: true,
+        meta: {
+          requiresAuth: true,
+        },
       },
       {
         path: "/page-audit",
@@ -86,6 +89,18 @@ const router = new Router({
   scrollBehavior(_, __, savedPosition) {
     return savedPosition || { x: 0, y: 0 };
   },
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (store.getters.isLoggedIn) {
+      next();
+      return;
+    }
+    next("/login");
+  } else {
+    next();
+  }
 });
 
 new Vue({

@@ -88,7 +88,13 @@
     >
       <a href="#" class="block px-4 py-2 hover:bg-gray-200">Account</a>
       <a href="#" class="block px-4 py-2 hover:bg-gray-200">Settings</a>
-      <a href="#" class="block px-4 py-2 hover:bg-gray-200">Logout</a>
+      <button
+        v-if="isLoggedIn"
+        @click="logout"
+        class="block px-4 py-2 hover:bg-gray-200"
+      >
+        Logout
+      </button>
     </div>
     <!-- dropdown menu end -->
   </div>
@@ -109,6 +115,9 @@ export default {
   name: "Navbar",
   computed: {
     ...mapState(["sideBarOpen"]),
+    isLoggedIn: function () {
+      return this.$store.getters.isLoggedIn;
+    },
   },
   components: {
     MenuItems,
@@ -125,7 +134,13 @@ export default {
       animatedCloseBtn: true,
     };
   },
+
   methods: {
+    logout: function () {
+      this.$store.dispatch("logout").then(() => {
+        this.$router.push("/login");
+      });
+    },
     toggleSidebar() {
       this.$store.dispatch("toggleSidebar");
     },
@@ -138,6 +153,16 @@ export default {
             .classList.remove("rotate-center");
       }, 3000);
     },
+  },
+  created: function () {
+    this.$http.interceptors.response.use(undefined, function (err) {
+      return new Promise(function () {
+        if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
+          this.$store.dispatch("logout");
+        }
+        throw err;
+      });
+    });
   },
 };
 </script>
