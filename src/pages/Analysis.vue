@@ -641,7 +641,7 @@ export default {
       try {
         let response = await fetch(`${this.search.api_url}retrieve?id=${id}`);
         let data = await response.json();
-
+        console.log(data);
         if (data.error) {
           if (data.error.message === "Data Not Ready [checkSerp.js - 36]") {
             setTimeout(() => {
@@ -654,11 +654,11 @@ export default {
             this.errorHandler.error = true;
           }
         } else {
-          this.serpData = { ...this.serpData, ...data[0] };
+          this.serpData = { ...this.serpData, ...data };
           this.massage();
           this.$store.dispatch("addBluePrintData", {
             ...this.serpData,
-            ...data[0],
+            ...data,
           });
           this.loader.loading = false;
           this.loader.loaded = true;
