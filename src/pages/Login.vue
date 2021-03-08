@@ -15,7 +15,7 @@
                 class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                 placeholder="Jane Doe"
                 type="email"
-                v-model="username"
+                v-model="email"
                 required
               />
             </label>
@@ -67,7 +67,7 @@ export default {
   name: "Login",
   data() {
     return {
-      username: "test333@gmail.com",
+      email: "test333@gmail.com",
       password: "sdkjhfdgdfgf4fuhfe",
       api_url:
         process.env.NODE_ENV === "production"
@@ -76,34 +76,12 @@ export default {
     };
   },
   methods: {
-    // login: async function () {
-    //   try {
-    //     const rawResponse = await fetch(`${this.api_url}login`, {
-    //       method: "POST",
-    //       headers: {
-    //         Accept: "application/json",
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify({
-    //         user: {
-    //           email: `${this.username}`,
-    //           password: `${this.password}`,
-    //         },
-    //       }),
-    //     });
-    //     const content = await rawResponse.json();
-
-    //     console.log(content);
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // },
     login: function () {
       let email = this.email;
       let password = this.password;
       this.$store
         .dispatch("login", { email, password })
-        .then(() => this.$router.push("/"))
+        .then(() => this.$router.push("/dashboard"))
         .catch((err) => console.log(err));
     },
   },

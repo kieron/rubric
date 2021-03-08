@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="{ sticky: $route.name !== 'Blueprint Editor' }"
+    :class="{ sticky: $route.name !== 'Blueprint Editorz' }"
     class="top-0 z-40"
   >
     <transition
@@ -15,7 +15,7 @@
         <div class="flex items-center">
           <router-link
             active-class="bg-gray-25"
-            to="/"
+            to="/dashboard"
             @click.native="toggleSidebar()"
             class="flex items-center w-full h-20 px-4"
           >
@@ -86,8 +86,12 @@
       class="absolute right-0 w-48 mr-6 text-gray-700 border border-t-0 rounded-b-lg shadow-xl bg-gray-25"
       :class="dropDownOpen ? '' : 'hidden'"
     >
-      <a href="#" class="block px-4 py-2 hover:bg-gray-200">Account</a>
-      <a href="#" class="block px-4 py-2 hover:bg-gray-200">Settings</a>
+      <a v-if="isLoggedIn" href="#" class="block px-4 py-2 hover:bg-gray-200"
+        >Account</a
+      >
+      <a v-if="isLoggedIn" href="#" class="block px-4 py-2 hover:bg-gray-200"
+        >Settings</a
+      >
       <button
         v-if="isLoggedIn"
         @click="logout"
@@ -95,6 +99,20 @@
       >
         Logout
       </button>
+
+      <router-link
+        to="/login"
+        class="block px-4 py-2 hover:bg-gray-200"
+        v-if="!isLoggedIn"
+        >Login</router-link
+      >
+
+      <router-link
+        to="/register"
+        class="block px-4 py-2 hover:bg-gray-200"
+        v-if="!isLoggedIn"
+        >Register</router-link
+      >
     </div>
     <!-- dropdown menu end -->
   </div>
@@ -154,16 +172,16 @@ export default {
       }, 3000);
     },
   },
-  created: function () {
-    this.$http.interceptors.response.use(undefined, function (err) {
-      return new Promise(function () {
-        if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
-          this.$store.dispatch("logout");
-        }
-        throw err;
-      });
-    });
-  },
+  // created: function () {
+  //   this.$http.interceptors.response.use(undefined, function (err) {
+  //     return new Promise(function () {
+  //       if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
+  //         this.$store.dispatch("logout");
+  //       }
+  //       throw err;
+  //     });
+  //   });
+  // },
 };
 </script>
 

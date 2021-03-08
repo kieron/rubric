@@ -13,7 +13,7 @@
               placeholder="Jane Doe"
               type="email"
               required
-              v-model="username"
+              v-model="email"
             />
           </label>
           <label class="block mt-4 text-sm">
@@ -34,6 +34,7 @@
               class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
               placeholder="***************"
               type="password"
+              v-model="password_confirmation"
               required
             />
           </label>
@@ -81,9 +82,9 @@ export default {
   name: "Register",
   data() {
     return {
-      email: "",
-      password: "",
-      password_confirmation: "",
+      email: "test@gmail.com",
+      password: "test",
+      password_confirmation: "test",
       is_admin: null,
       api_url:
         process.env.NODE_ENV === "production"
@@ -92,28 +93,6 @@ export default {
     };
   },
   methods: {
-    // register: async function () {
-    //   try {
-    //     const rawResponse = await fetch(`${this.api_url}register`, {
-    //       method: "POST",
-    //       headers: {
-    //         Accept: "application/json",
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify({
-    //         user: {
-    //           email: `${this.username}`,
-    //           password: `${this.password}`,
-    //         },
-    //       }),
-    //     });
-    //     const content = await rawResponse.json();
-
-    //     console.log(content);
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // },
     register: function () {
       let data = {
         name: this.name,
@@ -123,7 +102,7 @@ export default {
       };
       this.$store
         .dispatch("register", data)
-        .then(() => this.$router.push("/"))
+        .then(() => this.$router.push("/dashboard"))
         .catch((err) => console.log(err));
     },
   },

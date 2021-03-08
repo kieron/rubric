@@ -36,6 +36,9 @@ const routes = [
         path: "/dashboard",
         name: "Dashboard",
         component: Dashboard,
+        meta: {
+          requiresAuth: true,
+        },
       },
       {
         path: "/login",
@@ -56,6 +59,9 @@ const routes = [
         path: "/analysis",
         name: "SERP Analysis",
         component: view("Analysis"),
+        meta: {
+          requiresAuth: true,
+        },
       },
       {
         path: "/blueprint",
@@ -71,6 +77,9 @@ const routes = [
         name: "Page Audit",
         component: view("Audit"),
         props: true,
+        meta: {
+          requiresAuth: true,
+        },
       },
       {
         path: "/privacy",
