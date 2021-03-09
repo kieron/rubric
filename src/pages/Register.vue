@@ -1,5 +1,7 @@
 <template>
-  <div class="flex-1 h-full max-w-4xl mx-auto overflow-hidden dark:bg-gray-800">
+  <div
+    class="flex-1 h-full max-w-4xl mx-auto overflow-hidden dark:bg-gray-800 slide-in-right"
+  >
     <div class="flex items-center justify-center p-6 sm:p-12">
       <div class="w-full">
         <h1 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">

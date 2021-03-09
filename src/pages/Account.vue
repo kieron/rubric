@@ -1,5 +1,5 @@
 <template>
-  <div id="analysis">
+  <div id="analysis" class="slide-in-right">
     <Breadcrumb />
     <BetaMessage
       class="flex flex-row items-center p-5 mb-8 bg-blue-200 border-b-2 border-blue-300 rounded alert"

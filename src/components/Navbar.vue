@@ -167,7 +167,7 @@ export default {
     logout: function () {
       this.$store.dispatch("logout").then(() => {
         this.dropDownOpen = !this.dropDownOpen;
-        this.$router.push("/login");
+        this.$router.push("/");
       });
     },
     toggleSidebar() {

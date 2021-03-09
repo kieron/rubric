@@ -1,5 +1,5 @@
 <template>
-  <div id="home">
+  <div id="home" class="slide-in-right">
     <div class="flex bg-white" style="height: 600px">
       <div
         class="flex items-center px-8 text-center lg:text-left md:px-12 lg:w-1/2"

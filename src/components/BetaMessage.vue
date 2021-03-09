@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-blue-100 border-2 border-blue-500 rounded-full alert-icon"
+      class="flex items-center justify-center flex-shrink-0 bg-blue-100 border-2 border-blue-500 rounded-full md:h-10 md:w-10 w-7 h-7 alert-icon"
     >
       <span class="text-blue-500">
         <InformationCircleIcon class="w-6 h-6" />

@@ -1,5 +1,7 @@
 <template>
-  <div class="flex-1 h-full max-w-4xl mx-auto overflow-hidden dark:bg-gray-800">
+  <div
+    class="flex-1 h-full max-w-4xl mx-auto overflow-hidden slide-in-right dark:bg-gray-800"
+  >
     <div class="flex flex-col overflow-y-auto">
       <div class="flex items-center justify-center p-6 sm:p-12">
         <div class="w-full">
@@ -114,7 +116,7 @@ export default {
       try {
         await this.$store.dispatch("login", { email, password });
         if (this.authStatus === "success") {
-          this.$router.push("/");
+          this.$router.push("/account");
         }
       } catch (err) {
         console.log(err);
@@ -127,81 +129,4 @@ export default {
 </script>
 
 <style scoped>
-.swing-in-top-fwd {
-  -webkit-animation: swing-in-top-fwd 0.5s
-    cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
-  animation: swing-in-top-fwd 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
-}
-
-@-webkit-keyframes swing-in-top-fwd {
-  0% {
-    -webkit-transform: rotateX(-100deg);
-    transform: rotateX(-100deg);
-    -webkit-transform-origin: top;
-    transform-origin: top;
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: rotateX(0deg);
-    transform: rotateX(0deg);
-    -webkit-transform-origin: top;
-    transform-origin: top;
-    opacity: 1;
-  }
-}
-@keyframes swing-in-top-fwd {
-  0% {
-    -webkit-transform: rotateX(-100deg);
-    transform: rotateX(-100deg);
-    -webkit-transform-origin: top;
-    transform-origin: top;
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: rotateX(0deg);
-    transform: rotateX(0deg);
-    -webkit-transform-origin: top;
-    transform-origin: top;
-    opacity: 1;
-  }
-}
-
-.swing-in-top-fwd {
-  -webkit-animation: swing-in-top-fwd 0.8s
-    cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
-  animation: swing-in-top-fwd 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
-}
-
-@-webkit-keyframes swing-in-top-fwd {
-  0% {
-    -webkit-transform: rotateX(-100deg);
-    transform: rotateX(-100deg);
-    -webkit-transform-origin: top;
-    transform-origin: top;
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: rotateX(0deg);
-    transform: rotateX(0deg);
-    -webkit-transform-origin: top;
-    transform-origin: top;
-    opacity: 1;
-  }
-}
-@keyframes swing-in-top-fwd {
-  0% {
-    -webkit-transform: rotateX(-100deg);
-    transform: rotateX(-100deg);
-    -webkit-transform-origin: top;
-    transform-origin: top;
-    opacity: 0;
-  }
-  100% {
-    -webkit-transform: rotateX(0deg);
-    transform: rotateX(0deg);
-    -webkit-transform-origin: top;
-    transform-origin: top;
-    opacity: 1;
-  }
-}
 </style>
