@@ -5,7 +5,7 @@
     <p class="mb-2 lg:mb-0">©RUBRIC Copyright 2021</p>
 
     <div class="flex text-sm text-gray-600 md:text-base">
-      <a href="/dashboard" class="mr-6 hover:text-gray-900">Terms of Service</a>
+      <a href="/" class="mr-6 hover:text-gray-900">Terms of Service</a>
       <router-link to="/privacy" class="mr-6 hover:text-gray-900"
         >Privacy Policy</router-link
       >

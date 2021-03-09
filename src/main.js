@@ -8,7 +8,6 @@ import LoadScript from "vue-plugin-load-script";
 import Default from "@/layouts/Default";
 
 // Views
-import Dashboard from "@/pages/Dashboard";
 const view = (name) => () => import(`@/pages/${name}.vue`);
 
 import "@/assets/css/tailwind.css";
@@ -33,11 +32,11 @@ const routes = [
     component: Default,
     children: [
       {
-        path: "/dashboard",
-        name: "Dashboard",
-        component: Dashboard,
+        path: "/",
+        name: "Home",
+        component: view("Home"),
         meta: {
-          requiresAuth: true,
+          requiresAuth: false,
         },
       },
       {
@@ -103,11 +102,14 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (store.getters.isLoggedIn) {
+      // console.log("Required Auth, But Logged In");
       next();
       return;
     }
+    // console.log("Required Auth, Not Logged In");
     next("/login");
   } else {
+    // console.log("Doesn't Require Auth");
     next();
   }
 });

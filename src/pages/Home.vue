@@ -20,7 +20,14 @@
             <router-link
               class="flex items-center self-center h-16 px-4 mb-2 font-semibold text-white duration-150 bg-indigo-600 rounded-lg hover:bg-indigo-500 focus:outline-none"
               to="/analysis"
+              v-if="isLoggedIn"
               >SERP Analysis</router-link
+            >
+            <router-link
+              class="flex items-center self-center h-16 px-4 mb-2 font-semibold text-white duration-150 bg-indigo-600 rounded-lg hover:bg-indigo-500 focus:outline-none"
+              to="/login"
+              v-if="!isLoggedIn"
+              >Login</router-link
             >
             <router-link
               class="flex items-center self-center h-16 px-4 mb-2 ml-2 font-semibold text-center text-gray-300 duration-150 bg-gray-700 rounded-lg hover:bg-gray-300 hover:text-gray-700 focus:outline-none"
@@ -37,5 +44,10 @@
 <script>
 export default {
   name: "Home",
+  computed: {
+    isLoggedIn: function () {
+      return this.$store.getters.isLoggedIn;
+    },
+  },
 };
 </script>

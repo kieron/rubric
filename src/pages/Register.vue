@@ -55,13 +55,22 @@
             </label>
           </div>
           <button
-            class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-indigo-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-indigo-700 focus:outline-none focus:shadow-outline-purple"
+            class="flex items-center justify-center w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white align-middle transition-colors duration-150 bg-indigo-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-indigo-700 focus:outline-none focus:shadow-outline-purple"
             type="submit"
           >
-            Create Account
+            <span v-if="authStatus !== 'loading'">Create Account</span>
+            <LoadingSpinner
+              class="w-5 h-5 ml-3 fill-current"
+              v-if="authStatus === 'loading'"
+            />
           </button>
           <!-- You should use a button here, as the anchor is only used for the example  -->
         </form>
+        <ErrorMessage
+          class="flex flex-row items-center p-5 mt-5 bg-red-200 border-b-2 border-red-300 rounded alert swing-in-top-fwd"
+          v-bind:message="$store.getters.authStatus.message"
+          v-if="authStatus !== 'success' && authStatus.message"
+        />
         <hr class="my-8" />
 
         <p class="mt-2">
@@ -78,8 +87,25 @@
 </template>
 
 <script>
+import ErrorMessage from "@/components/ErrorMessage";
+import LoadingSpinner from "@/components/LoadingSpinner";
 export default {
   name: "Register",
+  components: {
+    ErrorMessage,
+    LoadingSpinner,
+  },
+  computed: {
+    isLoggedIn: function () {
+      return this.$store.getters.isLoggedIn;
+    },
+    authStatus: function () {
+      return this.$store.getters.authStatus;
+    },
+  },
+  mounted() {
+    if (this.isLoggedIn === true) this.$router.push("/");
+  },
   data() {
     return {
       email: "test@gmail.com",
@@ -90,6 +116,9 @@ export default {
         process.env.NODE_ENV === "production"
           ? "https://rubricseo-api.herokuapp.com/"
           : "http://localhost:3001/",
+      loader: {
+        loading: false,
+      },
     };
   },
   methods: {
@@ -102,7 +131,12 @@ export default {
       };
       this.$store
         .dispatch("register", data)
-        .then(() => this.$router.push("/dashboard"))
+        .then(() => {
+          if (this.$store.getters.authStatus === "success") {
+            this.$router.push("/");
+          }
+          this.loader.loading = false;
+        })
         .catch((err) => console.log(err));
     },
   },

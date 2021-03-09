@@ -15,7 +15,7 @@
         <router-link
           active-class="bg-indigo-600"
           class="flex items-center justify-center w-40 h-16 px-4 mb-2 font-semibold text-center text-white duration-150 bg-indigo-600 rounded-lg hover:bg-indigo-500 focus:outline-none"
-          to="/dashboard"
+          to="/"
           >Go Home</router-link
         >
       </div>

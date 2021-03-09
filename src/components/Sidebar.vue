@@ -5,7 +5,7 @@
   >
     <router-link
       active-class="bg-gray-25"
-      to="/dashboard"
+      to="/"
       class="flex items-center w-full h-20 px-4 mb-8 text-gray-800 hover:text-indigo-600"
     >
       <DocumentTextIcon class="w-8 h-8 ml-2 text-indigo-600" />

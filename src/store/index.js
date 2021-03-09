@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import axios from "axios";
+// import axios from "axios";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -20,6 +20,7 @@ export default new Vuex.Store({
   getters: {
     isLoggedIn: (state) => !!state.token,
     authStatus: (state) => state.status,
+    userDetails: (state) => state.user,
 
     getBlueprint: (state) => {
       return state.blueprintData;
@@ -72,8 +73,8 @@ export default new Vuex.Store({
       state.token = token;
       state.user = user;
     },
-    auth_error(state) {
-      state.status = "error";
+    auth_error(state, msg) {
+      state.status = msg;
     },
     logout(state) {
       state.status = "";
@@ -104,17 +105,19 @@ export default new Vuex.Store({
             user,
           }),
         };
-        let response = await fetch(url, options);
-        let data = await response.json();
-        if (data.error) {
-          console.log(data.error);
-        } else {
-          const token = data.user.token;
-          const user = data.user;
-          console.log(user);
-          localStorage.setItem("token", token);
-          // axios.defaults.headers.common["Authorization"] = token;
-          commit("auth_success", token, user);
+        try {
+          let response = await fetch(url, options);
+          let data = await response.json();
+          if (data.error) {
+            console.log(data.error);
+            commit("auth_error", data.error);
+          } else {
+            const token = data.user.token;
+            localStorage.setItem("token", token);
+            commit("auth_success", token, user);
+          }
+        } catch (error) {
+          commit("auth_error", error);
         }
       })();
     },
@@ -136,34 +139,19 @@ export default new Vuex.Store({
         let data = await response.json();
         if (data.error) {
           console.log(data.error);
+          commit("auth_error", data.error);
         } else {
           const token = data.user.token;
           const user = data.user;
-          console.log(user);
           localStorage.setItem("token", token);
-          axios.defaults.headers.common["Authorization"] = token;
           commit("auth_success", token, user);
         }
-        // axios({ url: state.api_url, data: user, method: "POST" })
-        //   .then((resp) => {
-        //     const token = resp.data.token;
-        //     const user = resp.data.user;
-        //     localStorage.setItem("token", token);
-        //     commit("auth_success", token, user);
-        //     resolve(resp);
-        //   })
-        //   .catch((err) => {
-        //     commit("auth_error", err);
-        //     localStorage.removeItem("token");
-        //     reject(err);
-        //   });
       })();
     },
     logout({ commit }) {
       return new Promise((resolve) => {
         commit("logout");
         localStorage.removeItem("token");
-        delete axios.defaults.headers.common["Authorization"];
         resolve();
       });
     },

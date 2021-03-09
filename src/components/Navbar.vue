@@ -15,7 +15,7 @@
         <div class="flex items-center">
           <router-link
             active-class="bg-gray-25"
-            to="/dashboard"
+            to="/"
             @click.native="toggleSidebar()"
             class="flex items-center w-full h-20 px-4"
           >
@@ -95,7 +95,8 @@
       <button
         v-if="isLoggedIn"
         @click="logout"
-        class="block px-4 py-2 hover:bg-gray-200"
+        class="flex w-full px-4 py-2 flex-start hover:bg-gray-200"
+        title="Log Out"
       >
         Logout
       </button>
@@ -135,6 +136,9 @@ export default {
     ...mapState(["sideBarOpen"]),
     isLoggedIn: function () {
       return this.$store.getters.isLoggedIn;
+    },
+    authStatus: function () {
+      return this.$store.getters.authStatus;
     },
   },
   components: {

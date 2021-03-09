@@ -30,14 +30,23 @@
               />
             </label>
 
-            <!-- You should use a button here, as the anchor is only used for the example  -->
             <button
               type="submit"
-              class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-indigo-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-indigo-700 focus:outline-none focus:shadow-outline-purple"
+              class="flex items-center justify-center w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white align-middle transition-colors duration-150 bg-indigo-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-indigo-700 focus:outline-none focus:shadow-outline-purple"
+              :disabled="this.loader.loading == 1"
             >
-              Log In
+              <span v-if="authStatus !== 'loading'">Log In</span>
+              <LoadingSpinner
+                class="w-5 h-5 ml-3 fill-current"
+                v-if="authStatus === 'loading'"
+              />
             </button>
           </form>
+          <ErrorMessage
+            class="flex flex-row items-center p-5 mt-5 bg-red-200 border-b-2 border-red-300 rounded alert swing-in-top-fwd"
+            v-bind:message="$store.getters.authStatus.message"
+            v-if="authStatus !== 'success' && authStatus.message"
+          />
           <hr class="my-8" />
 
           <p class="mt-4">
@@ -63,8 +72,26 @@
 </template>
 
 <script>
+import ErrorMessage from "@/components/ErrorMessage";
+import LoadingSpinner from "@/components/LoadingSpinner";
+
 export default {
   name: "Login",
+  components: {
+    ErrorMessage,
+    LoadingSpinner,
+  },
+  computed: {
+    isLoggedIn: function () {
+      return this.$store.getters.isLoggedIn;
+    },
+    authStatus: function () {
+      return this.$store.getters.authStatus;
+    },
+  },
+  mounted() {
+    if (this.isLoggedIn === true) this.$router.push("/");
+  },
   data() {
     return {
       email: "test333@gmail.com",
@@ -73,17 +100,122 @@ export default {
         process.env.NODE_ENV === "production"
           ? "https://rubricseo-api.herokuapp.com/"
           : "http://localhost:3001/",
+
+      loader: {
+        loading: false,
+      },
     };
   },
   methods: {
     login: function () {
+      this.loader.loading = true;
       let email = this.email;
       let password = this.password;
       this.$store
         .dispatch("login", { email, password })
-        .then(() => this.$router.push("/dashboard"))
-        .catch((err) => console.log(err));
+        .then(() => {
+          if (this.authStatus === "success") {
+            this.$router.push("/");
+          }
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          this.loader.loading = false;
+        });
     },
+
+    // async login2() {
+    //   let email = this.email;
+    //   let password = this.password;
+    //   try {
+    //       await this.$store.dispatch("login", { email, password });
+    //     this.$router.push("/");
+    //    } catch(err) {
+    //         this.$store.commit("SET_ERROR", err);
+    //    } finally {
+    //         this.$store.commit("SET_LOADING", false);
+    //    }
+    // },
   },
 };
 </script>
+
+<style scoped>
+.swing-in-top-fwd {
+  -webkit-animation: swing-in-top-fwd 0.5s
+    cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  animation: swing-in-top-fwd 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+@-webkit-keyframes swing-in-top-fwd {
+  0% {
+    -webkit-transform: rotateX(-100deg);
+    transform: rotateX(-100deg);
+    -webkit-transform-origin: top;
+    transform-origin: top;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    -webkit-transform-origin: top;
+    transform-origin: top;
+    opacity: 1;
+  }
+}
+@keyframes swing-in-top-fwd {
+  0% {
+    -webkit-transform: rotateX(-100deg);
+    transform: rotateX(-100deg);
+    -webkit-transform-origin: top;
+    transform-origin: top;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    -webkit-transform-origin: top;
+    transform-origin: top;
+    opacity: 1;
+  }
+}
+
+.swing-in-top-fwd {
+  -webkit-animation: swing-in-top-fwd 0.8s
+    cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  animation: swing-in-top-fwd 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+@-webkit-keyframes swing-in-top-fwd {
+  0% {
+    -webkit-transform: rotateX(-100deg);
+    transform: rotateX(-100deg);
+    -webkit-transform-origin: top;
+    transform-origin: top;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    -webkit-transform-origin: top;
+    transform-origin: top;
+    opacity: 1;
+  }
+}
+@keyframes swing-in-top-fwd {
+  0% {
+    -webkit-transform: rotateX(-100deg);
+    transform: rotateX(-100deg);
+    -webkit-transform-origin: top;
+    transform-origin: top;
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: rotateX(0deg);
+    transform: rotateX(0deg);
+    -webkit-transform-origin: top;
+    transform-origin: top;
+    opacity: 1;
+  }
+}
+</style>
