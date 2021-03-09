@@ -4,12 +4,20 @@
     v-if="data.length"
   >
     <h3 class="font-bold text-gray-700 text-md">{{ title }}</h3>
-    <p class="mt-2 text-xl text-gray-500">
+    <p class="mt-2 text-xl text-gray-500" v-if="weighted.length">
       You may wish to include these in your content.
     </p>
     <p class="mt-2 text-sm text-gray-500">
-      We are currently showing the ones we think are relevant, use the button
-      below to see all popular headers.
+      <span v-if="weighted.length"
+        >We are currently showing the ones we think are relevant, you can click
+        show more to reveal all remaining popular headers.</span
+      >
+      <span v-if="!weighted.length"
+        >We found some headers that were repeated across articles, but they wont
+        be included in your blueprint initially, as we couldnt find any keywords
+        in them. You can click below to review all remaining popular
+        headers.</span
+      >
     </p>
     <div class="flex flex-wrap my-3 -m-1">
       <div
@@ -42,7 +50,10 @@
       title="Show More"
       class="flex items-center text-gray-500"
     >
-      <span class="mr-1 text-sm">Show More</span>
+      <span class="mr-1 text-sm" v-if="!weighted.length"
+        >Show Popular Headers without Keyword</span
+      >
+      <span class="mr-1 text-sm" v-if="weighted.length">Show More</span>
       <ChevronDownIcon class="inline w-4 h-4" />
     </button>
     <div

@@ -24,9 +24,9 @@
           for larger result sets.
         </p>
         <!-- <form
-        v-on:submit.prevent="retrieve('faed9a2f37d1d9d9f15609a482a5c749')"
-        class="pb-2 my-5"
-      > -->
+          v-on:submit.prevent="retrieve('faed9a2f37d1d9d9f15609a482a5c749')"
+          class="pb-2 my-5"
+        > -->
         <form v-on:submit.prevent="generate()" class="pb-2 my-5">
           <div class="mb-5 sm:flex">
             <input
@@ -76,17 +76,17 @@
               You don't need to set these, unless you really want too.
             </p>
             <div class="mb-3 sm:flex sm:justify-between">
-              <div class="relative sm:w-1/3">
+              <div class="relative sm:w-1/4 sm:mr-2">
                 <select
                   class="w-full h-16 px-3 text-sm bg-white border rounded-lg appearance-none focus:outline-none"
-                  name="location"
-                  id="location"
+                  name="engine"
+                  id="engine"
                   required
-                  v-model="search.location"
+                  v-model="search.engine"
                 >
-                  <option value="United States">United States</option>
-                  <option value="United Kingdom">United Kingdom</option>
-                  <option value="Canada">Canada</option>
+                  <option value="google">Google</option>
+                  <option value="bing">Bing</option>
+                  <option value="yahoo">Yahoo</option>
                 </select>
                 <div
                   class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-600 pointer-events-none"
@@ -94,9 +94,27 @@
                   <ChevronDownIcon class="w-6 h-6" />
                 </div>
               </div>
-              <div class="relative sm:w-1/3 sm:mx-2">
+              <div class="relative sm:w-1/4 sm:mr-2">
                 <select
-                  class="w-full h-16 px-3 mx-0 my-2 text-sm bg-white border rounded-lg appearance-none focus:outline-none sm:my-0"
+                  class="w-full h-16 px-3 mt-2 text-sm bg-white border rounded-lg appearance-none sm:mt-0 focus:outline-none"
+                  name="location"
+                  id="location"
+                  required
+                  v-model="search.location"
+                >
+                  <option value="United States">United States</option>
+                  <option value="United Kingdom">United Kingdom</option>
+                  <option value="af">Afghanistan</option>
+                </select>
+                <div
+                  class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-600 pointer-events-none"
+                >
+                  <ChevronDownIcon class="w-6 h-6" />
+                </div>
+              </div>
+              <div class="relative sm:w-1/4 sm:mr-2">
+                <select
+                  class="w-full h-16 px-3 mx-0 mt-2 text-sm bg-white border rounded-lg appearance-none sm:mt-0 focus:outline-none sm:my-0"
                   name="device"
                   id="device"
                   required
@@ -112,9 +130,9 @@
                   <ChevronDownIcon class="w-6 h-6" />
                 </div>
               </div>
-              <div class="relative sm:w-1/3">
+              <div class="relative sm:w-1/4">
                 <input
-                  class="w-full h-16 px-3 text-sm bg-white border rounded-lg focus:outline-none"
+                  class="w-full h-16 px-3 mt-2 text-sm bg-white border rounded-lg sm:mt-0 focus:outline-none"
                   type="number"
                   id="quantity"
                   name="quantity"
@@ -166,8 +184,8 @@
           <div class="my-8 md:flex">
             <div
               :class="{
-                'md:w-1/2 md:mr-3 xl:w-1/3': serpData.relatedQuestions,
-                'w-full': !serpData.relatedQuestions,
+                'md:w-1/2 md:mr-3 xl:w-1/3': serpData.relatedQuestions.length,
+                'w-full': !serpData.relatedQuestions.length,
               }"
               class="flex flex-col"
               v-if="
@@ -224,7 +242,7 @@
               </div>
             </div>
             <div
-              v-if="serpData.relatedQuestions"
+              v-if="serpData.relatedQuestions.length"
               class="flex flex-col flex-grow order-last w-full mt-5 xl:w-2/3 md:mt-0"
             >
               <p class="mb-4 text-xl font-semibold text-gray-700">
@@ -549,6 +567,7 @@ export default {
         amount: 50,
         device: "desktop",
         location: "United States",
+        engine: "google",
         idFromDb: "",
         peopleAlsoAsk: true,
         fetchQuestions: true,
@@ -620,7 +639,7 @@ export default {
       this.loader.loading = true;
       try {
         let response = await fetch(
-          `${this.search.api_url}generate?keyword=${this.search.query}&amount=${this.search.amount}&device=${this.search.device}&location=${this.search.location}&peopleAlsoAsk=${this.search.peopleAlsoAsk}&fetchQuestions=${this.search.fetchQuestions}&domainAuthority=${this.search.domainAuthority}`,
+          `${this.search.api_url}generate?keyword=${this.search.query}&amount=${this.search.amount}&device=${this.search.device}&location=${this.search.location}&engine=${this.search.engine}&fetchQuestions=${this.search.fetchQuestions}&domainAuthority=${this.search.domainAuthority}`,
           {
             headers: {
               Authorization: `Token ${localStorage.getItem("token")}`,
