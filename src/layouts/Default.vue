@@ -16,9 +16,9 @@
           <button
             @click="toggleContainer"
             title="Toggle Layout"
-            class="hidden text-gray-600 2xl:block"
+            class="absolute right-0 z-10 hidden mr-6 text-gray-600 2xl:block"
           >
-            <ViewGridIcon class="absolute right-0 mr-6 mt-0.5" />
+            <ViewGridIcon class="mt-0.5" />
           </button>
           <router-view />
         </div>
