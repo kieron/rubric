@@ -11,7 +11,7 @@ export default new Vuex.Store({
     accessToken: null,
     status: "",
     token: localStorage.getItem("token") || "",
-    user: {},
+    user: JSON.parse(localStorage.getItem("user")) || {},
     api_url:
       process.env.NODE_ENV === "production"
         ? "https://rubricseo-api.herokuapp.com"
@@ -20,11 +20,10 @@ export default new Vuex.Store({
   getters: {
     isLoggedIn: (state) => !!state.token,
     authStatus: (state) => state.status,
-    userDetails: (state) => state.user,
-
-    getBlueprint: (state) => {
-      return state.blueprintData;
-    },
+    userDetails: () => JSON.parse(localStorage.getItem("user")),
+    getBlueprint: (state) => state.blueprintData,
+    sideBarOpen: (state) => state.sideBarOpen,
+    containerFull: (state) => state.containerFull,
     getQuestions: (state) => {
       var questions = [];
       if (Object.keys(state.blueprintData).length) {
@@ -47,12 +46,6 @@ export default new Vuex.Store({
         }
       }
       return headers.filter(onlyUnique);
-    },
-    sideBarOpen: (state) => {
-      return state.sideBarOpen;
-    },
-    containerFull: (state) => {
-      return state.containerFull;
     },
   },
   mutations: {
@@ -79,6 +72,8 @@ export default new Vuex.Store({
     logout(state) {
       state.status = "";
       state.token = "";
+      state.user = {};
+      // location.reload();
     },
   },
   actions: {
@@ -109,11 +104,13 @@ export default new Vuex.Store({
           let response = await fetch(url, options);
           let data = await response.json();
           if (data.error) {
-            console.log(data.error);
             commit("auth_error", data.error);
           } else {
             const token = data.user.token;
+            const user = data.user;
+            delete user.password;
             localStorage.setItem("token", token);
+            localStorage.setItem("user", JSON.stringify(user));
             commit("auth_success", token, user);
           }
         } catch (error) {
@@ -138,12 +135,13 @@ export default new Vuex.Store({
         let response = await fetch(url, options);
         let data = await response.json();
         if (data.error) {
-          console.log(data.error);
           commit("auth_error", data.error);
         } else {
           const token = data.user.token;
           const user = data.user;
+          delete user.password;
           localStorage.setItem("token", token);
+          localStorage.setItem("user", JSON.stringify(user));
           commit("auth_success", token, user);
         }
       })();
@@ -152,6 +150,7 @@ export default new Vuex.Store({
       return new Promise((resolve) => {
         commit("logout");
         localStorage.removeItem("token");
+        localStorage.removeItem("user");
         resolve();
       });
     },

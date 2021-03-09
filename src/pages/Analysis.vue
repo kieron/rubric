@@ -21,11 +21,11 @@
         Simply input your article phrase below. This can take up to a minute for
         larger result sets.
       </p>
-      <form
+      <!-- <form
         v-on:submit.prevent="retrieve('faed9a2f37d1d9d9f15609a482a5c749')"
         class="pb-2 my-5"
-      >
-        <!-- <form v-on:submit.prevent="generate()" class="pb-2 my-5"> -->
+      > -->
+      <form v-on:submit.prevent="generate()" class="pb-2 my-5">
         <div class="mb-5 sm:flex">
           <input
             type="text"
@@ -614,7 +614,12 @@ export default {
       this.loader.loading = true;
       try {
         let response = await fetch(
-          `${this.search.api_url}generate?keyword=${this.search.query}&amount=${this.search.amount}&device=${this.search.device}&location=${this.search.location}&peopleAlsoAsk=${this.search.peopleAlsoAsk}&fetchQuestions=${this.search.fetchQuestions}&domainAuthority=${this.search.domainAuthority}`
+          `${this.search.api_url}generate?keyword=${this.search.query}&amount=${this.search.amount}&device=${this.search.device}&location=${this.search.location}&peopleAlsoAsk=${this.search.peopleAlsoAsk}&fetchQuestions=${this.search.fetchQuestions}&domainAuthority=${this.search.domainAuthority}`,
+          {
+            headers: {
+              Authorization: `Token ${localStorage.getItem("token")}`,
+            },
+          }
         );
         let data = await response.json();
         if (data.error) {
@@ -639,7 +644,11 @@ export default {
         console.log("Fetching Data");
       }
       try {
-        let response = await fetch(`${this.search.api_url}retrieve?id=${id}`);
+        let response = await fetch(`${this.search.api_url}retrieve?id=${id}`, {
+          headers: {
+            Authorization: `Token ${localStorage.getItem("token")}`,
+          },
+        });
         let data = await response.json();
         if (data.error) {
           if (data.error.message === "Data Not Ready [checkSerp.js - 36]") {

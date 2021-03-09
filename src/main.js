@@ -12,7 +12,7 @@ const view = (name) => () => import(`@/pages/${name}.vue`);
 
 import "@/assets/css/tailwind.css";
 
-Vue.config.productionTip = true;
+Vue.config.productionTip = false;
 Vue.use(LoadScript);
 Vue.use(Router);
 
@@ -35,9 +35,6 @@ const routes = [
         path: "/",
         name: "Home",
         component: view("Home"),
-        meta: {
-          requiresAuth: false,
-        },
       },
       {
         path: "/login",
@@ -48,6 +45,14 @@ const routes = [
         path: "/register",
         name: "Register",
         component: view("Register"),
+      },
+      {
+        path: "/account",
+        name: "Account",
+        component: view("Account"),
+        meta: {
+          requiresAuth: true,
+        },
       },
       {
         path: "/forgotten",
@@ -102,14 +107,11 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (store.getters.isLoggedIn) {
-      // console.log("Required Auth, But Logged In");
       next();
       return;
     }
-    // console.log("Required Auth, Not Logged In");
     next("/login");
   } else {
-    // console.log("Doesn't Require Auth");
     next();
   }
 });

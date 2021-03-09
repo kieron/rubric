@@ -86,8 +86,12 @@
       class="absolute right-0 w-48 mr-6 text-gray-700 border border-t-0 rounded-b-lg shadow-xl bg-gray-25"
       :class="dropDownOpen ? '' : 'hidden'"
     >
-      <a v-if="isLoggedIn" href="#" class="block px-4 py-2 hover:bg-gray-200"
-        >Account</a
+      <router-link
+        v-if="isLoggedIn"
+        to="/account"
+        class="block px-4 py-2 hover:bg-gray-200"
+        @click="dropDownOpen = !dropDownOpen"
+        >Account</router-link
       >
       <a v-if="isLoggedIn" href="#" class="block px-4 py-2 hover:bg-gray-200"
         >Settings</a
@@ -105,6 +109,7 @@
         to="/login"
         class="block px-4 py-2 hover:bg-gray-200"
         v-if="!isLoggedIn"
+        @click="dropDownOpen = !dropDownOpen"
         >Login</router-link
       >
 
@@ -112,6 +117,7 @@
         to="/register"
         class="block px-4 py-2 hover:bg-gray-200"
         v-if="!isLoggedIn"
+        @click="dropDownOpen = !dropDownOpen"
         >Register</router-link
       >
     </div>
@@ -137,9 +143,6 @@ export default {
     isLoggedIn: function () {
       return this.$store.getters.isLoggedIn;
     },
-    authStatus: function () {
-      return this.$store.getters.authStatus;
-    },
   },
   components: {
     MenuItems,
@@ -152,21 +155,27 @@ export default {
   data() {
     return {
       dropDownOpen: false,
-      // mobNavOpen: false,
       animatedCloseBtn: true,
     };
   },
-
+  watch: {
+    $route() {
+      this.dropDownOpen = false;
+    },
+  },
   methods: {
     logout: function () {
       this.$store.dispatch("logout").then(() => {
+        this.dropDownOpen = !this.dropDownOpen;
         this.$router.push("/login");
       });
     },
     toggleSidebar() {
+      this.dropDownOpen = false;
       this.$store.dispatch("toggleSidebar");
     },
     animateClose() {
+      this.dropDownOpen = false;
       document.getElementById("mobCloseBtn").classList.add("rotate-center");
       setTimeout(function () {
         if (document.getElementById("mobCloseBtn"))
@@ -176,16 +185,6 @@ export default {
       }, 3000);
     },
   },
-  // created: function () {
-  //   this.$http.interceptors.response.use(undefined, function (err) {
-  //     return new Promise(function () {
-  //       if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
-  //         this.$store.dispatch("logout");
-  //       }
-  //       throw err;
-  //     });
-  //   });
-  // },
 };
 </script>
 

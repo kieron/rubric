@@ -111,7 +111,6 @@ export default {
       email: "test@gmail.com",
       password: "test",
       password_confirmation: "test",
-      is_admin: null,
       api_url:
         process.env.NODE_ENV === "production"
           ? "https://rubricseo-api.herokuapp.com/"
@@ -122,22 +121,22 @@ export default {
     };
   },
   methods: {
-    register: function () {
+    register: async function () {
       let data = {
         name: this.name,
         email: this.email,
         password: this.password,
-        is_admin: this.is_admin,
       };
-      this.$store
-        .dispatch("register", data)
-        .then(() => {
-          if (this.$store.getters.authStatus === "success") {
-            this.$router.push("/");
-          }
-          this.loader.loading = false;
-        })
-        .catch((err) => console.log(err));
+      try {
+        await this.$store.dispatch("register", data);
+        if (this.$store.getters.authStatus === "success") {
+          this.$router.push("/");
+        }
+      } catch (err) {
+        console.log(err);
+      } finally {
+        this.loader.loading = false;
+      }
     },
   },
 };

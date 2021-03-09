@@ -44,7 +44,7 @@
           </form>
           <ErrorMessage
             class="flex flex-row items-center p-5 mt-5 bg-red-200 border-b-2 border-red-300 rounded alert swing-in-top-fwd"
-            v-bind:message="$store.getters.authStatus.message"
+            v-bind:message="authStatus.message"
             v-if="authStatus !== 'success' && authStatus.message"
           />
           <hr class="my-8" />
@@ -107,35 +107,21 @@ export default {
     };
   },
   methods: {
-    login: function () {
+    login: async function () {
       this.loader.loading = true;
       let email = this.email;
       let password = this.password;
-      this.$store
-        .dispatch("login", { email, password })
-        .then(() => {
-          if (this.authStatus === "success") {
-            this.$router.push("/");
-          }
-        })
-        .catch((err) => console.log(err))
-        .finally(() => {
-          this.loader.loading = false;
-        });
+      try {
+        await this.$store.dispatch("login", { email, password });
+        if (this.authStatus === "success") {
+          this.$router.push("/");
+        }
+      } catch (err) {
+        console.log(err);
+      } finally {
+        this.loader.loading = false;
+      }
     },
-
-    // async login2() {
-    //   let email = this.email;
-    //   let password = this.password;
-    //   try {
-    //       await this.$store.dispatch("login", { email, password });
-    //     this.$router.push("/");
-    //    } catch(err) {
-    //         this.$store.commit("SET_ERROR", err);
-    //    } finally {
-    //         this.$store.commit("SET_LOADING", false);
-    //    }
-    // },
   },
 };
 </script>
