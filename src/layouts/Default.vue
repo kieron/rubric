@@ -14,6 +14,7 @@
           :class="containerFull ? '' : 'container'"
         >
           <button
+            v-if="$route.name == 'Blueprint Editor'"
             @click="toggleContainer"
             title="Toggle Layout"
             class="absolute right-0 z-10 hidden mr-6 text-gray-600 2xl:block"

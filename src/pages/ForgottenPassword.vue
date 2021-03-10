@@ -62,6 +62,14 @@ export default {
     LoadingSpinner,
     SuccessMessage,
   },
+  computed: {
+    isLoggedIn: function () {
+      return this.$store.getters.isLoggedIn;
+    },
+  },
+  mounted() {
+    if (this.isLoggedIn === true) this.$router.push("/");
+  },
   data() {
     return {
       successMessage: "",

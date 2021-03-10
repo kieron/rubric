@@ -55,7 +55,7 @@ const routes = [
         },
       },
       {
-        path: "/forgotten",
+        path: "/forgot-password",
         name: "Forgotten Password",
         component: view("ForgottenPassword"),
       },

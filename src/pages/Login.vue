@@ -54,7 +54,7 @@
           <p class="mt-4">
             <router-link
               class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
-              to="forgotten"
+              to="/forgot-password"
             >
               Forgot your password?
             </router-link>
