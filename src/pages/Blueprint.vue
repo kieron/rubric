@@ -312,9 +312,15 @@
           class="p-5 border-2 border-gray-200 rounded editor__content"
           :editor="editor"
           id="editor"
-          ref="editor"
-          innerRef="editor"
+          ref="editorRef"
+          innerRef="editorInner"
+          v-model="content"
         />
+        <vue-countable
+          :text="editorRef"
+          :elementId="'editor-word-counter'"
+          @change="change"
+        ></vue-countable>
       </div>
       <div
         class="sticky top-0 flex-grow w-1/3 h-full p-5 ml-2 bg-gray-100 border-2 border-gray-200 rounded"
@@ -361,6 +367,8 @@
 
 <script>
 import { Editor, EditorContent, EditorMenuBar, EditorMenuBubble } from "tiptap";
+import VueCountable from "vue-countable";
+
 import {
   // QuestionMarkCircleIcon,
   TemplateIcon,
@@ -413,7 +421,7 @@ export default {
     EditorContent,
     EditorMenuBar,
     EditorMenuBubble,
-    // QuestionMarkCircleIcon,
+    VueCountable,
     TemplateIcon,
     AnnotationIcon,
     NewspaperIcon,
@@ -451,6 +459,10 @@ export default {
     };
   },
   methods: {
+    change(event) {
+      console.log(event);
+      // event.words to get word count, etc.
+    },
     toggleBlueprintData: function () {
       this.blueprintSidebarOpen = !this.blueprintSidebarOpen;
     },

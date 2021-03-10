@@ -23,11 +23,11 @@
           Simply input your article phrase below. This can take up to a minute
           for larger result sets.
         </p>
-        <!-- <form
-          v-on:submit.prevent="retrieve('faed9a2f37d1d9d9f15609a482a5c749')"
+        <form
+          v-on:submit.prevent="retrieve('d50b268a56a01132c999f10e9ad53dfb')"
           class="pb-2 my-5"
-        > -->
-        <form v-on:submit.prevent="generate()" class="pb-2 my-5">
+        >
+          <!-- <form v-on:submit.prevent="generate()" class="pb-2 my-5"> -->
           <div class="mb-5 sm:flex">
             <input
               type="text"
