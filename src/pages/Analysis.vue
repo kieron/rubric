@@ -38,7 +38,7 @@
             />
             <button
               type="submit"
-              :disabled="this.loader.loading == 1"
+              :disabled="this.loader.loading === true"
               v-on:click="animateSearchBtn($event)"
               :class="{ 'bounce-top': search.animatedSearchBtn }"
               @animationend="search.animatedSearchBtn = false"

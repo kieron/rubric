@@ -73,7 +73,6 @@ export default new Vuex.Store({
       state.status = "";
       state.token = "";
       state.user = {};
-      // location.reload();
     },
   },
   actions: {

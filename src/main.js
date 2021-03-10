@@ -60,6 +60,11 @@ const routes = [
         component: view("ForgottenPassword"),
       },
       {
+        path: "/confirm-password/:token",
+        name: "Confirm Password",
+        component: view("ConfirmPassword"),
+      },
+      {
         path: "/analysis",
         name: "SERP Analysis",
         component: view("Analysis"),

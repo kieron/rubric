@@ -8,16 +8,28 @@
           <h1
             class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200"
           >
-            Forgot password
+            Confirm your new password
           </h1>
-          <form @submit.prevent="resetPassword">
-            <label class="block text-sm">
-              <span class="text-gray-700 dark:text-gray-400">Email</span>
+          <form @submit.prevent="confirmPassword">
+            <label class="block mt-4 text-sm">
+              <span class="text-gray-700 dark:text-gray-400">Password</span>
               <input
                 class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                placeholder="Jane Doe"
-                type="email"
-                v-model="email"
+                placeholder="***************"
+                type="password"
+                required
+                v-model="password"
+              />
+            </label>
+            <label class="block mt-4 text-sm">
+              <span class="text-gray-700 dark:text-gray-400">
+                Confirm password
+              </span>
+              <input
+                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                placeholder="***************"
+                type="password"
+                v-model="password_confirmation"
                 required
               />
             </label>
@@ -34,16 +46,24 @@
               />
             </button>
           </form>
-          <SuccessMessage
-            class="flex flex-row items-center p-5 mt-5 bg-green-200 border-b-2 border-green-300 rounded alert swing-in-top-fwd"
-            v-if="successMessage && !errorHandler.error"
-            v-bind:message="successMessage"
-          />
           <ErrorMessage
             class="flex flex-row items-center p-5 mt-5 bg-red-200 border-b-2 border-red-300 rounded alert swing-in-top-fwd"
             v-bind:message="errorHandler.errorMessage"
             v-if="errorHandler.error === true && !successMessage"
           />
+          <SuccessMessage
+            class="flex flex-row items-center p-5 mt-5 bg-green-200 border-b-2 border-green-300 rounded alert swing-in-top-fwd"
+            v-if="successMessage && !errorHandler.error"
+            v-bind:message="successMessage"
+          />
+          <p class="mt-4" v-if="successMessage">
+            <router-link
+              class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
+              to="/login"
+            >
+              Login
+            </router-link>
+          </p>
         </div>
       </div>
     </div>
@@ -56,24 +76,17 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import SuccessMessage from "@/components/SuccessMessage";
 
 export default {
-  name: "Forgotten",
+  name: "ConfirmPassword",
   components: {
     ErrorMessage,
     LoadingSpinner,
     SuccessMessage,
   },
-  computed: {
-    isLoggedIn: function () {
-      return this.$store.getters.isLoggedIn;
-    },
-    authStatus: function () {
-      return this.$store.getters.authStatus;
-    },
-  },
   data() {
     return {
       successMessage: "",
-      email: "kieronboz@gmail.com",
+      password: "Kieron",
+      password_confirmation: "Kieron",
       token: this.$route.params.token,
       api_url:
         process.env.NODE_ENV === "production"
@@ -92,26 +105,29 @@ export default {
     };
   },
   methods: {
-    resetPassword: async function () {
+    confirmPassword: async function () {
       this.loader.loading = true;
       try {
-        const url = `${this.api_url}/reset-password/`;
+        const url = `${this.api_url}/confirm-password/${this.token}`;
         const options = {
           method: "POST",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json;charset=UTF-8",
           },
-          body: JSON.stringify({ email: this.email }),
+          body: JSON.stringify({ password: this.password }),
         };
         let response = await fetch(url, options);
         let data = await response.json();
         if (data.error) {
           this.errorHandler.error = true;
           this.errorHandler.errorMessage = data.error.message;
+          this.successMessage = "";
         } else {
           this.errorHandler.error = false;
-          this.successMessage = "Check your email for a password reset link!";
+          this.successMessage = "Your password has been changed";
+          this.password = "";
+          this.password_confirmation = "";
         }
       } catch (err) {
         this.errorHandler.error = true;
