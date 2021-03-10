@@ -96,8 +96,8 @@ export default {
   },
   data() {
     return {
-      email: "test333@gmail.com",
-      password: "sdkjhfdgdfgf4fuhfe",
+      email: "",
+      password: "",
       api_url:
         process.env.NODE_ENV === "production"
           ? "https://rubricseo-api.herokuapp.com/"
