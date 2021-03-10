@@ -85,8 +85,8 @@ export default {
   data() {
     return {
       successMessage: "",
-      password: "Kieron",
-      password_confirmation: "Kieron",
+      password: "",
+      password_confirmation: "",
       token: this.$route.params.token,
       api_url:
         process.env.NODE_ENV === "production"

@@ -62,18 +62,10 @@ export default {
     LoadingSpinner,
     SuccessMessage,
   },
-  computed: {
-    isLoggedIn: function () {
-      return this.$store.getters.isLoggedIn;
-    },
-    authStatus: function () {
-      return this.$store.getters.authStatus;
-    },
-  },
   data() {
     return {
       successMessage: "",
-      email: "kieronboz@gmail.com",
+      email: "",
       token: this.$route.params.token,
       api_url:
         process.env.NODE_ENV === "production"
