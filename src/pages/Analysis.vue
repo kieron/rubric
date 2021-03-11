@@ -34,7 +34,7 @@
               v-model="search.query"
               placeholder="Keywords"
               required
-              class="flex flex-grow w-full h-16 px-6 mb-2 mr-2 bg-white border rounded-lg focus:outline-none"
+              class="flex flex-grow w-full h-16 px-6 mb-2 mr-2 bg-white border rounded-lg dark:border-gray-500 focus:outline-none"
             />
             <button
               type="submit"

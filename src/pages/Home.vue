@@ -1,11 +1,13 @@
 <template>
   <div id="home" class="slide-in-right">
-    <div class="flex bg-white" style="height: 600px">
+    <div class="flex" style="height: 600px">
       <div
         class="flex items-center px-8 text-center lg:text-left md:px-12 lg:w-1/2"
       >
         <div>
-          <h2 class="text-3xl font-semibold text-gray-800 md:text-4xl">
+          <h2
+            class="text-3xl font-semibold text-gray-800 dark:text-gray-300 md:text-4xl"
+          >
             Welcome to <span class="text-indigo-600">Rubric</span>
           </h2>
           <p class="mt-2 text-sm text-gray-500 md:text-base">

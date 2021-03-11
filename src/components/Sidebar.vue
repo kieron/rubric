@@ -1,6 +1,6 @@
 <template>
   <div
-    class="hidden w-3/4 h-screen border-r lg:fixed md:w-1/3 lg:w-64 md:top-0 md:left-0 lg:block bg-gray-25 dark:bg-gray-800 sidebar"
+    class="hidden w-3/4 h-screen border-r dark:border-gray-600 lg:fixed md:w-1/3 lg:w-64 md:top-0 md:left-0 lg:block bg-gray-25 dark:bg-gray-800 sidebar"
     id="main-nav"
   >
     <router-link

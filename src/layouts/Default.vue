@@ -1,16 +1,19 @@
 <template>
-  <div class="leading-normal tracking-normal" id="main-body">
+  <div
+    class="h-screen leading-normal tracking-normal bg-white dark:bg-gray-800"
+    id="main-body"
+  >
     <div class="flex flex-wrap">
       <Sidebar />
       <main
-        class="w-full pl-0 bg-white lg:pl-64"
+        class="w-full pl-0 bg-white dark:bg-gray-800 lg:pl-64"
         id="main-con"
         :class="sideBarOpen ? 'overlay' : ''"
       >
         <Navbar />
 
         <div
-          class="relative p-6 mx-auto mb-20 bg-white transition-width transition-slowest ease"
+          class="relative p-6 mx-auto mb-20 bg-white dark:bg-gray-800 transition-width transition-slowest ease"
           :class="containerFull ? '' : 'container'"
         >
           <button
