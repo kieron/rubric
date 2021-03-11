@@ -8,7 +8,7 @@
       leave-active-class="slide-out-left"
     >
       <div
-        class="fixed z-30 w-3/4 h-screen border-r bg-gray-25 dark:bg-gray-800 md:w-2/3 lg:w-64 md:top-0 md:left-0 lg:hidden"
+        class="fixed z-30 w-3/4 h-screen border-r dark:border-gray-600 bg-gray-25 dark:bg-gray-800 md:w-2/3 lg:w-64 md:top-0 md:left-0 lg:hidden"
         id="mobile-nav"
         v-if="sideBarOpen"
       >
@@ -150,12 +150,10 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "Navbar",
-  beforeMount() {
-    this.$store.dispatch("initTheme");
-  },
+
   computed: {
-    ...mapState(["sideBarOpen"]),
     ...mapGetters({ theme: "getTheme" }),
+    ...mapState(["sideBarOpen"]),
     isLoggedIn: function () {
       return this.$store.getters.isLoggedIn;
     },
@@ -177,11 +175,6 @@ export default {
     };
   },
   watch: {
-    theme(newTheme) {
-      newTheme === "light"
-        ? document.querySelector("html").classList.remove("dark")
-        : document.querySelector("html").classList.add("dark");
-    },
     $route() {
       this.dropDownOpen = false;
     },

@@ -3,23 +3,25 @@
     <vue-topprogress ref="topProgress" color="#4f46e5"></vue-topprogress>
     <div id="animHolder" class="slide-in-right">
       <Breadcrumb />
-      <BetaMessage
-        class="flex flex-row items-center p-5 mb-8 bg-blue-200 border-b-2 border-blue-300 rounded alert"
-      />
+      <BetaMessage />
 
       <div class="items-center mb-6">
-        <h1 class="mb-3 text-3xl font-semibold text-gray-800 lg:mb-0">
+        <h1
+          class="mb-3 text-3xl font-semibold text-gray-800 dark:text-gray-300 lg:mb-0"
+        >
           SERP Analysis
         </h1>
-        <p>Find out who is ranking and why for any given search result.</p>
+        <p class="text-gray-800 dark:text-gray-300">
+          Find out who is ranking and why for any given search result.
+        </p>
         <hr class="mt-2" />
       </div>
 
-      <div class="p-5 rounded bg-gray-25">
-        <h2 class="pt-2 mb-2 text-2xl text-gray-800 lg:mb-0">
+      <div class="p-5 rounded bg-gray-25 dark:bg-gray-700">
+        <h2 class="pt-2 mb-2 text-2xl text-gray-800 dark:text-gray-300 lg:mb-0">
           Search Parameters
         </h2>
-        <p class="text-gray-600">
+        <p class="text-gray-600 dark:text-gray-400">
           Simply input your article phrase below. This can take up to a minute
           for larger result sets.
         </p>
@@ -34,7 +36,7 @@
               v-model="search.query"
               placeholder="Keywords"
               required
-              class="flex flex-grow w-full h-16 px-6 mb-2 mr-2 bg-white border rounded-lg dark:border-gray-500 focus:outline-none"
+              class="flex flex-grow w-full h-16 px-6 mb-2 mr-2 bg-white border rounded-lg dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 focus:outline-none"
             />
             <button
               type="submit"
@@ -71,14 +73,14 @@
           </div>
           <hr class="mb-3" />
           <div class="">
-            <p class="text-gray-600">Optional Parameters</p>
-            <p class="mb-3 text-sm text-gray-600">
+            <p class="text-gray-600 dark:text-gray-400">Optional Parameters</p>
+            <p class="mb-3 text-sm text-gray-600 dark:text-gray-400">
               You don't need to set these, unless you really want too.
             </p>
             <div class="mb-3 sm:flex sm:justify-between">
               <div class="relative sm:w-1/4 sm:mr-2">
                 <select
-                  class="w-full h-16 px-3 text-sm bg-white border rounded-lg appearance-none focus:outline-none"
+                  class="w-full h-16 px-3 text-sm bg-white border rounded-lg appearance-none dark:border-gray-600 dark:text-gray-400 dark:bg-gray-800 focus:outline-none"
                   name="engine"
                   id="engine"
                   required
@@ -96,7 +98,7 @@
               </div>
               <div class="relative sm:w-1/4 sm:mr-2">
                 <select
-                  class="w-full h-16 px-3 mt-2 text-sm bg-white border rounded-lg appearance-none sm:mt-0 focus:outline-none"
+                  class="w-full h-16 px-3 mt-2 text-sm bg-white border rounded-lg appearance-none dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 sm:mt-0 focus:outline-none"
                   name="location"
                   id="location"
                   required
@@ -423,7 +425,7 @@
               </div>
               <div class="relative sm:w-1/4 sm:mr-2">
                 <select
-                  class="w-full h-16 px-3 mx-0 mt-2 text-sm bg-white border rounded-lg appearance-none sm:mt-0 focus:outline-none sm:my-0"
+                  class="w-full h-16 px-3 mx-0 mt-2 text-sm bg-white border rounded-lg appearance-none dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 sm:mt-0 focus:outline-none sm:my-0"
                   name="device"
                   id="device"
                   required
@@ -441,7 +443,7 @@
               </div>
               <div class="relative sm:w-1/4">
                 <input
-                  class="w-full h-16 px-3 mt-2 text-sm bg-white border rounded-lg sm:mt-0 focus:outline-none"
+                  class="w-full h-16 px-3 mt-2 text-sm bg-white border rounded-lg dark:border-gray-600 dark:text-gray-400 dark:bg-gray-800 sm:mt-0 focus:outline-none"
                   type="number"
                   id="quantity"
                   name="quantity"
@@ -452,7 +454,7 @@
                   v-model="search.amount"
                 />
                 <p
-                  class="absolute right-0 mt-1 text-xs text-right text-gray-500"
+                  class="absolute right-0 mt-1 text-xs text-right text-gray-500 dark:text-gray-400"
                 >
                   This amount of articles could take around
                   <strong> {{ Math.round(this.search.amount / 3) }}</strong>
@@ -477,10 +479,14 @@
           class="mt-5 slide-in-bottom"
           v-if="loader.loaded && !loader.loading && !serpData.error"
         >
-          <h2 class="pt-2 mb-2 text-2xl font-semibold text-gray-800 lg:mb-0">
+          <h2
+            class="pt-2 mb-2 text-2xl font-semibold text-gray-800 dark:text-gray-300 lg:mb-0"
+          >
             Results
           </h2>
-          <p class="mb-2 text-gray-800 font text-1xl lg:mb-0">
+          <p
+            class="mb-2 text-gray-800 dark:text-gray-400 font text-1xl lg:mb-0"
+          >
             Your search for <strong>{{ serpData.searchTerm }}</strong> had
             <strong>{{ serpData.totalResults.toLocaleString() }}</strong>
             results, we brought back
@@ -504,7 +510,9 @@
                 serpData.averageValues.averageHeaderCount.value
               "
             >
-              <p class="mb-4 text-xl font-semibold text-gray-700">
+              <p
+                class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-400"
+              >
                 Average Values
               </p>
               <div
@@ -554,7 +562,9 @@
               v-if="serpData.relatedQuestions.length"
               class="flex flex-col flex-grow order-last w-full mt-5 xl:w-2/3 md:mt-0"
             >
-              <p class="mb-4 text-xl font-semibold text-gray-700">
+              <p
+                class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-400"
+              >
                 People Also Ask
               </p>
 

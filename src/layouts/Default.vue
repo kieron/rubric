@@ -38,6 +38,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { mapState } from "vuex";
 import { ViewGridIcon } from "@vue-hero-icons/outline";
+import { mapGetters } from "vuex";
 
 export default {
   name: "DefaultLayout",
@@ -47,12 +48,21 @@ export default {
     Navbar,
     Footer,
   },
+  watch: {
+    theme(newTheme) {
+      newTheme === "light"
+        ? document.querySelector("html").classList.remove("dark")
+        : document.querySelector("html").classList.add("dark");
+    },
+  },
   methods: {
     toggleContainer() {
       this.$store.dispatch("toggleContainer");
     },
   },
   computed: {
+    ...mapGetters({ theme: "getTheme" }),
+
     ...mapState(["sideBarOpen", "containerFull"]),
   },
   beforeMount() {

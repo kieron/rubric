@@ -2,7 +2,11 @@
   <nav class="mb-6 text-sm font-semibold" aria-label="Breadcrumb">
     <ol class="inline-flex p-0 list-none">
       <li class="flex items-center text-purple">
-        <router-link to="/" class="text-gray-700">Home</router-link>
+        <router-link
+          to="/"
+          class="text-gray-700 dark:hover:text-red-400 dark:text-gray-300"
+          >Home</router-link
+        >
         <svg
           class="w-3 h-3 mx-3 fill-current"
           xmlns="http://www.w3.org/2000/svg"
@@ -14,9 +18,11 @@
         </svg>
       </li>
       <li class="flex items-center">
-        <router-link :to="current" class="text-gray-600">{{
-          $route.name
-        }}</router-link>
+        <router-link
+          :to="current"
+          class="text-gray-600 dark:hover:text-red-400 dark:text-gray-300"
+          >{{ $route.name }}</router-link
+        >
       </li>
     </ol>
   </nav>

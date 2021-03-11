@@ -1,17 +1,19 @@
 <template>
   <div id="analysis" class="slide-in-right">
     <Breadcrumb />
-    <BetaMessage
-      class="flex flex-row items-center p-5 mb-8 bg-blue-200 border-b-2 border-blue-300 rounded alert"
-    />
+    <BetaMessage />
 
     <div class="items-center mb-6">
-      <h1 class="mb-3 text-3xl font-semibold text-gray-800 lg:mb-0">
+      <h1
+        class="mb-3 text-3xl font-semibold text-gray-800 dark:text-gray-300 lg:mb-0"
+      >
         Page Audit
       </h1>
-      <p>Audit any given web page to find out how it's put together.</p>
+      <p class="text-gray-800 dark:text-gray-300">
+        Audit any given web page to find out how it's put together.
+      </p>
       <hr class="mt-2" />
-      <p class="mt-5 text-3xl">Coming Soon</p>
+      <p class="mt-5 text-3xl text-gray-800 dark:text-gray-300">Coming Soon</p>
     </div>
   </div>
 </template>
