@@ -6,6 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     blueprintData: {},
+    theme: {},
     sideBarOpen: false,
     containerFull: false,
     accessToken: null,
@@ -24,6 +25,9 @@ export default new Vuex.Store({
     getBlueprint: (state) => state.blueprintData,
     sideBarOpen: (state) => state.sideBarOpen,
     containerFull: (state) => state.containerFull,
+    getTheme: (state) => {
+      return state.theme;
+    },
     getQuestions: (state) => {
       var questions = [];
       if (Object.keys(state.blueprintData).length) {
@@ -49,6 +53,10 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    SET_THEME(state, theme) {
+      state.theme = theme;
+      localStorage.theme = theme;
+    },
     addBlueprint: (state, data) => {
       state.blueprintData = data;
     },
@@ -152,6 +160,27 @@ export default new Vuex.Store({
         localStorage.removeItem("user");
         resolve();
       });
+    },
+    initTheme({ commit }) {
+      const cachedTheme = localStorage.theme ? localStorage.theme : false;
+      //  `true` if the user has set theme to `dark` on browser/OS
+      const userPrefersDark = window.matchMedia("(prefers-color-scheme: dark)")
+        .matches;
+
+      if (cachedTheme) commit("SET_THEME", cachedTheme);
+      else if (userPrefersDark) commit("SET_THEME", "dark");
+      else commit("SET_THEME", "light");
+    },
+    toggleTheme({ commit }) {
+      switch (localStorage.theme) {
+        case "light":
+          commit("SET_THEME", "dark");
+          break;
+
+        default:
+          commit("SET_THEME", "light");
+          break;
+      }
     },
   },
 });

@@ -35,5 +35,5 @@ module.exports = {
       padding: ["hover"],
     },
   },
-  plugins: [],
+  darkMode: "class",
 };

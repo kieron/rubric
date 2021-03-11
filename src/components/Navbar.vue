@@ -8,21 +8,23 @@
       leave-active-class="slide-out-left"
     >
       <div
-        class="fixed z-30 w-3/4 h-screen border-r bg-gray-25 md:w-2/3 lg:w-64 md:top-0 md:left-0 lg:hidden"
+        class="fixed z-30 w-3/4 h-screen border-r bg-gray-25 dark:bg-gray-800 md:w-2/3 lg:w-64 md:top-0 md:left-0 lg:hidden"
         id="mobile-nav"
         v-if="sideBarOpen"
       >
         <div class="flex items-center">
           <router-link
-            active-class="bg-gray-25"
+            active-class="bg-gray-25 dark:bg-gray-800"
             to="/"
             @click.native="toggleSidebar()"
             class="flex items-center w-full h-20 px-4"
           >
-            <DocumentTextIcon class="w-8 h-8 ml-2 text-indigo-600" />
+            <DocumentTextIcon
+              class="w-8 h-8 ml-2 text-indigo-600 dark:text-indigo-200"
+            />
 
             <p
-              class="pl-2 text-3xl font-semibold text-gray-800 hover:text-indigo-600"
+              class="pl-2 text-3xl font-semibold text-gray-800 dark:text-indigo-200 hover:text-indigo-600"
             >
               RUBRIC
             </p>
@@ -31,10 +33,10 @@
           <!-- Close Menu -->
           <button
             @click="toggleSidebar(), animateClose()"
-            class="flex align-middle"
+            class="flex text-gray-700 align-middle hover:text-indigo-600 dark:hover:text-red-400 dark:text-indigo-200"
             id="mobCloseBtn"
           >
-            <XIcon class="w-12 h-12 mr-4 text-gray-700 hover:text-indigo-600" />
+            <XIcon class="w-12 h-12 mr-4" />
           </button>
         </div>
 
@@ -42,14 +44,16 @@
       </div>
     </transition>
     <div
-      class="flex items-center justify-between w-full h-20 px-6 bg-white border-b"
+      class="flex items-center justify-between w-full h-20 px-6 bg-white border-b dark:bg-gray-800"
     >
       <!-- left navbar -->
       <div class="flex">
         <!-- mobile hamburger OPEN -->
-        <div class="flex items-center mr-4 text-gray-700 lg:hidden">
+        <div
+          class="flex items-center mr-4 text-gray-600 dark:text-indigo-200 lg:hidden"
+        >
           <button
-            class="hover:text-indigo-600 hover:border-white focus:outline-none navbar-burger"
+            class="hover:text-indigo-600 dark:hover:text-red-400 hover:border-white focus:outline-none navbar-burger"
             @click="toggleSidebar()"
           >
             <MenuAlt2Icon class="w-10 h-10" />
@@ -61,22 +65,30 @@
       </div>
 
       <!-- right navbar -->
-      <div class="relative flex items-center">
-        <button class="p-1 mr-4 text-gray-700 duration-150 focus:outline-none">
+      <div
+        class="relative flex items-center text-gray-600 dark:text-indigo-200"
+      >
+        <button
+          @click="toggleTheme"
+          class="mr-4 hover:text-indigo-600 dark:hover:text-red-400"
+          title="Toggle Theme"
+        >
+          <SunIcon v-if="theme === 'dark'" class="w-8 h-8 duration-150" />
+          <MoonIcon v-if="theme !== 'dark'" class="w-8 h-8 duration-150" />
+        </button>
+        <button
+          class="hidden p-1 mr-4 duration-150 focus:outline-none hover:text-indigo-600 dark:hover:text-red-400"
+        >
           <div class="flex px-0 leading-3">
-            <BellIcon
-              class="w-8 h-8 text-gray-600 duration-150 hover:text-indigo-600"
-            />
+            <BellIcon class="w-8 h-8 duration-150" />
             <div class="z-10 w-2 h-2 -ml-1 rounded-full bg-pink"></div>
           </div>
         </button>
         <button
-          class="p-0 duration-150 focus:outline-none"
+          class="p-0 duration-150 focus:outline-none hover:text-indigo-600 dark:hover:text-red-400"
           @click="dropDownOpen = !dropDownOpen"
         >
-          <UserCircleIcon
-            class="w-8 h-8 text-gray-600 duration-150 hover:text-indigo-600"
-          />
+          <UserCircleIcon class="w-8 h-8 duration-150" />
         </button>
       </div>
     </div>
@@ -92,9 +104,6 @@
         class="block px-4 py-2 hover:bg-gray-200"
         @click="dropDownOpen = !dropDownOpen"
         >Account</router-link
-      >
-      <a v-if="isLoggedIn" href="#" class="block px-4 py-2 hover:bg-gray-200"
-        >Settings</a
       >
       <button
         v-if="isLoggedIn"
@@ -132,14 +141,21 @@ import {
   XIcon,
   MenuAlt2Icon,
   BellIcon,
+  SunIcon,
+  MoonIcon,
 } from "@vue-hero-icons/outline";
 import MenuItems from "@/components/MenuItems";
 import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Navbar",
+  beforeMount() {
+    this.$store.dispatch("initTheme");
+  },
   computed: {
     ...mapState(["sideBarOpen"]),
+    ...mapGetters({ theme: "getTheme" }),
     isLoggedIn: function () {
       return this.$store.getters.isLoggedIn;
     },
@@ -151,6 +167,8 @@ export default {
     UserCircleIcon,
     MenuAlt2Icon,
     BellIcon,
+    SunIcon,
+    MoonIcon,
   },
   data() {
     return {
@@ -159,15 +177,23 @@ export default {
     };
   },
   watch: {
+    theme(newTheme) {
+      newTheme === "light"
+        ? document.querySelector("html").classList.remove("dark")
+        : document.querySelector("html").classList.add("dark");
+    },
     $route() {
       this.dropDownOpen = false;
     },
   },
   methods: {
+    toggleTheme() {
+      this.$store.dispatch("toggleTheme");
+    },
     logout: function () {
       this.$store.dispatch("logout").then(() => {
         this.dropDownOpen = !this.dropDownOpen;
-        this.$router.push("/");
+        if (this.$route.path !== "/") this.$router.push("/");
       });
     },
     toggleSidebar() {

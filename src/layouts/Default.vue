@@ -52,5 +52,8 @@ export default {
   computed: {
     ...mapState(["sideBarOpen", "containerFull"]),
   },
+  beforeMount() {
+    this.$store.dispatch("initTheme");
+  },
 };
 </script>
