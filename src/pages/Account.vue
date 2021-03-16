@@ -67,7 +67,13 @@
           <div class="flex my-5">
             <p>
               Plan:
-              <strong class="break-all">{{ planLevel || "null" }} </strong>
+              <strong class="break-all">{{ plan || "null" }} </strong>
+            </p>
+          </div>
+          <div class="flex my-5">
+            <p>
+              Quota Remaining:
+              <strong class="break-all">{{ quota }} </strong>
             </p>
           </div>
           <div class="flex my-5" v-if="userSerps.length">
@@ -236,7 +242,7 @@ export default {
     return {
       activeSub: false,
       stripeCustomerID: "",
-      planLevel: "",
+      plan: "No Plan Selected",
       sessionId: "",
       api_url: config.API_URL,
       loader: {
@@ -248,6 +254,7 @@ export default {
       },
       successMessage: "",
       userSerps: [],
+      quota: 0,
     };
   },
   mounted: async function () {
@@ -269,18 +276,18 @@ export default {
         this.errorHandler.errorMessage = data.error.message;
         this.errorHandler.error = true;
       } else {
-        this.stripeCustomerID = data.stripeCustomer;
+        this.stripeCustomerID = data.stripeId;
         this.activeSub = data.subscription || false;
+        this.quota = data.quota || 0;
         this.userSerps = data.reports;
-        console.log(data.reports);
-        if (data.planLevel === "prod_J7DL9tzQXLvekf") {
-          this.planLevel = `Agency Plan [${data.planLevel}]`;
+        if (data.plan === "prod_J7DL9tzQXLvekf") {
+          this.plan = `Agency Plan [${data.plan}]`;
         }
-        if (data.planLevel === "prod_J7DLe43HaCNbjj") {
-          this.planLevel = `Pro Plan [${data.planLevel}]`;
+        if (data.plan === "prod_J7DLe43HaCNbjj") {
+          this.plan = `Pro Plan [${data.plan}]`;
         }
-        if (data.planLevel === "prod_J7DKIW8v3s1Fkk") {
-          this.planLevel = `Just Start Plan [${data.planLevel}]`;
+        if (data.plan === "prod_J7DKIW8v3s1Fkk") {
+          this.plan = `Just Start Plan [${data.plan}]`;
         }
       }
     } catch (err) {
@@ -299,7 +306,6 @@ export default {
   },
   methods: {
     pay: async function (plan) {
-      console.log(plan);
       try {
         let response = await fetch(`${this.api_url}/purchase`, {
           method: "POST",
