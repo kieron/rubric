@@ -76,6 +76,7 @@
 <script>
 import ErrorMessage from "@/components/ErrorMessage";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import config from "../../config";
 
 export default {
   name: "Login",
@@ -98,10 +99,7 @@ export default {
     return {
       email: "",
       password: "",
-      api_url:
-        process.env.NODE_ENV === "production"
-          ? "https://rubricseo-api.herokuapp.com/"
-          : "http://localhost:3001/",
+      api_url: config.API_URL,
 
       loader: {
         loading: false,

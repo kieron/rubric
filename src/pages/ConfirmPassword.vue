@@ -74,6 +74,7 @@
 import ErrorMessage from "@/components/ErrorMessage";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import SuccessMessage from "@/components/SuccessMessage";
+import config from "../../config";
 
 export default {
   name: "ConfirmPassword",
@@ -96,16 +97,11 @@ export default {
       password: "",
       password_confirmation: "",
       token: this.$route.params.token,
-      api_url:
-        process.env.NODE_ENV === "production"
-          ? "https://rubricseo-api.herokuapp.com"
-          : "http://localhost:3001",
-
+      api_url: config.API_URL,
       errorHandler: {
         error: false,
         errorMessage: "Something Went Wrong",
       },
-
       loader: {
         loaded: false,
         loading: false,

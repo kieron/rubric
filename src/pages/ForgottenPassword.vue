@@ -54,6 +54,7 @@
 import ErrorMessage from "@/components/ErrorMessage";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import SuccessMessage from "@/components/SuccessMessage";
+import config from "../../config";
 
 export default {
   name: "Forgotten",
@@ -75,10 +76,7 @@ export default {
       successMessage: "",
       email: "",
       token: this.$route.params.token,
-      api_url:
-        process.env.NODE_ENV === "production"
-          ? "https://rubricseo-api.herokuapp.com"
-          : "http://localhost:3001",
+      api_url: config.API_URL,
 
       errorHandler: {
         error: false,

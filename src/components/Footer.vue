@@ -1,4 +1,4 @@
-<template>
+<template functional>
   <div
     class="items-center justify-between w-full px-8 py-6 text-gray-700 border-t dark:border-gray-600 lg:flex"
   >
@@ -18,9 +18,3 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  name: "Footer",
-};
-</script>

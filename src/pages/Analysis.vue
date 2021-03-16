@@ -25,11 +25,11 @@
           Simply input your article phrase below. This can take up to a minute
           for larger result sets.
         </p>
-        <form
+        <!-- <form
           v-on:submit.prevent="retrieve('d50b268a56a01132c999f10e9ad53dfb')"
           class="pb-2 my-5"
-        >
-          <!-- <form v-on:submit.prevent="generate()" class="pb-2 my-5"> -->
+        > -->
+        <form v-on:submit.prevent="generate()" class="pb-2 my-5">
           <div class="mb-5 sm:flex">
             <input
               type="text"
@@ -835,6 +835,7 @@ import HeaderQuestions from "@/components/HeaderQuestions";
 import ResultCount from "@/components/ResultCount";
 var VueScrollTo = require("vue-scrollto");
 import { vueTopprogress } from "vue-top-progress";
+import config from "../../config";
 
 import {
   CubeTransparentIcon,
@@ -894,10 +895,7 @@ export default {
         timeStart: 0,
         timeTaken: 0,
         animatedSearchBtn: false,
-        api_url:
-          process.env.NODE_ENV === "production"
-            ? "https://rubricseo-api.herokuapp.com/"
-            : "http://localhost:3001/",
+        api_url: config.API_URL,
       },
 
       errorHandler: {
@@ -957,8 +955,9 @@ export default {
       this.$refs.topProgress.start();
       this.loader.loading = true;
       try {
+        const user = JSON.parse(localStorage.getItem("user"));
         let response = await fetch(
-          `${this.search.api_url}generate?keyword=${this.search.query}&amount=${this.search.amount}&device=${this.search.device}&location=${this.search.location}&engine=${this.search.engine}&fetchQuestions=${this.search.fetchQuestions}&domainAuthority=${this.search.domainAuthority}`,
+          `${this.search.api_url}/generate?keyword=${this.search.query}&amount=${this.search.amount}&device=${this.search.device}&location=${this.search.location}&engine=${this.search.engine}&fetchQuestions=${this.search.fetchQuestions}&domainAuthority=${this.search.domainAuthority}&billing=${user.billingId}`,
           {
             headers: {
               Authorization: `Token ${localStorage.getItem("token")}`,
@@ -971,6 +970,7 @@ export default {
           this.errorHandler.error = true;
           this.loader.loaded = false;
           this.loader.loading = false;
+          this.$refs.topProgress.done();
         } else {
           this.search.idFromDb = data.id;
           setTimeout(() => {
@@ -979,6 +979,7 @@ export default {
         }
       } catch (err) {
         console.log(err);
+        this.$refs.topProgress.done();
       }
     },
     retrieve: async function (id, retry) {
@@ -988,7 +989,7 @@ export default {
         console.log("Fetching Data");
       }
       try {
-        let response = await fetch(`${this.search.api_url}retrieve?id=${id}`, {
+        let response = await fetch(`${this.search.api_url}/retrieve?id=${id}`, {
           headers: {
             Authorization: `Token ${localStorage.getItem("token")}`,
           },
@@ -1004,6 +1005,7 @@ export default {
             this.loader.loaded = false;
             this.loader.loading = false;
             this.errorHandler.error = true;
+            this.$refs.topProgress.done();
           }
         } else {
           this.serpData = { ...this.serpData, ...data };
@@ -1012,10 +1014,7 @@ export default {
             ...this.serpData,
             ...data,
           });
-          this.loader.loading = false;
-          this.loader.loaded = true;
-          this.search.idFromDb = "";
-          this.$refs.topProgress.done();
+
           this.$nextTick(() =>
             VueScrollTo.scrollTo("#results", { offset: -90 })
           );
@@ -1025,6 +1024,12 @@ export default {
         }
       } catch (err) {
         this.errorHandler.errorMessage = "Something went wrong!";
+        this.$refs.topProgress.done();
+      } finally {
+        this.loader.loaded = true;
+        this.loader.loading = false;
+        this.search.idFromDb = "";
+        this.$refs.topProgress.done();
       }
     },
     animateSearchBtn() {

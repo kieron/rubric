@@ -1,5 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import config from "../../config";
+
 // import axios from "axios";
 Vue.use(Vuex);
 
@@ -13,10 +15,7 @@ export default new Vuex.Store({
     status: "",
     token: localStorage.getItem("token") || "",
     user: JSON.parse(localStorage.getItem("user")) || {},
-    api_url:
-      process.env.NODE_ENV === "production"
-        ? "https://rubricseo-api.herokuapp.com"
-        : "http://localhost:3001",
+    api_url: config.API_URL,
   },
   getters: {
     isLoggedIn: (state) => !!state.token,
