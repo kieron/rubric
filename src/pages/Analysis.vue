@@ -968,9 +968,8 @@ export default {
       this.$refs.topProgress.start();
       this.loader.loading = true;
       try {
-        const user = JSON.parse(localStorage.getItem("user"));
         let response = await fetch(
-          `${this.search.api_url}/generate?keyword=${this.search.query}&amount=${this.search.amount}&device=${this.search.device}&location=${this.search.location}&engine=${this.search.engine}&fetchQuestions=${this.search.fetchQuestions}&domainAuthority=${this.search.domainAuthority}&billing=${user.billingId}`,
+          `${this.search.api_url}/generate?keyword=${this.search.query}&amount=${this.search.amount}&device=${this.search.device}&location=${this.search.location}&engine=${this.search.engine}&fetchQuestions=${this.search.fetchQuestions}&domainAuthority=${this.search.domainAuthority}`,
           {
             headers: {
               Authorization: `Token ${localStorage.getItem("token")}`,
