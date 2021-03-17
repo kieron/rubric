@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 hover:font-bold md:text-sm"
+    class="flex flex-no-wrap items-center mr-4 text-xs text-gray-600 dark:text-gray-500 hover:font-bold md:text-sm"
     :class="[hoverColour]"
   >
     <component

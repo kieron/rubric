@@ -1,13 +1,18 @@
 <template>
   <div
-    class="flex-grow px-4 py-3 mt-2 bg-gray-100 border rounded"
+    class="flex-grow px-4 py-3 mt-2 bg-gray-100 border rounded dark:bg-gray-700 dark:border-gray-600"
     v-if="data.length"
   >
-    <h3 class="font-bold text-gray-700 text-md">{{ title }}</h3>
-    <p class="mt-2 text-xl text-gray-500" v-if="weighted.length">
+    <h3 class="font-bold text-gray-700 dark:text-gray-300 text-md">
+      {{ title }}
+    </h3>
+    <p
+      class="mt-2 text-xl text-gray-500 dark:text-gray-400"
+      v-if="weighted.length"
+    >
       You may wish to include these in your content.
     </p>
-    <p class="mt-2 text-sm text-gray-500">
+    <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
       <span v-if="weighted.length"
         >We are currently showing the ones we think are relevant, you can click
         show more to reveal all remaining popular headers.</span

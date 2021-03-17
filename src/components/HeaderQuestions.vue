@@ -1,9 +1,11 @@
 <template>
   <div
-    class="flex-grow px-4 py-3 mt-2 bg-gray-100 border rounded lg:mx-1"
+    class="flex-grow px-4 py-3 mt-2 bg-gray-100 border rounded lg:mx-1 dark:bg-gray-700 dark:border-gray-600"
     v-if="articleData.length"
   >
-    <h3 class="font-bold text-gray-700 text-md">{{ title }}</h3>
+    <h3 class="font-bold text-gray-700 text-md dark:text-gray-300">
+      {{ title }}
+    </h3>
     <div class="flex flex-wrap my-3 -m-1">
       <span
         v-for="question in articleData"

@@ -488,7 +488,7 @@
             class="mb-2 text-gray-800 dark:text-gray-400 font text-1xl lg:mb-0"
           >
             Your search for <strong>{{ serpData.searchTerm }}</strong> had
-            <strong>{{ serpData.totalResults.toLocaleString() }}</strong>
+            <strong>{{ serpData.totalResults }}</strong>
             results, we brought back
             <strong>{{ serpData.results.length }}</strong> of them. There are
             <strong>{{ serpData.uniqueDomainCount }}</strong> unique domains and
@@ -535,22 +535,26 @@
                   }"
                   class="w-1/2"
                 >
-                  <div class="flex items-center p-0 bg-white border rounded-lg">
+                  <div
+                    class="flex items-center p-0 bg-white border rounded-lg dark:bg-gray-700 dark:border-gray-600"
+                  >
                     <div
-                      class="px-3 py-10 text-white rounded-l-lg lg:px-5 lg:py-5 bg-pink"
+                      class="px-3 py-10 text-white rounded-l-lg dark:text-gray-400 lg:px-5 lg:py-5 bg-pink"
                       :class="[average.bg]"
                     >
                       <component
                         :is="average.icon"
-                        class="hidden w-8 h-8 mx-auto lg:block"
+                        class="hidden w-8 h-8 mx-auto lg:block dark:text-gray-300"
                       />
                     </div>
 
-                    <div class="ml-6 leading-6 text-gray-700">
+                    <div
+                      class="ml-6 leading-6 text-gray-700 dark:text-gray-300"
+                    >
                       <p class="text-2xl font-semibold">
                         {{ average.value }}
                       </p>
-                      <p class="text-sm text-gray-600">
+                      <p class="text-sm text-gray-600 dark:text-gray-400">
                         Average {{ average.label }}
                       </p>
                     </div>
@@ -572,22 +576,24 @@
                 <div
                   :key="question.id"
                   v-for="(question, index) in serpData.relatedQuestions"
-                  class="items-center flex-grow px-4 py-2 bg-gray-100 border rounded-lg"
+                  class="items-center flex-grow px-4 py-2 bg-gray-100 border rounded-lg dark:border-gray-600 dark:bg-gray-700"
                   :class="{
                     'mb-2': index != serpData.relatedQuestions.length - 1,
                   }"
                 >
                   <div>
-                    <p class="text-base font-semibold text-gray-700">
+                    <p
+                      class="text-base font-semibold text-gray-700 dark:text-gray-300"
+                    >
                       {{ question.question }}
                     </p>
-                    <p class="text-sm text-gray-700">
+                    <p class="text-sm text-gray-700 dark:text-gray-400">
                       {{ question.source.title }}
                     </p>
                     <a
                       target="_blank"
                       :href="question.source.link"
-                      class="text-sm text-gray-700"
+                      class="text-sm text-gray-700 dark:text-gray-400"
                       >{{ question.source.link }}</a
                     >
                   </div>
@@ -605,7 +611,7 @@
           </div>
           <!-- table -->
           <div
-            class="flex flex-col mb-12 border border-gray-300 rounded-md bg-gray-25"
+            class="flex flex-col mb-12 border border-gray-300 rounded-md dark:border-gray-600 bg-gray-25 dark:bg-gray-700"
             v-if="serpData.results.length"
           >
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -617,31 +623,31 @@
                     <thead>
                       <tr>
                         <th
-                          class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-700 uppercase bg-gray-50"
+                          class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-700 uppercase dark:text-gray-300 dark:bg-gray-700 bg-gray-50"
                         >
                           Results
                         </th>
                       </tr>
                     </thead>
                     <tbody
-                      class="bg-white border-t border-gray-300 divide-y divide-gray-200"
+                      class="bg-white border-t border-gray-300 divide-y divide-gray-200 dark:bg-gray-700"
                     >
                       <tr
                         :key="article.id"
                         v-for="(article, articleIndex) in serpData.results"
-                        class="border-b border-gray-200"
+                        class="border-b border-gray-200 dark:border-gray-600"
                       >
                         <td class="px-3 py-3 md:px-6 md:py-4">
                           <div class="flex items-center">
                             <div class="">
                               <div
-                                class="mb-1 mr-16 font-medium leading-5 text-gray-900 md:text-lg"
+                                class="mb-1 mr-16 font-medium leading-5 text-gray-900 dark:text-gray-300 md:text-lg"
                               >
                                 {{ article.title }}
                               </div>
 
                               <div
-                                class="text-xs leading-5 text-gray-500 md:text-sm"
+                                class="text-xs leading-5 text-gray-500 dark:text-gray-400 md:text-sm"
                               >
                                 <a
                                   :href="article.url"
@@ -654,7 +660,7 @@
                                 <ResultCount
                                   icon="AnnotationIcon"
                                   v-bind:label="article.wordCount + ' Words'"
-                                  hoverColour="hover:text-pink-700"
+                                  hoverColour="hover:text-pink-700 dark:hover:text-pink-700"
                                   title="Word Count"
                                 />
 
@@ -663,14 +669,14 @@
                                   v-bind:label="
                                     article.headers.length + ' Headers'
                                   "
-                                  hoverColour="hover:text-purple"
+                                  hoverColour="hover:text-purple dark:hover:text-purple"
                                   title="Header Count"
                                 />
 
                                 <ResultCount
                                   icon="PhotographIcon"
                                   v-bind:label="article.imageCount + ' Images'"
-                                  hoverColour="hover:text-orange"
+                                  hoverColour="hover:text-orange dark:hover:text-orange"
                                   title="Image Count"
                                 />
 
@@ -679,7 +685,7 @@
                                   v-bind:label="
                                     article.paragraphCount + ' Paragraphs'
                                   "
-                                  hoverColour="hover:text-green-500"
+                                  hoverColour="hover:text-green-500 dark:hover:text-green-500"
                                   title="Paragraph Count"
                                 />
 
@@ -689,7 +695,7 @@
                                     article.domainAuthority +
                                     ' Domain Authority'
                                   "
-                                  hoverColour="hover:text-pink-700"
+                                  hoverColour="hover:text-pink-700 dark:hover:text-pink-700"
                                   title="Domain Authority"
                                 />
 
@@ -698,7 +704,7 @@
                                   v-bind:label="
                                     article.questions.length + ' Questions'
                                   "
-                                  hoverColour="hover:text-purple"
+                                  hoverColour="hover:text-purple dark:hover:text-purple"
                                   title="Questions Answered"
                                 />
 
@@ -707,7 +713,7 @@
                                   v-bind:label="
                                     article.date ? article.date : 'N/A'
                                   "
-                                  hoverColour="hover:text-orange"
+                                  hoverColour="hover:text-orange dark:hover:text-orange"
                                   title="SERP Date"
                                 />
                               </div>
@@ -793,11 +799,13 @@
             </div>
           </div>
 
-          <div class="p-5 bg-gray-200 rounded">
-            <h2 class="pt-2 mb-2 text-2xl text-gray-800 lg:mb-0">
+          <div class="p-5 bg-gray-200 rounded dark:bg-gray-600">
+            <h2
+              class="pt-2 mb-2 text-2xl text-gray-800 dark:text-gray-300 lg:mb-0"
+            >
               Blueprint Tool
             </h2>
-            <p>
+            <p class="dark:text-gray-400">
               Load this data into the blueprint tool to help you write, or to
               give to your writers for a more concise plan.
             </p>
@@ -1087,6 +1095,12 @@ export default {
               paragraphsNotZero.reduce((p, c) => (p += c.paragraphCount), 0) /
                 paragraphsNotZero.length
             );
+
+      //Prettify Total Results
+      const britishNumberFormatter = new Intl.NumberFormat("en-GB");
+      this.serpData.totalResults = britishNumberFormatter.format(
+        this.serpData.totalResults
+      );
     },
   },
 };

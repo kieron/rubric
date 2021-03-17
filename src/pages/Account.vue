@@ -273,8 +273,13 @@ export default {
       );
       let data = await response.json();
       if (data.error) {
-        this.errorHandler.errorMessage = data.error.message;
-        this.errorHandler.error = true;
+        if (data.error.message === "invalid token") {
+          localStorage.removeItem("token");
+          location.reload();
+        } else {
+          this.errorHandler.errorMessage = data.error.message;
+          this.errorHandler.error = true;
+        }
       } else {
         this.stripeCustomerID = data.stripeId;
         this.activeSub = data.subscription || false;
@@ -296,7 +301,10 @@ export default {
       this.loader.loading = false;
     }
 
-    if (this.$route.query.checkout === "true") {
+    if (
+      this.$route.query.checkout === "true" &&
+      this.errorHandler.error == false
+    ) {
       this.errorHandler.error = false;
       this.successMessage = "You're all set! We hope you love Rubric.";
     } else if (this.$route.query.checkout === "false") {
