@@ -619,7 +619,9 @@
                 class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8"
               >
                 <div class="overflow-hidden sm:rounded-lg">
-                  <table class="min-w-full divide-y divide-gray-200">
+                  <table
+                    class="min-w-full divide-y divide-gray-200 dark:divide-gray-600"
+                  >
                     <thead>
                       <tr>
                         <th
@@ -630,7 +632,7 @@
                       </tr>
                     </thead>
                     <tbody
-                      class="bg-white border-t border-gray-300 divide-y divide-gray-200 dark:bg-gray-700"
+                      class="bg-white border-t border-gray-300 divide-y divide-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:divide-gray-600"
                     >
                       <tr
                         :key="article.id"
@@ -865,6 +867,9 @@ export default {
   },
   mounted() {
     if (this.serpData.results) this.massage();
+    if (this.$route.query.retrieve) {
+      this.retrieve(this.$route.query.retrieve);
+    }
   },
   components: {
     HeaderQuestions,
@@ -981,22 +986,23 @@ export default {
           this.$refs.topProgress.done();
         } else {
           this.search.idFromDb = data.id;
-          console.log(`Got DB ID: ${data.id}`);
-          // setTimeout(() => {
-          this.retrieve(data.id);
-          // }, 5000);
+          this.serpData = { ...this.serpData, ...data };
+          this.massage();
+          this.$store.dispatch("addBluePrintData", {
+            ...this.serpData,
+            ...data,
+          });
+          this.search.timeTaken = Math.round(
+            (performance.now() - this.search.timeStart) / 1000
+          );
+          this.loadedAndShow();
         }
       } catch (err) {
         console.log(err);
         this.$refs.topProgress.done();
       }
     },
-    retrieve: async function (id, retry) {
-      if (retry) {
-        console.log("Data not ready - Retrying");
-      } else {
-        console.log("Fetching Data");
-      }
+    retrieve: async function (id) {
       try {
         let response = await fetch(`${this.search.api_url}/retrieve?id=${id}`, {
           headers: {
@@ -1005,17 +1011,11 @@ export default {
         });
         let data = await response.json();
         if (data.error) {
-          if (data.error.message === "Data Not Ready [checkSerp.js - 36]") {
-            setTimeout(() => {
-              this.retrieve(id, (retry = true));
-            }, 2500);
-          } else {
-            this.errorHandler.errorMessage = data.error.message;
-            this.loader.loaded = false;
-            this.loader.loading = false;
-            this.errorHandler.error = true;
-            this.$refs.topProgress.done();
-          }
+          this.errorHandler.errorMessage = data.error.message;
+          this.errorHandler.error = true;
+          this.loader.loaded = false;
+          this.loader.loading = false;
+          this.$refs.topProgress.done();
         } else {
           this.serpData = { ...this.serpData, ...data };
           this.massage();
@@ -1023,20 +1023,12 @@ export default {
             ...this.serpData,
             ...data,
           });
-
-          this.search.timeTaken = Math.round(
-            (performance.now() - this.search.timeStart) / 1000
-          );
         }
       } catch (err) {
         this.errorHandler.errorMessage = "Something went wrong!";
         this.$refs.topProgress.done();
       } finally {
-        this.loader.loaded = true;
-        this.loader.loading = false;
-        this.$nextTick(() => VueScrollTo.scrollTo("#results", { offset: -90 }));
-        this.search.idFromDb = "";
-        this.$refs.topProgress.done();
+        this.loadedAndShow();
       }
     },
     animateSearchBtn() {
@@ -1045,6 +1037,13 @@ export default {
     deleteItem(index) {
       this.serpData.results.splice(index, 1);
       this.massage();
+    },
+    loadedAndShow() {
+      this.$nextTick(() => VueScrollTo.scrollTo("#results", { offset: -90 }));
+      this.loader.loaded = true;
+      this.loader.loading = false;
+      this.search.idFromDb = "";
+      this.$refs.topProgress.done();
     },
     massage() {
       //Average Word Count

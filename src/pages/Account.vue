@@ -80,7 +80,10 @@
             <p>
               Your Reports:
               <ul class="list-disc list-inside">
-                <li class="ml-3" v-for="report in userSerps" v-bind:key="report.id">{{report}}</li>
+                <li class="ml-3" v-for="report in userSerps" v-bind:key="report.id">
+                  <router-link :to="`/analysis?retrieve=${report._id}`">
+                  {{report.searchTerm}}
+                  </router-link></li>
               </ul>
             </p>
           </div>
