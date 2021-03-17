@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="{ sticky: $route.name !== 'Blueprint Editorz' }"
+    :class="{ sticky: $route.name !== 'Blueprint Editor' }"
     class="top-0 z-40"
   >
     <transition

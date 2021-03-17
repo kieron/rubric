@@ -36,9 +36,13 @@
               class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
               placeholder="***************"
               type="password"
+              id="password_confirmation"
               v-model="password_confirmation"
               required
             />
+            <span v-if="passwordMatchError" class="text-xs text-red-500"
+              >Password does not match!</span
+            >
           </label>
 
           <div class="flex mt-6 text-sm">
@@ -115,6 +119,7 @@ export default {
       email: "",
       password: "",
       password_confirmation: "",
+      passwordMatchError: false,
       api_url: config.API_URL,
       loader: {
         loading: false,
@@ -123,20 +128,36 @@ export default {
   },
   methods: {
     register: async function () {
-      let data = {
-        name: this.name,
-        email: this.email,
-        password: this.password,
-      };
-      try {
-        await this.$store.dispatch("register", data);
-        if (this.$store.getters.authStatus === "success") {
-          this.$router.push("/");
+      if (this.password === this.password_confirmation) {
+        this.passwordMatchError = false;
+        let data = {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+        };
+        try {
+          await this.$store.dispatch("register", data);
+          if (this.$store.getters.authStatus === "success") {
+            this.$router.push("/account");
+          }
+        } catch (err) {
+          console.log(err);
+        } finally {
+          this.loader.loading = false;
         }
-      } catch (err) {
-        console.log(err);
-      } finally {
-        this.loader.loading = false;
+      } else {
+        this.passwordMatchError = true;
+        document.getElementById("password_confirmation").focus();
+      }
+    },
+  },
+  watch: {
+    password_confirmation: function () {
+      if (
+        this.passwordMatchError &&
+        this.password === this.password_confirmation
+      ) {
+        this.passwordMatchError = false;
       }
     },
   },
