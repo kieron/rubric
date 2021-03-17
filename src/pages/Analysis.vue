@@ -981,9 +981,10 @@ export default {
           this.$refs.topProgress.done();
         } else {
           this.search.idFromDb = data.id;
-          setTimeout(() => {
-            this.retrieve(data.id);
-          }, 5000);
+          console.log(`Got DB ID: ${data.id}`);
+          // setTimeout(() => {
+          this.retrieve(data.id);
+          // }, 5000);
         }
       } catch (err) {
         console.log(err);
@@ -1023,9 +1024,6 @@ export default {
             ...data,
           });
 
-          this.$nextTick(() =>
-            VueScrollTo.scrollTo("#results", { offset: -90 })
-          );
           this.search.timeTaken = Math.round(
             (performance.now() - this.search.timeStart) / 1000
           );
@@ -1036,6 +1034,7 @@ export default {
       } finally {
         this.loader.loaded = true;
         this.loader.loading = false;
+        this.$nextTick(() => VueScrollTo.scrollTo("#results", { offset: -90 }));
         this.search.idFromDb = "";
         this.$refs.topProgress.done();
       }
