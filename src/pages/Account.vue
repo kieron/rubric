@@ -35,8 +35,8 @@
                   Just Start
                 </h2>
                 <p class="my-4 text-base leading-relaxed dark:text-gray-300">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Generate up to 50 reports a month.
+
                 </p>
                 <div
                   class="flex flex-col items-center justify-center px-2 text-center lg:h-32"
@@ -44,7 +44,7 @@
                   <h2
                     class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-black dark:text-gray-300 lg:text-6xl"
                   >
-                    $8
+                    $9.99
                     <span class="ml-1 text-base text-gray-600">/mo</span>
                   </h2>
                 </div>
@@ -63,8 +63,8 @@
                   Pro
                 </h2>
                 <p class="my-4 text-base leading-relaxed dark:text-gray-300">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Generate up to 100 reports a month.
+
                 </p>
                 <div
                   class="flex flex-col items-center justify-center px-2 text-center lg:h-32"
@@ -72,7 +72,7 @@
                   <h2
                     class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-black dark:text-gray-300 lg:text-6xl"
                   >
-                    $16
+                    $19.99
                     <span class="ml-1 text-base text-gray-600">/mo</span>
                   </h2>
                 </div>
@@ -91,8 +91,7 @@
                   Agency
                 </h2>
                 <p class="my-4 text-base leading-relaxed dark:text-gray-300">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Generate unlimited reports a month!
                 </p>
                 <div
                   class="flex flex-col items-center justify-center px-2 text-center lg:h-32"
@@ -100,7 +99,7 @@
                   <h2
                     class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-black dark:text-gray-300 lg:text-6xl"
                   >
-                    $38
+                    $39.99
                     <span class="ml-1 text-base text-gray-600">/mo</span>
                   </h2>
                 </div>
