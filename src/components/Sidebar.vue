@@ -6,17 +6,11 @@
     <router-link
       active-class="bg-gray-25 dark:bg-gray-800"
       to="/"
-      class="flex items-center w-full h-20 px-4 mb-8 text-gray-800 hover:text-indigo-600"
+      class="flex items-center w-full h-20 px-4 mb-8 text-gray-800 hover:text-indigo-600 dark:hover:text-indigo-600 dark:text-indigo-200"
     >
-      <DocumentTextIcon
-        class="w-8 h-8 ml-2 text-indigo-600 dark:text-indigo-200"
-      />
+      <DocumentTextIcon class="w-8 h-8 ml-2 text-indigo-600" />
 
-      <p
-        class="pl-2 text-3xl font-semibold text-gray-800 dark:text-indigo-200 hover:text-indigo-600"
-      >
-        RUBRIC
-      </p>
+      <p class="pl-2 text-3xl font-semibold">RUBRIC</p>
     </router-link>
     <MenuItems />
   </div>

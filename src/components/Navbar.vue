@@ -17,26 +17,20 @@
             active-class="bg-gray-25 dark:bg-gray-800"
             to="/"
             @click.native="toggleSidebar()"
-            class="flex items-center w-full h-20 px-4"
+            class="flex items-center w-full h-20 px-4 text-gray-800 hover:text-indigo-600 dark:hover:text-indigo-600 dark:text-indigo-200"
           >
-            <DocumentTextIcon
-              class="w-8 h-8 ml-2 text-indigo-600 dark:text-indigo-200"
-            />
+            <DocumentTextIcon class="w-8 h-8 ml-2 text-indigo-600" />
 
-            <p
-              class="pl-2 text-3xl font-semibold text-gray-800 dark:text-indigo-200 hover:text-indigo-600"
-            >
-              RUBRIC
-            </p>
+            <p class="pl-2 text-3xl font-semibold">RUBRIC</p>
           </router-link>
 
           <!-- Close Menu -->
           <button
             @click="toggleSidebar(), animateClose()"
-            class="flex text-gray-700 align-middle hover:text-indigo-600 dark:hover:text-red-400 dark:text-indigo-200"
+            class="flex mr-4 text-gray-700 align-middle rounded-lg hover:text-indigo-600 dark:hover:text-red-400 focus:outline-none focus:ring focus:border-indigo-600 dark:text-indigo-200"
             id="mobCloseBtn"
           >
-            <XIcon class="w-12 h-12 mr-4" />
+            <XIcon class="w-12 h-12" />
           </button>
         </div>
 
@@ -53,7 +47,7 @@
           class="flex items-center mr-4 text-gray-600 dark:text-indigo-200 lg:hidden"
         >
           <button
-            class="hover:text-indigo-600 dark:hover:text-red-400 hover:border-white focus:outline-none navbar-burger"
+            class="rounded-lg hover:text-indigo-600 dark:hover:text-red-400 focus:outline-none focus:ring focus:border-indigo-600 hover:border-white navbar-burger"
             @click="toggleSidebar()"
           >
             <MenuAlt2Icon class="w-10 h-10" />
@@ -70,14 +64,14 @@
       >
         <button
           @click="toggleTheme"
-          class="mr-4 hover:text-indigo-600 dark:hover:text-red-400"
+          class="mr-4 rounded-lg hover:text-indigo-600 dark:hover:text-red-400 focus:outline-none focus:ring focus:border-indigo-600"
           title="Toggle Theme"
         >
           <SunIcon v-if="theme === 'dark'" class="w-8 h-8 duration-150" />
           <MoonIcon v-if="theme !== 'dark'" class="w-8 h-8 duration-150" />
         </button>
         <button
-          class="hidden p-1 mr-4 duration-150 focus:outline-none hover:text-indigo-600 dark:hover:text-red-400"
+          class="hidden p-1 mr-4 duration-150 rounded-lg focus:outline-none focus:ring focus:border-indigo-600 hover:text-indigo-600 dark:hover:text-red-400"
         >
           <div class="flex px-0 leading-3">
             <BellIcon class="w-8 h-8 duration-150" />
@@ -85,7 +79,7 @@
           </div>
         </button>
         <button
-          class="p-0 duration-150 focus:outline-none hover:text-indigo-600 dark:hover:text-red-400"
+          class="p-0 duration-150 rounded-lg focus:outline-none hover:text-indigo-600 focus:ring focus:border-indigo-600 dark:hover:text-red-400"
           @click="dropDownOpen = !dropDownOpen"
         >
           <UserCircleIcon class="w-8 h-8 duration-150" />

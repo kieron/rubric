@@ -20,88 +20,7 @@
         />
       </div>
       <div v-if="!loader.loading">
-        <div class="dark:text-gray-400">
-          <div class="flex my-5">
-            <p>
-              Logged In: <strong v-if="isLoggedIn">True</strong
-              ><strong v-if="!isLoggedIn">False</strong>
-            </p>
-          </div>
-          <div class="flex my-5">
-            <p>
-              Email:
-              <strong v-if="userDetails" class="break-all">{{
-                userDetails.email || "null"
-              }}</strong>
-            </p>
-          </div>
-          <div class="flex my-5">
-            <p>
-              Token (JWT):
-              <strong v-if="userDetails" class="break-all">{{
-                userDetails.token || "null"
-              }}</strong>
-            </p>
-          </div>
-          <div class="flex my-5">
-            <p>
-              Rubric Customer ID:
-              <strong v-if="userDetails" class="break-all">{{
-                userDetails._id || "null"
-              }}</strong>
-            </p>
-          </div>
-          <div class="flex my-5">
-            <p>
-              Customer Stripe ID:
-              <strong>{{ stripeCustomerID || "null" }}</strong>
-            </p>
-          </div>
-
-          <div class="flex my-5">
-            <p>
-              Active Plan:
-              <strong class="break-all">{{ activeSub }}</strong>
-            </p>
-          </div>
-          <div class="flex my-5">
-            <p>
-              Plan:
-              <strong class="break-all">{{ plan || "null" }} </strong>
-            </p>
-          </div>
-          <div class="flex my-5">
-            <p>
-              Quota Remaining:
-              <strong class="break-all">{{ quota }} </strong>
-            </p>
-          </div>
-          <div class="flex my-5" v-if="userSerps.length">
-            <p>
-              Your Reports:
-              <ul class="list-disc list-inside">
-                <li class="ml-3" v-for="report in userSerps" v-bind:key="report.id">
-                  <router-link :to="`/analysis?retrieve=${report._id}`">
-                  {{report.searchTerm}}
-                  </router-link></li>
-              </ul>
-            </p>
-          </div>
-        </div>
-        <div>
-          <div class="flex my-5" v-if="activeSub">
-            <form @submit.prevent="portal">
-              <button
-                type="submit"
-                class="items-center self-center w-full h-16 px-4 mb-2 font-semibold text-white duration-150 bg-indigo-600 rounded-lg sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
-              >
-                Open Billing Portal
-              </button>
-            </form>
-          </div>
-        </div>
-
-        <section class="text-gray-700 body-font" v-if="!activeSub && !errorHandler.error">
+         <section class="text-gray-700 body-font" v-if="!activeSub && !errorHandler.error">
           <stripe-checkout
             ref="checkoutRef"
             :pk="publishableKey"
@@ -196,6 +115,89 @@
             </div>
           </div>
         </section>
+        
+        <div class="dark:text-gray-400">
+          <div class="flex my-5" v-if="admin">
+            <p>
+              Logged In: <strong v-if="isLoggedIn">True</strong
+              ><strong v-if="!isLoggedIn">False</strong>
+            </p>
+          </div>
+          <div class="flex my-5">
+            <p>
+              Email:
+              <strong v-if="userDetails" class="break-all">{{
+                userDetails.email || "null"
+              }}</strong>
+            </p>
+          </div>
+          <div class="flex my-5"  v-if="admin">
+            <p>
+              Token (JWT):
+              <strong v-if="userDetails" class="break-all">{{
+                userDetails.token || "null"
+              }}</strong>
+            </p>
+          </div>
+          <div class="flex my-5"  v-if="admin">
+            <p>
+              Rubric Customer ID:
+              <strong v-if="userDetails" class="break-all">{{
+                userDetails._id || "null"
+              }}</strong>
+            </p>
+          </div>
+          <div class="flex my-5"  v-if="admin">
+            <p>
+              Customer Stripe ID:
+              <strong>{{ stripeCustomerID || "null" }}</strong>
+            </p>
+          </div>
+
+          <div class="flex my-5"  v-if="admin">
+            <p>
+              Active Plan:
+              <strong class="break-all">{{ activeSub }}</strong>
+            </p>
+          </div>
+          <div class="flex my-5">
+            <p>
+              Plan:
+              <strong class="break-all">{{ plan || "null" }} </strong>
+            </p>
+          </div>
+          <div class="flex my-5">
+            <p>
+              Quota Remaining:
+              <strong class="break-all">{{ quota }} </strong>
+            </p>
+          </div>
+          <div class="flex my-5" v-if="userSerps.length">
+            <p>
+              Your Reports:
+              <ul class="list-disc list-inside">
+                <li class="ml-3" v-for="report in userSerps" v-bind:key="report.id">
+                  <router-link :to="`/analysis?retrieve=${report._id}`">
+                  {{report.searchTerm}}
+                  </router-link></li>
+              </ul>
+            </p>
+          </div>
+        </div>
+        <div>
+          <div class="flex my-5" v-if="activeSub">
+            <form @submit.prevent="portal">
+              <button
+                type="submit"
+                class="items-center self-center w-full h-16 px-4 mb-2 font-semibold text-white duration-150 bg-indigo-600 rounded-lg sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
+              >
+                Open Billing Portal
+              </button>
+            </form>
+          </div>
+        </div>
+
+       
       </div>
       <ErrorMessage
         class="flex flex-row items-center p-5 mt-5 bg-red-200 border-b-2 border-red-300 rounded alert swing-in-top-fwd"
@@ -258,6 +260,7 @@ export default {
       successMessage: "",
       userSerps: [],
       quota: 0,
+      admin: false,
     };
   },
   mounted: async function () {

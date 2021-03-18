@@ -496,7 +496,7 @@
             Here are the results.
           </p>
 
-          <div class="my-8 md:flex">
+          <div class="my-4 md:my-8 md:flex">
             <div
               :class="{
                 'md:w-1/2 md:mr-3 xl:w-1/3': serpData.relatedQuestions.length,
@@ -602,7 +602,7 @@
             </div>
           </div>
 
-          <div class="flex w-full my-5">
+          <div class="flex w-full md:my-5">
             <PopularQuestions
               v-if="serpData.popularHeaders"
               v-bind:data="serpData.popularHeaders"
@@ -868,6 +868,8 @@ export default {
   mounted() {
     if (this.serpData.results) this.massage();
     if (this.$route.query.retrieve) {
+      this.$refs.topProgress.start();
+      this.loader.loading = true;
       this.retrieve(this.$route.query.retrieve);
     }
   },

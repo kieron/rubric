@@ -23,6 +23,7 @@ module.exports = {
       transitionProperty: {
         width: "width",
       },
+      borderRadius: ["hover", "focus"],
       // screens: {
       //   "2xl": "1600px",
       // },

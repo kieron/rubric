@@ -23,7 +23,7 @@
 
         <span class="font-medium">Blueprint Editor</span>
       </router-link>
-      <router-link
+      <!-- <router-link
         to="/page-audit"
         active-class="border-l-8 border-indigo-600 bg-gray-30"
         title="Coming Soon"
@@ -33,7 +33,7 @@
         <BriefcaseIcon class="w-6 h-6 mr-2" />
 
         <span class="font-medium">Page Audit</span>
-      </router-link>
+      </router-link> -->
     </div>
     <div class="px-4 mt-5 mb-4 text-gray-800 dark:text-gray-500">
       <p class="pl-4 mb-4 text-xs font-semibold text-gray-600">HELP</p>
@@ -54,7 +54,7 @@ import { mapState } from "vuex";
 import {
   CubeTransparentIcon,
   ChartSquareBarIcon,
-  BriefcaseIcon,
+  // BriefcaseIcon,
   ChatIcon,
 } from "@vue-hero-icons/outline";
 
@@ -67,7 +67,7 @@ export default {
     CubeTransparentIcon,
     ChartSquareBarIcon,
     ChatIcon,
-    BriefcaseIcon,
+    // BriefcaseIcon,
   },
   methods: {
     toggleSidebar() {
