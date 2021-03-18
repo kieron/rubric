@@ -285,9 +285,11 @@ export default {
         }
       } else {
         this.stripeCustomerID = data.stripeId;
-        this.activeSub = data.subscription || false;
-        this.quota = data.quota || 0;
-        this.userSerps = data.reports;
+        this.activeSub = data.activeSub || false;
+        this.quota = data.quotaRemaining || 0;
+        if (data.reports) {
+          this.userSerps = data.reports;
+        }
         if (data.plan === "prod_J7DL9tzQXLvekf") {
           this.plan = `Agency Plan [${data.plan}]`;
         }
@@ -327,7 +329,7 @@ export default {
           },
           body: JSON.stringify({
             client_reference_id: this.stripeCustomerID,
-            email: this.userDetails.email,
+            email: this.stripeCustomerID ? null : this.userDetails.email,
             plan: plan,
           }),
         });
