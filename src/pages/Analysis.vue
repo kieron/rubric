@@ -34,7 +34,8 @@
             <input
               type="text"
               v-model="search.query"
-              placeholder="Keywords"
+              placeholder="best fishing rod for beginners"
+              id="query"
               required
               class="flex flex-grow w-full h-16 px-6 mb-2 mr-2 bg-white border rounded-lg dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 focus:outline-none"
             />
@@ -611,7 +612,7 @@
           </div>
           <!-- table -->
           <div
-            class="flex flex-col mb-12 border border-gray-300 rounded-md dark:border-gray-600 bg-gray-25 dark:bg-gray-700"
+            class="flex flex-col mt-5 mb-12 border border-gray-300 rounded-md dark:border-gray-600 bg-gray-25 dark:bg-gray-700"
             v-if="serpData.results.length"
           >
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -898,7 +899,7 @@ export default {
   data() {
     return {
       search: {
-        query: "best fishing rod for beginners",
+        query: "",
         amount: 50,
         device: "desktop",
         location: "United States",
@@ -980,6 +981,7 @@ export default {
         );
         let data = await response.json();
         if (data.error) {
+          console.log("Here");
           this.errorHandler.errorMessage = data.error.message;
           this.errorHandler.error = true;
           this.loader.loaded = false;
@@ -987,6 +989,36 @@ export default {
           this.$refs.topProgress.done();
         } else {
           this.search.idFromDb = data.id;
+          setTimeout(() => {
+            this.retrieve(data.id);
+          }, 5000);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    retrieve: async function (id) {
+      console.log(`Retrieving: ${id}`);
+      try {
+        let response = await fetch(`${this.search.api_url}/retrieve?id=${id}`, {
+          headers: {
+            Authorization: `Token ${localStorage.getItem("token")}`,
+          },
+        });
+        let data = await response.json();
+        if (data.error) {
+          if (data.error.message === "Data Not Ready") {
+            setTimeout(() => {
+              this.retrieve(id);
+            }, 2500);
+          } else {
+            this.errorHandler.errorMessage = data.error.message;
+            this.errorHandler.error = true;
+            this.loader.loaded = false;
+            this.loader.loading = false;
+            this.$refs.topProgress.done();
+          }
+        } else {
           this.serpData = { ...this.serpData, ...data };
           this.massage();
           this.$store.dispatch("addBluePrintData", {
@@ -999,37 +1031,8 @@ export default {
           this.loadedAndShow();
         }
       } catch (err) {
-        console.log(err);
-        this.$refs.topProgress.done();
-      }
-    },
-    retrieve: async function (id) {
-      try {
-        let response = await fetch(`${this.search.api_url}/retrieve?id=${id}`, {
-          headers: {
-            Authorization: `Token ${localStorage.getItem("token")}`,
-          },
-        });
-        let data = await response.json();
-        if (data.error) {
-          this.errorHandler.errorMessage = data.error.message;
-          this.errorHandler.error = true;
-          this.loader.loaded = false;
-          this.loader.loading = false;
-          this.$refs.topProgress.done();
-        } else {
-          this.serpData = { ...this.serpData, ...data };
-          this.massage();
-          this.$store.dispatch("addBluePrintData", {
-            ...this.serpData,
-            ...data,
-          });
-        }
-      } catch (err) {
         this.errorHandler.errorMessage = "Something went wrong!";
         this.$refs.topProgress.done();
-      } finally {
-        this.loadedAndShow();
       }
     },
     animateSearchBtn() {
