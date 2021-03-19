@@ -167,8 +167,14 @@
           </div>
           <div class="flex my-5">
             <p>
-              Quota Remaining:
+              Quota:
               <strong class="break-all">{{ quota }} </strong>
+            </p>
+          </div>
+          <div class="flex my-5">
+            <p>
+              Quota Remaining:
+              <strong class="break-all">{{ quotaRemaining }} </strong>
             </p>
           </div>
           <div class="flex my-5" v-if="userSerps.length">
@@ -259,7 +265,8 @@ export default {
       successMessage: "",
       userSerps: [],
       quota: 0,
-      admin: false,
+      quotaRemaining: 0,
+      admin: true,
     };
   },
   mounted: async function () {
@@ -286,21 +293,14 @@ export default {
           this.errorHandler.error = true;
         }
       } else {
-        this.stripeCustomerID = data.stripeId;
-        this.activeSub = data.activeSub || false;
-        this.quota = data.quotaRemaining || 0;
+        this.stripeCustomerID = data.billing.stripeId;
+        this.activeSub = data.billing.activePlan || false;
+        this.quota = data.billing.quota || 0;
+        this.quotaRemaining = data.billing.quotaRemaining || 0;
         if (data.reports) {
           this.userSerps = data.reports;
         }
-        if (data.plan === "prod_J7DL9tzQXLvekf") {
-          this.plan = `Agency Plan [${data.plan}]`;
-        }
-        if (data.plan === "prod_J7DLe43HaCNbjj") {
-          this.plan = `Pro Plan [${data.plan}]`;
-        }
-        if (data.plan === "prod_J7DKIW8v3s1Fkk") {
-          this.plan = `Just Start Plan [${data.plan}]`;
-        }
+        this.plan = data.billing.plan;
       }
     } catch (err) {
       console.log(err);
