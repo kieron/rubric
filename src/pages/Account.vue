@@ -266,7 +266,7 @@ export default {
       userSerps: [],
       quota: 0,
       quotaRemaining: 0,
-      admin: true,
+      admin: false,
     };
   },
   mounted: async function () {

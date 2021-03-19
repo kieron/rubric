@@ -489,11 +489,15 @@
             class="mb-2 text-gray-800 dark:text-gray-400 font text-1xl lg:mb-0"
           >
             Your search for <strong>{{ serpData.searchTerm }}</strong> had
-            <strong>{{ serpData.totalResults }}</strong>
+            <strong>{{ serpData.totalResults || "many" }}</strong>
             results, we brought back
             <strong>{{ serpData.results.length }}</strong> of them. There are
-            <strong>{{ serpData.uniqueDomainCount }}</strong> unique domains and
-            this search took <strong>{{ search.timeTaken }}</strong> seconds!
+            <strong>{{ serpData.uniqueDomainCount }}</strong> unique
+            domains<span v-if="!search.timeStart">.</span>
+            <span v-if="search.timeStart">
+              and this search took
+              <strong>{{ search.timeTaken }}</strong> seconds!</span
+            >
             Here are the results.
           </p>
 
@@ -981,7 +985,6 @@ export default {
         );
         let data = await response.json();
         if (data.error) {
-          console.log("Here");
           this.errorHandler.errorMessage = data.error.message;
           this.errorHandler.error = true;
           this.loader.loaded = false;
@@ -998,7 +1001,6 @@ export default {
       }
     },
     retrieve: async function (id) {
-      console.log(`Retrieving: ${id}`);
       try {
         let response = await fetch(`${this.search.api_url}/retrieve?id=${id}`, {
           headers: {
@@ -1099,10 +1101,12 @@ export default {
             );
 
       //Prettify Total Results
-      const britishNumberFormatter = new Intl.NumberFormat("en-GB");
-      this.serpData.totalResults = britishNumberFormatter.format(
-        this.serpData.totalResults
-      );
+      if (this.serpData.totalResults) {
+        const britishNumberFormatter = new Intl.NumberFormat("en-GB");
+        this.serpData.totalResults = britishNumberFormatter.format(
+          this.serpData.totalResults
+        );
+      }
     },
   },
 };
