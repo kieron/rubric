@@ -18,6 +18,7 @@
                 placeholder="jane.doe@gmail.com"
                 type="email"
                 v-model="email"
+                id="email"
                 required
               />
             </label>
@@ -28,6 +29,7 @@
                 placeholder="***************"
                 type="password"
                 v-model="password"
+                id="password"
                 required
               />
             </label>
@@ -36,6 +38,7 @@
               type="submit"
               class="flex items-center justify-center w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white align-middle transition-colors duration-150 bg-indigo-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-indigo-700 focus:outline-none focus:shadow-outline-purple"
               :disabled="this.loader.loading == 1"
+              id="submit"
             >
               <span v-if="authStatus !== 'loading'">Log In</span>
               <LoadingSpinner
