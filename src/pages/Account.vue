@@ -9,8 +9,8 @@
       >
         My Account
       </h1>
-      <p class="text-gray-800 dark:text-gray-300">It's all about you.</p>
-      <hr class="mt-2" />
+      <p class="text-gray-800 dark:text-gray-300">It's all about you<span v-if="userDetails.email">, <strong>{{userDetails.email}}</strong></span></p>
+      <hr class="mt-2 dark:border-gray-600" />
       <div
         class="flex justify-center my-20 text-indigo-600"
         v-if="loader.loading"
@@ -27,8 +27,10 @@
             :session-id="sessionId"
           />
           <div class="container px-8 mx-auto">
-            <div class="flex flex-wrap text-center lg:divide-x">
-              <div class="w-full px-8 py-6 mx-auto lg:w-1/3">
+            <h3 class="text-xl font-semibold text-center my-7">Pick a plan to get started!</h3>
+            <div class="flex flex-wrap text-center lg:divide-x dark:divide-gray-600">
+              
+              <div class="order-3 w-full px-8 py-6 mx-auto lg:order-1 lg:w-1/3">
                 <h2
                   class="mb-3 text-lg font-semibold text-gray-700 dark:text-gray-300 lg:text-2xl title-font"
                 >
@@ -56,7 +58,7 @@
                   Subscribe
                 </button>
               </div>
-              <div class="w-full px-8 py-6 mx-auto lg:w-1/3">
+              <div class="order-2 w-full px-8 py-6 mx-auto lg:order-1 lg:w-1/3">
                 <h2
                   class="mb-3 text-lg font-semibold text-gray-700 dark:text-gray-300 lg:text-2xl title-font"
                 >
@@ -84,7 +86,7 @@
                   Subscribe
                 </button>
               </div>
-              <div class="w-full px-8 py-6 mx-auto lg:w-1/3">
+              <div class="order-1 w-full px-8 py-6 mx-auto lg:order-1 lg:w-1/3">
                 <h2
                   class="mb-3 text-lg font-semibold text-gray-700 dark:text-gray-300 lg:text-2xl title-font"
                 >
@@ -122,7 +124,7 @@
               ><strong v-if="!isLoggedIn">False</strong>
             </p>
           </div>
-          <div class="flex my-5">
+          <div class="flex my-5" v-if="admin">
             <p>
               Email:
               <strong v-if="userDetails" class="break-all">{{
@@ -159,19 +161,19 @@
               <strong class="break-all">{{ activeSub }}</strong>
             </p>
           </div>
-          <div class="flex my-5">
+          <div class="flex my-5" v-if="plan">
             <p>
               Plan:
               <strong class="break-all">{{ plan || "null" }} </strong>
             </p>
           </div>
-          <div class="flex my-5">
+          <div class="flex my-5" v-if="quota">
             <p>
               Quota:
               <strong class="break-all">{{ quota }} </strong>
             </p>
           </div>
-          <div class="flex my-5">
+          <div class="flex my-5" v-if="quota">
             <p>
               Quota Remaining:
               <strong class="break-all">{{ quotaRemaining }} </strong>

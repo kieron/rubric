@@ -13,7 +13,7 @@
         <Navbar />
 
         <div
-          class="relative p-6 mx-auto mb-20 bg-white dark:bg-gray-800 transition-width transition-slowest ease"
+          class="relative p-6 mx-auto bg-white dark:bg-gray-800 transition-width transition-slowest ease"
           :class="containerFull ? '' : 'container'"
         >
           <button
