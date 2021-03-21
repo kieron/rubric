@@ -2,7 +2,7 @@
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 84 66"
-    class="w-16 h-16 ml-2 text-indigo-600 fill-current"
+    class="w-16 h-16 ml-2 text-indigo-600 fill-current dark:text-indigo-200"
   >
     <defs />
     <path
