@@ -544,7 +544,7 @@
                     class="flex items-center p-0 bg-white border rounded-lg dark:bg-gray-700 dark:border-gray-600"
                   >
                     <div
-                      class="px-3 py-10 text-white rounded-l-lg dark:text-gray-400 lg:px-5 lg:py-5 bg-pink"
+                      class="px-1 py-10 text-white rounded-l-lg md:px-3 dark:text-gray-400 lg:px-5 lg:py-5 bg-pink"
                       :class="[average.bg]"
                     >
                       <component
@@ -554,7 +554,7 @@
                     </div>
 
                     <div
-                      class="ml-6 leading-6 text-gray-700 dark:text-gray-300"
+                      class="ml-3 leading-6 text-gray-700 md:ml-6 dark:text-gray-300"
                     >
                       <p class="text-2xl font-semibold">
                         {{ average.value }}
