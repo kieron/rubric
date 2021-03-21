@@ -311,18 +311,13 @@
         </editor-menu-bar>
 
         <editor-content
-          class="p-5 border-2 border-gray-200 rounded editor__content"
+          class="p-5 border-2 border-gray-200 rounded editor__content focus:outline-none"
           :editor="editor"
           id="editor"
           ref="editorRef"
           innerRef="editorInner"
           v-model="content"
         />
-        <vue-countable
-          :text="editorRef"
-          :elementId="'editor-word-counter'"
-          @change="change"
-        ></vue-countable>
       </div>
       <div
         class="sticky top-0 flex-grow w-1/3 h-full p-5 ml-2 bg-gray-100 border-2 border-gray-200 rounded"
@@ -369,7 +364,6 @@
 
 <script>
 import { Editor, EditorContent, EditorMenuBar, EditorMenuBubble } from "tiptap";
-import VueCountable from "vue-countable";
 
 import {
   // QuestionMarkCircleIcon,
@@ -423,7 +417,6 @@ export default {
     EditorContent,
     EditorMenuBar,
     EditorMenuBubble,
-    VueCountable,
     TemplateIcon,
     AnnotationIcon,
     NewspaperIcon,
@@ -431,9 +424,6 @@ export default {
   },
   data() {
     return {
-      blueprintSidebarOpen: false,
-      // questions: store.getters.getQuestions || "null",
-      // headers: store.getters.getheaders || "null",
       editor: new Editor({
         extensions: [
           new Blockquote(),
@@ -465,9 +455,7 @@ export default {
       console.log(event);
       // event.words to get word count, etc.
     },
-    toggleBlueprintData: function () {
-      this.blueprintSidebarOpen = !this.blueprintSidebarOpen;
-    },
+
     insertHeader: function (item) {
       var editorHtml = this.editor.getHTML();
       editorHtml += "<br>";
@@ -495,6 +483,10 @@ export default {
 </script>
 
 <style>
+.ProseMirror:focus {
+  outline: none;
+}
+
 .ProseMirror h1 {
   font-size: 2em;
 }

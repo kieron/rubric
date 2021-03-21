@@ -19,9 +19,8 @@
             @click.native="toggleSidebar()"
             class="flex items-center w-full h-20 px-4 text-gray-800 hover:text-indigo-600 dark:hover:text-indigo-600 dark:text-indigo-200"
           >
-            <DocumentTextIcon class="w-8 h-8 ml-2 text-indigo-600" />
-
-            <p class="pl-2 text-3xl font-semibold">RUBRIC</p>
+            <Logo class="ml-2" />
+            <p class="text-3xl font-semibold">RUBRIC</p>
           </router-link>
 
           <!-- Close Menu -->
@@ -130,7 +129,6 @@
 
 <script>
 import {
-  DocumentTextIcon,
   UserCircleIcon,
   XIcon,
   MenuAlt2Icon,
@@ -141,6 +139,7 @@ import {
 import MenuItems from "@/components/MenuItems";
 import { mapState } from "vuex";
 import { mapGetters } from "vuex";
+import Logo from "@/components/BaseLogo";
 
 export default {
   name: "Navbar",
@@ -154,13 +153,13 @@ export default {
   },
   components: {
     MenuItems,
-    DocumentTextIcon,
     XIcon,
     UserCircleIcon,
     MenuAlt2Icon,
     BellIcon,
     SunIcon,
     MoonIcon,
+    Logo,
   },
   data() {
     return {

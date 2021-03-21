@@ -8,9 +8,9 @@
       to="/"
       class="flex items-center w-full h-20 px-4 mb-8 text-gray-800 hover:text-indigo-600 dark:hover:text-indigo-600 dark:text-indigo-200"
     >
-      <DocumentTextIcon class="w-8 h-8 ml-2 text-indigo-600" />
+      <Logo class="ml-2" />
 
-      <p class="pl-2 text-3xl font-semibold">RUBRIC</p>
+      <p class="text-3xl font-semibold">RUBRIC</p>
     </router-link>
     <MenuItems />
   </div>
@@ -18,12 +18,13 @@
 
 <script>
 import MenuItems from "@/components/MenuItems";
-import { DocumentTextIcon } from "@vue-hero-icons/outline";
+import Logo from "@/components/BaseLogo";
 export default {
   name: "Sidebar",
   components: {
     MenuItems,
-    DocumentTextIcon,
+
+    Logo,
   },
   data() {
     return {};
