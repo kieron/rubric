@@ -1045,7 +1045,7 @@ export default {
       this.massage();
     },
     loadedAndShow() {
-      this.$nextTick(() => VueScrollTo.scrollTo("#results", { offset: -90 }));
+      this.$nextTick(() => VueScrollTo.scrollTo("#results", { offset: -270 }));
       this.loader.loaded = true;
       this.loader.loading = false;
       this.search.idFromDb = "";
