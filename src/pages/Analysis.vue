@@ -37,7 +37,7 @@
               placeholder="best fishing rod for beginners"
               id="query"
               required
-              class="flex flex-grow w-full h-16 px-6 mb-2 mr-2 bg-white border rounded-lg dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 focus:outline-none"
+              class="flex flex-grow w-full h-16 px-6 mb-2 mr-2 placeholder-gray-500 placeholder-opacity-50 bg-white border rounded-lg dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 focus:outline-none"
             />
             <button
               type="submit"
@@ -598,7 +598,7 @@
                     <a
                       target="_blank"
                       :href="question.source.link"
-                      class="text-sm text-gray-700 dark:text-gray-400"
+                      class="text-sm text-gray-700 break-all dark:text-gray-400"
                       >{{ question.source.link }}</a
                     >
                   </div>
