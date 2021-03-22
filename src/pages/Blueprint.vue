@@ -65,7 +65,7 @@
               >
                 <img
                   src="@/assets/icons/bold.svg"
-                  class="w-6 h-6 md:w-8 md:h-8"
+                  class="w-6 h-6 xl:w-8 xl:h-8"
                 />
               </button>
 
@@ -77,7 +77,7 @@
               >
                 <img
                   src="@/assets/icons/italic.svg"
-                  class="w-6 h-6 md:w-8 md:h-8"
+                  class="w-6 h-6 xl:w-8 xl:h-8"
                 />
               </button>
 
@@ -89,7 +89,7 @@
               >
                 <img
                   src="@/assets/icons/strike.svg"
-                  class="w-6 h-6 md:w-8 md:h-8"
+                  class="w-6 h-6 xl:w-8 xl:h-8"
                 />
               </button>
 
@@ -101,7 +101,7 @@
               >
                 <img
                   src="@/assets/icons/underline.svg"
-                  class="w-6 h-6 md:w-8 md:h-8"
+                  class="w-6 h-6 xl:w-8 xl:h-8"
                 />
               </button>
 
@@ -113,7 +113,7 @@
               >
                 <img
                   src="@/assets/icons/code.svg"
-                  class="w-6 h-6 md:w-8 md:h-8"
+                  class="w-6 h-6 xl:w-8 xl:h-8"
                 />
               </button>
 
@@ -125,7 +125,7 @@
               >
                 <img
                   src="@/assets/icons/paragraph.svg"
-                  class="w-6 h-6 md:w-8 md:h-8"
+                  class="w-6 h-6 xl:w-8 xl:h-8"
                 />
               </button>
 
@@ -134,7 +134,7 @@
                 :class="{ 'is-active': isActive.heading({ level: 1 }) }"
                 @click="commands.heading({ level: 1 })"
               >
-                <div class="w-6 h-6 md:w-8 md:h-8">
+                <div class="w-6 h-6 xl:w-8 xl:h-8">
                   <span class="text-xl md:text-2xl">H1</span>
                 </div>
               </button>
@@ -144,7 +144,7 @@
                 :class="{ 'is-active': isActive.heading({ level: 2 }) }"
                 @click="commands.heading({ level: 2 })"
               >
-                <div class="w-6 h-6 md:w-8 md:h-8">
+                <div class="w-6 h-6 xl:w-8 xl:h-8">
                   <span class="text-xl md:text-2xl">H2</span>
                 </div>
               </button>
@@ -154,7 +154,7 @@
                 :class="{ 'is-active': isActive.heading({ level: 3 }) }"
                 @click="commands.heading({ level: 3 })"
               >
-                <div class="w-6 h-6 md:w-8 md:h-8">
+                <div class="w-6 h-6 xl:w-8 xl:h-8">
                   <span class="text-xl md:text-2xl">H3</span>
                 </div>
               </button>
@@ -167,7 +167,7 @@
               >
                 <img
                   src="@/assets/icons/ul.svg"
-                  class="w-6 h-6 md:w-8 md:h-8"
+                  class="w-6 h-6 xl:w-8 xl:h-8"
                 />
               </button>
 
@@ -179,7 +179,7 @@
               >
                 <img
                   src="@/assets/icons/ol.svg"
-                  class="w-6 h-6 md:w-8 md:h-8"
+                  class="w-6 h-6 xl:w-8 xl:h-8"
                 />
               </button>
 
@@ -191,7 +191,7 @@
               >
                 <img
                   src="@/assets/icons/quote.svg"
-                  class="w-6 h-6 md:w-8 md:h-8"
+                  class="w-6 h-6 xl:w-8 xl:h-8"
                 />
               </button>
 
@@ -203,7 +203,7 @@
               >
                 <img
                   src="@/assets/icons/code.svg"
-                  class="w-6 h-6 md:w-8 md:h-8"
+                  class="w-6 h-6 xl:w-8 xl:h-8"
                 />
               </button>
 
@@ -214,7 +214,7 @@
               >
                 <img
                   src="@/assets/icons/hr.svg"
-                  class="w-6 h-6 md:w-8 md:h-8"
+                  class="w-6 h-6 xl:w-8 xl:h-8"
                 />
               </button>
 
@@ -225,7 +225,7 @@
               >
                 <img
                   src="@/assets/icons/undo.svg"
-                  class="w-6 h-6 md:w-8 md:h-8"
+                  class="w-6 h-6 xl:w-8 xl:h-8"
                 />
               </button>
 
@@ -236,7 +236,7 @@
               >
                 <img
                   src="@/assets/icons/redo.svg"
-                  class="w-6 h-6 md:w-8 md:h-8"
+                  class="w-6 h-6 xl:w-8 xl:h-8"
                 />
               </button>
               <div
