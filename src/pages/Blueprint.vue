@@ -17,285 +17,57 @@
     </div>
     <div class="flex">
       <div class="w-2/3 text-gray-900 rounded editor">
-        <editor-menu-bubble
-          :editor="editor"
-          :keep-in-bounds="keepInBounds"
-          v-slot="{ commands, isActive, menu }"
+        <div
+          class="flex flex-wrap justify-center p-3 mb-2 border-2 rounded md:justify-start space-between menubar"
+          v-if="blueprintData.averageValues"
         >
-          <div
-            class="menububble"
-            :class="{ 'is-active': menu.isActive }"
-            :style="`left: ${menu.left}px; top: ${menu.top + 10}px;`"
-          >
-            <button
-              class="menububble__button"
-              :class="{ 'is-active': isActive.bold() }"
-              @click="commands.bold"
-            >
-              <span class="mx-2 text-lg bold">B</span>
-            </button>
+          <div class="flex flex-no-wrap items-center mr-4 text-gray-600">
+            <AnnotationIcon class="inline w-5 h-5 mr-1 align-middle" />
 
-            <button
-              class="menububble__button"
-              :class="{ 'is-active': isActive.italic() }"
-              @click="commands.italic"
+            <span title="Word Count" class="whitespace-no-wrap align-middle"
+              >{{ counts.words }}/{{
+                blueprintData.averageValues.averageWordCount.value
+              }}
+              Words</span
             >
-              <span class="mx-2 text-lg bold">I</span>
-            </button>
-
-            <button
-              class="menububble__button"
-              :class="{ 'is-active': isActive.underline() }"
-              @click="commands.underline"
-            >
-              <span class="mx-2 text-lg bold">U</span>
-            </button>
           </div>
-        </editor-menu-bubble>
-        <editor-menu-bar :editor="editor" v-slot="{ commands, isActive }">
-          <div class="sticky z-10 -top-1">
-            <div
-              class="flex flex-wrap justify-center w-full p-4 mb-5 bg-gray-100 border-2 rounded md:justify-start space-between menubar"
+
+          <div class="flex flex-no-wrap items-center mr-4 text-gray-600">
+            <NewspaperIcon class="inline w-5 h-5 mr-1 align-middle" />
+
+            <span title="Header Count" class="whitespace-no-wrap align-middle"
+              >{{ counts.headers }}/{{
+                blueprintData.averageValues.averageHeaderCount.value
+              }}
+              Headers</span
             >
-              <button
-                class="p-1 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
-                :class="{ 'is-active': isActive.bold() }"
-                @click="commands.bold"
-                title="Bold"
-              >
-                <img
-                  src="@/assets/icons/bold.svg"
-                  class="w-6 h-6 xl:w-8 xl:h-8"
-                />
-              </button>
+          </div>
 
-              <button
-                class="p-1 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
-                :class="{ 'is-active': isActive.italic() }"
-                @click="commands.italic"
-                title="Italic"
-              >
-                <img
-                  src="@/assets/icons/italic.svg"
-                  class="w-6 h-6 xl:w-8 xl:h-8"
-                />
-              </button>
+          <div class="flex flex-no-wrap items-center mr-4 text-gray-600">
+            <PhotographIcon class="inline w-5 h-5 mr-1 align-middle" />
 
-              <button
-                class="p-1 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
-                :class="{ 'is-active': isActive.strike() }"
-                @click="commands.strike"
-                title="Strikethrough"
-              >
-                <img
-                  src="@/assets/icons/strike.svg"
-                  class="w-6 h-6 xl:w-8 xl:h-8"
-                />
-              </button>
+            <span title="Image Count" class="whitespace-no-wrap align-middle"
+              >0/{{
+                blueprintData.averageValues.averageImageCount.value
+              }}
+              Images</span
+            >
+          </div>
 
-              <button
-                class="p-1 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
-                :class="{ 'is-active': isActive.underline() }"
-                @click="commands.underline"
-                title="Underline"
-              >
-                <img
-                  src="@/assets/icons/underline.svg"
-                  class="w-6 h-6 xl:w-8 xl:h-8"
-                />
-              </button>
+          <div class="flex flex-no-wrap items-center mr-4 text-gray-600">
+            <TemplateIcon class="inline w-5 h-5 mr-1 align-middle" />
 
-              <button
-                class="p-1 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
-                :class="{ 'is-active': isActive.code() }"
-                @click="commands.code"
-                title="Code"
-              >
-                <img
-                  src="@/assets/icons/code.svg"
-                  class="w-6 h-6 xl:w-8 xl:h-8"
-                />
-              </button>
+            <span
+              title="Paragraph Count"
+              class="whitespace-no-wrap align-middle"
+              >{{ counts.paragraphs }}/{{
+                blueprintData.averageValues.averageParagraphCount.value
+              }}
+              Paragraphs</span
+            >
+          </div>
 
-              <button
-                class="p-1 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
-                :class="{ 'is-active': isActive.paragraph() }"
-                @click="commands.paragraph"
-                title="Paragraph"
-              >
-                <img
-                  src="@/assets/icons/paragraph.svg"
-                  class="w-6 h-6 xl:w-8 xl:h-8"
-                />
-              </button>
-
-              <button
-                class="p-1 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
-                :class="{ 'is-active': isActive.heading({ level: 1 }) }"
-                @click="commands.heading({ level: 1 })"
-              >
-                <div class="w-6 h-6 xl:w-8 xl:h-8">
-                  <span class="text-xl md:text-2xl">H1</span>
-                </div>
-              </button>
-
-              <button
-                class="p-1 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
-                :class="{ 'is-active': isActive.heading({ level: 2 }) }"
-                @click="commands.heading({ level: 2 })"
-              >
-                <div class="w-6 h-6 xl:w-8 xl:h-8">
-                  <span class="text-xl md:text-2xl">H2</span>
-                </div>
-              </button>
-
-              <button
-                class="p-1 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
-                :class="{ 'is-active': isActive.heading({ level: 3 }) }"
-                @click="commands.heading({ level: 3 })"
-              >
-                <div class="w-6 h-6 xl:w-8 xl:h-8">
-                  <span class="text-xl md:text-2xl">H3</span>
-                </div>
-              </button>
-
-              <button
-                class="p-1 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
-                :class="{ 'is-active': isActive.bullet_list() }"
-                @click="commands.bullet_list"
-                title="Bullet List"
-              >
-                <img
-                  src="@/assets/icons/ul.svg"
-                  class="w-6 h-6 xl:w-8 xl:h-8"
-                />
-              </button>
-
-              <button
-                class="p-1 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
-                :class="{ 'is-active': isActive.ordered_list() }"
-                @click="commands.ordered_list"
-                title="Ordered List"
-              >
-                <img
-                  src="@/assets/icons/ol.svg"
-                  class="w-6 h-6 xl:w-8 xl:h-8"
-                />
-              </button>
-
-              <button
-                class="p-1 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
-                :class="{ 'is-active': isActive.blockquote() }"
-                @click="commands.blockquote"
-                title="Block Quote"
-              >
-                <img
-                  src="@/assets/icons/quote.svg"
-                  class="w-6 h-6 xl:w-8 xl:h-8"
-                />
-              </button>
-
-              <button
-                class="p-1 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
-                :class="{ 'is-active': isActive.code_block() }"
-                @click="commands.code_block"
-                title="Code Block"
-              >
-                <img
-                  src="@/assets/icons/code.svg"
-                  class="w-6 h-6 xl:w-8 xl:h-8"
-                />
-              </button>
-
-              <button
-                class="p-1 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
-                @click="commands.horizontal_rule"
-                title="Horizontal Rule"
-              >
-                <img
-                  src="@/assets/icons/hr.svg"
-                  class="w-6 h-6 xl:w-8 xl:h-8"
-                />
-              </button>
-
-              <button
-                class="p-1 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
-                @click="commands.undo"
-                title="Undo"
-              >
-                <img
-                  src="@/assets/icons/undo.svg"
-                  class="w-6 h-6 xl:w-8 xl:h-8"
-                />
-              </button>
-
-              <button
-                class="p-1 mx-1 my-1 border-2 border-gray-900 rounded menubar__button"
-                @click="commands.redo"
-                title="Redo"
-              >
-                <img
-                  src="@/assets/icons/redo.svg"
-                  class="w-6 h-6 xl:w-8 xl:h-8"
-                />
-              </button>
-              <div
-                class="flex flex-wrap justify-center p-3 mt-2 border-2 rounded md:justify-start space-between menubar"
-                v-if="blueprintData.averageValues"
-              >
-                <div class="flex flex-no-wrap items-center mr-4 text-gray-600">
-                  <AnnotationIcon class="inline w-5 h-5 mr-1 align-middle" />
-
-                  <span
-                    title="Word Count"
-                    class="whitespace-no-wrap align-middle"
-                    >0/{{
-                      blueprintData.averageValues.averageWordCount.value
-                    }}
-                    Words</span
-                  >
-                </div>
-
-                <div class="flex flex-no-wrap items-center mr-4 text-gray-600">
-                  <NewspaperIcon class="inline w-5 h-5 mr-1 align-middle" />
-
-                  <span
-                    title="Header Count"
-                    class="whitespace-no-wrap align-middle"
-                    >0/{{
-                      blueprintData.averageValues.averageHeaderCount.value
-                    }}
-                    Headers</span
-                  >
-                </div>
-
-                <div class="flex flex-no-wrap items-center mr-4 text-gray-600">
-                  <PhotographIcon class="inline w-5 h-5 mr-1 align-middle" />
-
-                  <span
-                    title="Image Count"
-                    class="whitespace-no-wrap align-middle"
-                    >0/{{
-                      blueprintData.averageValues.averageImageCount.value
-                    }}
-                    Images</span
-                  >
-                </div>
-
-                <div class="flex flex-no-wrap items-center mr-4 text-gray-600">
-                  <TemplateIcon class="inline w-5 h-5 mr-1 align-middle" />
-
-                  <span
-                    title="Paragraph Count"
-                    class="whitespace-no-wrap align-middle"
-                    >0/{{
-                      blueprintData.averageValues.averageParagraphCount.value
-                    }}
-                    Paragraphs</span
-                  >
-                </div>
-
-                <!-- <div class="flex flex-no-wrap items-center mr-4 text-gray-600">
+          <!-- <div class="flex flex-no-wrap items-center mr-4 text-gray-600">
                   <QuestionMarkCircleIcon
                     class="inline w-5 h-5 mr-1 align-middle"
                   />
@@ -305,19 +77,22 @@
                     >0/26 Questions</span
                   >
                 </div> -->
-              </div>
-            </div>
-          </div>
-        </editor-menu-bar>
-
-        <editor-content
-          class="p-5 border-2 border-gray-200 rounded editor__content focus:outline-none"
-          :editor="editor"
-          id="editor"
-          ref="editorRef"
-          innerRef="editorInner"
+        </div>
+        <quill-editor
+          id="myText"
+          ref="myQuillEditor"
           v-model="content"
+          :options="quillConfig"
+          @change="onEditorChange($event)"
         />
+        <!--@blur="onEditorBlur($event)"
+          @focus="onEditorFocus($event)"
+          @ready="onEditorReady($event)" -->
+        <!-- <vue-countable
+          :text="myText"
+          :elementId="'myId'"
+          @change="change"
+        ></vue-countable> -->
       </div>
       <div
         class="sticky top-0 flex-grow w-1/3 h-full p-5 ml-2 bg-gray-100 border-2 border-gray-200 rounded"
@@ -363,8 +138,12 @@
 </template>
 
 <script>
-import { Editor, EditorContent, EditorMenuBar, EditorMenuBubble } from "tiptap";
-
+import { mapGetters } from "vuex";
+import Breadcrumb from "@/components/Breadcrumb";
+import BetaMessage from "@/components/BetaMessage";
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.snow.css";
+import "quill/dist/quill.bubble.css";
 import {
   // QuestionMarkCircleIcon,
   TemplateIcon,
@@ -372,30 +151,12 @@ import {
   NewspaperIcon,
   PhotographIcon,
 } from "@vue-hero-icons/outline";
-import { mapGetters } from "vuex";
-import Breadcrumb from "@/components/Breadcrumb";
-import BetaMessage from "@/components/BetaMessage";
+// import VueCountable from "vue-countable";
+import { parse } from "node-html-parser";
+const wordCount = require("word-character-count");
 
 import store from "../store";
-import {
-  Blockquote,
-  CodeBlock,
-  HardBreak,
-  Heading,
-  HorizontalRule,
-  OrderedList,
-  BulletList,
-  ListItem,
-  TodoItem,
-  TodoList,
-  Bold,
-  Code,
-  Italic,
-  Link,
-  Strike,
-  Underline,
-  History,
-} from "tiptap-extensions";
+
 export default {
   name: "Blueprint",
 
@@ -410,134 +171,122 @@ export default {
         return item.weight === true;
       });
     },
+    editor() {
+      return this.$refs.myQuillEditor.quill;
+    },
   },
   components: {
     BetaMessage,
+    // VueCountable,
     Breadcrumb,
-    EditorContent,
-    EditorMenuBar,
-    EditorMenuBubble,
     TemplateIcon,
     AnnotationIcon,
     NewspaperIcon,
     PhotographIcon,
+    QuillEditor: async () => {
+      await Promise.all([
+        import("quill/dist/quill.core.css"),
+        import("quill/dist/quill.snow.css"),
+      ]);
+      const { quillEditor } = await import("vue-quill-editor");
+
+      return quillEditor;
+    },
   },
   data() {
     return {
-      editor: new Editor({
-        extensions: [
-          new Blockquote(),
-          new BulletList(),
-          new CodeBlock(),
-          new HardBreak(),
-          new Heading({ levels: [1, 2, 3] }),
-          new HorizontalRule(),
-          new ListItem(),
-          new OrderedList(),
-          new TodoItem(),
-          new TodoList(),
-          new Link(),
-          new Bold(),
-          new Code(),
-          new Italic(),
-          new Strike(),
-          new Underline(),
-          new History(),
-        ],
-        content: `<h1><strong>${
-          store.getters.getBlueprint.searchTerm || "Your Amazing Article Title"
-        }</strong></h1>`,
+      counts: {
+        words: 0,
+        headers: 0,
+        paragraphs: 0,
+      },
+      content: `<h1><strong>${
+        store.getters.getBlueprint.searchTerm || "Your Amazing Article Title"
+      }</strong></h1>`,
+      quillConfig: Object.freeze({
+        modules: {
+          toolbar: [
+            ["bold", "italic", "underline"],
+            [{ align: [] }],
+            ["link"],
+            [{ header: 1 }, { header: 2 }],
+            [{ list: "ordered" }, { list: "bullet" }],
+          ],
+        },
       }),
     };
   },
   methods: {
-    change(event) {
-      console.log(event);
-      // event.words to get word count, etc.
+    // change(event) {
+    //  // console.log(event);
+    //   // event.words to get word count, etc.
+    // },
+    // onEditorBlur(quill) {
+    //   console.log("editor blur!", quill);
+    // },
+    // onEditorFocus(quill) {
+    //   console.log("editor focus!", quill);
+    // },
+    // onEditorReady(quill) {
+    //   //console.log("editor ready!", quill);
+    // },
+    async onEditorChange({ quill }) {
+      // console.log("editor change!", quill, html, text);
+      // this.content = html;
+      const quillRoot = quill.root.innerHTML;
+      const parsed = parse(quillRoot);
+
+      const pTags = parsed.querySelectorAll("p");
+      const h1Elements = parsed.querySelectorAll("h1");
+      const h2Elements = parsed.querySelectorAll("h2");
+      const h3Elements = parsed.querySelectorAll("h3");
+      const h4Elements = parsed.querySelectorAll("h4");
+      const h5Elements = parsed.querySelectorAll("h5");
+      this.counts.paragraphs = pTags.length;
+      this.counts.headers =
+        h1Elements.length +
+        h2Elements.length +
+        h3Elements.length +
+        h4Elements.length +
+        h5Elements.length;
+
+      const result = await wordCount.WordCount(quillRoot);
+      this.counts.words = result.WordCount;
     },
 
     insertHeader: function (item) {
-      var editorHtml = this.editor.getHTML();
-      editorHtml += "<br>";
-      this.editor.setContent(editorHtml);
-      const transaction = this.editor.state.tr.insertText(item.trim());
-      this.editor.view.dispatch(transaction);
-      this.focusEditor();
+      // editorHtml += "<br>";
+      this.editor.insertText(
+        this.editor.getSelection(true).index,
+        item.trim(),
+        {
+          format: "h1",
+        }
+      );
     },
     insertQuestion: function (item) {
-      var editorHtml = this.editor.getHTML();
-      editorHtml += "<br>";
-      this.editor.setContent(editorHtml);
-      const transaction = this.editor.state.tr.insertText(item.trim());
-      this.editor.view.dispatch(transaction);
-      this.focusEditor();
+      this.editor.insertText(
+        this.editor.getSelection(true).index,
+        item.trim(),
+        {
+          format: "h1",
+        }
+      );
     },
     focusEditor() {
       this.$refs.editor.focus();
     },
   },
-  beforeDestroy() {
-    this.editor.destroy();
+
+  mounted() {
+    // console.log("this is current quill instance object", this.editor);
+    // setTimeout(async function () {
+    //   const result = await wordCount.WordCount(this.editor.root.innerHTML);
+    //   this.counts.words = result.WordCount;
+    // }, 3000);
   },
 };
 </script>
 
 <style>
-.ProseMirror:focus {
-  outline: none;
-}
-
-.ProseMirror h1 {
-  font-size: 2em;
-}
-.ProseMirror h2 {
-  font-size: 1.7em;
-}
-.ProseMirror h3 {
-  font-size: 1.5em;
-}
-.ProseMirror h4 {
-  font-size: 1.3em;
-}
-.ProseMirror h5 {
-  font-size: 1.3em;
-}
-
-.ProseMirror ul {
-  list-style: disc;
-  margin: 0;
-  padding: 0;
-}
-
-.editor__content pre {
-  padding: 0.7rem 1rem;
-  border-radius: 5px;
-  background: #000;
-  color: #fff;
-  font-size: 0.8rem;
-  overflow-x: auto;
-}
-
-.menububble {
-  position: absolute;
-  display: -webkit-box;
-  display: flex;
-  z-index: 20;
-  background: #000;
-  border-radius: 5px;
-  padding: 0.3rem;
-  color: white;
-  margin-bottom: 0.5rem;
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
-  visibility: hidden;
-  opacity: 0;
-  -webkit-transition: opacity 0.2s, visibility 0.2s;
-  transition: opacity 0.2s, visibility 0.2s;
-}
-
-.menububble.is-active {
-  opacity: 1;
-  visibility: visible;
-}
 </style>
