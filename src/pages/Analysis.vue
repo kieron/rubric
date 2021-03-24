@@ -822,7 +822,7 @@
                 tag="button"
                 class="flex items-center self-center flex-initial h-16 px-4 font-semibold text-gray-100 duration-150 bg-gray-500 rounded-lg shadow focus:outline-none"
               >
-                <span>Load Data Into Blueprint Tool</span>
+                <span>Load Into Blueprint Tool</span>
                 <CubeTransparentIcon class="w-6 h-6 ml-2 text-gray-100" />
               </router-link>
             </div>
