@@ -994,7 +994,7 @@ export default {
           this.search.idFromDb = data.id;
           setTimeout(() => {
             this.retrieve(data.id);
-          }, 5000);
+          }, 5500);
         }
       } catch (err) {
         console.log(err);
@@ -1101,7 +1101,8 @@ export default {
             );
 
       //Prettify Total Results
-      if (this.serpData.totalResults) {
+      if (this.serpData.totalResults && !isNaN(this.serpData.totalResults)) {
+        console.log(this.serpData.totalResults);
         const britishNumberFormatter = new Intl.NumberFormat("en-GB");
         this.serpData.totalResults = britishNumberFormatter.format(
           this.serpData.totalResults
