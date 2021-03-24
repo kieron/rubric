@@ -9,6 +9,7 @@
       >
         My Account
       </h1>
+      
       <p class="text-gray-800 dark:text-gray-300">It's all about you<span v-if="userDetails.email">, <strong>{{userDetails.email}}</strong></span></p>
       <hr class="mt-2 dark:border-gray-600" />
       <div

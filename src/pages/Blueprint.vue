@@ -18,10 +18,10 @@
     <div class="flex">
       <div class="w-2/3 text-gray-900 rounded editor">
         <div
-          class="flex flex-wrap justify-center p-3 mb-2 border-2 rounded md:justify-start space-between menubar"
+          class="flex flex-wrap justify-center p-3 mb-2 text-gray-600 border dark:border-gray-600 md:justify-start space-between menubar dark:text-gray-400"
           v-if="blueprintData.averageValues"
         >
-          <div class="flex flex-no-wrap items-center mr-4 text-gray-600">
+          <div class="flex flex-no-wrap items-center mr-4">
             <AnnotationIcon class="inline w-5 h-5 mr-1 align-middle" />
 
             <span title="Word Count" class="whitespace-no-wrap align-middle"
@@ -32,7 +32,7 @@
             >
           </div>
 
-          <div class="flex flex-no-wrap items-center mr-4 text-gray-600">
+          <div class="flex flex-no-wrap items-center mr-4">
             <NewspaperIcon class="inline w-5 h-5 mr-1 align-middle" />
 
             <span title="Header Count" class="whitespace-no-wrap align-middle"
@@ -43,7 +43,7 @@
             >
           </div>
 
-          <div class="flex flex-no-wrap items-center mr-4 text-gray-600">
+          <div class="flex flex-no-wrap items-center mr-4">
             <PhotographIcon class="inline w-5 h-5 mr-1 align-middle" />
 
             <span title="Image Count" class="whitespace-no-wrap align-middle"
@@ -54,7 +54,7 @@
             >
           </div>
 
-          <div class="flex flex-no-wrap items-center mr-4 text-gray-600">
+          <div class="flex flex-no-wrap items-center mr-4">
             <TemplateIcon class="inline w-5 h-5 mr-1 align-middle" />
 
             <span
@@ -79,27 +79,25 @@
                 </div> -->
         </div>
         <quill-editor
+          class="dark:text-gray-300"
           id="myText"
           ref="myQuillEditor"
           v-model="content"
           :options="quillConfig"
           @change="onEditorChange($event)"
-        />
-        <!--@blur="onEditorBlur($event)"
+          @ready="onEditorReady($event)"
+          @blur="onEditorBlur($event)"
           @focus="onEditorFocus($event)"
-          @ready="onEditorReady($event)" -->
-        <!-- <vue-countable
-          :text="myText"
-          :elementId="'myId'"
-          @change="change"
-        ></vue-countable> -->
+        />
       </div>
       <div
-        class="sticky top-0 flex-grow w-1/3 h-full p-5 ml-2 bg-gray-100 border-2 border-gray-200 rounded"
+        class="sticky top-0 flex-grow w-1/3 h-full p-5 ml-2 bg-gray-100 border border-gray-200 dark:border-gray-600 dark:bg-gray-700"
       >
-        <h2 class="text-2xl bold">Blueprint Data</h2>
+        <h2 class="text-2xl bold dark:text-gray-400">Blueprint Data</h2>
         <div v-if="!Object.keys(blueprintData).length && !questions.length">
-          <p class="mt-2">You haven't loaded any data from a SERP analysis.</p>
+          <p class="mt-2 dark:text-gray-400">
+            You haven't loaded any data from a SERP analysis.
+          </p>
           <router-link
             to="/analysis"
             tag="button"
@@ -109,7 +107,7 @@
           </router-link>
         </div>
         <div class="py-3" v-if="blueprintData.popularHeaders">
-          <h3 class="text-xs font-bold">HEADERS</h3>
+          <h3 class="text-xs font-bold dark:text-gray-400">HEADERS</h3>
           <div class="flex flex-wrap my-3 -m-1">
             <span
               v-for="item in weightedHeaders"
@@ -121,7 +119,7 @@
           </div>
         </div>
         <div class="py-3" v-if="questions.length">
-          <h3 class="text-xs font-bold">QUESTIONS</h3>
+          <h3 class="text-xs font-bold dark:text-gray-400">QUESTIONS</h3>
           <div class="flex flex-wrap my-3 -m-1">
             <span
               @click="insertQuestion(item)"
@@ -151,7 +149,6 @@ import {
   NewspaperIcon,
   PhotographIcon,
 } from "@vue-hero-icons/outline";
-// import VueCountable from "vue-countable";
 import { parse } from "node-html-parser";
 const wordCount = require("word-character-count");
 
@@ -177,7 +174,6 @@ export default {
   },
   components: {
     BetaMessage,
-    // VueCountable,
     Breadcrumb,
     TemplateIcon,
     AnnotationIcon,
@@ -217,25 +213,24 @@ export default {
     };
   },
   methods: {
-    // change(event) {
-    //  // console.log(event);
-    //   // event.words to get word count, etc.
-    // },
-    // onEditorBlur(quill) {
-    //   console.log("editor blur!", quill);
-    // },
-    // onEditorFocus(quill) {
-    //   console.log("editor focus!", quill);
-    // },
-    // onEditorReady(quill) {
-    //   //console.log("editor ready!", quill);
-    // },
+    // eslint-disable-next-line no-unused-vars
+    onEditorBlur(quill) {
+      //console.log("editor blur!", quill);
+    },
+    // eslint-disable-next-line no-unused-vars
+    onEditorFocus(quill) {
+      //console.log("editor focus!", quill);
+    },
+    onEditorReady(quill) {
+      this.calculateAverage(quill);
+    },
     async onEditorChange({ quill }) {
-      // console.log("editor change!", quill, html, text);
-      // this.content = html;
+      this.calculateAverage(quill);
+    },
+
+    calculateAverage: async function (quill) {
       const quillRoot = quill.root.innerHTML;
       const parsed = parse(quillRoot);
-
       const pTags = parsed.querySelectorAll("p");
       const h1Elements = parsed.querySelectorAll("h1");
       const h2Elements = parsed.querySelectorAll("h2");
@@ -278,13 +273,7 @@ export default {
     },
   },
 
-  mounted() {
-    // console.log("this is current quill instance object", this.editor);
-    // setTimeout(async function () {
-    //   const result = await wordCount.WordCount(this.editor.root.innerHTML);
-    //   this.counts.words = result.WordCount;
-    // }, 3000);
-  },
+  mounted() {},
 };
 </script>
 

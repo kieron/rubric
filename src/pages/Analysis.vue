@@ -1102,7 +1102,6 @@ export default {
 
       //Prettify Total Results
       if (this.serpData.totalResults && !isNaN(this.serpData.totalResults)) {
-        console.log(this.serpData.totalResults);
         const britishNumberFormatter = new Intl.NumberFormat("en-GB");
         this.serpData.totalResults = britishNumberFormatter.format(
           this.serpData.totalResults
