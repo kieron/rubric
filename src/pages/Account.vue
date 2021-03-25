@@ -59,7 +59,7 @@
                   Subscribe
                 </button>
               </div>
-              <div class="order-2 w-full px-8 py-6 mx-auto lg:order-1 lg:w-1/3">
+              <!-- <div class="order-2 w-full px-8 py-6 mx-auto lg:order-1 lg:w-1/3">
                 <h2
                   class="mb-3 text-lg font-semibold text-gray-700 dark:text-gray-300 lg:text-2xl title-font"
                 >
@@ -113,7 +113,7 @@
                 >
                   Subscribe
                 </button>
-              </div>
+              </div> -->
             </div>
           </div>
         </section>
