@@ -9,8 +9,12 @@
       >
         My Account
       </h1>
-      
-      <p class="text-gray-800 dark:text-gray-300">It's all about you<span v-if="userDetails.email">, <strong>{{userDetails.email}}</strong></span></p>
+
+      <p class="text-gray-800 dark:text-gray-300">
+        It's all about you<span v-if="userDetails.email"
+          >, <strong>{{ userDetails.email }}</strong></span
+        >
+      </p>
       <hr class="mt-2 dark:border-gray-600" />
       <div
         class="flex justify-center my-20 text-indigo-600"
@@ -21,16 +25,22 @@
         />
       </div>
       <div v-if="!loader.loading">
-         <section class="text-gray-700 body-font" v-if="!activeSub && !errorHandler.error">
+        <section
+          class="text-gray-700 body-font"
+          v-if="!activeSub && !errorHandler.error"
+        >
           <stripe-checkout
             ref="checkoutRef"
             :pk="publishableKey"
             :session-id="sessionId"
           />
           <div class="container px-8 mx-auto">
-            <h3 class="text-xl font-semibold text-center my-7">Pick a plan to get started!</h3>
-            <div class="flex flex-wrap text-center lg:divide-x dark:divide-gray-600">
-              
+            <h3 class="text-xl font-semibold text-center my-7">
+              Pick a plan to get started!
+            </h3>
+            <div
+              class="flex flex-wrap text-center lg:divide-x dark:divide-gray-600"
+            >
               <div class="order-3 w-full px-8 py-6 mx-auto lg:order-1 lg:w-1/3">
                 <h2
                   class="mb-3 text-lg font-semibold text-gray-700 dark:text-gray-300 lg:text-2xl title-font"
@@ -39,7 +49,6 @@
                 </h2>
                 <p class="my-4 text-base leading-relaxed dark:text-gray-300">
                   Generate up to 50 reports a month.
-
                 </p>
                 <div
                   class="flex flex-col items-center justify-center px-2 text-center lg:h-32"
@@ -117,7 +126,7 @@
             </div>
           </div>
         </section>
-        
+
         <div class="dark:text-gray-400">
           <div class="flex my-5" v-if="admin">
             <p>
@@ -133,7 +142,7 @@
               }}</strong>
             </p>
           </div>
-          <div class="flex my-5"  v-if="admin">
+          <div class="flex my-5" v-if="admin">
             <p>
               Token (JWT):
               <strong v-if="userDetails" class="break-all">{{
@@ -141,7 +150,7 @@
               }}</strong>
             </p>
           </div>
-          <div class="flex my-5"  v-if="admin">
+          <div class="flex my-5" v-if="admin">
             <p>
               Rubric Customer ID:
               <strong v-if="userDetails" class="break-all">{{
@@ -149,14 +158,14 @@
               }}</strong>
             </p>
           </div>
-          <div class="flex my-5"  v-if="admin">
+          <div class="flex my-5" v-if="admin">
             <p>
               Customer Stripe ID:
               <strong>{{ stripeCustomerID || "null" }}</strong>
             </p>
           </div>
 
-          <div class="flex my-5"  v-if="admin">
+          <div class="flex my-5" v-if="admin">
             <p>
               Active Plan:
               <strong class="break-all">{{ activeSub }}</strong>
@@ -180,17 +189,6 @@
               <strong class="break-all">{{ quotaRemaining }} </strong>
             </p>
           </div>
-          <div class="flex my-5" v-if="userSerps.length">
-            <p>
-              Your Reports:
-              <ul class="list-disc list-inside">
-                <li class="ml-3" v-for="report in userSerps" v-bind:key="report.id">
-                  <router-link :to="`/analysis?retrieve=${report._id}`">
-                  {{report.searchTerm}}
-                  </router-link></li>
-              </ul>
-            </p>
-          </div>
         </div>
         <div>
           <div class="flex my-5" v-if="activeSub">
@@ -205,7 +203,86 @@
           </div>
         </div>
 
-       
+        <div v-if="userSerps.length">
+          <h2
+            class="mb-3 text-2xl font-semibold text-gray-800 dark:text-gray-300 lg:mb-0"
+          >
+            Your Reports
+          </h2>
+
+          <p class="text-sm text-gray-800 dark:text-gray-300">
+            Look back on your old reports
+          </p>
+          <hr class="mt-2 dark:border-gray-600" />
+          <div
+            class="flex flex-col mt-5 mb-12 border border-gray-300 rounded-md dark:border-gray-600 bg-gray-25 dark:bg-gray-700"
+          >
+            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+              <div
+                class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8"
+              >
+                <div class="overflow-hidden sm:rounded-lg">
+                  <table
+                    class="min-w-full divide-y divide-gray-200 dark:divide-gray-600"
+                  >
+                    <thead>
+                      <tr>
+                        <th
+                          class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-700 uppercase dark:text-gray-300 dark:bg-gray-700 bg-gray-50"
+                        >
+                          Report
+                        </th>
+                        <td
+                          class="py-3 text-xs font-medium leading-4 tracking-wider text-center text-gray-700 uppercase dark:text-gray-300 dark:bg-gray-700 bg-gray-50"
+                        >
+                          Analysis
+                        </td>
+                      </tr>
+                    </thead>
+                    <tbody
+                      class="bg-white border-t border-gray-300 divide-y divide-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:divide-gray-600"
+                    >
+                      <tr
+                        :key="article._id"
+                        v-for="article in userSerps"
+                        class="border-b border-gray-200 dark:border-gray-600"
+                      >
+                        <td class="px-3 py-3 md:px-6 md:py-4">
+                          <div class="flex items-center">
+                            <div class="">
+                              <div
+                                class="mb-1 mr-16 font-medium leading-5 text-gray-900 dark:text-gray-300 md:text-lg"
+                              >
+                                {{ article.searchTerm }}
+                              </div>
+
+                              <div
+                                class="text-xs leading-5 text-gray-500 dark:text-gray-400 md:text-sm"
+                              >
+                                <span class="break-all">{{
+                                  convertTime(article.createdAt)
+                                }}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="px-3 py-3 text-center md:px-6 md:py-4">
+                          <router-link
+                            :to="`/analysis?retrieve=${article._id}`"
+                            tag="button"
+                            class="px-5 py-3 font-semibold text-gray-700 duration-150 bg-indigo-400 rounded-lg sm:w-auto hover:bg-indigo-500 focus:outline-none hover:text-white"
+                          >
+                            Open
+                          </router-link>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <ErrorMessage
         class="flex flex-row items-center p-5 mt-5 bg-red-200 border-b-2 border-red-300 rounded alert swing-in-top-fwd"
@@ -364,6 +441,11 @@ export default {
       });
       let data = await response.json();
       window.location.assign(data);
+    },
+
+    convertTime: function (input) {
+      let d = new Date(input);
+      return d.toUTCString();
     },
   },
 };
