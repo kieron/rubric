@@ -240,7 +240,7 @@
                       </tr>
                     </thead>
                     <tbody
-                      class="bg-white border-t border-gray-300 divide-y divide-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:divide-gray-600"
+                      class="bg-white border-t border-gray-300 divide-y divide-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:divide-gray-600"
                     >
                       <tr
                         :key="article._id"
@@ -266,14 +266,22 @@
                             </div>
                           </div>
                         </td>
-                        <td class="px-3 py-3 text-center md:px-6 md:py-4">
+                        <td class="py-2 text-center bg-gray-700 md:py-0">
                           <router-link
                             :to="`/analysis?retrieve=${article._id}`"
                             tag="button"
-                            class="px-5 py-3 font-semibold text-gray-700 duration-150 bg-indigo-400 rounded-lg sm:w-auto hover:bg-indigo-500 focus:outline-none hover:text-white"
+                            class="w-auto h-10 px-4 font-semibold text-white duration-150 bg-indigo-600 rounded-lg sm:mr-2 hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
+                            title="Open Report"
                           >
-                            Open
+                            <ArrowCircleRightIcon class="flex align-middle" />
                           </router-link>
+                          <button
+                            class="w-auto h-10 px-4 mt-1 font-semibold text-white duration-150 bg-red-600 rounded-lg hover:bg-red-500 md:mt-0 focus:outline-none whitespace-nowrap"
+                            @click="deleteReport()"
+                            title="Delete Report"
+                          >
+                            <XIcon class="flex align-middle" />
+                          </button>
                         </td>
                       </tr>
                     </tbody>
@@ -305,6 +313,8 @@ import { StripeCheckout } from "@vue-stripe/vue-stripe";
 import ErrorMessage from "@/components/ErrorMessage";
 import SuccessMessage from "@/components/SuccessMessage";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import { XIcon, ArrowCircleRightIcon } from "@vue-hero-icons/outline";
+
 import config from "../../config";
 
 export default {
@@ -324,6 +334,8 @@ export default {
     ErrorMessage,
     SuccessMessage,
     LoadingSpinner,
+    XIcon,
+    ArrowCircleRightIcon,
   },
 
   data() {
@@ -446,6 +458,10 @@ export default {
     convertTime: function (input) {
       let d = new Date(input);
       return d.toUTCString();
+    },
+
+    deleteReport: function () {
+      alert("Delete Coming Soon! 🙏");
     },
   },
 };

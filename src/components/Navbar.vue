@@ -37,7 +37,7 @@
       </div>
     </transition>
     <div
-      class="flex items-center justify-between w-full h-20 px-6 bg-white border-b dark:border-gray-600 dark:bg-gray-800"
+      class="flex items-center justify-between w-full h-20 px-6 bg-white border-b dark:border-gray-600 dark:bg-gray-900"
     >
       <!-- left navbar -->
       <div class="flex">

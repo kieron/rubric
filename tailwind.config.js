@@ -1,3 +1,5 @@
+const colors = require("tailwindcss/colors");
+
 module.exports = {
   purge: [
     "./src/**/*.html",
@@ -19,6 +21,7 @@ module.exports = {
         purple: {
           DEFAULT: "#7e3af2",
         },
+        bluegray: colors.blueGray,
       },
       transitionProperty: {
         width: "width",
