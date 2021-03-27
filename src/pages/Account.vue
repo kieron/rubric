@@ -266,7 +266,7 @@
                             </div>
                           </div>
                         </td>
-                        <td class="py-2 text-center bg-gray-700 md:py-0">
+                        <td class="py-2 text-center dark:bg-gray-700 md:py-0">
                           <router-link
                             :to="`/analysis?retrieve=${article._id}`"
                             tag="button"
