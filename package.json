@@ -16,6 +16,7 @@
     "connect-history-api-fallback": "^1.6.0",
     "core-js": "^3.6.4",
     "express": "^4.17.1",
+    "lodash.orderby": "^4.6.0",
     "node-html-parser": "^3.1.1",
     "vue": "^2.6.12",
     "vue-load-progress": "^1.0.8",

@@ -266,22 +266,26 @@
                             </div>
                           </div>
                         </td>
-                        <td class="py-2 text-center dark:bg-gray-700 md:py-0">
-                          <router-link
-                            :to="`/analysis?retrieve=${article._id}`"
-                            tag="button"
-                            class="w-auto h-10 px-4 font-semibold text-white duration-150 bg-indigo-600 rounded-lg sm:mr-2 hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
-                            title="Open Report"
-                          >
-                            <ArrowCircleRightIcon class="flex align-middle" />
-                          </router-link>
-                          <button
-                            class="w-auto h-10 px-4 mt-1 font-semibold text-white duration-150 bg-red-600 rounded-lg hover:bg-red-500 md:mt-0 focus:outline-none whitespace-nowrap"
-                            @click="deleteReport()"
-                            title="Delete Report"
-                          >
-                            <XIcon class="flex align-middle" />
-                          </button>
+                        <td
+                          class="w-40 p-2 text-center dark:bg-gray-700 md:py-0"
+                        >
+                          <div class="flex justify-between sm:justify-around">
+                            <router-link
+                              :to="`/analysis?retrieve=${article._id}`"
+                              tag="button"
+                              class="w-auto h-10 px-4 font-semibold text-white duration-150 bg-indigo-600 rounded-lg hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
+                              title="Open Report"
+                            >
+                              <ArrowCircleRightIcon class="flex align-middle" />
+                            </router-link>
+                            <button
+                              class="w-auto h-10 px-4 font-semibold text-white duration-150 bg-red-600 rounded-lg hover:bg-red-500 md:mt-0 focus:outline-none whitespace-nowrap"
+                              @click="deleteReport()"
+                              title="Delete Report"
+                            >
+                              <XIcon class="flex align-middle" />
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     </tbody>
@@ -314,7 +318,7 @@ import ErrorMessage from "@/components/ErrorMessage";
 import SuccessMessage from "@/components/SuccessMessage";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { XIcon, ArrowCircleRightIcon } from "@vue-hero-icons/outline";
-
+var orderBy = require("lodash.orderby");
 import config from "../../config";
 
 export default {
@@ -325,6 +329,9 @@ export default {
     },
     userDetails: function () {
       return JSON.parse(localStorage.getItem("user"));
+    },
+    orderedSerps: function () {
+      return orderBy(this.serpData, "createdAt");
     },
   },
   components: {
@@ -390,7 +397,7 @@ export default {
         this.quota = data.billing.quota || 0;
         this.quotaRemaining = data.billing.quotaRemaining || 0;
         if (data.reports) {
-          this.userSerps = data.reports;
+          this.userSerps = orderBy(data.reports, "createdAt", "desc");
         }
         this.plan = data.billing.plan;
       }
@@ -411,6 +418,7 @@ export default {
       this.errorHandler.error = true;
     }
   },
+
   methods: {
     pay: async function (plan) {
       try {
