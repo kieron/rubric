@@ -174,10 +174,13 @@
           <div class="flex my-5" v-if="plan">
             <p>
               Plan:
-              <strong class="break-all">{{ plan || "null" }} </strong>
+              <strong class="break-all"
+                >{{ plan || "null" }}
+                <span v-if="quota">({{ quota }} Reports)</span></strong
+              >
             </p>
           </div>
-          <div class="flex my-5" v-if="quota">
+          <div class="flex my-5" v-if="quota && admin">
             <p>
               Quota:
               <strong class="break-all">{{ quota }} </strong>
@@ -185,14 +188,14 @@
           </div>
           <div class="flex my-5" v-if="quota">
             <p>
-              Quota Remaining:
+              Reports Remaining:
               <strong class="break-all">{{ quotaRemaining }} </strong>
             </p>
           </div>
         </div>
         <div>
           <div class="flex my-5" v-if="activeSub">
-            <form @submit.prevent="portal">
+            <form @submit.prevent="portal" class="w-full">
               <button
                 type="submit"
                 class="items-center self-center w-full h-16 px-4 mb-2 font-semibold text-white duration-150 bg-indigo-600 rounded-lg sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
@@ -269,17 +272,17 @@
                         <td
                           class="w-40 p-2 text-center dark:bg-gray-700 md:py-0"
                         >
-                          <div class="flex justify-between sm:justify-around">
+                          <div class="flex flex-wrap sm:justify-around">
                             <router-link
                               :to="`/analysis?retrieve=${article._id}`"
                               tag="button"
-                              class="w-auto h-10 px-4 font-semibold text-white duration-150 bg-indigo-600 rounded-lg hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
+                              class="w-auto h-10 px-4 mx-auto mb-1 font-semibold text-white duration-150 bg-indigo-600 rounded-lg hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
                               title="Open Report"
                             >
                               <ArrowCircleRightIcon class="flex align-middle" />
                             </router-link>
                             <button
-                              class="w-auto h-10 px-4 font-semibold text-white duration-150 bg-red-600 rounded-lg hover:bg-red-500 md:mt-0 focus:outline-none whitespace-nowrap"
+                              class="w-auto h-10 px-4 mx-auto font-semibold text-white duration-150 bg-red-600 rounded-lg hover:bg-red-500 md:mt-0 focus:outline-none whitespace-nowrap"
                               @click="deleteReport()"
                               title="Delete Report"
                             >
@@ -313,7 +316,6 @@
 <script>
 import BetaMessage from "@/components/BetaMessage";
 import Breadcrumb from "@/components/Breadcrumb";
-import { StripeCheckout } from "@vue-stripe/vue-stripe";
 import ErrorMessage from "@/components/ErrorMessage";
 import SuccessMessage from "@/components/SuccessMessage";
 import LoadingSpinner from "@/components/LoadingSpinner";
@@ -337,7 +339,6 @@ export default {
   components: {
     Breadcrumb,
     BetaMessage,
-    StripeCheckout,
     ErrorMessage,
     SuccessMessage,
     LoadingSpinner,

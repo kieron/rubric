@@ -994,7 +994,7 @@ export default {
           this.search.idFromDb = data.id;
           setTimeout(() => {
             this.retrieve(data.id);
-          }, 5500);
+          }, 1000);
         }
       } catch (err) {
         console.log(err);
@@ -1012,7 +1012,7 @@ export default {
           if (data.error.message === "Data Not Ready") {
             setTimeout(() => {
               this.retrieve(id);
-            }, 2500);
+            }, 1500);
           } else {
             this.errorHandler.errorMessage = data.error.message;
             this.errorHandler.error = true;
