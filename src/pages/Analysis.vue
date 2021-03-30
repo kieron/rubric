@@ -1070,7 +1070,7 @@ export default {
     },
     retrieve: async function (id) {
       try {
-        let response = await fetch(`${this.search.api_url}/retrieve?id=${0}`, {
+        let response = await fetch(`${this.search.api_url}/retrieve?id=${id}`, {
           headers: {
             Authorization: `Token ${localStorage.getItem("token")}`,
           },
