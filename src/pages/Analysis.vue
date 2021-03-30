@@ -1,7 +1,9 @@
 <template>
   <div id="analysis">
     <vue-topprogress ref="topProgress" color="#4f46e5"></vue-topprogress>
+
     <div id="animHolder" class="slide-in-right">
+      <v-tour name="myTour" :steps="steps" :callbacks="tourComplete"></v-tour>
       <Breadcrumb />
       <BetaMessage />
 
@@ -32,6 +34,7 @@
         <form v-on:submit.prevent="generate()" class="pb-2 my-5">
           <div class="mb-5 sm:flex">
             <input
+              data-tour-step="1"
               type="text"
               v-model="search.query"
               placeholder="best fishing rod for beginners"
@@ -40,6 +43,7 @@
               class="flex flex-grow w-full h-16 px-6 mb-2 mr-2 placeholder-gray-500 placeholder-opacity-50 bg-white border rounded-lg dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 focus:outline-none"
             />
             <button
+              data-tour-step="6"
               type="submit"
               :disabled="this.loader.loading === true"
               v-on:click="animateSearchBtn($event)"
@@ -81,6 +85,7 @@
             <div class="mb-3 sm:flex sm:justify-between">
               <div class="relative sm:w-1/4 sm:mr-2">
                 <select
+                  data-tour-step="2"
                   class="w-full h-16 px-3 text-sm bg-white border rounded-lg appearance-none dark:border-gray-600 dark:text-gray-400 dark:bg-gray-800 focus:outline-none"
                   name="engine"
                   id="engine"
@@ -99,6 +104,7 @@
               </div>
               <div class="relative sm:w-1/4 sm:mr-2">
                 <select
+                  data-tour-step="3"
                   class="w-full h-16 px-3 mt-2 text-sm bg-white border rounded-lg appearance-none dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 sm:mt-0 focus:outline-none"
                   name="location"
                   id="location"
@@ -426,6 +432,7 @@
               </div>
               <div class="relative sm:w-1/4 sm:mr-2">
                 <select
+                  data-tour-step="4"
                   class="w-full h-16 px-3 mx-0 mt-2 text-sm bg-white border rounded-lg appearance-none dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 sm:mt-0 focus:outline-none sm:my-0"
                   name="device"
                   id="device"
@@ -444,6 +451,7 @@
               </div>
               <div class="relative sm:w-1/4">
                 <input
+                  data-tour-step="5"
                   class="w-full h-16 px-3 mt-2 text-sm bg-white border rounded-lg dark:border-gray-600 dark:text-gray-400 dark:bg-gray-800 sm:mt-0 focus:outline-none"
                   type="number"
                   id="quantity"
@@ -839,6 +847,9 @@
 </template>
 
 <script>
+import VueTour from "vue-tour";
+import Vue from "vue";
+import "vue-tour/dist/vue-tour.css";
 import { mapState } from "vuex";
 import store from "../store";
 import LoadingSpinner from "@/components/LoadingSpinner";
@@ -851,6 +862,8 @@ import ResultCount from "@/components/ResultCount";
 var VueScrollTo = require("vue-scrollto");
 import { vueTopprogress } from "vue-top-progress";
 import config from "../../config";
+
+Vue.use(VueTour);
 
 import {
   CubeTransparentIcon,
@@ -877,6 +890,11 @@ export default {
       this.loader.loading = true;
       this.retrieve(this.$route.query.retrieve);
     }
+    if (localStorage.getItem("tourComplete") !== "true") {
+      setTimeout(() => {
+        this.$tours["myTour"].start();
+      }, 1000);
+    }
   },
   components: {
     HeaderQuestions,
@@ -898,6 +916,7 @@ export default {
     QuestionMarkCircleIcon,
     CalendarIcon,
     ArrowCircleRightIcon,
+    VueTour,
   },
   name: "Analysis",
   data() {
@@ -960,6 +979,55 @@ export default {
               },
               expandedArticles: [],
             },
+      steps: [
+        {
+          target: '[data-tour-step="1"]',
+          header: {
+            title: "Keywords",
+          },
+          content: `These are the keywords that we will run the analysis on.`,
+        },
+        {
+          target: '[data-tour-step="2"]',
+          header: {
+            title: "Search Engine",
+          },
+          content: `Choose the search engine that you wish results to come from, such as Google or Bing.`,
+        },
+        {
+          target: '[data-tour-step="3"]',
+          header: {
+            title: "Country",
+          },
+          content: `Choose the country you wish the search to be ran in.`,
+        },
+        {
+          target: '[data-tour-step="4"]',
+          header: {
+            title: "Device",
+          },
+          content: `Choose a specific device to run the search engine analysis on.`,
+        },
+        {
+          target: '[data-tour-step="5"]',
+          header: {
+            title: "Amount",
+          },
+          content: `Choose the amount of articles you wish to analyse, more articles will take longer!`,
+        },
+        {
+          target: '[data-tour-step="6"]',
+          header: {
+            title: "Start Analysis",
+          },
+          content: `Clicking on 'Start Analysis' will tell the machines behind the scene to get to work, and you'll have your data back here in no time!`,
+        },
+      ],
+      tourComplete: {
+        onStop: function () {
+          localStorage.setItem("tourComplete", "true");
+        },
+      },
     };
   },
   methods: {
@@ -1002,7 +1070,7 @@ export default {
     },
     retrieve: async function (id) {
       try {
-        let response = await fetch(`${this.search.api_url}/retrieve?id=${id}`, {
+        let response = await fetch(`${this.search.api_url}/retrieve?id=${0}`, {
           headers: {
             Authorization: `Token ${localStorage.getItem("token")}`,
           },
