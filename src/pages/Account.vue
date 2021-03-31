@@ -246,8 +246,8 @@
                       class="bg-white border-t border-gray-300 divide-y divide-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:divide-gray-600"
                     >
                       <tr
-                        :key="article._id"
-                        v-for="article in userSerps"
+                        :key="index"
+                        v-for="(article, index) in userSerps"
                         class="border-b border-gray-200 dark:border-gray-600"
                       >
                         <td class="px-3 py-3 md:px-6 md:py-4">
@@ -283,10 +283,18 @@
                             </router-link>
                             <button
                               class="w-auto h-10 px-4 mx-auto font-semibold text-white duration-150 bg-red-600 rounded-lg hover:bg-red-500 md:mt-0 focus:outline-none whitespace-nowrap"
-                              @click="deleteReport()"
+                              @click="deleteReport(article._id, index)"
                               title="Delete Report"
+                              :disabled="loader.deleting === true"
                             >
-                              <XIcon class="flex align-middle" />
+                              <XIcon
+                                class="flex align-middle"
+                                v-if="!loader.deleting"
+                              />
+                              <LoadingSpinner
+                                class="flex items-center w-6 h-6 fill-current"
+                                v-if="loader.deleting"
+                              />
                             </button>
                           </div>
                         </td>
@@ -357,6 +365,7 @@ export default {
       api_url: config.API_URL,
       loader: {
         loading: true,
+        deleting: false,
       },
       errorHandler: {
         error: false,
@@ -469,8 +478,34 @@ export default {
       return d.toUTCString();
     },
 
-    deleteReport: function () {
-      alert("Delete Coming Soon! 🙏");
+    deleteReport: async function (id, index) {
+      var r = confirm("Are you sure you want to delete this report?");
+      if (r == true) {
+        try {
+          this.loader.deleting = true;
+          let response = await fetch(`${this.api_url}/delete?id=${id}`, {
+            headers: {
+              Authorization: `Token ${localStorage.getItem("token")}`,
+            },
+          });
+          let data = await response.json();
+          if (data.error) {
+            this.errorHandler.errorMessage = data.error.message;
+            this.errorHandler.error = true;
+            this.loader.deleting = false;
+          } else if (data === "Report Deleted") {
+            this.userSerps.splice(index, 1);
+            this.loader.deleting = false;
+          } else {
+            console.log(data);
+            this.errorHandler.errorMessage = data;
+            this.errorHandler.error = true;
+            this.loader.deleting = false;
+          }
+        } catch (err) {
+          this.errorHandler.errorMessage = "Something went wrong!";
+        }
+      }
     },
   },
 };

@@ -464,54 +464,11 @@
                 />
               </div>
             </div>
-            <p class="mt-1 text-xs text-right text-gray-500 dark:text-gray-400">
+            <p class="text-xs text-right text-gray-500 dark:text-gray-400">
               This amount of articles could take around
               <strong> {{ Math.round(this.search.amount / 3) }}</strong>
               seconds to fetch.
             </p>
-
-            <div class="w-full mt-3 text-gray-600 md:mt-0 dark:text-gray-400">
-              <p class="">Excluded Domains</p>
-              <p class="mb-3 text-sm">
-                These domains always rank high, and usually dont contain useful
-                data.
-              </p>
-              <div class="flex">
-                <label class="flex items-start justify-start mr-3">
-                  <div
-                    class="flex items-center justify-center flex-shrink-0 w-5 h-5 mr-1 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"
-                  >
-                    <input type="checkbox" class="absolute opacity-0" checked />
-                    <CheckIcon
-                      class="hidden w-5 h-5 text-indigo-500 pointer-events-none"
-                    />
-                  </div>
-                  <div class="text-sm select-none">Amazon</div>
-                </label>
-                <label class="flex items-start justify-start mr-3">
-                  <div
-                    class="flex items-center justify-center flex-shrink-0 w-5 h-5 mr-1 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"
-                  >
-                    <input type="checkbox" class="absolute opacity-0" checked />
-                    <CheckIcon
-                      class="hidden w-5 h-5 text-indigo-500 pointer-events-none"
-                    />
-                  </div>
-                  <div class="text-sm select-none">Pinterest</div>
-                </label>
-                <label class="flex items-start justify-start">
-                  <div
-                    class="flex items-center justify-center flex-shrink-0 w-5 h-5 mr-1 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"
-                  >
-                    <input type="checkbox" class="absolute opacity-0" checked />
-                    <CheckIcon
-                      class="hidden w-5 h-5 text-indigo-500 pointer-events-none"
-                    />
-                  </div>
-                  <div class="text-sm select-none">Imgur</div>
-                </label>
-              </div>
-            </div>
           </div>
         </form>
       </div>
