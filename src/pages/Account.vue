@@ -247,7 +247,7 @@
                     >
                       <tr
                         :key="index"
-                        v-for="(article, index) in userSerps"
+                        v-for="(report, index) in userSerps"
                         class="border-b border-gray-200 dark:border-gray-600"
                       >
                         <td class="px-3 py-3 md:px-6 md:py-4">
@@ -256,25 +256,23 @@
                               <div
                                 class="mb-1 mr-16 font-medium leading-5 text-gray-900 dark:text-gray-300 md:text-lg"
                               >
-                                {{ article.searchTerm }}
+                                {{ report.searchTerm }}
                               </div>
 
                               <div
                                 class="text-xs leading-5 text-gray-500 dark:text-gray-400 md:text-sm"
                               >
                                 <span class="break-all">{{
-                                  convertTime(article.createdAt)
+                                  convertTime(report.createdAt)
                                 }}</span>
                               </div>
                             </div>
                           </div>
                         </td>
-                        <td
-                          class="w-40 p-2 text-center dark:bg-gray-700 md:py-0"
-                        >
+                        <td class="w-40 p-2 text-center md:py-0">
                           <div class="flex flex-wrap sm:justify-around">
                             <router-link
-                              :to="`/analysis?retrieve=${article._id}`"
+                              :to="`/analysis?retrieve=${report._id}`"
                               tag="button"
                               class="w-auto h-10 px-4 mx-auto mb-1 font-semibold text-white duration-150 bg-indigo-600 rounded-lg hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
                               title="Open Report"
@@ -283,17 +281,17 @@
                             </router-link>
                             <button
                               class="w-auto h-10 px-4 mx-auto font-semibold text-white duration-150 bg-red-600 rounded-lg hover:bg-red-500 md:mt-0 focus:outline-none whitespace-nowrap"
-                              @click="deleteReport(article._id, index)"
+                              @click="deleteReport(report._id, index, report)"
                               title="Delete Report"
-                              :disabled="loader.deleting === true"
+                              :disabled="report.deleting === true"
                             >
                               <XIcon
                                 class="flex align-middle"
-                                v-if="!loader.deleting"
+                                v-if="!report.deleting"
                               />
                               <LoadingSpinner
                                 class="flex items-center w-6 h-6 fill-current"
-                                v-if="loader.deleting"
+                                v-if="report.deleting"
                               />
                             </button>
                           </div>
@@ -340,9 +338,6 @@ export default {
     userDetails: function () {
       return JSON.parse(localStorage.getItem("user"));
     },
-    orderedSerps: function () {
-      return orderBy(this.serpData, "createdAt");
-    },
   },
   components: {
     Breadcrumb,
@@ -365,7 +360,6 @@ export default {
       api_url: config.API_URL,
       loader: {
         loading: true,
-        deleting: false,
       },
       errorHandler: {
         error: false,
@@ -406,10 +400,11 @@ export default {
         this.activeSub = data.billing.activePlan || false;
         this.quota = data.billing.quota || 0;
         this.quotaRemaining = data.billing.quotaRemaining || 0;
+        this.plan = data.billing.plan;
         if (data.reports) {
           this.userSerps = orderBy(data.reports, "createdAt", "desc");
+          this.userSerps.map((report) => (report.deleting = false));
         }
-        this.plan = data.billing.plan;
       }
     } catch (err) {
       console.log(err);
@@ -479,28 +474,26 @@ export default {
     },
 
     deleteReport: async function (id, index) {
-      var r = confirm("Are you sure you want to delete this report?");
+      // console.log(`ID: ${id}`);
+      // console.log(`INDEX: ${index}`);
+      // console.log(`REPORT: ${this.serpData}`);
+      const r = confirm("Are you sure you want to delete this report?");
       if (r == true) {
         try {
-          this.loader.deleting = true;
           let response = await fetch(`${this.api_url}/delete?id=${id}`, {
             headers: {
-              Authorization: `Token ${localStorage.getItem("token")}`,
+              Authorization: `Token ${localStorage.getsssssItem("token")}`,
             },
           });
           let data = await response.json();
           if (data.error) {
             this.errorHandler.errorMessage = data.error.message;
             this.errorHandler.error = true;
-            this.loader.deleting = false;
           } else if (data === "Report Deleted") {
             this.userSerps.splice(index, 1);
-            this.loader.deleting = false;
           } else {
-            console.log(data);
             this.errorHandler.errorMessage = data;
             this.errorHandler.error = true;
-            this.loader.deleting = false;
           }
         } catch (err) {
           this.errorHandler.errorMessage = "Something went wrong!";
