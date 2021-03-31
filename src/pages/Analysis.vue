@@ -77,7 +77,7 @@
             </button>
           </div>
           <hr class="mb-3" />
-          <div class="">
+          <div>
             <p class="text-gray-600 dark:text-gray-400">Optional Parameters</p>
             <p class="mb-3 text-sm text-gray-600 dark:text-gray-400">
               You don't need to set these, unless you really want too.
@@ -462,13 +462,54 @@
                   max="100"
                   v-model="search.amount"
                 />
-                <p
-                  class="absolute right-0 mt-1 text-xs text-right text-gray-500 dark:text-gray-400"
-                >
-                  This amount of articles could take around
-                  <strong> {{ Math.round(this.search.amount / 3) }}</strong>
-                  seconds to fetch.
-                </p>
+              </div>
+            </div>
+            <p class="mt-1 text-xs text-right text-gray-500 dark:text-gray-400">
+              This amount of articles could take around
+              <strong> {{ Math.round(this.search.amount / 3) }}</strong>
+              seconds to fetch.
+            </p>
+
+            <div class="w-full mt-3 text-gray-600 md:mt-0 dark:text-gray-400">
+              <p class="">Excluded Domains</p>
+              <p class="mb-3 text-sm">
+                These domains always rank high, and usually dont contain useful
+                data.
+              </p>
+              <div class="flex">
+                <label class="flex items-start justify-start mr-3">
+                  <div
+                    class="flex items-center justify-center flex-shrink-0 w-5 h-5 mr-1 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"
+                  >
+                    <input type="checkbox" class="absolute opacity-0" checked />
+                    <CheckIcon
+                      class="hidden w-5 h-5 text-indigo-500 pointer-events-none"
+                    />
+                  </div>
+                  <div class="text-sm select-none">Amazon</div>
+                </label>
+                <label class="flex items-start justify-start mr-3">
+                  <div
+                    class="flex items-center justify-center flex-shrink-0 w-5 h-5 mr-1 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"
+                  >
+                    <input type="checkbox" class="absolute opacity-0" checked />
+                    <CheckIcon
+                      class="hidden w-5 h-5 text-indigo-500 pointer-events-none"
+                    />
+                  </div>
+                  <div class="text-sm select-none">Pinterest</div>
+                </label>
+                <label class="flex items-start justify-start">
+                  <div
+                    class="flex items-center justify-center flex-shrink-0 w-5 h-5 mr-1 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"
+                  >
+                    <input type="checkbox" class="absolute opacity-0" checked />
+                    <CheckIcon
+                      class="hidden w-5 h-5 text-indigo-500 pointer-events-none"
+                    />
+                  </div>
+                  <div class="text-sm select-none">Imgur</div>
+                </label>
               </div>
             </div>
           </div>
@@ -867,6 +908,7 @@ Vue.use(VueTour);
 
 import {
   CubeTransparentIcon,
+  CheckIcon,
   ChevronDownIcon,
   AnnotationIcon,
   NewspaperIcon,
@@ -897,6 +939,7 @@ export default {
     }
   },
   components: {
+    CheckIcon,
     HeaderQuestions,
     LoadingSpinner,
     Breadcrumb,
@@ -1181,6 +1224,10 @@ export default {
 </script>
 
 <style lang="css" scoped>
+input:checked + svg {
+  display: block;
+}
+
 .slide-in-bottom {
   -webkit-animation: slide-in-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     both;
