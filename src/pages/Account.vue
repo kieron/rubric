@@ -256,8 +256,7 @@
                               <div
                                 class="mb-1 mr-16 font-medium leading-5 text-gray-900 dark:text-gray-300 md:text-lg"
                               >
-                                {{ report.searchTerm }} -
-                                <span class="text-xs">{{ report._id }}</span>
+                                {{ report.searchTerm }}
                               </div>
 
                               <div
