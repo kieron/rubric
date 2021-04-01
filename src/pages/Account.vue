@@ -281,17 +281,17 @@
                             </router-link>
                             <button
                               class="w-auto h-10 px-4 mx-auto font-semibold text-white duration-150 bg-red-600 rounded-lg hover:bg-red-500 md:mt-0 focus:outline-none whitespace-nowrap"
-                              @click="deleteReport(report._id, index, report)"
+                              @click="deleteReport(index, report)"
                               title="Delete Report"
                               :disabled="report.deleting === true"
                             >
                               <XIcon
                                 class="flex align-middle"
-                                v-if="!report.deleting"
+                                :id="report._id + '_x'"
                               />
                               <LoadingSpinner
-                                class="flex items-center w-6 h-6 fill-current"
-                                v-if="report.deleting"
+                                class="items-center hidden w-6 h-6 fill-current"
+                                :id="report._id + '_spinner'"
                               />
                             </button>
                           </div>
@@ -473,18 +473,19 @@ export default {
       return d.toUTCString();
     },
 
-    deleteReport: async function (id, index) {
-      // console.log(`ID: ${id}`);
-      // console.log(`INDEX: ${index}`);
-      // console.log(`REPORT: ${this.serpData}`);
+    deleteReport: async function (index, report) {
       const r = confirm("Are you sure you want to delete this report?");
       if (r == true) {
+        this.showSpinner(report._id);
         try {
-          let response = await fetch(`${this.api_url}/delete?id=${id}`, {
-            headers: {
-              Authorization: `Token ${localStorage.getsssssItem("token")}`,
-            },
-          });
+          let response = await fetch(
+            `${this.api_url}/delete?id=${report._id}`,
+            {
+              headers: {
+                Authorization: `Token ${localStorage.getItem("token")}`,
+              },
+            }
+          );
           let data = await response.json();
           if (data.error) {
             this.errorHandler.errorMessage = data.error.message;
@@ -497,8 +498,31 @@ export default {
           }
         } catch (err) {
           this.errorHandler.errorMessage = "Something went wrong!";
+        } finally {
+          this.hideSpinner(report._id);
         }
       }
+    },
+
+    showSpinner: function (reportId) {
+      if (
+        document.getElementById(reportId + "_x") &&
+        document.getElementById(reportId + "_spinner")
+      )
+        document.getElementById(reportId + "_x").classList.remove("flex");
+      document.getElementById(reportId + "_x").classList.add("hidden");
+      document.getElementById(reportId + "_spinner").classList.remove("hidden");
+      document.getElementById(reportId + "_spinner").classList.add("flex");
+    },
+    hideSpinner: function (reportId) {
+      if (
+        document.getElementById(reportId + "_x") &&
+        document.getElementById(reportId + "_spinner")
+      )
+        document.getElementById(reportId + "_x").classList.remove("hidden");
+      document.getElementById(reportId + "_x").classList.add("flex");
+      document.getElementById(reportId + "_spinner").classList.remove("flex");
+      document.getElementById(reportId + "_spinner").classList.add("hidden");
     },
   },
 };
