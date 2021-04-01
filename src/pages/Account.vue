@@ -403,7 +403,6 @@ export default {
         this.plan = data.billing.plan;
         if (data.reports) {
           this.userSerps = orderBy(data.reports, "createdAt", "desc");
-          this.userSerps.map((report) => (report.deleting = false));
         }
       }
     } catch (err) {
