@@ -256,7 +256,8 @@
                               <div
                                 class="mb-1 mr-16 font-medium leading-5 text-gray-900 dark:text-gray-300 md:text-lg"
                               >
-                                {{ report.searchTerm }}
+                                {{ report.searchTerm }} -
+                                <span class="text-xs">{{ report._id }}</span>
                               </div>
 
                               <div
@@ -280,10 +281,10 @@
                               <ArrowCircleRightIcon class="flex align-middle" />
                             </router-link>
                             <button
-                              class="w-auto h-10 px-4 mx-auto font-semibold text-white duration-150 bg-red-600 rounded-lg hover:bg-red-500 md:mt-0 focus:outline-none whitespace-nowrap"
+                              class="w-auto h-10 px-4 mx-auto font-semibold text-white duration-150 bg-red-600 rounded-lg cursor-not-allowed md:mt-0 focus:outline-none whitespace-nowrap"
                               @click="deleteReport(index, report)"
                               title="Delete Report"
-                              :disabled="report.deleting === true"
+                              disabled
                             >
                               <XIcon
                                 class="flex align-middle"
