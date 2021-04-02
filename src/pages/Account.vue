@@ -328,6 +328,7 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import { XIcon, ArrowCircleRightIcon } from "@vue-hero-icons/outline";
 var orderBy = require("lodash.orderby");
 import config from "../../config";
+import { StripeCheckout } from "@vue-stripe/vue-stripe";
 
 export default {
   name: "Account",
@@ -340,6 +341,7 @@ export default {
     },
   },
   components: {
+    StripeCheckout,
     Breadcrumb,
     BetaMessage,
     ErrorMessage,
