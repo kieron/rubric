@@ -7,7 +7,7 @@
       <h1 class="mb-3 text-3xl font-semibold text-gray-800 lg:mb-0">
         Privacy Policy
       </h1>
-      <p>//To do.</p>
+      <p>//Coming Soon.</p>
       <hr class="mt-2" />
     </div>
   </div>
