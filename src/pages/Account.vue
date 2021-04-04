@@ -280,7 +280,7 @@
                               <ArrowCircleRightIcon class="flex align-middle" />
                             </router-link>
                             <button
-                              class="w-auto h-10 px-4 mx-auto font-semibold text-white duration-150 bg-red-600 rounded-lg cursor-not-allowed md:mt-0 focus:outline-none whitespace-nowrap"
+                              class="hidden w-auto h-10 px-4 mx-auto font-semibold text-white duration-150 bg-red-600 rounded-lg cursor-not-allowed md:mt-0 focus:outline-none whitespace-nowrap"
                               @click="deleteReport(index, report)"
                               title="Delete Report"
                               disabled
