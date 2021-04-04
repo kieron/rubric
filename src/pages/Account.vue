@@ -326,7 +326,7 @@ import ErrorMessage from "@/components/ErrorMessage";
 import SuccessMessage from "@/components/SuccessMessage";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { XIcon, ArrowCircleRightIcon } from "@vue-hero-icons/outline";
-var orderBy = require("lodash.orderby");
+const orderBy = require("lodash.orderby");
 import config from "../../config";
 import { StripeCheckout } from "@vue-stripe/vue-stripe";
 
