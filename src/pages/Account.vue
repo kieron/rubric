@@ -365,7 +365,7 @@ export default {
       },
       errorHandler: {
         error: false,
-        errorMessage: "Something Went Wrong",
+        errorMessage: "Something Went Wrong!",
       },
       successMessage: "",
       userSerps: [],
