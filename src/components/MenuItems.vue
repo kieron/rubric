@@ -7,6 +7,7 @@
         active-class="border-l-8 border-indigo-600 dark:border-indigo-200 bg-gray-30 dark:bg-gray-700 dark:text-indigo-200"
         class="flex items-center w-full h-10 pl-4 mb-2 text-gray-800 duration-150 rounded-lg cursor-pointer dark:text-gray-300 dark:hover:text-indigo-200 hover:bg-gray-30 dark:hover:bg-gray-700"
         @click.native="toggleSidebar()"
+        title="SERP Analysis"
       >
         <ChartSquareBarIcon class="w-6 h-6 mr-2" />
 
@@ -15,7 +16,7 @@
       <router-link
         active-class="border-l-8 border-indigo-600 dark:border-indigo-200 bg-gray-30 dark:bg-gray-700 dark:text-indigo-200"
         to="/blueprint"
-        title="Coming Soon"
+        title="Blueprint Editor"
         @click.native="toggleSidebar()"
         class="flex items-center w-full h-10 pl-4 mb-2 text-gray-800 duration-150 rounded-lg cursor-pointer dark:text-gray-300 dark:hover:text-indigo-200 hover:bg-gray-30 dark:hover:bg-gray-700"
       >
@@ -40,10 +41,21 @@
       <a
         href="mailto:hello@rubricseo.com?subject=Feedback%20-%20Rubric%20SEO"
         class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-pointer dark:text-gray-300 dark:hover:text-indigo-200 hover:bg-gray-30 dark:hover:bg-gray-700"
+        title="Email your feedback!"
       >
         <ChatIcon class="w-6 h-6 mr-2" />
 
         <span class="font-medium">Provide Feedback</span>
+      </a>
+      <a
+        href="https://discord.gg/EtKzRF3dY7"
+        class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-pointer dark:text-gray-300 dark:hover:text-indigo-200 hover:bg-gray-30 dark:hover:bg-gray-700"
+        title="Join the Discord to help with Rubric!"
+        target="_blank"
+      >
+        <ChatAlt2Icon class="w-6 h-6 mr-2" />
+
+        <span class="font-medium">Join the Discord</span>
       </a>
     </div>
   </div>
@@ -56,6 +68,7 @@ import {
   ChartSquareBarIcon,
   // BriefcaseIcon,
   ChatIcon,
+  ChatAlt2Icon,
 } from "@vue-hero-icons/outline";
 
 export default {
@@ -67,6 +80,7 @@ export default {
     CubeTransparentIcon,
     ChartSquareBarIcon,
     ChatIcon,
+    ChatAlt2Icon,
     // BriefcaseIcon,
   },
   methods: {
