@@ -91,7 +91,7 @@
         />
       </div>
       <div
-        class="sticky top-0 flex-grow w-1/3 h-full p-5 ml-2 bg-gray-100 border border-gray-200 dark:border-gray-600 dark:bg-gray-700"
+        class="sticky top-0 flex-grow w-1/3 h-full p-5 ml-2 border border-gray-200 dark:border-gray-600 dark:bg-gray-700"
       >
         <h2 class="text-2xl bold dark:text-gray-400">Blueprint Data</h2>
         <div v-if="!Object.keys(blueprintData).length && !questions.length">
@@ -113,7 +113,7 @@
               v-for="item in weightedHeaders"
               @click="insertHeader(item.header)"
               :key="item.header"
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded cursor-pointer hover:bg-indigo-400"
+              class="px-2 m-1 text-xs font-bold leading-loose bg-indigo-200 rounded cursor-pointer hover:bg-indigo-400"
               >{{ item.header }}</span
             >
           </div>
@@ -125,7 +125,7 @@
               @click="insertQuestion(item)"
               v-for="item in questions"
               :key="item.question"
-              class="px-2 m-1 text-sm font-bold leading-loose bg-indigo-200 rounded cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-xs font-bold leading-loose bg-indigo-200 rounded cursor-pointer hover:bg-gray-300"
               >{{ item }}</span
             >
           </div>
@@ -253,7 +253,7 @@ export default {
       // editorHtml += "<br>";
       this.editor.insertText(
         this.editor.getSelection(true).index,
-        item.trim(),
+        `\n` + item.trim(),
         {
           format: "h1",
         }
@@ -262,7 +262,7 @@ export default {
     insertQuestion: function (item) {
       this.editor.insertText(
         this.editor.getSelection(true).index,
-        item.trim(),
+        `\n` + item.trim(),
         {
           format: "h1",
         }

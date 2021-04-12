@@ -122,7 +122,7 @@
                 >
                   Subscribe
                 </button>
-              </div> -->
+              </div>  -->
             </div>
           </div>
         </section>
@@ -280,10 +280,10 @@
                               <ArrowCircleRightIcon class="flex align-middle" />
                             </router-link>
                             <button
-                              class="w-auto h-10 px-4 mx-auto font-semibold text-white duration-150 bg-red-600 rounded-lg hover:bg-red-500 md:mt-0 focus:outline-none whitespace-nowrap"
+                              class="hidden w-auto h-10 px-4 mx-auto font-semibold text-white duration-150 bg-red-600 rounded-lg cursor-not-allowed md:mt-0 focus:outline-none whitespace-nowrap"
                               @click="deleteReport(index, report)"
                               title="Delete Report"
-                              :disabled="report.deleting === true"
+                              disabled
                             >
                               <XIcon
                                 class="flex align-middle"
@@ -326,8 +326,9 @@ import ErrorMessage from "@/components/ErrorMessage";
 import SuccessMessage from "@/components/SuccessMessage";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { XIcon, ArrowCircleRightIcon } from "@vue-hero-icons/outline";
-var orderBy = require("lodash.orderby");
+const orderBy = require("lodash.orderby");
 import config from "../../config";
+import { StripeCheckout } from "@vue-stripe/vue-stripe";
 
 export default {
   name: "Account",
@@ -340,6 +341,7 @@ export default {
     },
   },
   components: {
+    StripeCheckout,
     Breadcrumb,
     BetaMessage,
     ErrorMessage,
@@ -363,7 +365,7 @@ export default {
       },
       errorHandler: {
         error: false,
-        errorMessage: "Something Went Wrong",
+        errorMessage: "Something Went Wrong!",
       },
       successMessage: "",
       userSerps: [],

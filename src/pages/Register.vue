@@ -25,8 +25,15 @@
               placeholder="***************"
               type="password"
               required
+              id="password"
               v-model="password"
+              v-on:input="passwordStrength()"
             />
+            <span v-if="passwordComplexityError" class="text-xs text-red-500"
+              >Your password should be at least 8 characters in length, and
+              contain either a number, special character or an uppercase
+              letter.</span
+            >
           </label>
           <label class="block mt-4 text-sm">
             <span class="text-gray-700 dark:text-gray-400">
@@ -120,6 +127,7 @@ export default {
       password: "",
       password_confirmation: "",
       passwordMatchError: false,
+      passwordComplexityError: false,
       api_url: config.API_URL,
       loader: {
         loading: false,
@@ -128,26 +136,43 @@ export default {
   },
   methods: {
     register: async function () {
-      if (this.password === this.password_confirmation) {
-        this.passwordMatchError = false;
-        let data = {
-          name: this.name,
-          email: this.email,
-          password: this.password,
-        };
-        try {
-          await this.$store.dispatch("register", data);
-          if (this.$store.getters.authStatus === "success") {
-            this.$router.push("/account");
+      if (!this.passwordComplexityError) {
+        if (this.password === this.password_confirmation) {
+          this.passwordMatchError = false;
+          let data = {
+            name: this.name,
+            email: this.email,
+            password: this.password,
+          };
+          try {
+            await this.$store.dispatch("register", data);
+            if (this.$store.getters.authStatus === "success") {
+              this.$router.push("/account");
+            }
+          } catch (err) {
+            console.log(err);
+          } finally {
+            this.loader.loading = false;
           }
-        } catch (err) {
-          console.log(err);
-        } finally {
-          this.loader.loading = false;
+        } else {
+          this.passwordMatchError = true;
+          document.getElementById("password_confirmation").focus();
         }
       } else {
-        this.passwordMatchError = true;
-        document.getElementById("password_confirmation").focus();
+        document.getElementById("password").focus();
+      }
+    },
+    passwordStrength: function () {
+      console.log("STR CHECK");
+      const mediumRegex = new RegExp(
+        "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{8,})"
+      );
+
+      if (mediumRegex.test(this.password)) {
+        this.passwordComplexityError = false;
+      } else {
+        console.log("ok");
+        this.passwordComplexityError = true;
       }
     },
   },

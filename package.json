@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@vue-hero-icons/outline": "^1.7.0",
+    "@vue-stripe/vue-stripe": "^4.1.8",
     "axios": "^0.21.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "config.js": "^0.1.0",
