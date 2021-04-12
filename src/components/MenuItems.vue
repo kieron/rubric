@@ -42,6 +42,7 @@
         href="mailto:hello@rubricseo.com?subject=Feedback%20-%20Rubric%20SEO"
         class="flex items-center w-full h-10 pl-4 text-gray-800 duration-150 rounded-lg cursor-pointer dark:text-gray-300 dark:hover:text-indigo-200 hover:bg-gray-30 dark:hover:bg-gray-700"
         title="Email your feedback!"
+        target="_blank"
       >
         <ChatIcon class="w-6 h-6 mr-2" />
 
