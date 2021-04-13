@@ -25,10 +25,7 @@
         />
       </div>
       <div v-if="!loader.loading">
-        <section
-          class="text-gray-700 body-font"
-          v-if="!activeSub && !errorHandler.error"
-        >
+        <section class="text-gray-700 body-font" v-if="!activeSub">
           <stripe-checkout
             ref="checkoutRef"
             :pk="publishableKey"
@@ -36,7 +33,7 @@
           />
           <div class="container px-8 mx-auto">
             <h3 class="text-xl font-semibold text-center my-7">
-              Pick a plan to get started!
+              Pick a plan to get started, and pay nothing for 5 days!
             </h3>
             <div
               class="flex flex-wrap text-center lg:divide-x dark:divide-gray-600"
@@ -68,7 +65,7 @@
                   Subscribe
                 </button>
               </div>
-              <!-- <div class="order-2 w-full px-8 py-6 mx-auto lg:order-1 lg:w-1/3">
+              <div class="order-2 w-full px-8 py-6 mx-auto lg:order-1 lg:w-1/3">
                 <h2
                   class="mb-3 text-lg font-semibold text-gray-700 dark:text-gray-300 lg:text-2xl title-font"
                 >
@@ -76,7 +73,6 @@
                 </h2>
                 <p class="my-4 text-base leading-relaxed dark:text-gray-300">
                   Generate up to 100 reports a month.
-
                 </p>
                 <div
                   class="flex flex-col items-center justify-center px-2 text-center lg:h-32"
@@ -122,7 +118,7 @@
                 >
                   Subscribe
                 </button>
-              </div>  -->
+              </div>
             </div>
           </div>
         </section>
