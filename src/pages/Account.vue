@@ -25,10 +25,7 @@
         />
       </div>
       <div v-if="!loader.loading">
-        <section
-          class="text-gray-700 body-font"
-          v-if="!activeSub && !errorHandler.error"
-        >
+        <section class="text-gray-700 body-font" v-if="!activeSub">
           <stripe-checkout
             ref="checkoutRef"
             :pk="publishableKey"
@@ -36,7 +33,7 @@
           />
           <div class="container px-8 mx-auto">
             <h3 class="text-xl font-semibold text-center my-7">
-              Pick a plan to get started!
+              Pick a plan to get started, and pay nothing for 5 days!
             </h3>
             <div
               class="flex flex-wrap text-center  lg:divide-x dark:divide-gray-600"
@@ -68,21 +65,20 @@
                   Subscribe
                 </button>
               </div>
-              <!-- <div class="order-2 w-full px-8 py-6 mx-auto lg:order-1 lg:w-1/3">
+              <div class="order-2 w-full px-8 py-6 mx-auto lg:order-1 lg:w-1/3">
                 <h2
-                  class="mb-3 text-lg font-semibold text-gray-700 dark:text-gray-300 lg:text-2xl title-font"
+                  class="mb-3 text-lg font-semibold text-gray-700  dark:text-gray-300 lg:text-2xl title-font"
                 >
                   Pro
                 </h2>
                 <p class="my-4 text-base leading-relaxed dark:text-gray-300">
                   Generate up to 100 reports a month.
-
                 </p>
                 <div
-                  class="flex flex-col items-center justify-center px-2 text-center lg:h-32"
+                  class="flex flex-col items-center justify-center px-2 text-center  lg:h-32"
                 >
                   <h2
-                    class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-black dark:text-gray-300 lg:text-6xl"
+                    class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-black  dark:text-gray-300 lg:text-6xl"
                   >
                     $19.99
                     <span class="ml-1 text-base text-gray-600">/mo</span>
@@ -91,14 +87,14 @@
                 <button
                   v-if="sessionId === ''"
                   @click="pay('price_1IUyuoFDmua4eDfjMQPpCTFl')"
-                  class="flex items-center px-8 py-3 mx-auto mt-3 font-semibold text-white duration-150 bg-indigo-600 rounded-lg sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
+                  class="flex items-center px-8 py-3 mx-auto mt-3 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
                 >
                   Subscribe
                 </button>
               </div>
               <div class="order-1 w-full px-8 py-6 mx-auto lg:order-1 lg:w-1/3">
                 <h2
-                  class="mb-3 text-lg font-semibold text-gray-700 dark:text-gray-300 lg:text-2xl title-font"
+                  class="mb-3 text-lg font-semibold text-gray-700  dark:text-gray-300 lg:text-2xl title-font"
                 >
                   Agency
                 </h2>
@@ -106,10 +102,10 @@
                   Generate unlimited reports a month!
                 </p>
                 <div
-                  class="flex flex-col items-center justify-center px-2 text-center lg:h-32"
+                  class="flex flex-col items-center justify-center px-2 text-center  lg:h-32"
                 >
                   <h2
-                    class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-black dark:text-gray-300 lg:text-6xl"
+                    class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-black  dark:text-gray-300 lg:text-6xl"
                   >
                     $39.99
                     <span class="ml-1 text-base text-gray-600">/mo</span>
@@ -118,11 +114,11 @@
                 <button
                   v-if="sessionId === ''"
                   @click="pay('price_1IUyvEFDmua4eDfjVM96JENl')"
-                  class="flex items-center px-8 py-3 mx-auto mt-3 font-semibold text-white duration-150 bg-indigo-600 rounded-lg sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
+                  class="flex items-center px-8 py-3 mx-auto mt-3 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
                 >
                   Subscribe
                 </button>
-              </div>  -->
+              </div>
             </div>
           </div>
         </section>
@@ -280,10 +276,9 @@
                               <ArrowCircleRightIcon class="flex align-middle" />
                             </router-link>
                             <button
-                              class="hidden w-auto h-10 px-4 mx-auto font-semibold text-white duration-150 bg-red-600 rounded-lg cursor-not-allowed  md:mt-0 focus:outline-none whitespace-nowrap"
+                              class="w-auto h-10 px-4 mx-auto font-semibold text-white duration-150 bg-red-600 rounded-lg  md:mt-0 focus:outline-none whitespace-nowrap"
                               @click="deleteReport(index, report)"
                               title="Delete Report"
-                              disabled
                             >
                               <XIcon
                                 class="flex align-middle"
