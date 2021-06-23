@@ -5,7 +5,7 @@
 
     <div class="items-center mb-6">
       <h1
-        class="mb-3 text-3xl font-semibold text-gray-800 dark:text-gray-300 lg:mb-0"
+        class="mb-3 text-3xl font-semibold text-gray-800  dark:text-gray-300 lg:mb-0"
       >
         My Account
       </h1>
@@ -21,7 +21,7 @@
         v-if="loader.loading"
       >
         <LoadingSpinner
-          class="flex justify-center w-40 ml-auto mr-auto text-center fill-current"
+          class="flex justify-center w-40 ml-auto mr-auto text-center fill-current "
         />
       </div>
       <div v-if="!loader.loading">
@@ -39,11 +39,11 @@
               Pick a plan to get started!
             </h3>
             <div
-              class="flex flex-wrap text-center lg:divide-x dark:divide-gray-600"
+              class="flex flex-wrap text-center  lg:divide-x dark:divide-gray-600"
             >
               <div class="order-3 w-full px-8 py-6 mx-auto lg:order-1 lg:w-1/3">
                 <h2
-                  class="mb-3 text-lg font-semibold text-gray-700 dark:text-gray-300 lg:text-2xl title-font"
+                  class="mb-3 text-lg font-semibold text-gray-700  dark:text-gray-300 lg:text-2xl title-font"
                 >
                   Just Start
                 </h2>
@@ -51,10 +51,10 @@
                   Generate up to 50 reports a month.
                 </p>
                 <div
-                  class="flex flex-col items-center justify-center px-2 text-center lg:h-32"
+                  class="flex flex-col items-center justify-center px-2 text-center  lg:h-32"
                 >
                   <h2
-                    class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-black dark:text-gray-300 lg:text-6xl"
+                    class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-black  dark:text-gray-300 lg:text-6xl"
                   >
                     $9.99
                     <span class="ml-1 text-base text-gray-600">/mo</span>
@@ -63,7 +63,7 @@
                 <button
                   v-if="sessionId === ''"
                   @click="pay('price_1IUyuIFDmua4eDfjjcwvBQMW')"
-                  class="flex items-center px-8 py-3 mx-auto mt-3 font-semibold text-white duration-150 bg-indigo-600 rounded-lg sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
+                  class="flex items-center px-8 py-3 mx-auto mt-3 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
                 >
                   Subscribe
                 </button>
@@ -198,7 +198,7 @@
             <form @submit.prevent="portal" class="w-full">
               <button
                 type="submit"
-                class="items-center self-center w-full h-16 px-4 mb-2 font-semibold text-white duration-150 bg-indigo-600 rounded-lg sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
+                class="items-center self-center w-full h-16 px-4 mb-2 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
               >
                 Open Billing Portal
               </button>
@@ -208,7 +208,7 @@
 
         <div v-if="userSerps.length">
           <h2
-            class="mb-3 text-2xl font-semibold text-gray-800 dark:text-gray-300 lg:mb-0"
+            class="mb-3 text-2xl font-semibold text-gray-800  dark:text-gray-300 lg:mb-0"
           >
             Your Reports
           </h2>
@@ -218,32 +218,32 @@
           </p>
           <hr class="mt-2 dark:border-gray-600" />
           <div
-            class="flex flex-col mt-5 mb-12 border border-gray-300 rounded-md dark:border-gray-600 bg-gray-25 dark:bg-gray-700"
+            class="flex flex-col mt-5 mb-12 border border-gray-300 rounded-md  dark:border-gray-600 bg-gray-25 dark:bg-gray-700"
           >
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div
-                class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8"
+                class="inline-block min-w-full py-2 align-middle  sm:px-6 lg:px-8"
               >
                 <div class="overflow-hidden sm:rounded-lg">
                   <table
-                    class="min-w-full divide-y divide-gray-200 dark:divide-gray-600"
+                    class="min-w-full divide-y divide-gray-200  dark:divide-gray-600"
                   >
                     <thead>
                       <tr>
                         <th
-                          class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-700 uppercase dark:text-gray-300 dark:bg-gray-700 bg-gray-50"
+                          class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-700 uppercase  dark:text-gray-300 dark:bg-gray-700 bg-gray-50"
                         >
                           Report
                         </th>
                         <td
-                          class="py-3 text-xs font-medium leading-4 tracking-wider text-center text-gray-700 uppercase dark:text-gray-300 dark:bg-gray-700 bg-gray-50"
+                          class="py-3 text-xs font-medium leading-4 tracking-wider text-center text-gray-700 uppercase  dark:text-gray-300 dark:bg-gray-700 bg-gray-50"
                         >
                           Analysis
                         </td>
                       </tr>
                     </thead>
                     <tbody
-                      class="bg-white border-t border-gray-300 divide-y divide-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:divide-gray-600"
+                      class="bg-white border-t border-gray-300 divide-y divide-gray-200  dark:border-gray-600 dark:bg-gray-800 dark:divide-gray-600"
                     >
                       <tr
                         :key="index"
@@ -254,13 +254,13 @@
                           <div class="flex items-center">
                             <div class="">
                               <div
-                                class="mb-1 mr-16 font-medium leading-5 text-gray-900 dark:text-gray-300 md:text-lg"
+                                class="mb-1 mr-16 font-medium leading-5 text-gray-900  dark:text-gray-300 md:text-lg"
                               >
                                 {{ report.searchTerm }}
                               </div>
 
                               <div
-                                class="text-xs leading-5 text-gray-500 dark:text-gray-400 md:text-sm"
+                                class="text-xs leading-5 text-gray-500  dark:text-gray-400 md:text-sm"
                               >
                                 <span class="break-all">{{
                                   convertTime(report.createdAt)
@@ -274,13 +274,13 @@
                             <router-link
                               :to="`/analysis?retrieve=${report._id}`"
                               tag="button"
-                              class="w-auto h-10 px-4 mx-auto mb-1 font-semibold text-white duration-150 bg-indigo-600 rounded-lg hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
+                              class="w-auto h-10 px-4 mx-auto mb-1 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
                               title="Open Report"
                             >
                               <ArrowCircleRightIcon class="flex align-middle" />
                             </router-link>
                             <button
-                              class="hidden w-auto h-10 px-4 mx-auto font-semibold text-white duration-150 bg-red-600 rounded-lg cursor-not-allowed md:mt-0 focus:outline-none whitespace-nowrap"
+                              class="hidden w-auto h-10 px-4 mx-auto font-semibold text-white duration-150 bg-red-600 rounded-lg cursor-not-allowed  md:mt-0 focus:outline-none whitespace-nowrap"
                               @click="deleteReport(index, report)"
                               title="Delete Report"
                               disabled
@@ -306,12 +306,12 @@
         </div>
       </div>
       <ErrorMessage
-        class="flex flex-row items-center p-5 mt-5 bg-red-200 border-b-2 border-red-300 rounded alert swing-in-top-fwd"
+        class="flex flex-row items-center p-5 mt-5 bg-red-200 border-b-2 border-red-300 rounded  alert swing-in-top-fwd"
         v-if="errorHandler.error && loader.loading != true"
         v-bind:message="errorHandler.errorMessage"
       />
       <SuccessMessage
-        class="flex flex-row items-center p-5 mt-5 bg-green-200 border-b-2 border-green-300 rounded alert swing-in-top-fwd"
+        class="flex flex-row items-center p-5 mt-5 bg-green-200 border-b-2 border-green-300 rounded  alert swing-in-top-fwd"
         v-if="successMessage && !errorHandler.error && activeSub !== false"
         v-bind:message="successMessage"
       />
@@ -390,7 +390,10 @@ export default {
       );
       let data = await response.json();
       if (data.error) {
-        if (data.error.message === "invalid token") {
+        if (
+          data.error.message === "invalid token" ||
+          data.error.message === "jwt expired"
+        ) {
           localStorage.removeItem("token");
           location.reload();
         } else {
