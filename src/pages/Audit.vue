@@ -3,7 +3,6 @@
     <vue-topprogress ref="topProgress" color="#4f46e5"></vue-topprogress>
 
     <div id="animHolder" class="slide-in-right">
-      <v-tour name="myTour" :steps="steps" :callbacks="tourComplete"></v-tour>
       <Breadcrumb />
       <BetaMessage />
 
@@ -359,23 +358,16 @@
 </template>
 
 <script>
-import VueTour from "vue-tour";
-import Vue from "vue";
-import "vue-tour/dist/vue-tour.css";
 import { mapState } from "vuex";
-// import store from "../store";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import BetaMessage from "@/components/BetaMessage";
 import ErrorMessage from "@/components/ErrorMessage";
 import Breadcrumb from "@/components/Breadcrumb";
-//import PopularQuestions from "@/components/PopularQuestions";
 import HeaderQuestions from "@/components/HeaderQuestions";
 import ResultCount from "@/components/ResultCount";
 var VueScrollTo = require("vue-scrollto");
 import { vueTopprogress } from "vue-top-progress";
 import config from "../../config";
-
-Vue.use(VueTour);
 
 import {
   AnnotationIcon,
@@ -390,13 +382,7 @@ export default {
   computed: {
     ...mapState(["blueprintData"]),
   },
-  mounted() {
-    if (localStorage.getItem("tourComplete") !== "true") {
-      setTimeout(() => {
-        this.$tours["myTour"].start();
-      }, 1000);
-    }
-  },
+  mounted() {},
   components: {
     HeaderQuestions,
     LoadingSpinner,
@@ -412,21 +398,12 @@ export default {
     //ShieldCheckIcon,
     //QuestionMarkCircleIcon,
     ArrowCircleRightIcon,
-    //VueTour,
   },
   name: "Audit",
   data() {
     return {
       search: {
         query: "",
-        amount: 50,
-        device: "desktop",
-        location: "United States",
-        engine: "google",
-        idFromDb: "",
-        peopleAlsoAsk: true,
-        fetchQuestions: true,
-        domainAuthority: true,
         timeStart: 0,
         timeTaken: 0,
         animatedSearchBtn: false,
@@ -444,55 +421,6 @@ export default {
       },
 
       serpData: {},
-      steps: [
-        {
-          target: '[data-tour-step="1"]',
-          header: {
-            title: "Keywords",
-          },
-          content: `These are the keywords that we will run the analysis on.`,
-        },
-        {
-          target: '[data-tour-step="2"]',
-          header: {
-            title: "Search Engine",
-          },
-          content: `Choose the search engine that you wish results to come from, such as Google or Bing.`,
-        },
-        {
-          target: '[data-tour-step="3"]',
-          header: {
-            title: "Country",
-          },
-          content: `Choose the country you wish the search to be ran in.`,
-        },
-        {
-          target: '[data-tour-step="4"]',
-          header: {
-            title: "Device",
-          },
-          content: `Choose a specific device to run the search engine analysis on.`,
-        },
-        {
-          target: '[data-tour-step="5"]',
-          header: {
-            title: "Amount",
-          },
-          content: `Choose the amount of articles you wish to analyse, more articles will take longer!`,
-        },
-        {
-          target: '[data-tour-step="6"]',
-          header: {
-            title: "Start Analysis",
-          },
-          content: `Clicking on 'Start Analysis' will tell the machines behind the scene to get to work, and you'll have your data back here in no time!`,
-        },
-      ],
-      tourComplete: {
-        onStop: function () {
-          localStorage.setItem("tourComplete", "true");
-        },
-      },
     };
   },
   methods: {
