@@ -59,7 +59,7 @@
                 </div>
                 <button
                   v-if="sessionId === ''"
-                  @click="pay('price_1IUyuIFDmua4eDfjjcwvBQMW')"
+                  @click="pay(justStartPlan)"
                   class="flex items-center px-8 py-3 mx-auto mt-3 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
                 >
                   Subscribe
@@ -86,7 +86,7 @@
                 </div>
                 <button
                   v-if="sessionId === ''"
-                  @click="pay('price_1IUyuoFDmua4eDfjMQPpCTFl')"
+                  @click="pay(proPlan)"
                   class="flex items-center px-8 py-3 mx-auto mt-3 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
                 >
                   Subscribe
@@ -113,7 +113,7 @@
                 </div>
                 <button
                   v-if="sessionId === ''"
-                  @click="pay('price_1IUyvEFDmua4eDfjVM96JENl')"
+                  @click="pay(agencyPlan)"
                   class="flex items-center px-8 py-3 mx-auto mt-3 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
                 >
                   Subscribe
@@ -348,7 +348,9 @@ export default {
 
   data() {
     this.publishableKey = config.STRIPE_PUBKEY;
-
+    this.justStartPlan = config.JUSTSTART_PLAN;
+    this.proPlan = config.PRO_PLAN;
+    this.agencyPlan = config.AGENCY_PLAN;
     return {
       activeSub: false,
       stripeCustomerID: "",
