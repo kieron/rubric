@@ -90,6 +90,11 @@ const routes = [
         name: "Privacy Policy",
         component: view("Privacy"),
       },
+      {
+        path: "/tos",
+        name: "Terms of Service",
+        component: view("TermsOfService"),
+      },
       { path: "*", name: "PageNotFound", component: view("PageNotFound") },
     ],
   },
