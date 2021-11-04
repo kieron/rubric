@@ -107,7 +107,7 @@
                   <h2
                     class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-black  dark:text-gray-300 lg:text-6xl"
                   >
-                    $39.99
+                    $34.99
                     <span class="ml-1 text-base text-gray-600">/mo</span>
                   </h2>
                 </div>
