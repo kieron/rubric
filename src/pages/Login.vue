@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex-1 h-full max-w-4xl mx-auto overflow-hidden slide-in-right dark:bg-gray-800"
+    class="flex-1 h-full max-w-4xl mx-auto overflow-hidden  slide-in-right dark:bg-gray-800"
   >
     <div class="flex flex-col overflow-y-auto">
       <div class="flex items-center justify-center p-6 sm:p-12">
@@ -14,8 +14,9 @@
             <label class="block text-sm">
               <span class="text-gray-700 dark:text-gray-400">Email</span>
               <input
-                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                class="block w-full mt-1 text-sm  dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                 placeholder="jane.doe@gmail.com"
+                autocomplete="email"
                 type="email"
                 v-model="email"
                 id="email"
@@ -25,8 +26,9 @@
             <label class="block mt-4 text-sm">
               <span class="text-gray-700 dark:text-gray-400">Password</span>
               <input
-                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                class="block w-full mt-1 text-sm  dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                 placeholder="***************"
+                autocomplete="current-password"
                 type="password"
                 v-model="password"
                 id="password"
@@ -36,7 +38,7 @@
 
             <button
               type="submit"
-              class="flex items-center justify-center w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white align-middle transition-colors duration-150 bg-indigo-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-indigo-700 focus:outline-none focus:shadow-outline-purple"
+              class="flex items-center justify-center w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white align-middle transition-colors duration-150 bg-indigo-600 border border-transparent rounded-lg  active:bg-purple-600 hover:bg-indigo-700 focus:outline-none focus:shadow-outline-purple"
               :disabled="this.loader.loading == 1"
               id="submit"
             >
@@ -48,7 +50,7 @@
             </button>
           </form>
           <ErrorMessage
-            class="flex flex-row items-center p-5 mt-5 bg-red-200 border-b-2 border-red-300 rounded alert swing-in-top-fwd"
+            class="flex flex-row items-center p-5 mt-5 bg-red-200 border-b-2 border-red-300 rounded  alert swing-in-top-fwd"
             v-bind:message="authStatus.message"
             v-if="authStatus !== 'success' && authStatus.message"
           />
@@ -56,7 +58,7 @@
 
           <p class="mt-4">
             <router-link
-              class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
+              class="text-sm font-medium text-purple-600  dark:text-purple-400 hover:underline"
               to="/forgot-password"
             >
               Forgot your password?
@@ -64,7 +66,7 @@
           </p>
           <p class="mt-1">
             <router-link
-              class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
+              class="text-sm font-medium text-purple-600  dark:text-purple-400 hover:underline"
               to="/register"
             >
               Create account

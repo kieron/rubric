@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex-1 h-full max-w-4xl mx-auto overflow-hidden dark:bg-gray-800 slide-in-right"
+    class="flex-1 h-full max-w-4xl mx-auto overflow-hidden  dark:bg-gray-800 slide-in-right"
   >
     <div class="flex items-center justify-center p-6 sm:p-12">
       <div class="w-full">
@@ -11,8 +11,9 @@
           <label class="block text-sm">
             <span class="text-gray-700 dark:text-gray-400">Email</span>
             <input
-              class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+              class="block w-full mt-1 text-sm  dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
               placeholder="jane.doe@gmail.com"
+              autocomplete="email"
               type="email"
               required
               v-model="email"
@@ -21,9 +22,10 @@
           <label class="block mt-4 text-sm">
             <span class="text-gray-700 dark:text-gray-400">Password</span>
             <input
-              class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+              class="block w-full mt-1 text-sm  dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
               placeholder="***************"
               type="password"
+              autocomplete="new-password"
               required
               id="password"
               v-model="password"
@@ -40,7 +42,7 @@
               Confirm password
             </span>
             <input
-              class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+              class="block w-full mt-1 text-sm  dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
               placeholder="***************"
               type="password"
               id="password_confirmation"
@@ -56,7 +58,7 @@
             <label class="flex items-center dark:text-gray-400">
               <input
                 type="checkbox"
-                class="text-purple-600 form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                class="text-purple-600  form-checkbox focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                 required
               />
               <span class="ml-2">
@@ -68,7 +70,7 @@
             </label>
           </div>
           <button
-            class="flex items-center justify-center w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white align-middle transition-colors duration-150 bg-indigo-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-indigo-700 focus:outline-none focus:shadow-outline-purple"
+            class="flex items-center justify-center w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white align-middle transition-colors duration-150 bg-indigo-600 border border-transparent rounded-lg  active:bg-purple-600 hover:bg-indigo-700 focus:outline-none focus:shadow-outline-purple"
             type="submit"
           >
             <span v-if="authStatus !== 'loading'">Create Account</span>
@@ -80,7 +82,7 @@
           <!-- You should use a button here, as the anchor is only used for the example  -->
         </form>
         <ErrorMessage
-          class="flex flex-row items-center p-5 mt-5 bg-red-200 border-b-2 border-red-300 rounded alert swing-in-top-fwd"
+          class="flex flex-row items-center p-5 mt-5 bg-red-200 border-b-2 border-red-300 rounded  alert swing-in-top-fwd"
           v-bind:message="$store.getters.authStatus.message"
           v-if="authStatus !== 'success' && authStatus.message"
         />
@@ -88,7 +90,7 @@
 
         <p class="mt-2">
           <router-link
-            class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
+            class="text-sm font-medium text-purple-600  dark:text-purple-400 hover:underline"
             to="/login"
           >
             Already have an account? Login

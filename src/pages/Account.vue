@@ -33,7 +33,7 @@
           />
           <div class="container px-8 mx-auto">
             <h3 class="text-xl font-semibold text-center my-7">
-              Pick a plan to get started, and pay nothing for 5 days!
+              Pick a plan to get started, and pay nothing for 10 days!
             </h3>
             <div
               class="flex flex-wrap text-center  lg:divide-x dark:divide-gray-600"
