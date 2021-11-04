@@ -16,11 +16,6 @@ Vue.config.productionTip = false;
 Vue.use(LoadScript);
 Vue.use(Router);
 
-// Analytics for Live Site
-if (process.env.NODE_ENV === "production") {
-  Vue.loadScript("https://analytics.alderaan.network/js/plausible.js");
-}
-
 // Visual Tailwind Breakpoints
 if (process.env.NODE_ENV !== "production") {
   Vue.loadScript("https://awesomecdn.netlify.app/tw.js");
