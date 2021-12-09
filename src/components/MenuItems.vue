@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="px-4 mt-8 mb-4 text-gray-800 dark:text-gray-500">
-      <p class="pl-4 mb-4 text-xs font-semibold text-gray-600">TOOLS</p>
+      <p class="pl-4 mb-4 text-xs font-semibold text-gray-600">CONTENT TOOLS</p>
       <router-link
         to="/analysis"
         active-class="border-l-8 border-indigo-600 dark:border-indigo-200 bg-gray-30 dark:bg-gray-700 dark:text-indigo-200"

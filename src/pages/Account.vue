@@ -466,7 +466,6 @@ export default {
         body: JSON.stringify({ customer: this.stripeCustomerID }),
       });
       let data = await response.json();
-      console.log(data);
       window.location.assign(data);
     },
 
