@@ -36,7 +36,8 @@
               Pick a plan to get started, and pay nothing for 10 days!
             </h3>
             <div
-              class="flex flex-wrap text-center  lg:divide-x dark:divide-gray-600"
+              class="flex flex-wrap text-center  lg:divide-x dark:divide-gray-600 opacity-5"
+              title="Thanks for testing! Right now, Rubric SEO is FREE!"
             >
               <div class="order-3 w-full px-8 py-6 mx-auto lg:order-1 lg:w-1/3">
                 <h2
@@ -60,9 +61,10 @@
                 <button
                   v-if="sessionId === ''"
                   @click="pay(justStartPlan)"
-                  class="flex items-center px-8 py-3 mx-auto mt-3 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
+                  class="flex items-center px-8 py-3 mx-auto mt-3 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  disable-button sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
                 >
-                  Subscribe
+                  <!-- Subscribe -->
+                  Still Free!
                 </button>
               </div>
               <div class="order-2 w-full px-8 py-6 mx-auto lg:order-1 lg:w-1/3">
@@ -87,9 +89,10 @@
                 <button
                   v-if="sessionId === ''"
                   @click="pay(proPlan)"
-                  class="flex items-center px-8 py-3 mx-auto mt-3 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
+                  class="flex items-center px-8 py-3 mx-auto mt-3 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap disable-button"
                 >
-                  Subscribe
+                  <!-- Subscribe -->
+                  Still Free!
                 </button>
               </div>
               <div class="order-1 w-full px-8 py-6 mx-auto lg:order-1 lg:w-1/3">
@@ -114,9 +117,10 @@
                 <button
                   v-if="sessionId === ''"
                   @click="pay(agencyPlan)"
-                  class="flex items-center px-8 py-3 mx-auto mt-3 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
+                  class="flex items-center px-8 py-3 mx-auto mt-3 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap disable-button"
                 >
-                  Subscribe
+                  <!-- Subscribe -->
+                  Still Free!
                 </button>
               </div>
             </div>
