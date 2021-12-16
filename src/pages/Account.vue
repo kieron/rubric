@@ -61,10 +61,9 @@
                 <button
                   v-if="sessionId === ''"
                   @click="pay(justStartPlan)"
-                  class="flex items-center px-8 py-3 mx-auto mt-3 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  disable-button sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
+                  class="flex items-center px-8 py-3 mx-auto mt-3 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
                 >
-                  <!-- Subscribe -->
-                  Still Free!
+                  Subscribe
                 </button>
               </div>
               <div class="order-2 w-full px-8 py-6 mx-auto lg:order-1 lg:w-1/3">
@@ -89,10 +88,9 @@
                 <button
                   v-if="sessionId === ''"
                   @click="pay(proPlan)"
-                  class="flex items-center px-8 py-3 mx-auto mt-3 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap disable-button"
+                  class="flex items-center px-8 py-3 mx-auto mt-3 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
                 >
-                  <!-- Subscribe -->
-                  Still Free!
+                  Subscribe
                 </button>
               </div>
               <div class="order-1 w-full px-8 py-6 mx-auto lg:order-1 lg:w-1/3">
@@ -117,10 +115,9 @@
                 <button
                   v-if="sessionId === ''"
                   @click="pay(agencyPlan)"
-                  class="flex items-center px-8 py-3 mx-auto mt-3 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap disable-button"
+                  class="flex items-center px-8 py-3 mx-auto mt-3 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
                 >
-                  <!-- Subscribe -->
-                  Still Free!
+                  Subscribe
                 </button>
               </div>
             </div>
@@ -194,7 +191,7 @@
           </div>
         </div>
         <div>
-          <div class="flex my-5" v-if="activeSub">
+          <div class="flex mt-5" v-if="activeSub && billingMode">
             <form @submit.prevent="portal" class="w-full">
               <button
                 type="submit"
@@ -206,7 +203,7 @@
           </div>
         </div>
 
-        <div v-if="userSerps.length">
+        <div class="mt-5" v-if="userSerps.length">
           <h2
             class="mb-3 text-2xl font-semibold text-gray-800  dark:text-gray-300 lg:mb-0"
           >
@@ -303,6 +300,33 @@
             </div>
           </div>
         </div>
+        <div class="mt-5" v-else>
+          <h2
+            class="mb-3 text-2xl font-semibold text-gray-800  dark:text-gray-300 lg:mb-0"
+          >
+            Your Reports
+          </h2>
+
+          <p class="text-sm text-gray-800 dark:text-gray-300">
+            Look back on your old reports
+          </p>
+          <hr class="mt-2 dark:border-gray-600" />
+          <div class="flex flex-col mt-5 mb-12 dark:border-gray-600">
+            <p
+              class="mt-2 text-sm text-gray-800 md:text-base dark:text-gray-300"
+            >
+              You havent performed any SERP Analysis yet, start now!
+            </p>
+            <div class="flex justify-center mt-6 lg:justify-start">
+              <router-link
+                class="flex items-center self-center h-16 px-4 mb-2 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  hover:bg-indigo-500 focus:outline-none"
+                to="/analysis"
+                v-if="isLoggedIn"
+                >SERP Analysis</router-link
+              >
+            </div>
+          </div>
+        </div>
       </div>
       <ErrorMessage
         class="flex flex-row items-center p-5 mt-5 bg-red-200 border-b-2 border-red-300 rounded  alert swing-in-top-fwd"
@@ -355,6 +379,7 @@ export default {
     this.justStartPlan = config.JUSTSTART_PLAN;
     this.proPlan = config.PRO_PLAN;
     this.agencyPlan = config.AGENCY_PLAN;
+    this.billingMode = config.BILLING_MODE;
     return {
       activeSub: false,
       stripeCustomerID: "",
