@@ -46,6 +46,7 @@
               placeholder="***************"
               type="password"
               id="password_confirmation"
+autocomplete="new-password"
               v-model="password_confirmation"
               required
             />
