@@ -489,8 +489,18 @@
           <h2
             class="pt-2 mb-2 text-2xl font-semibold text-gray-800  dark:text-gray-300 lg:mb-0"
           >
-            Results
+            <router-link
+              to="/blueprint"
+              tag="button"
+              class="hidden px-1 mr-2 duration-150 rounded-lg shadow  hover:bg-gray-100 w-7 h-7 lg:inline focus:outline-none"
+              title="Load Into Blueprint Tool"
+            >
+              <CubeTransparentIcon
+                class="block w-5 h-5 text-indigo-900"
+              /> </router-link
+            >Results
           </h2>
+
           <p
             class="mb-2 text-gray-800 dark:text-gray-400 font text-1xl lg:mb-0"
           >
@@ -638,7 +648,7 @@
                         <th
                           class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-700 uppercase  dark:text-gray-300 dark:bg-gray-700 bg-gray-50"
                         >
-                          Results
+                          <span>Results</span>
                         </th>
                       </tr>
                     </thead>

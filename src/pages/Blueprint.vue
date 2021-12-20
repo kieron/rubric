@@ -250,13 +250,13 @@ export default {
     },
 
     insertHeader: function (item) {
-      var position = this.editor.getText();
-      var content = item.trim();
+      const position = this.editor.getText();
+      const content = item.trim();
       this.editor.insertText(position, content, { bold: true });
     },
     insertQuestion: function (item) {
-      var position = this.editor.getText();
-      var content = item.trim();
+      const position = this.editor.getText();
+      const content = item.trim();
       this.editor.insertText(position, content, { bold: true });
     },
     focusEditor() {
