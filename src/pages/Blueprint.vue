@@ -4,7 +4,7 @@
     <BetaMessage />
     <div class="items-center mb-6">
       <h1
-        class="mb-3 text-3xl font-semibold text-gray-800 dark:text-gray-300 lg:mb-0"
+        class="mb-3 text-3xl font-semibold text-gray-800  dark:text-gray-300 lg:mb-0"
       >
         Blueprint Editor
       </h1>
@@ -18,7 +18,7 @@
     <div class="flex">
       <div class="w-2/3 text-gray-900 rounded editor">
         <div
-          class="flex flex-wrap justify-center p-3 mb-2 text-gray-600 border dark:border-gray-600 md:justify-start space-between menubar dark:text-gray-400"
+          class="flex flex-wrap justify-center p-3 mb-2 text-gray-600 border  dark:border-gray-600 md:justify-start space-between menubar dark:text-gray-400"
           v-if="blueprintData.averageValues"
         >
           <div class="flex flex-no-wrap items-center mr-4">
@@ -91,7 +91,7 @@
         />
       </div>
       <div
-        class="sticky top-0 flex-grow w-1/3 h-full p-5 ml-2 border border-gray-200 dark:border-gray-600 dark:bg-gray-700"
+        class="sticky top-0 flex-grow w-1/3 h-full p-5 ml-2 border border-gray-200  dark:border-gray-600 dark:bg-gray-700"
       >
         <h2 class="text-2xl bold dark:text-gray-400">Blueprint Data</h2>
         <div v-if="!Object.keys(blueprintData).length && !questions.length">
@@ -101,7 +101,7 @@
           <router-link
             to="/analysis"
             tag="button"
-            class="flex items-center self-center justify-center flex-initial w-full h-16 px-4 mt-3 font-semibold text-gray-100 duration-150 bg-indigo-600 rounded-lg shadow hover:bg-indigo-500 focus:outline-none"
+            class="flex items-center self-center justify-center flex-initial w-full h-16 px-4 mt-3 font-semibold text-gray-100 duration-150 bg-indigo-600 rounded-lg shadow  hover:bg-indigo-500 focus:outline-none"
           >
             <span>Load SERP Analysis</span>
           </router-link>
@@ -113,7 +113,7 @@
               v-for="item in weightedHeaders"
               @click="insertHeader(item.header)"
               :key="item.header"
-              class="px-2 m-1 text-xs font-bold leading-loose bg-indigo-200 rounded cursor-pointer hover:bg-indigo-400"
+              class="px-2 m-1 text-xs font-bold leading-loose bg-indigo-200 rounded cursor-pointer  hover:bg-indigo-400"
               >{{ item.header }}</span
             >
           </div>
@@ -125,7 +125,7 @@
               @click="insertQuestion(item)"
               v-for="item in questions"
               :key="item.question"
-              class="px-2 m-1 text-xs font-bold leading-loose bg-indigo-200 rounded cursor-pointer hover:bg-gray-300"
+              class="px-2 m-1 text-xs font-bold leading-loose bg-indigo-200 rounded cursor-pointer  hover:bg-gray-300"
               >{{ item }}</span
             >
           </div>
@@ -250,26 +250,17 @@ export default {
     },
 
     insertHeader: function (item) {
-      // editorHtml += "<br>";
-      this.editor.insertText(
-        this.editor.getSelection(true).index,
-        `\n` + item.trim(),
-        {
-          format: "h1",
-        }
-      );
+      var position = this.editor.getText();
+      var content = item.trim();
+      this.editor.insertText(position, content, { bold: true });
     },
     insertQuestion: function (item) {
-      this.editor.insertText(
-        this.editor.getSelection(true).index,
-        `\n` + item.trim(),
-        {
-          format: "h1",
-        }
-      );
+      var position = this.editor.getText();
+      var content = item.trim();
+      this.editor.insertText(position, content, { bold: true });
     },
     focusEditor() {
-      this.$refs.editor.focus();
+      this.$refs.myQuillEditor.$el.focus();
     },
   },
 
