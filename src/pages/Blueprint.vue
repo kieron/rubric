@@ -16,7 +16,7 @@
       <hr class="mt-2" />
     </div>
     <div class="flex">
-      <div class="w-2/3 text-gray-900 rounded editor">
+      <div class="w-2/3 h-full text-gray-900">
         <div
           class="flex flex-wrap justify-center p-3 mb-2 text-gray-600 border  dark:border-gray-600 md:justify-start space-between menubar dark:text-gray-400"
           v-if="blueprintData.averageValues"
@@ -91,7 +91,7 @@
         />
       </div>
       <div
-        class="sticky top-0 flex-grow w-1/3 h-full p-5 ml-2 border border-gray-200  dark:border-gray-600 dark:bg-gray-700"
+        class="flex-grow w-1/3 h-full p-5 ml-2 border border-gray-200  dark:border-gray-600 dark:bg-gray-700"
       >
         <h2 class="text-2xl bold dark:text-gray-400">Blueprint Data</h2>
         <div v-if="!Object.keys(blueprintData).length && !questions.length">
