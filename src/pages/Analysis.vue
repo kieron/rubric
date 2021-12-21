@@ -712,7 +712,7 @@
                                   title="Paragraph Count"
                                 />
 
-                                <ResultCount
+                                <!-- <ResultCount
                                   icon="ShieldCheckIcon"
                                   v-bind:label="
                                     article.domainAuthority +
@@ -720,7 +720,7 @@
                                   "
                                   hoverColour="hover:text-pink-700 dark:hover:text-pink-700"
                                   title="Domain Authority"
-                                />
+                                /> -->
 
                                 <ResultCount
                                   icon="QuestionMarkCircleIcon"
@@ -923,7 +923,7 @@ export default {
     NewspaperIcon,
     PhotographIcon,
     TemplateIcon,
-    ShieldCheckIcon,
+    // ShieldCheckIcon,
     QuestionMarkCircleIcon,
     CalendarIcon,
     ArrowCircleRightIcon,
