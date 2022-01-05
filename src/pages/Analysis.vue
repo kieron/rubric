@@ -883,7 +883,7 @@ import {
   PhotographIcon,
   XCircleIcon,
   TemplateIcon,
-  ShieldCheckIcon,
+  //ShieldCheckIcon,
   QuestionMarkCircleIcon,
   CalendarIcon,
   ArrowCircleRightIcon,
