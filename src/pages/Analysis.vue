@@ -492,11 +492,11 @@
             <router-link
               to="/blueprint"
               tag="button"
-              class="hidden px-1 mr-2 duration-150 rounded-lg shadow  hover:bg-gray-100 w-7 h-7 lg:inline focus:outline-none"
+              class="hidden px-1 mr-2 duration-150 rounded-lg shadow  dark:bg-gray-600 hover:bg-gray-100 dark:hover:bg-gray-500 w-7 h-7 lg:inline focus:outline-none"
               title="Load Into Blueprint Tool"
             >
               <CubeTransparentIcon
-                class="block w-5 h-5 text-indigo-900"
+                class="block w-5 h-5 text-indigo-900 dark:text-indigo-200"
               /> </router-link
             >Results
           </h2>
