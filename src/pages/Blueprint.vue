@@ -113,7 +113,8 @@
               v-for="item in weightedHeaders"
               @click="insertHeader(item.header)"
               :key="item.header"
-              class="px-2 m-1 text-xs font-bold leading-loose bg-indigo-200 rounded cursor-pointer  hover:bg-indigo-400"
+              :class="item.included ? 'bg-green-400' : 'bg-indigo-200 '"
+              class="px-2 m-1 text-xs font-bold leading-loose rounded cursor-pointer  hover:bg-indigo-400"
               >{{ item.header }}</span
             >
           </div>
@@ -164,9 +165,15 @@ export default {
       headers: "getHeaders",
     }),
     weightedHeaders: function () {
-      return this.blueprintData.popularHeaders.filter(function (item) {
+      let data = this.blueprintData.popularHeaders.filter(function (item) {
         return item.weight === true;
       });
+
+      data.forEach(function (item) {
+        item.included = false;
+      });
+
+      return data;
     },
     editor() {
       return this.$refs.myQuillEditor.quill;
@@ -226,6 +233,7 @@ export default {
     },
     async onEditorChange({ quill }) {
       this.calculateAverage(quill);
+      this.checkContent(quill);
     },
 
     calculateAverage: async function (quill) {
@@ -247,6 +255,14 @@ export default {
 
       const result = await wordCount.WordCount(quillRoot);
       this.counts.words = result.WordCount;
+    },
+
+    checkContent: function (quill) {
+      this.weightedHeaders.forEach(function (header) {
+        if (quill.root.innerHTML.includes(header.header)) {
+          header.included = true;
+        }
+      });
     },
 
     insertHeader: function (item) {

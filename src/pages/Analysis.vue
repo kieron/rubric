@@ -19,7 +19,7 @@
         <hr class="mt-2" />
       </div>
 
-      <div class="p-5 rounded bg-gray-25 dark:bg-gray-700">
+      <div class="p-5 rounded bg-gray-25 dark:bg-gray-700" v-if="!retrieving">
         <h2 class="pt-2 mb-2 text-2xl text-gray-800 dark:text-gray-300 lg:mb-0">
           Search Parameters
         </h2>
@@ -896,6 +896,7 @@ export default {
   mounted() {
     if (this.serpData.results) this.massage();
     if (this.$route.query.retrieve) {
+      this.retrieving = true;
       this.$refs.topProgress.start();
       this.loader.loading = true;
       this.retrieve(this.$route.query.retrieve);
@@ -947,6 +948,8 @@ export default {
         animatedSearchBtn: false,
         api_url: config.API_URL,
       },
+
+      retrieving: false,
 
       errorHandler: {
         error: false,
@@ -1124,7 +1127,12 @@ export default {
       this.massage();
     },
     loadedAndShow() {
-      this.$nextTick(() => VueScrollTo.scrollTo("#results", { offset: -270 }));
+      if (!this.retrieving) {
+        this.$nextTick(() =>
+          VueScrollTo.scrollTo("#results", { offset: -270 })
+        );
+      }
+
       this.loader.loaded = true;
       this.loader.loading = false;
       this.search.idFromDb = "";
