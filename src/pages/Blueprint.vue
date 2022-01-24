@@ -268,15 +268,15 @@ export default {
 
     checkContent: function (quill) {
       this.weightedHeaders.forEach(function (header) {
-        if (quill.getText().includes(header.header)) {
-          header.included = true;
-        }
+        header.included = quill.getText().includes(header.header)
+          ? true
+          : false;
       });
 
       this.questionz.forEach(function (question) {
-        if (quill.getText().includes(question.question)) {
-          question.included = true;
-        }
+        question.included = quill.getText().includes(question.question)
+          ? true
+          : false;
       });
     },
 
