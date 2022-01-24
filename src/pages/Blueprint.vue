@@ -259,7 +259,7 @@ export default {
 
     checkContent: function (quill) {
       this.weightedHeaders.forEach(function (header) {
-        if (quill.root.innerHTML.includes(header.header)) {
+        if (quill.getText().includes(header.header)) {
           header.included = true;
         }
       });
