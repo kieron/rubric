@@ -119,15 +119,16 @@
             >
           </div>
         </div>
-        <div class="py-3" v-if="questions.length">
+        <div class="py-3" v-if="questionz.length">
           <h3 class="text-xs font-bold dark:text-gray-400">QUESTIONS</h3>
           <div class="flex flex-wrap my-3 -m-1">
             <span
-              @click="insertQuestion(item)"
-              v-for="item in questions"
+              @click="insertQuestion(item.question)"
+              v-for="item in questionz"
               :key="item.question"
-              class="px-2 m-1 text-xs font-bold leading-loose bg-indigo-200 rounded cursor-pointer  hover:bg-gray-300"
-              >{{ item }}</span
+              :class="item.included ? 'bg-green-400' : 'bg-indigo-200 '"
+              class="px-2 m-1 text-xs font-bold leading-loose rounded cursor-pointer  hover:bg-gray-300"
+              >{{ item.question }}</span
             >
           </div>
         </div>
@@ -175,6 +176,14 @@ export default {
 
       return data;
     },
+    questionz: function () {
+      let questions = this.questions;
+      var newArr = questions.map(function (value) {
+        return { question: value, included: false };
+      });
+      return newArr;
+    },
+
     editor() {
       return this.$refs.myQuillEditor.quill;
     },
@@ -263,17 +272,19 @@ export default {
           header.included = true;
         }
       });
+
+      this.questionz.forEach(function (question) {
+        if (quill.getText().includes(question.question)) {
+          question.included = true;
+        }
+      });
     },
 
     insertHeader: function (item) {
-      const position = this.editor.getText();
-      const content = item.trim();
-      this.editor.insertText(position, content, { bold: true });
+      this.content += "<h2>" + item.trim() + "</h2>";
     },
     insertQuestion: function (item) {
-      const position = this.editor.getText();
-      const content = item.trim();
-      this.editor.insertText(position, content, { bold: true });
+      this.content += "<h2>" + item.trim() + "</h2>";
     },
     focusEditor() {
       this.$refs.myQuillEditor.$el.focus();
