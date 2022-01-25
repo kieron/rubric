@@ -25,7 +25,7 @@
         />
       </div>
       <div v-if="!loader.loading">
-        <section class="text-gray-700 body-font" v-if="!activeSub">
+        <section class="text-gray-700 body-font" v-if="plan === 'Free'">
           <stripe-checkout
             ref="checkoutRef"
             :pk="publishableKey"
@@ -36,7 +36,7 @@
               Pick a plan to get started, and pay nothing for 10 days!
             </h3>
             <div
-              class="flex flex-wrap text-center  lg:divide-x dark:divide-gray-600 opacity-5"
+              class="flex flex-wrap text-center  lg:divide-x dark:divide-gray-600"
               title="Thanks for testing! Right now, Rubric SEO is FREE!"
             >
               <div class="order-3 w-full px-8 py-6 mx-auto lg:order-1 lg:w-1/3">
@@ -100,7 +100,7 @@
                   Agency
                 </h2>
                 <p class="my-4 text-base leading-relaxed dark:text-gray-300">
-                  Generate unlimited reports a month!
+                  Generate 500 reports a month!
                 </p>
                 <div
                   class="flex flex-col items-center justify-center px-2 text-center  lg:h-32"
@@ -191,7 +191,10 @@
           </div>
         </div>
         <div>
-          <div class="flex mt-5" v-if="activeSub && billingMode">
+          <div
+            class="flex mt-5"
+            v-if="activeSub && billingMode && plan != 'Free'"
+          >
             <form @submit.prevent="portal" class="w-full">
               <button
                 type="submit"

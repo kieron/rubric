@@ -4,6 +4,6 @@ var config = {
   JUSTSTART_PLAN: process.env.VUE_APP_JUSTSTART,
   PRO_PLAN: process.env.VUE_APP_PRO,
   AGENCY_PLAN: process.env.VUE_APP_AGENCY,
-  BILLING_MODE: false,
+  BILLING_MODE: true,
 };
 module.exports = config;
