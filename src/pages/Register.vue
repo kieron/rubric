@@ -166,7 +166,6 @@ export default {
       }
     },
     passwordStrength: function () {
-      console.log("STR CHECK");
       const mediumRegex = new RegExp(
         "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{8,})"
       );
@@ -174,7 +173,6 @@ export default {
       if (mediumRegex.test(this.password)) {
         this.passwordComplexityError = false;
       } else {
-        console.log("ok");
         this.passwordComplexityError = true;
       }
     },
