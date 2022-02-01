@@ -301,7 +301,7 @@ export default {
       bluePrintDataFromApi: [],
       questions: [],
       newBluePrintId: "",
-      delay: 5000, // anti-rebound for 500ms
+      delay: 3800, // anti-rebound for 3.8s
       lastExecution: 0,
     };
   },
@@ -410,6 +410,7 @@ export default {
           ? true
           : false;
       });
+      this.autoSave();
     },
 
     insertHeader: function (item) {
@@ -420,6 +421,7 @@ export default {
     },
     focusEditor() {
       this.$refs.myQuillEditor.$el.focus();
+      this.autoSave();
     },
     showSpinner: function (id) {
       if (
