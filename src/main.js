@@ -63,6 +63,7 @@ const routes = [
         path: "/analysis",
         name: "SERP Analysis",
         component: view("Analysis"),
+        props: true,
         meta: {
           requiresAuth: true,
         },

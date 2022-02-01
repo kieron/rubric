@@ -7,7 +7,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    blueprintData: {},
+    // blueprintData: {},
     theme: {},
     sideBarOpen: false,
     containerFull: false,
@@ -21,44 +21,44 @@ export default new Vuex.Store({
     isLoggedIn: (state) => !!state.token,
     authStatus: (state) => state.status,
     userDetails: () => JSON.parse(localStorage.getItem("user")),
-    getBlueprint: (state) => state.blueprintData,
+    // getBlueprint: (state) => state.blueprintData,
     sideBarOpen: (state) => state.sideBarOpen,
     containerFull: (state) => state.containerFull,
     getTheme: (state) => {
       return state.theme;
     },
-    getQuestions: (state) => {
-      var questions = [];
-      if (Object.keys(state.blueprintData).length) {
-        for (const result of state.blueprintData.results) {
-          for (const question of result.questions) {
-            questions.push(question);
-          }
-        }
-        // Still need to add Google's questions here
-      }
-      return questions.filter(onlyUnique);
-    },
-    getHeaders: (state) => {
-      var headers = [];
-      if (Object.keys(state.blueprintData).length) {
-        for (const result of state.blueprintData.results) {
-          for (const header of result.headers) {
-            headers.push(header);
-          }
-        }
-      }
-      return headers.filter(onlyUnique);
-    },
+    // getQuestions: (state) => {
+    //   var questions = [];
+    //   if (Object.keys(state.blueprintData).length) {
+    //     for (const result of state.blueprintData.results) {
+    //       for (const question of result.questions) {
+    //         questions.push(question);
+    //       }
+    //     }
+    //     // Still need to add Google's questions here
+    //   }
+    //   return questions.filter(onlyUnique);
+    // },
+    // getHeaders: (state) => {
+    //   var headers = [];
+    //   if (Object.keys(state.blueprintData).length) {
+    //     for (const result of state.blueprintData.results) {
+    //       for (const header of result.headers) {
+    //         headers.push(header);
+    //       }
+    //     }
+    //   }
+    //   return headers.filter(onlyUnique);
+    // },
   },
   mutations: {
     SET_THEME(state, theme) {
       state.theme = theme;
       localStorage.theme = theme;
     },
-    addBlueprint: (state, data) => {
-      state.blueprintData = data;
-    },
+    // addBlueprint: (state, data) => {
+    //   state.blueprintData = data;
+    // },
     toggleSidebar(state) {
       state.sideBarOpen = !state.sideBarOpen;
     },
@@ -83,9 +83,9 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    async addBluePrintData({ commit }, data) {
-      commit("addBlueprint", data);
-    },
+    // async addBluePrintData({ commit }, data) {
+    //   commit("addBlueprint", data);
+    // },
     toggleSidebar(context) {
       context.commit("toggleSidebar");
     },
@@ -184,6 +184,6 @@ export default new Vuex.Store({
   },
 });
 
-function onlyUnique(value, index, self) {
-  return self.indexOf(value) === index;
-}
+// function onlyUnique(value, index, self) {
+//   return self.indexOf(value) === index;
+// }

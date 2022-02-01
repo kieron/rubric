@@ -489,17 +489,27 @@
           <h2
             class="pt-2 mb-2 text-2xl font-semibold text-gray-800  dark:text-gray-300 lg:mb-0"
           >
-            <router-link
+            <!-- router.push({ name: 'user', params: { userId: '123' } }) -->
+            <!-- <router-link
               to="/blueprint"
               tag="button"
-              class="hidden px-1 mr-2 duration-150 rounded-lg shadow  dark:bg-gray-600 hover:bg-gray-100 dark:hover:bg-gray-500 w-7 h-7 lg:inline focus:outline-none"
+              class="hidden px-1 mr-2 duration-150 rounded-lg shadow dark:bg-gray-600 hover:bg-gray-100 dark:hover:bg-gray-500 w-7 h-7 lg:inline focus:outline-none"
               title="Load Into Blueprint Tool"
             >
               <CubeTransparentIcon
                 class="block w-5 h-5 text-indigo-900 dark:text-indigo-200"
               /> </router-link
-            >Results
+            >Results -->
           </h2>
+          <button
+            @click="goToBp()"
+            class="hidden px-1 mr-2 duration-150 rounded-lg shadow  dark:bg-gray-600 hover:bg-gray-100 dark:hover:bg-gray-500 w-7 h-7 lg:inline focus:outline-none"
+            title="Load Into Blueprint Tool"
+          >
+            <CubeTransparentIcon
+              class="block w-5 h-5 text-indigo-900 dark:text-indigo-200"
+            />
+          </button>
 
           <p
             class="mb-2 text-gray-800 dark:text-gray-400 font text-1xl lg:mb-0"
@@ -860,7 +870,7 @@ import VueTour from "vue-tour";
 import Vue from "vue";
 import "vue-tour/dist/vue-tour.css";
 import { mapState } from "vuex";
-import store from "../store";
+// import store from "../store";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import BetaMessage from "@/components/BetaMessage";
 import ErrorMessage from "@/components/ErrorMessage";
@@ -957,42 +967,44 @@ export default {
       },
 
       loader: {
-        loaded: Object.keys(store.getters.getBlueprint).length ? true : false,
+        // loaded: Object.keys(store.getters.getBlueprint).length ? true : false,
+        loaded: false,
         loading: false,
       },
 
       serpData:
-        Object.keys(store.getters.getBlueprint).length && this.error !== true
-          ? store.getters.getBlueprint
-          : {
-              averageValues: {
-                averageWordCount: {
-                  icon: "AnnotationIcon",
-                  value: 0,
-                  label: "Words",
-                  bg: "bg-pink",
-                },
-                averageHeaderCount: {
-                  icon: "NewspaperIcon",
-                  value: 0,
-                  label: "Headers",
-                  bg: "bg-purple",
-                },
-                averageImageCount: {
-                  icon: "PhotographIcon",
-                  value: 0,
-                  label: "Images",
-                  bg: "bg-orange",
-                },
-                averageParagraphCount: {
-                  icon: "TemplateIcon",
-                  value: 0,
-                  label: "Paragraphs",
-                  bg: "bg-green",
-                },
-              },
-              expandedArticles: [],
+        // Object.keys(store.getters.getBlueprint).length && this.error !== true
+        //   ? store.getters.getBlueprint
+        //   : {
+        {
+          averageValues: {
+            averageWordCount: {
+              icon: "AnnotationIcon",
+              value: 0,
+              label: "Words",
+              bg: "bg-pink",
             },
+            averageHeaderCount: {
+              icon: "NewspaperIcon",
+              value: 0,
+              label: "Headers",
+              bg: "bg-purple",
+            },
+            averageImageCount: {
+              icon: "PhotographIcon",
+              value: 0,
+              label: "Images",
+              bg: "bg-orange",
+            },
+            averageParagraphCount: {
+              icon: "TemplateIcon",
+              value: 0,
+              label: "Paragraphs",
+              bg: "bg-green",
+            },
+          },
+          expandedArticles: [],
+        },
       steps: [
         {
           target: '[data-tour-step="1"]',
@@ -1045,6 +1057,13 @@ export default {
     };
   },
   methods: {
+    goToBp: function () {
+      console.log("lol");
+      const myprop = this.serpData;
+      console.log(myprop);
+      // this.$router.replace({ name: "Blueprint Editor", params: { serpData } });
+      this.$router.replace({ name: "Blueprint Editor", params: { myprop } });
+    },
     onClickExpand(index) {
       if (this.serpData.expandedArticles.includes(index))
         this.serpData.expandedArticles = this.serpData.expandedArticles.filter(
@@ -1105,10 +1124,10 @@ export default {
         } else {
           this.serpData = { ...this.serpData, ...data };
           this.massage();
-          this.$store.dispatch("addBluePrintData", {
-            ...this.serpData,
-            ...data,
-          });
+          // this.$store.dispatch("addBluePrintData", {
+          //   ...this.serpData,
+          //   ...data,
+          // });
           this.search.timeTaken = Math.round(
             (performance.now() - this.search.timeStart) / 1000
           );

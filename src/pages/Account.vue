@@ -330,6 +330,103 @@
             </div>
           </div>
         </div>
+        <div class="mt-5" v-if="userBlueprints.length">
+          <h2
+            class="mb-3 text-2xl font-semibold text-gray-800  dark:text-gray-300 lg:mb-0"
+          >
+            Your Blueprints
+          </h2>
+
+          <p class="text-sm text-gray-800 dark:text-gray-300">
+            Look back on your old blueprints
+          </p>
+          <hr class="mt-2 dark:border-gray-600" />
+          <div
+            class="flex flex-col mt-5 mb-12 border border-gray-300 rounded-md  dark:border-gray-600 bg-gray-25 dark:bg-gray-700"
+          >
+            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+              <div
+                class="inline-block min-w-full py-2 align-middle  sm:px-6 lg:px-8"
+              >
+                <div class="overflow-hidden sm:rounded-lg">
+                  <table
+                    class="min-w-full divide-y divide-gray-200  dark:divide-gray-600"
+                  >
+                    <thead>
+                      <tr>
+                        <th
+                          class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-700 uppercase  dark:text-gray-300 dark:bg-gray-700 bg-gray-50"
+                        >
+                          Blueprint
+                        </th>
+                        <td
+                          class="py-3 text-xs font-medium leading-4 tracking-wider text-center text-gray-700 uppercase  dark:text-gray-300 dark:bg-gray-700 bg-gray-50"
+                        >
+                          Options
+                        </td>
+                      </tr>
+                    </thead>
+                    <tbody
+                      class="bg-white border-t border-gray-300 divide-y divide-gray-200  dark:border-gray-600 dark:bg-gray-800 dark:divide-gray-600"
+                    >
+                      <tr
+                        :key="index"
+                        v-for="(blueprint, index) in userBlueprints"
+                        class="border-b border-gray-200 dark:border-gray-600"
+                      >
+                        <td class="px-3 py-3 md:px-6 md:py-4">
+                          <div class="flex items-center">
+                            <div class="">
+                              <div
+                                class="mb-1 mr-16 font-medium leading-5 text-gray-900  dark:text-gray-300 md:text-lg"
+                              >
+                                {{ blueprint.searchTerm }}
+                              </div>
+
+                              <div
+                                class="text-xs leading-5 text-gray-500  dark:text-gray-400 md:text-sm"
+                              >
+                                <span class="break-all">{{
+                                  convertTime(blueprint.createdAt)
+                                }}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td class="w-40 p-2 text-center md:py-0">
+                          <div class="flex flex-wrap sm:justify-around">
+                            <router-link
+                              :to="`/blueprint?retrieve=${blueprint._id}`"
+                              tag="button"
+                              class="w-auto h-10 px-4 mx-auto mb-1 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
+                              title="Open Blueprint"
+                            >
+                              <ArrowCircleRightIcon class="flex align-middle" />
+                            </router-link>
+                            <button
+                              class="w-auto h-10 px-4 mx-auto font-semibold text-white duration-150 bg-red-600 rounded-lg  md:mt-0 focus:outline-none whitespace-nowrap"
+                              @click="deleteBlueprint(index, blueprint)"
+                              title="Delete Report"
+                            >
+                              <XIcon
+                                class="flex align-middle"
+                                :id="blueprint._id + '_x'"
+                              />
+                              <LoadingSpinner
+                                class="items-center hidden w-6 h-6 fill-current"
+                                :id="blueprint._id + '_spinner'"
+                              />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <ErrorMessage
         class="flex flex-row items-center p-5 mt-5 bg-red-200 border-b-2 border-red-300 rounded  alert swing-in-top-fwd"
@@ -398,6 +495,7 @@ export default {
       },
       successMessage: "",
       userSerps: [],
+      userBlueprints: [],
       quota: 0,
       quotaRemaining: 0,
       admin: false,
@@ -437,6 +535,9 @@ export default {
         this.plan = data.billing.plan;
         if (data.reports) {
           this.userSerps = orderBy(data.reports, "createdAt", "desc");
+        }
+        if (data.blueprints) {
+          this.userBlueprints = orderBy(data.blueprints, "createdAt", "desc");
         }
       }
     } catch (err) {
@@ -533,6 +634,37 @@ export default {
           this.errorHandler.errorMessage = "Something went wrong!";
         } finally {
           this.hideSpinner(report._id);
+        }
+      }
+    },
+
+    deleteBlueprint: async function (index, blueprint) {
+      const r = confirm("Are you sure you want to delete this blueprint?");
+      if (r == true) {
+        this.showSpinner(blueprint._id);
+        try {
+          let response = await fetch(
+            `${this.api_url}/blueprint/delete?id=${blueprint._id}`,
+            {
+              headers: {
+                Authorization: `Token ${localStorage.getItem("token")}`,
+              },
+            }
+          );
+          let data = await response.json();
+          if (data.error) {
+            this.errorHandler.errorMessage = data.error.message;
+            this.errorHandler.error = true;
+          } else if (data === "Blueprint Deleted") {
+            this.userBlueprints.splice(index, 1);
+          } else {
+            this.errorHandler.errorMessage = data;
+            this.errorHandler.error = true;
+          }
+        } catch (err) {
+          this.errorHandler.errorMessage = "Something went wrong!";
+        } finally {
+          this.hideSpinner(blueprint._id);
         }
       }
     },
