@@ -1,7 +1,6 @@
 <template>
   <div id="analysis">
     <Breadcrumb />
-    <BetaMessage />
 
     <div class="items-center mb-6">
       <h1
@@ -16,12 +15,10 @@
 </template>
 
 <script>
-import BetaMessage from "@/components/BetaMessage";
 import Breadcrumb from "@/components/Breadcrumb";
 
 export default {
   components: {
-    BetaMessage,
     Breadcrumb,
   },
 };

@@ -5,7 +5,6 @@
     <div id="animHolder" class="slide-in-right">
       <v-tour name="myTour" :steps="steps" :callbacks="tourComplete"></v-tour>
       <Breadcrumb />
-      <BetaMessage />
 
       <div class="items-center mb-6">
         <h1
@@ -870,9 +869,7 @@ import VueTour from "vue-tour";
 import Vue from "vue";
 import "vue-tour/dist/vue-tour.css";
 import { mapState } from "vuex";
-// import store from "../store";
 import LoadingSpinner from "@/components/LoadingSpinner";
-import BetaMessage from "@/components/BetaMessage";
 import ErrorMessage from "@/components/ErrorMessage";
 import Breadcrumb from "@/components/Breadcrumb";
 import PopularQuestions from "@/components/PopularQuestions";
@@ -925,7 +922,6 @@ export default {
     vueTopprogress,
     PopularQuestions,
     ResultCount,
-    BetaMessage,
     ErrorMessage,
     XCircleIcon,
     CubeTransparentIcon,

@@ -1,7 +1,6 @@
 <template>
   <div id="analysis" class="slide-in-right">
     <Breadcrumb />
-    <BetaMessage />
 
     <div class="items-center mb-6">
       <h1
@@ -32,7 +31,9 @@
             :session-id="sessionId"
           />
           <div class="container px-8 mx-auto">
-            <h3 class="text-xl font-semibold text-center my-7">
+            <h3
+              class="text-xl font-semibold text-center text-gray-700  my-7 dark:text-gray-300"
+            >
               Pick a plan to get started, and pay nothing for 10 days!
             </h3>
             <div
@@ -443,7 +444,6 @@
 </template>
 
 <script>
-import BetaMessage from "@/components/BetaMessage";
 import Breadcrumb from "@/components/Breadcrumb";
 import ErrorMessage from "@/components/ErrorMessage";
 import SuccessMessage from "@/components/SuccessMessage";
@@ -466,7 +466,6 @@ export default {
   components: {
     StripeCheckout,
     Breadcrumb,
-    BetaMessage,
     ErrorMessage,
     SuccessMessage,
     LoadingSpinner,

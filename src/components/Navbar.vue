@@ -53,8 +53,11 @@
           </button>
         </div>
 
-        <!-- search bar -->
-        <div class="relative text-gray-500"></div>
+        <span
+          class="hidden p-3 text-xs font-bold text-gray-600 bg-blue-200 border-b-2 border-blue-300 rounded  md:flex align-left dark:text-indigo-200 dark:border-indigo-800 dark:bg-indigo-900"
+          >Hey! Rubric is ALPHA software. Features may be broken and/or
+          unstable. Please report issues! ✨</span
+        >
       </div>
 
       <!-- right navbar -->

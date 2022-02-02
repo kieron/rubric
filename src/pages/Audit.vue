@@ -4,7 +4,6 @@
 
     <div id="animHolder" class="slide-in-right">
       <Breadcrumb />
-      <BetaMessage />
 
       <div class="items-center mb-6">
         <h1
@@ -360,7 +359,6 @@
 <script>
 import { mapState } from "vuex";
 import LoadingSpinner from "@/components/LoadingSpinner";
-import BetaMessage from "@/components/BetaMessage";
 import ErrorMessage from "@/components/ErrorMessage";
 import Breadcrumb from "@/components/Breadcrumb";
 import HeaderQuestions from "@/components/HeaderQuestions";
@@ -389,7 +387,6 @@ export default {
     Breadcrumb,
     vueTopprogress,
     ResultCount,
-    BetaMessage,
     ErrorMessage,
     AnnotationIcon,
     NewspaperIcon,

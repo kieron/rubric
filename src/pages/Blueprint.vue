@@ -1,72 +1,71 @@
 <template>
-  <div id="blueprint" class="slide-in-right">
+  <div id="blueprint">
     <vue-topprogress ref="topProgress" color="#4f46e5"></vue-topprogress>
-
-    <Breadcrumb />
-    <BetaMessage />
-    <div class="items-center mb-6">
-      <h1
-        class="mb-3 text-3xl font-semibold text-gray-800  dark:text-gray-300 lg:mb-0"
-      >
-        Blueprint Editor
-      </h1>
-
-      <p class="text-gray-800 dark:text-gray-300">
-        Create blueprints for your content faster & easier than before.
-      </p>
-
-      <hr class="mt-2" />
-    </div>
-    <div class="flex">
-      <div class="w-2/3 h-full text-gray-900">
-        <div
-          class="flex flex-wrap justify-center p-3 mb-2 text-gray-600 border  dark:border-gray-600 md:justify-start space-between menubar dark:text-gray-400"
-          v-if="averageValues"
+    <div id="animHolder" class="slide-in-right">
+      <Breadcrumb />
+      <div class="items-center mb-6">
+        <h1
+          class="mb-3 text-3xl font-semibold text-gray-800  dark:text-gray-300 lg:mb-0"
         >
-          <div class="flex flex-no-wrap items-center mr-4">
-            <AnnotationIcon class="inline w-5 h-5 mr-1 align-middle" />
+          Blueprint Editor
+        </h1>
 
-            <span title="Word Count" class="whitespace-no-wrap align-middle"
-              >{{ counts.words }}/{{
-                averageValues.averageWordCount.value
-              }}
-              Words</span
-            >
-          </div>
+        <p class="text-gray-800 dark:text-gray-300">
+          Create blueprints for your content faster & easier than before.
+        </p>
 
-          <div class="flex flex-no-wrap items-center mr-4">
-            <NewspaperIcon class="inline w-5 h-5 mr-1 align-middle" />
+        <hr class="mt-2" />
+      </div>
+      <div class="flex">
+        <div class="w-2/3 h-full text-gray-900">
+          <div
+            class="flex flex-wrap justify-center p-3 mb-2 text-gray-600 border  dark:border-gray-600 md:justify-start space-between menubar dark:text-gray-400"
+            v-if="averageValues"
+          >
+            <div class="flex flex-no-wrap items-center mr-4">
+              <AnnotationIcon class="inline w-5 h-5 mr-1 align-middle" />
 
-            <span title="Header Count" class="whitespace-no-wrap align-middle"
-              >{{ counts.headers }}/{{
-                averageValues.averageHeaderCount.value
-              }}
-              Headers</span
-            >
-          </div>
+              <span title="Word Count" class="whitespace-no-wrap align-middle"
+                >{{ counts.words }}/{{
+                  averageValues.averageWordCount.value
+                }}
+                Words</span
+              >
+            </div>
 
-          <div class="flex flex-no-wrap items-center mr-4">
-            <PhotographIcon class="inline w-5 h-5 mr-1 align-middle" />
+            <div class="flex flex-no-wrap items-center mr-4">
+              <NewspaperIcon class="inline w-5 h-5 mr-1 align-middle" />
 
-            <span title="Image Count" class="whitespace-no-wrap align-middle"
-              >0/{{ averageValues.averageImageCount.value }} Images</span
-            >
-          </div>
+              <span title="Header Count" class="whitespace-no-wrap align-middle"
+                >{{ counts.headers }}/{{
+                  averageValues.averageHeaderCount.value
+                }}
+                Headers</span
+              >
+            </div>
 
-          <div class="flex flex-no-wrap items-center mr-4">
-            <TemplateIcon class="inline w-5 h-5 mr-1 align-middle" />
+            <div class="flex flex-no-wrap items-center mr-4">
+              <PhotographIcon class="inline w-5 h-5 mr-1 align-middle" />
 
-            <span
-              title="Paragraph Count"
-              class="whitespace-no-wrap align-middle"
-              >{{ counts.paragraphs }}/{{
-                averageValues.averageParagraphCount.value
-              }}
-              Paragraphs</span
-            >
-          </div>
+              <span title="Image Count" class="whitespace-no-wrap align-middle"
+                >0/{{ averageValues.averageImageCount.value }} Images</span
+              >
+            </div>
 
-          <!-- <div class="flex flex-no-wrap items-center mr-4 text-gray-600">
+            <div class="flex flex-no-wrap items-center mr-4">
+              <TemplateIcon class="inline w-5 h-5 mr-1 align-middle" />
+
+              <span
+                title="Paragraph Count"
+                class="whitespace-no-wrap align-middle"
+                >{{ counts.paragraphs }}/{{
+                  averageValues.averageParagraphCount.value
+                }}
+                Paragraphs</span
+              >
+            </div>
+
+            <!-- <div class="flex flex-no-wrap items-center mr-4 text-gray-600">
                   <QuestionMarkCircleIcon
                     class="inline w-5 h-5 mr-1 align-middle"
                   />
@@ -76,83 +75,85 @@
                     >0/26 Questions</span
                   >
                 </div> -->
-        </div>
-        <quill-editor
-          class="dark:text-gray-300"
-          id="myText"
-          ref="myQuillEditor"
-          v-model="content"
-          :options="quillConfig"
-          @change="onEditorChange($event)"
-          @ready="onEditorReady($event)"
-          @blur="onEditorBlur($event)"
-          @focus="onEditorFocus($event)"
-        />
-        <button
-          class="flex items-center self-center flex-grow w-full h-16 px-4 mt-3 mb-2 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
-          @click="saveBlueprint()"
-          title="Save Blueprint"
-        >
-          <SaveIcon
-            class="flex w-6 h-6 mr-2 align-middle"
-            :id="'saveBlueprintIcon' + '_x'"
-          />
-          <LoadingSpinner
-            class="items-center hidden w-6 h-6 mr-2 fill-current"
-            :id="'saveBlueprintIcon' + '_spinner'"
-          />
-          <div class="flex ml-auto mr-auto">Save Blueprint</div>
-        </button>
-        <ErrorMessage
-          class="flex flex-row items-center p-5 mt-5 bg-red-200 border-b-2 border-red-300 rounded  alert swing-in-top-fwd"
-          v-if="errorHandler.error && loader.loading != true"
-          v-bind:message="errorHandler.errorMessage"
-        />
-      </div>
-
-      <div
-        class="flex-grow w-1/3 h-full p-5 ml-2 border border-gray-200  dark:border-gray-600 dark:bg-gray-700"
-      >
-        <h2 class="text-2xl bold dark:text-gray-400">Blueprint Data</h2>
-
-        <div v-if="!weightedHeaders && !weightedQuestions">
-          <p class="mt-2 dark:text-gray-400">
-            You haven't loaded any data from a SERP analysis.
-          </p>
-          <router-link
-            to="/analysis"
-            tag="button"
-            class="flex items-center self-center justify-center flex-initial w-full h-16 px-4 mt-3 font-semibold text-gray-100 duration-150 bg-indigo-600 rounded-lg shadow  hover:bg-indigo-500 focus:outline-none"
-          >
-            <span>Load SERP Analysis</span>
-          </router-link>
-        </div>
-
-        <div class="py-3" v-if="weightedHeaders">
-          <h3 class="text-xs font-bold dark:text-gray-400">HEADERS</h3>
-          <div class="flex flex-wrap my-3 -m-1">
-            <span
-              v-for="item in weightedHeaders"
-              @click="insertHeader(item.header)"
-              :key="item.header"
-              :class="item.included ? 'bg-green-400' : 'bg-indigo-200 '"
-              class="px-2 m-1 text-xs font-bold leading-loose rounded cursor-pointer  hover:bg-indigo-400"
-              >{{ item.header }}</span
-            >
           </div>
+          <quill-editor
+            class="dark:text-gray-300"
+            id="myText"
+            ref="myQuillEditor"
+            v-model="content"
+            :options="quillConfig"
+            @change="onEditorChange($event)"
+            @ready="onEditorReady($event)"
+            @blur="onEditorBlur($event)"
+            @focus="onEditorFocus($event)"
+          />
+          <button
+            class="flex items-center self-center flex-grow w-full h-16 px-4 mt-3 mb-2 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
+            @click="saveBlueprint()"
+            title="Save Blueprint"
+            v-if="content"
+          >
+            <SaveIcon
+              class="flex w-6 h-6 mr-2 align-middle"
+              :id="'saveBlueprintIcon' + '_x'"
+            />
+            <LoadingSpinner
+              class="items-center hidden w-6 h-6 mr-2 fill-current"
+              :id="'saveBlueprintIcon' + '_spinner'"
+            />
+            <div class="flex ml-auto mr-auto">Save Blueprint</div>
+          </button>
+          <ErrorMessage
+            class="flex flex-row items-center p-5 mt-5 bg-red-200 border-b-2 border-red-300 rounded  alert swing-in-top-fwd"
+            v-if="errorHandler.error && loader.loading != true"
+            v-bind:message="errorHandler.errorMessage"
+          />
         </div>
 
-        <div class="py-3" v-if="weightedQuestions">
-          <h3 class="text-xs font-bold dark:text-gray-400">QUESTIONS</h3>
-          <div class="flex flex-wrap my-3 -m-1">
-            <span
-              @click="insertQuestion(item.question)"
-              v-for="(item, index) in weightedQuestions"
-              :key="index"
-              :class="item.included ? 'bg-green-400' : 'bg-indigo-200 '"
-              class="px-2 m-1 text-xs font-bold leading-loose rounded cursor-pointer  hover:bg-gray-300"
-              >{{ item.question }}</span
+        <div
+          class="flex-grow w-1/3 h-full p-5 ml-2 border border-gray-200  dark:border-gray-600 dark:bg-gray-700"
+        >
+          <h2 class="text-2xl bold dark:text-gray-400">Blueprint Data</h2>
+
+          <div v-if="!weightedHeaders && !weightedQuestions">
+            <p class="mt-2 dark:text-gray-400">
+              You haven't loaded any data from a SERP analysis.
+            </p>
+            <router-link
+              to="/analysis"
+              tag="button"
+              class="flex items-center self-center justify-center flex-initial w-full h-16 px-4 mt-3 font-semibold text-gray-100 duration-150 bg-indigo-600 rounded-lg shadow  hover:bg-indigo-500 focus:outline-none"
             >
+              <span>Load SERP Analysis</span>
+            </router-link>
+          </div>
+
+          <div class="py-3" v-if="weightedHeaders">
+            <h3 class="text-xs font-bold dark:text-gray-400">HEADERS</h3>
+            <div class="flex flex-wrap my-3 -m-1">
+              <span
+                v-for="item in weightedHeaders"
+                @click="insertHeader(item.header)"
+                :key="item.header"
+                :class="item.included ? 'bg-green-400' : 'bg-indigo-200 '"
+                class="px-2 m-1 text-xs font-bold leading-loose rounded cursor-pointer  hover:bg-indigo-400"
+                >{{ item.header }}</span
+              >
+            </div>
+          </div>
+
+          <div class="py-3" v-if="weightedQuestions">
+            <h3 class="text-xs font-bold dark:text-gray-400">QUESTIONS</h3>
+            <div class="flex flex-wrap my-3 -m-1">
+              <span
+                @click="insertQuestion(item.question)"
+                v-for="(item, index) in weightedQuestions"
+                :key="index"
+                :class="item.included ? 'bg-green-400' : 'bg-indigo-200 '"
+                class="px-2 m-1 text-xs font-bold leading-loose rounded cursor-pointer  hover:bg-gray-300"
+                >{{ item.question }}</span
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -161,9 +162,7 @@
 </template>
 
 <script>
-// import { mapGetters } from "vuex";
 import Breadcrumb from "@/components/Breadcrumb";
-import BetaMessage from "@/components/BetaMessage";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import ErrorMessage from "@/components/ErrorMessage";
 
@@ -174,7 +173,6 @@ import "quill/dist/quill.core.css";
 import "quill/dist/quill.snow.css";
 import "quill/dist/quill.bubble.css";
 import {
-  //QuestionMarkCircleIcon,
   TemplateIcon,
   AnnotationIcon,
   NewspaperIcon,
@@ -184,17 +182,10 @@ import {
 import { parse } from "node-html-parser";
 const wordCount = require("word-character-count");
 
-// import store from "../store";
-
 export default {
   name: "Blueprint",
 
   computed: {
-    // ...mapGetters({
-    //   blueprintData: "getBlueprint",
-    //   questions: "getQuestions",
-    //   headers: "getHeaders",
-    // }),
     weightedHeaders: function () {
       if (typeof this.myprop === "undefined") {
         return this.bluePrintDataFromApi.weightedHeaders;
@@ -242,7 +233,6 @@ export default {
     },
   },
   components: {
-    BetaMessage,
     Breadcrumb,
     TemplateIcon,
     AnnotationIcon,
@@ -293,7 +283,6 @@ export default {
       },
       loader: {
         loaded: false,
-        // loaded: Object.keys(store.getters.getBlueprint).length ? true : false,
         loading: false,
       },
       successMessage: "",
@@ -303,6 +292,7 @@ export default {
       newBluePrintId: "",
       delay: 3800, // anti-rebound for 3.8s
       lastExecution: 0,
+      autoSaving: false,
     };
   },
   methods: {
@@ -349,6 +339,7 @@ export default {
         this.errorHandler.errorMessage = "Something went wrong!";
       } finally {
         this.hideSpinner("saveBlueprintIcon");
+        this.autoSaving = true;
       }
     },
     // eslint-disable-next-line no-unused-vars
@@ -390,24 +381,26 @@ export default {
     },
 
     checkContent: function (quill) {
-      (this.haveProp()
-        ? this.weightedHeaders
-        : this.bluePrintDataFromApi.weightedHeaders
-      ).forEach(function (header) {
-        header.included = quill.getText().includes(header.header)
-          ? true
-          : false;
-      });
+      if (this.weightedHeaders || this.bluePrintDataFromApi.weightedHeaders) {
+        (this.haveProp()
+          ? this.weightedHeaders
+          : this.bluePrintDataFromApi.weightedHeaders
+        ).forEach(function (header) {
+          header.included = quill.getText().includes(header.header)
+            ? true
+            : false;
+        });
 
-      (this.haveProp()
-        ? this.weightedQuestions
-        : this.bluePrintDataFromApi.weightedQuestions
-      ).forEach(function (question) {
-        question.included = quill.getText().includes(question.question)
-          ? true
-          : false;
-      });
-      this.autoSave();
+        (this.haveProp()
+          ? this.weightedQuestions
+          : this.bluePrintDataFromApi.weightedQuestions
+        ).forEach(function (question) {
+          question.included = quill.getText().includes(question.question)
+            ? true
+            : false;
+        });
+        this.autoSave();
+      }
     },
 
     insertHeader: function (item) {
@@ -441,7 +434,7 @@ export default {
       document.getElementById(id + "_spinner").classList.add("hidden");
     },
     autoSave: function () {
-      if (this.lastExecution + this.delay < Date.now()) {
+      if (this.lastExecution + this.delay < Date.now() && this.autoSaving) {
         this.saveBlueprint();
         this.lastExecution = Date.now();
       }
