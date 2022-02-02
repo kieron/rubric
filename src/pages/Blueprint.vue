@@ -273,7 +273,7 @@ export default {
       },
       content:
         typeof this.myprop === "undefined"
-          ? `<h1><strong>This needs to come from prop or API</strong></h1>`
+          ? `<h1><strong>My amazing article title</strong></h1>`
           : `<h1><strong>${this.myprop.searchTerm}</strong></h1>`,
       quillConfig: Object.freeze({
         modules: {
