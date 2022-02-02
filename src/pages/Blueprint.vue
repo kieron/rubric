@@ -311,8 +311,6 @@ export default {
     saveBlueprint: async function () {
       this.showSpinner("saveBlueprintIcon");
       try {
-        // console.log(this.myprop.averageValues);
-        // console.log(this.bluePrintDataFromApi.averageValues);
         const blueprint = {
           averageValues: this.haveProp()
             ? this.myprop.averageValues
@@ -331,7 +329,6 @@ export default {
             ? this.newBluePrintId
             : this.bluePrintDataFromApi._id,
         };
-        // console.log(blueprint);
         let response = await fetch(`${this.api_url}/blueprint/save`, {
           method: "POST",
           headers: {
@@ -476,11 +473,6 @@ export default {
         } else {
           this.bluePrintDataFromApi = data;
           this.content = data.content;
-          // this.massage();
-          // this.$store.dispatch("addBluePrintData", {
-          //   ...this.serpData,
-          //   ...data,
-          // });
 
           this.loadedAndShow();
         }
