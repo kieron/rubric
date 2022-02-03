@@ -442,7 +442,6 @@ export default {
           this.loader.loading = false;
           this.$refs.topProgress.done();
         } else {
-          console.log(data);
           this.serpData = { ...this.serpData, ...data };
           this.search.timeTaken = Math.round(
             (performance.now() - this.search.timeStart) / 1000
