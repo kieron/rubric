@@ -187,10 +187,12 @@ export default {
 
   computed: {
     weightedHeaders: function () {
-      if (typeof this.myprop === "undefined") {
-        return this.bluePrintDataFromApi.weightedHeaders;
+      if (typeof this.blueprintPropData === "undefined") {
+        return this.blueprintApiData.weightedHeaders;
       } else {
-        let data = this.myprop.popularHeaders.filter(function (item) {
+        let data = this.blueprintPropData.popularHeaders.filter(function (
+          item
+        ) {
           return item.weight === true;
         });
 
@@ -203,11 +205,11 @@ export default {
     },
     weightedQuestions: function () {
       let newArr = {};
-      if (typeof this.myprop === "undefined") {
-        return this.bluePrintDataFromApi.weightedQuestions;
+      if (typeof this.blueprintPropData === "undefined") {
+        return this.blueprintApiData.weightedQuestions;
       } else {
         let questions = [];
-        for (const result of this.myprop.results) {
+        for (const result of this.blueprintPropData.results) {
           for (const question of result.questions) {
             questions.push(question);
           }
@@ -222,10 +224,10 @@ export default {
       }
     },
     averageValues: function () {
-      if (typeof this.myprop === "undefined") {
-        return this.bluePrintDataFromApi.averageValues;
+      if (typeof this.blueprintPropData === "undefined") {
+        return this.blueprintApiData.averageValues;
       } else {
-        return this.myprop.averageValues;
+        return this.blueprintPropData.averageValues;
       }
     },
     editor() {
@@ -252,7 +254,7 @@ export default {
       return quillEditor;
     },
   },
-  props: ["myprop"],
+  props: ["blueprintPropData"],
   data() {
     return {
       counts: {
@@ -262,9 +264,9 @@ export default {
         images: 0,
       },
       content:
-        typeof this.myprop === "undefined"
+        typeof this.blueprintPropData === "undefined"
           ? `<h1><strong>My amazing article title</strong></h1>`
-          : `<h1><strong>${this.myprop.searchTerm}</strong></h1>`,
+          : `<h1><strong>${this.blueprintPropData.searchTerm}</strong></h1>`,
       quillConfig: Object.freeze({
         modules: {
           toolbar: [
@@ -287,8 +289,7 @@ export default {
       },
       successMessage: "",
       api_url: config.API_URL,
-      bluePrintDataFromApi: [],
-      questions: [],
+      blueprintApiData: [],
       newBluePrintId: "",
       delay: 3800, // anti-rebound for 3.8s
       lastExecution: 0,
@@ -296,28 +297,26 @@ export default {
     };
   },
   methods: {
-    generateData: function () {},
-
     saveBlueprint: async function () {
       this.showSpinner("saveBlueprintIcon");
       try {
         const blueprint = {
-          averageValues: this.haveProp()
-            ? this.myprop.averageValues
-            : this.bluePrintDataFromApi.averageValues,
-          weightedHeaders: this.haveProp()
+          averageValues: this.haveblueprintPropData()
+            ? this.blueprintPropData.averageValues
+            : this.blueprintApiData.averageValues,
+          weightedHeaders: this.haveblueprintPropData()
             ? this.weightedHeaders
-            : this.bluePrintDataFromApi.weightedHeaders,
-          weightedQuestions: this.haveProp()
+            : this.blueprintApiData.weightedHeaders,
+          weightedQuestions: this.haveblueprintPropData()
             ? this.weightedQuestions
-            : this.bluePrintDataFromApi.weightedHeaders,
+            : this.blueprintApiData.weightedHeaders,
           content: this.content,
-          searchTerm: this.haveProp()
-            ? this.myprop.searchTerm
-            : this.bluePrintDataFromApi.searchTerm,
-          id: this.haveProp()
+          searchTerm: this.haveblueprintPropData()
+            ? this.blueprintPropData.searchTerm
+            : this.blueprintApiData.searchTerm,
+          id: this.haveblueprintPropData()
             ? this.newBluePrintId
-            : this.bluePrintDataFromApi._id,
+            : this.blueprintApiData._id,
         };
         let response = await fetch(`${this.api_url}/blueprint/save`, {
           method: "POST",
@@ -381,19 +380,19 @@ export default {
     },
 
     checkContent: function (quill) {
-      if (this.weightedHeaders || this.bluePrintDataFromApi.weightedHeaders) {
-        (this.haveProp()
+      if (this.weightedHeaders || this.blueprintApiData.weightedHeaders) {
+        (this.haveblueprintPropData()
           ? this.weightedHeaders
-          : this.bluePrintDataFromApi.weightedHeaders
+          : this.blueprintApiData.weightedHeaders
         ).forEach(function (header) {
           header.included = quill.getText().includes(header.header)
             ? true
             : false;
         });
 
-        (this.haveProp()
+        (this.haveblueprintPropData()
           ? this.weightedQuestions
-          : this.bluePrintDataFromApi.weightedQuestions
+          : this.blueprintApiData.weightedQuestions
         ).forEach(function (question) {
           question.included = quill.getText().includes(question.question)
             ? true
@@ -464,7 +463,7 @@ export default {
             this.$refs.topProgress.done();
           }
         } else {
-          this.bluePrintDataFromApi = data;
+          this.blueprintApiData = data;
           this.content = data.content;
 
           this.loadedAndShow();
@@ -474,8 +473,8 @@ export default {
         this.$refs.topProgress.done();
       }
     },
-    haveProp: function () {
-      if (typeof this.myprop === "undefined") {
+    haveblueprintPropData: function () {
+      if (typeof this.blueprintPropData === "undefined") {
         return false;
       } else {
         return true;

@@ -8,7 +8,14 @@
 
       <div class="items-center mb-6">
         <h1
-          class="mb-3 text-3xl font-semibold text-gray-800  dark:text-gray-300 lg:mb-0"
+          class="
+            mb-3
+            text-3xl
+            font-semibold
+            text-gray-800
+            dark:text-gray-300
+            lg:mb-0
+          "
         >
           SERP Analysis
         </h1>
@@ -42,7 +49,21 @@
               placeholder="best fishing rod for beginners"
               id="query"
               required
-              class="flex flex-grow w-full h-16 px-6 mb-2 mr-2 placeholder-gray-500 placeholder-opacity-50 bg-white border rounded-lg shadow-sm  dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 focus:outline-none"
+              class="
+                flex flex-grow
+                w-full
+                h-16
+                px-6
+                mb-2
+                mr-2
+                placeholder-gray-500 placeholder-opacity-50
+                bg-white
+                border
+                rounded-lg
+                shadow-sm
+                dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800
+                focus:outline-none
+              "
             />
             <button
               data-tour-step="6"
@@ -51,7 +72,26 @@
               v-on:click="animateSearchBtn($event)"
               :class="{ 'bounce-top': search.animatedSearchBtn }"
               @animationend="search.animatedSearchBtn = false"
-              class="flex items-center self-center flex-grow w-full h-16 px-4 mb-2 font-semibold text-white duration-150 bg-indigo-600 rounded-lg shadow-md  sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
+              class="
+                flex
+                items-center
+                self-center
+                flex-grow
+                w-full
+                h-16
+                px-4
+                mb-2
+                font-semibold
+                text-white
+                duration-150
+                bg-indigo-600
+                rounded-lg
+                shadow-md
+                sm:w-auto
+                hover:bg-indigo-500
+                focus:outline-none
+                whitespace-nowrap
+              "
             >
               <div class="flex ml-auto mr-auto">
                 <span v-if="!loader.loading" class="whitespace-no-wrap"
@@ -88,7 +128,19 @@
               <div class="relative sm:w-1/4 sm:mr-2">
                 <select
                   data-tour-step="2"
-                  class="w-full h-16 px-3 text-sm bg-white border rounded-lg shadow-sm appearance-none  dark:border-gray-600 dark:text-gray-400 dark:bg-gray-800 focus:outline-none"
+                  class="
+                    w-full
+                    h-16
+                    px-3
+                    text-sm
+                    bg-white
+                    border
+                    rounded-lg
+                    shadow-sm
+                    appearance-none
+                    dark:border-gray-600 dark:text-gray-400 dark:bg-gray-800
+                    focus:outline-none
+                  "
                   name="engine"
                   id="engine"
                   required
@@ -99,7 +151,16 @@
                   <option value="yahoo">Yahoo</option>
                 </select>
                 <div
-                  class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-600 pointer-events-none "
+                  class="
+                    absolute
+                    inset-y-0
+                    right-0
+                    flex
+                    items-center
+                    px-2
+                    text-gray-600
+                    pointer-events-none
+                  "
                 >
                   <ChevronDownIcon class="w-6 h-6" />
                 </div>
@@ -107,7 +168,21 @@
               <div class="relative sm:w-1/4 sm:mr-2">
                 <select
                   data-tour-step="3"
-                  class="w-full h-16 px-3 mt-2 text-sm bg-white border rounded-lg shadow-sm appearance-none  dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 sm:mt-0 focus:outline-none"
+                  class="
+                    w-full
+                    h-16
+                    px-3
+                    mt-2
+                    text-sm
+                    bg-white
+                    border
+                    rounded-lg
+                    shadow-sm
+                    appearance-none
+                    dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800
+                    sm:mt-0
+                    focus:outline-none
+                  "
                   name="location"
                   id="location"
                   required
@@ -427,7 +502,16 @@
                   <option value="Zimbabwe">Zimbabwe</option>
                 </select>
                 <div
-                  class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-600 pointer-events-none "
+                  class="
+                    absolute
+                    inset-y-0
+                    right-0
+                    flex
+                    items-center
+                    px-2
+                    text-gray-600
+                    pointer-events-none
+                  "
                 >
                   <ChevronDownIcon class="w-6 h-6" />
                 </div>
@@ -435,7 +519,23 @@
               <div class="relative sm:w-1/4 sm:mr-2">
                 <select
                   data-tour-step="4"
-                  class="w-full h-16 px-3 mx-0 mt-2 text-sm bg-white border rounded-lg shadow-sm appearance-none  dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 sm:mt-0 focus:outline-none sm:my-0"
+                  class="
+                    w-full
+                    h-16
+                    px-3
+                    mx-0
+                    mt-2
+                    text-sm
+                    bg-white
+                    border
+                    rounded-lg
+                    shadow-sm
+                    appearance-none
+                    dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800
+                    sm:mt-0
+                    focus:outline-none
+                    sm:my-0
+                  "
                   name="device"
                   id="device"
                   required
@@ -446,7 +546,16 @@
                   <option value="tablet">Tablet</option>
                 </select>
                 <div
-                  class="absolute inset-y-0 right-0 flex items-center px-2 text-gray-600 pointer-events-none "
+                  class="
+                    absolute
+                    inset-y-0
+                    right-0
+                    flex
+                    items-center
+                    px-2
+                    text-gray-600
+                    pointer-events-none
+                  "
                 >
                   <ChevronDownIcon class="w-6 h-6" />
                 </div>
@@ -454,7 +563,20 @@
               <div class="relative sm:w-1/4">
                 <input
                   data-tour-step="5"
-                  class="w-full h-16 px-3 mt-2 text-sm bg-white border rounded-lg shadow-sm  dark:border-gray-600 dark:text-gray-400 dark:bg-gray-800 sm:mt-0 focus:outline-none"
+                  class="
+                    w-full
+                    h-16
+                    px-3
+                    mt-2
+                    text-sm
+                    bg-white
+                    border
+                    rounded-lg
+                    shadow-sm
+                    dark:border-gray-600 dark:text-gray-400 dark:bg-gray-800
+                    sm:mt-0
+                    focus:outline-none
+                  "
                   type="number"
                   id="quantity"
                   name="quantity"
@@ -480,7 +602,15 @@
         v-if="loader.loading"
       >
         <LoadingSpinner
-          class="flex justify-center w-40 ml-auto mr-auto text-center fill-current "
+          class="
+            flex
+            justify-center
+            w-40
+            ml-auto
+            mr-auto
+            text-center
+            fill-current
+          "
         />
       </div>
       <div id="results">
@@ -489,7 +619,15 @@
           v-if="loader.loaded && !loader.loading && !serpData.error"
         >
           <h2
-            class="pt-2 mb-2 text-2xl font-semibold text-gray-800  dark:text-gray-300 lg:mb-0"
+            class="
+              pt-2
+              mb-2
+              text-2xl
+              font-semibold
+              text-gray-800
+              dark:text-gray-300
+              lg:mb-0
+            "
           >
             <!-- router.push({ name: 'user', params: { userId: '123' } }) -->
             <!-- <router-link
@@ -505,7 +643,21 @@
           </h2>
           <button
             @click="goToBp()"
-            class="hidden px-1 mr-2 duration-150 rounded-lg shadow  dark:bg-gray-600 hover:bg-gray-100 dark:hover:bg-gray-500 w-7 h-7 lg:inline focus:outline-none"
+            class="
+              hidden
+              px-1
+              mr-2
+              duration-150
+              rounded-lg
+              shadow
+              dark:bg-gray-600
+              hover:bg-gray-100
+              dark:hover:bg-gray-500
+              w-7
+              h-7
+              lg:inline
+              focus:outline-none
+            "
             title="Load Into Blueprint Tool"
           >
             <CubeTransparentIcon
@@ -544,7 +696,13 @@
               "
             >
               <p
-                class="mb-4 text-xl font-semibold text-gray-700  dark:text-gray-400"
+                class="
+                  mb-4
+                  text-xl
+                  font-semibold
+                  text-gray-700
+                  dark:text-gray-400
+                "
               >
                 Average Values
               </p>
@@ -553,7 +711,12 @@
                   'md:flex-col md:flex-no-wrap': serpData.relatedQuestions,
                   '': !serpData.relatedQuestions,
                 }"
-                class="flex flex-wrap h-full -mx-3  md:flex-col md:mx-0 md:justify-between"
+                class="
+                  flex flex-wrap
+                  h-full
+                  -mx-3
+                  md:flex-col md:mx-0 md:justify-between
+                "
               >
                 <div
                   v-for="(average, key, index) in serpData.averageValues"
@@ -569,20 +732,50 @@
                   class="w-1/2"
                 >
                   <div
-                    class="flex items-center p-0 bg-white border rounded-lg  dark:bg-gray-700 dark:border-gray-600"
+                    class="
+                      flex
+                      items-center
+                      p-0
+                      bg-white
+                      border
+                      rounded-lg
+                      dark:bg-gray-700 dark:border-gray-600
+                    "
                   >
                     <div
-                      class="px-1 py-10 text-white rounded-l-lg  md:px-3 dark:text-gray-400 lg:px-5 lg:py-5 bg-pink"
+                      class="
+                        px-1
+                        py-10
+                        text-white
+                        rounded-l-lg
+                        md:px-3
+                        dark:text-gray-400
+                        lg:px-5 lg:py-5
+                        bg-pink
+                      "
                       :class="[average.bg]"
                     >
                       <component
                         :is="average.icon"
-                        class="hidden w-8 h-8 mx-auto  lg:block dark:text-gray-300"
+                        class="
+                          hidden
+                          w-8
+                          h-8
+                          mx-auto
+                          lg:block
+                          dark:text-gray-300
+                        "
                       />
                     </div>
 
                     <div
-                      class="ml-3 leading-6 text-gray-700  md:ml-6 dark:text-gray-300"
+                      class="
+                        ml-3
+                        leading-6
+                        text-gray-700
+                        md:ml-6
+                        dark:text-gray-300
+                      "
                     >
                       <p class="text-2xl font-semibold">
                         {{ average.value }}
@@ -597,10 +790,23 @@
             </div>
             <div
               v-if="serpData.relatedQuestions.length"
-              class="flex flex-col flex-grow order-last w-full mt-5  xl:w-2/3 md:mt-0"
+              class="
+                flex flex-col flex-grow
+                order-last
+                w-full
+                mt-5
+                xl:w-2/3
+                md:mt-0
+              "
             >
               <p
-                class="mb-4 text-xl font-semibold text-gray-700  dark:text-gray-400"
+                class="
+                  mb-4
+                  text-xl
+                  font-semibold
+                  text-gray-700
+                  dark:text-gray-400
+                "
               >
                 People Also Ask
               </p>
@@ -609,14 +815,28 @@
                 <div
                   :key="question.id"
                   v-for="(question, index) in serpData.relatedQuestions"
-                  class="items-center flex-grow px-4 py-2 bg-gray-100 border rounded-lg  dark:border-gray-600 dark:bg-gray-700"
+                  class="
+                    items-center
+                    flex-grow
+                    px-4
+                    py-2
+                    bg-gray-100
+                    border
+                    rounded-lg
+                    dark:border-gray-600 dark:bg-gray-700
+                  "
                   :class="{
                     'mb-2': index != serpData.relatedQuestions.length - 1,
                   }"
                 >
                   <div>
                     <p
-                      class="text-base font-semibold text-gray-700  dark:text-gray-300"
+                      class="
+                        text-base
+                        font-semibold
+                        text-gray-700
+                        dark:text-gray-300
+                      "
                     >
                       {{ question.question }}
                     </p>
@@ -644,28 +864,66 @@
           </div>
           <!-- table -->
           <div
-            class="flex flex-col mt-5 mb-12 border border-gray-300 rounded-md  dark:border-gray-600 bg-gray-25 dark:bg-gray-700"
+            class="
+              flex flex-col
+              mt-5
+              mb-12
+              border border-gray-300
+              rounded-md
+              dark:border-gray-600
+              bg-gray-25
+              dark:bg-gray-700
+            "
             v-if="serpData.results.length"
           >
             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
               <div
-                class="inline-block min-w-full py-2 align-middle  sm:px-6 lg:px-8"
+                class="
+                  inline-block
+                  min-w-full
+                  py-2
+                  align-middle
+                  sm:px-6
+                  lg:px-8
+                "
               >
                 <div class="overflow-hidden sm:rounded-lg">
                   <table
-                    class="min-w-full divide-y divide-gray-200  dark:divide-gray-600"
+                    class="
+                      min-w-full
+                      divide-y divide-gray-200
+                      dark:divide-gray-600
+                    "
                   >
                     <thead>
                       <tr>
                         <th
-                          class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-700 uppercase  dark:text-gray-300 dark:bg-gray-700 bg-gray-50"
+                          class="
+                            px-6
+                            py-3
+                            text-xs
+                            font-medium
+                            leading-4
+                            tracking-wider
+                            text-left text-gray-700
+                            uppercase
+                            dark:text-gray-300 dark:bg-gray-700
+                            bg-gray-50
+                          "
                         >
                           <span>Results</span>
                         </th>
                       </tr>
                     </thead>
                     <tbody
-                      class="bg-white border-t border-gray-300 divide-y divide-gray-200  dark:border-gray-600 dark:bg-gray-700 dark:divide-gray-600"
+                      class="
+                        bg-white
+                        border-t border-gray-300
+                        divide-y divide-gray-200
+                        dark:border-gray-600
+                        dark:bg-gray-700
+                        dark:divide-gray-600
+                      "
                     >
                       <tr
                         :key="article.id"
@@ -676,13 +934,27 @@
                           <div class="flex items-center">
                             <div class="">
                               <div
-                                class="mb-1 mr-16 font-medium leading-5 text-gray-900  dark:text-gray-300 md:text-lg"
+                                class="
+                                  mb-1
+                                  mr-16
+                                  font-medium
+                                  leading-5
+                                  text-gray-900
+                                  dark:text-gray-300
+                                  md:text-lg
+                                "
                               >
                                 {{ article.title }}
                               </div>
 
                               <div
-                                class="text-xs leading-5 text-gray-500  dark:text-gray-400 md:text-sm"
+                                class="
+                                  text-xs
+                                  leading-5
+                                  text-gray-500
+                                  dark:text-gray-400
+                                  md:text-sm
+                                "
                               >
                                 <a
                                   :href="article.url"
@@ -762,7 +1034,12 @@
                               article.headersContainingKeyword.length ||
                               article.headersContainingPartialKeyword.length
                             "
-                            class="mt-5 rounded  additional-info swing-in-top-fwd"
+                            class="
+                              mt-5
+                              rounded
+                              additional-info
+                              swing-in-top-fwd
+                            "
                             :class="{
                               hidden:
                                 !serpData.expandedArticles.includes(
@@ -807,7 +1084,13 @@
                           <button
                             title="Delete Item"
                             @click="deleteItem(articleIndex)"
-                            class="p-1 transition duration-300 transform  hover:text-red-600 hover:-translate-y-1"
+                            class="
+                              p-1
+                              transition
+                              duration-300
+                              transform
+                              hover:text-red-600 hover:-translate-y-1
+                            "
                           >
                             <XCircleIcon class="w-6 h-6" />
                           </button>
@@ -818,7 +1101,14 @@
                               article.headersContainingKeyword.length ||
                               article.headersContainingPartialKeyword.length
                             "
-                            class="p-1 mr-2 transition duration-300 transform  hover:-translate-y-1"
+                            class="
+                              p-1
+                              mr-2
+                              transition
+                              duration-300
+                              transform
+                              hover:-translate-y-1
+                            "
                             @click="onClickExpand(articleIndex)"
                             title="Expand Details"
                           >
@@ -837,7 +1127,13 @@
 
           <div class="p-5 bg-gray-200 rounded dark:bg-gray-600">
             <h2
-              class="pt-2 mb-2 text-2xl text-gray-800  dark:text-gray-300 lg:mb-0"
+              class="
+                pt-2
+                mb-2
+                text-2xl text-gray-800
+                dark:text-gray-300
+                lg:mb-0
+              "
             >
               Blueprint Tool
             </h2>
@@ -846,20 +1142,44 @@
               give to your writers for a more concise plan.
             </p>
             <div class="my-5">
-              <router-link
-                to="/blueprint"
+              <button
+                @click="goToBp()"
                 tag="button"
-                class="flex items-center self-center flex-initial h-16 px-4 font-semibold text-gray-100 duration-150 bg-gray-500 rounded-lg shadow  focus:outline-none"
+                class="
+                  flex
+                  items-center
+                  self-center
+                  flex-initial
+                  h-16
+                  px-4
+                  font-semibold
+                  text-gray-100
+                  duration-150
+                  bg-gray-500
+                  rounded-lg
+                  shadow
+                  focus:outline-none
+                "
               >
                 <span>Load Into Blueprint Tool</span>
                 <CubeTransparentIcon class="w-6 h-6 ml-2 text-gray-100" />
-              </router-link>
+              </button>
             </div>
           </div>
         </div>
       </div>
       <ErrorMessage
-        class="flex flex-row items-center p-5 mt-5 bg-red-200 border-b-2 border-red-300 rounded  alert swing-in-top-fwd"
+        class="
+          flex flex-row
+          items-center
+          p-5
+          mt-5
+          bg-red-200
+          border-b-2 border-red-300
+          rounded
+          alert
+          swing-in-top-fwd
+        "
         v-if="errorHandler.error && loader.loading != true"
         v-bind:message="errorHandler.errorMessage"
       />
@@ -966,44 +1286,39 @@ export default {
       },
 
       loader: {
-        // loaded: Object.keys(store.getters.getBlueprint).length ? true : false,
         loaded: false,
         loading: false,
       },
 
-      serpData:
-        // Object.keys(store.getters.getBlueprint).length && this.error !== true
-        //   ? store.getters.getBlueprint
-        //   : {
-        {
-          averageValues: {
-            averageWordCount: {
-              icon: "AnnotationIcon",
-              value: 0,
-              label: "Words",
-              bg: "bg-pink",
-            },
-            averageHeaderCount: {
-              icon: "NewspaperIcon",
-              value: 0,
-              label: "Headers",
-              bg: "bg-purple",
-            },
-            averageImageCount: {
-              icon: "PhotographIcon",
-              value: 0,
-              label: "Images",
-              bg: "bg-orange",
-            },
-            averageParagraphCount: {
-              icon: "TemplateIcon",
-              value: 0,
-              label: "Paragraphs",
-              bg: "bg-green",
-            },
+      serpData: {
+        averageValues: {
+          averageWordCount: {
+            icon: "AnnotationIcon",
+            value: 0,
+            label: "Words",
+            bg: "bg-pink",
           },
-          expandedArticles: [],
+          averageHeaderCount: {
+            icon: "NewspaperIcon",
+            value: 0,
+            label: "Headers",
+            bg: "bg-purple",
+          },
+          averageImageCount: {
+            icon: "PhotographIcon",
+            value: 0,
+            label: "Images",
+            bg: "bg-orange",
+          },
+          averageParagraphCount: {
+            icon: "TemplateIcon",
+            value: 0,
+            label: "Paragraphs",
+            bg: "bg-green",
+          },
         },
+        expandedArticles: [],
+      },
       steps: [
         {
           target: '[data-tour-step="1"]',
@@ -1057,11 +1372,11 @@ export default {
   },
   methods: {
     goToBp: function () {
-      console.log("lol");
-      const myprop = this.serpData;
-      console.log(myprop);
-      // this.$router.replace({ name: "Blueprint Editor", params: { serpData } });
-      this.$router.replace({ name: "Blueprint Editor", params: { myprop } });
+      const blueprintPropData = this.serpData;
+      this.$router.push({
+        name: "Blueprint Editor",
+        params: { blueprintPropData },
+      });
     },
     onClickExpand(index) {
       if (this.serpData.expandedArticles.includes(index))
