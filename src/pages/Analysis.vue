@@ -18,7 +18,10 @@
         <hr class="mt-2" />
       </div>
 
-      <div class="p-5 rounded bg-gray-25 dark:bg-gray-700" v-if="!retrieving">
+      <div
+        class="p-5 rounded shadow-md bg-gray-25 dark:bg-gray-700"
+        v-if="!retrieving"
+      >
         <h2 class="pt-2 mb-2 text-2xl text-gray-800 dark:text-gray-300 lg:mb-0">
           Search Parameters
         </h2>
@@ -39,7 +42,7 @@
               placeholder="best fishing rod for beginners"
               id="query"
               required
-              class="flex flex-grow w-full h-16 px-6 mb-2 mr-2 placeholder-gray-500 placeholder-opacity-50 bg-white border rounded-lg  dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 focus:outline-none"
+              class="flex flex-grow w-full h-16 px-6 mb-2 mr-2 placeholder-gray-500 placeholder-opacity-50 bg-white border rounded-lg shadow-sm  dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 focus:outline-none"
             />
             <button
               data-tour-step="6"
@@ -48,7 +51,7 @@
               v-on:click="animateSearchBtn($event)"
               :class="{ 'bounce-top': search.animatedSearchBtn }"
               @animationend="search.animatedSearchBtn = false"
-              class="flex items-center self-center flex-grow w-full h-16 px-4 mb-2 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
+              class="flex items-center self-center flex-grow w-full h-16 px-4 mb-2 font-semibold text-white duration-150 bg-indigo-600 rounded-lg shadow-md  sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
             >
               <div class="flex ml-auto mr-auto">
                 <span v-if="!loader.loading" class="whitespace-no-wrap"
@@ -85,7 +88,7 @@
               <div class="relative sm:w-1/4 sm:mr-2">
                 <select
                   data-tour-step="2"
-                  class="w-full h-16 px-3 text-sm bg-white border rounded-lg appearance-none  dark:border-gray-600 dark:text-gray-400 dark:bg-gray-800 focus:outline-none"
+                  class="w-full h-16 px-3 text-sm bg-white border rounded-lg shadow-sm appearance-none  dark:border-gray-600 dark:text-gray-400 dark:bg-gray-800 focus:outline-none"
                   name="engine"
                   id="engine"
                   required
@@ -104,7 +107,7 @@
               <div class="relative sm:w-1/4 sm:mr-2">
                 <select
                   data-tour-step="3"
-                  class="w-full h-16 px-3 mt-2 text-sm bg-white border rounded-lg appearance-none  dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 sm:mt-0 focus:outline-none"
+                  class="w-full h-16 px-3 mt-2 text-sm bg-white border rounded-lg shadow-sm appearance-none  dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 sm:mt-0 focus:outline-none"
                   name="location"
                   id="location"
                   required
@@ -432,7 +435,7 @@
               <div class="relative sm:w-1/4 sm:mr-2">
                 <select
                   data-tour-step="4"
-                  class="w-full h-16 px-3 mx-0 mt-2 text-sm bg-white border rounded-lg appearance-none  dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 sm:mt-0 focus:outline-none sm:my-0"
+                  class="w-full h-16 px-3 mx-0 mt-2 text-sm bg-white border rounded-lg shadow-sm appearance-none  dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800 sm:mt-0 focus:outline-none sm:my-0"
                   name="device"
                   id="device"
                   required
@@ -451,7 +454,7 @@
               <div class="relative sm:w-1/4">
                 <input
                   data-tour-step="5"
-                  class="w-full h-16 px-3 mt-2 text-sm bg-white border rounded-lg  dark:border-gray-600 dark:text-gray-400 dark:bg-gray-800 sm:mt-0 focus:outline-none"
+                  class="w-full h-16 px-3 mt-2 text-sm bg-white border rounded-lg shadow-sm  dark:border-gray-600 dark:text-gray-400 dark:bg-gray-800 sm:mt-0 focus:outline-none"
                   type="number"
                   id="quantity"
                   name="quantity"
