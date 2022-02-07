@@ -297,6 +297,100 @@ export default {
     };
   },
   methods: {
+    // eslint-disable-next-line no-unused-vars
+    onEditorBlur(quill) {
+      //console.log("editor blur!", quill);
+    },
+    // eslint-disable-next-line no-unused-vars
+    onEditorFocus(quill) {
+      //console.log("editor focus!", quill);
+    },
+    onEditorReady(quill) {
+      this.calculateAverage(quill);
+    },
+    async onEditorChange({ quill }) {
+      this.calculateAverage(quill);
+      this.checkContent(quill);
+      this.autoSave();
+    },
+    calculateAverage: async function (quill) {
+      const quillRoot = quill.root.innerHTML;
+      const parsed = parse(quillRoot);
+      const pTags = parsed.querySelectorAll("p");
+      const h1Elements = parsed.querySelectorAll("h1");
+      const h2Elements = parsed.querySelectorAll("h2");
+      const h3Elements = parsed.querySelectorAll("h3");
+      const h4Elements = parsed.querySelectorAll("h4");
+      const h5Elements = parsed.querySelectorAll("h5");
+      this.counts.paragraphs = pTags.length;
+      this.counts.headers =
+        h1Elements.length +
+        h2Elements.length +
+        h3Elements.length +
+        h4Elements.length +
+        h5Elements.length;
+
+      const result = await wordCount.WordCount(quillRoot);
+      this.counts.words = result.WordCount;
+    },
+    checkContent: function (quill) {
+      if (this.weightedHeaders || this.blueprintApiData.weightedHeaders) {
+        (this.haveblueprintPropData()
+          ? this.weightedHeaders
+          : this.blueprintApiData.weightedHeaders
+        ).forEach(function (header) {
+          header.included = quill.getText().includes(header.header)
+            ? true
+            : false;
+        });
+
+        (this.haveblueprintPropData()
+          ? this.weightedQuestions
+          : this.blueprintApiData.weightedQuestions
+        ).forEach(function (question) {
+          question.included = quill.getText().includes(question.question)
+            ? true
+            : false;
+        });
+        this.autoSave();
+      }
+    },
+    insertHeader: function (item) {
+      this.content += "<h2>" + item.trim() + "</h2>";
+    },
+    insertQuestion: function (item) {
+      this.content += "<h2>" + item.trim() + "</h2>";
+    },
+    focusEditor() {
+      this.$refs.myQuillEditor.$el.focus();
+      this.autoSave();
+    },
+    showSpinner: function (id) {
+      if (
+        document.getElementById(id + "_x") &&
+        document.getElementById(id + "_spinner")
+      )
+        document.getElementById(id + "_x").classList.remove("flex");
+      document.getElementById(id + "_x").classList.add("hidden");
+      document.getElementById(id + "_spinner").classList.remove("hidden");
+      document.getElementById(id + "_spinner").classList.add("flex");
+    },
+    hideSpinner: function (id) {
+      if (
+        document.getElementById(id + "_x") &&
+        document.getElementById(id + "_spinner")
+      )
+        document.getElementById(id + "_x").classList.remove("hidden");
+      document.getElementById(id + "_x").classList.add("flex");
+      document.getElementById(id + "_spinner").classList.remove("flex");
+      document.getElementById(id + "_spinner").classList.add("hidden");
+    },
+    autoSave: function () {
+      if (this.lastExecution + this.delay < Date.now() && this.autoSaving) {
+        this.saveBlueprint();
+        this.lastExecution = Date.now();
+      }
+    },
     saveBlueprint: async function () {
       this.showSpinner("saveBlueprintIcon");
       try {
@@ -339,103 +433,6 @@ export default {
       } finally {
         this.hideSpinner("saveBlueprintIcon");
         this.autoSaving = true;
-      }
-    },
-    // eslint-disable-next-line no-unused-vars
-    onEditorBlur(quill) {
-      //console.log("editor blur!", quill);
-    },
-    // eslint-disable-next-line no-unused-vars
-    onEditorFocus(quill) {
-      //console.log("editor focus!", quill);
-    },
-    onEditorReady(quill) {
-      this.calculateAverage(quill);
-    },
-    async onEditorChange({ quill }) {
-      this.calculateAverage(quill);
-      this.checkContent(quill);
-      this.autoSave();
-    },
-
-    calculateAverage: async function (quill) {
-      const quillRoot = quill.root.innerHTML;
-      const parsed = parse(quillRoot);
-      const pTags = parsed.querySelectorAll("p");
-      const h1Elements = parsed.querySelectorAll("h1");
-      const h2Elements = parsed.querySelectorAll("h2");
-      const h3Elements = parsed.querySelectorAll("h3");
-      const h4Elements = parsed.querySelectorAll("h4");
-      const h5Elements = parsed.querySelectorAll("h5");
-      this.counts.paragraphs = pTags.length;
-      this.counts.headers =
-        h1Elements.length +
-        h2Elements.length +
-        h3Elements.length +
-        h4Elements.length +
-        h5Elements.length;
-
-      const result = await wordCount.WordCount(quillRoot);
-      this.counts.words = result.WordCount;
-    },
-
-    checkContent: function (quill) {
-      if (this.weightedHeaders || this.blueprintApiData.weightedHeaders) {
-        (this.haveblueprintPropData()
-          ? this.weightedHeaders
-          : this.blueprintApiData.weightedHeaders
-        ).forEach(function (header) {
-          header.included = quill.getText().includes(header.header)
-            ? true
-            : false;
-        });
-
-        (this.haveblueprintPropData()
-          ? this.weightedQuestions
-          : this.blueprintApiData.weightedQuestions
-        ).forEach(function (question) {
-          question.included = quill.getText().includes(question.question)
-            ? true
-            : false;
-        });
-        this.autoSave();
-      }
-    },
-
-    insertHeader: function (item) {
-      this.content += "<h2>" + item.trim() + "</h2>";
-    },
-    insertQuestion: function (item) {
-      this.content += "<h2>" + item.trim() + "</h2>";
-    },
-    focusEditor() {
-      this.$refs.myQuillEditor.$el.focus();
-      this.autoSave();
-    },
-    showSpinner: function (id) {
-      if (
-        document.getElementById(id + "_x") &&
-        document.getElementById(id + "_spinner")
-      )
-        document.getElementById(id + "_x").classList.remove("flex");
-      document.getElementById(id + "_x").classList.add("hidden");
-      document.getElementById(id + "_spinner").classList.remove("hidden");
-      document.getElementById(id + "_spinner").classList.add("flex");
-    },
-    hideSpinner: function (id) {
-      if (
-        document.getElementById(id + "_x") &&
-        document.getElementById(id + "_spinner")
-      )
-        document.getElementById(id + "_x").classList.remove("hidden");
-      document.getElementById(id + "_x").classList.add("flex");
-      document.getElementById(id + "_spinner").classList.remove("flex");
-      document.getElementById(id + "_spinner").classList.add("hidden");
-    },
-    autoSave: function () {
-      if (this.lastExecution + this.delay < Date.now() && this.autoSaving) {
-        this.saveBlueprint();
-        this.lastExecution = Date.now();
       }
     },
     retrieve: async function (id) {
