@@ -1,13 +1,10 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import config from "../../config";
-
-// import axios from "axios";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    // blueprintData: {},
     theme: {},
     sideBarOpen: false,
     containerFull: false,
@@ -21,44 +18,17 @@ export default new Vuex.Store({
     isLoggedIn: (state) => !!state.token,
     authStatus: (state) => state.status,
     userDetails: () => JSON.parse(localStorage.getItem("user")),
-    // getBlueprint: (state) => state.blueprintData,
     sideBarOpen: (state) => state.sideBarOpen,
     containerFull: (state) => state.containerFull,
     getTheme: (state) => {
       return state.theme;
     },
-    // getQuestions: (state) => {
-    //   var questions = [];
-    //   if (Object.keys(state.blueprintData).length) {
-    //     for (const result of state.blueprintData.results) {
-    //       for (const question of result.questions) {
-    //         questions.push(question);
-    //       }
-    //     }
-    //     // Still need to add Google's questions here
-    //   }
-    //   return questions.filter(onlyUnique);
-    // },
-    // getHeaders: (state) => {
-    //   var headers = [];
-    //   if (Object.keys(state.blueprintData).length) {
-    //     for (const result of state.blueprintData.results) {
-    //       for (const header of result.headers) {
-    //         headers.push(header);
-    //       }
-    //     }
-    //   }
-    //   return headers.filter(onlyUnique);
-    // },
   },
   mutations: {
     SET_THEME(state, theme) {
       state.theme = theme;
       localStorage.theme = theme;
     },
-    // addBlueprint: (state, data) => {
-    //   state.blueprintData = data;
-    // },
     toggleSidebar(state) {
       state.sideBarOpen = !state.sideBarOpen;
     },
@@ -83,9 +53,6 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    // async addBluePrintData({ commit }, data) {
-    //   commit("addBlueprint", data);
-    // },
     toggleSidebar(context) {
       context.commit("toggleSidebar");
     },
@@ -107,8 +74,8 @@ export default new Vuex.Store({
           }),
         };
         try {
-          let response = await fetch(url, options);
-          let data = await response.json();
+          const response = await fetch(url, options);
+          const data = await response.json();
           if (data.error) {
             commit("auth_error", data.error);
           } else {
@@ -138,8 +105,8 @@ export default new Vuex.Store({
             user,
           }),
         };
-        let response = await fetch(url, options);
-        let data = await response.json();
+        const response = await fetch(url, options);
+        const data = await response.json();
         if (data.error) {
           commit("auth_error", data.error);
         } else {
@@ -162,7 +129,6 @@ export default new Vuex.Store({
     },
     initTheme({ commit }) {
       const cachedTheme = localStorage.theme ? localStorage.theme : false;
-      //  `true` if the user has set theme to `dark` on browser/OS
       const userPrefersDark = window.matchMedia("(prefers-color-scheme: dark)")
         .matches;
 
@@ -183,7 +149,3 @@ export default new Vuex.Store({
     },
   },
 });
-
-// function onlyUnique(value, index, self) {
-//   return self.indexOf(value) === index;
-// }
