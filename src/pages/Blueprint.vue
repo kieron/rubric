@@ -111,11 +111,6 @@
             />
             <div class="flex ml-auto mr-auto">Save Blueprint</div>
           </button>
-          <ErrorMessage
-            class="flex flex-row items-center p-5 mt-5 bg-red-200 border-b-2 border-red-300 rounded  alert swing-in-top-fwd"
-            v-if="errorHandler.error && loader.loading != true"
-            v-bind:message="errorHandler.errorMessage"
-          />
         </div>
 
         <div
@@ -165,6 +160,11 @@
           </div>
         </div>
       </div>
+      <ErrorMessage
+        class="flex flex-row items-center p-5 mt-5 bg-red-200 border-b-2 border-red-300 rounded  alert swing-in-top-fwd"
+        v-if="errorHandler.error && loader.loading != true"
+        v-bind:message="errorHandler.errorMessage"
+      />
     </div>
   </div>
 </template>
