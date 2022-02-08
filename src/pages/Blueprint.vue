@@ -16,7 +16,15 @@
 
         <hr class="mt-2" />
       </div>
-      <div class="flex">
+      <div
+        class="flex justify-center my-20 text-indigo-600"
+        v-if="loader.loading"
+      >
+        <LoadingSpinner
+          class="flex justify-center w-40 ml-auto mr-auto text-center fill-current "
+        />
+      </div>
+      <div class="flex" v-if="loader.loaded && !loader.loading">
         <div class="w-2/3 h-full text-gray-900">
           <div
             class="flex flex-wrap justify-center p-3 mb-2 text-gray-600 border  dark:border-gray-600 md:justify-start space-between menubar dark:text-gray-400"
@@ -284,7 +292,7 @@ export default {
         errorMessage: "Something Went Wrong!",
       },
       loader: {
-        loaded: false,
+        loaded: true,
         loading: false,
       },
       successMessage: "",
@@ -462,7 +470,6 @@ export default {
         } else {
           this.blueprintApiData = data;
           this.content = data.content;
-
           this.loadedAndShow();
         }
       } catch (err) {
@@ -476,6 +483,12 @@ export default {
       } else {
         return true;
       }
+    },
+    loadedAndShow() {
+      this.loader.loaded = true;
+      this.loader.loading = false;
+      this.search.idFromDb = "";
+      this.$refs.topProgress.done();
     },
   },
 

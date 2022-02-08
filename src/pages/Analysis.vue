@@ -1103,10 +1103,6 @@ export default {
         } else {
           this.serpData = { ...this.serpData, ...data };
           this.massage();
-          // this.$store.dispatch("addBluePrintData", {
-          //   ...this.serpData,
-          //   ...data,
-          // });
           this.search.timeTaken = Math.round(
             (performance.now() - this.search.timeStart) / 1000
           );
