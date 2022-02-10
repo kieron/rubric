@@ -8,7 +8,20 @@
       leave-active-class="slide-out-left"
     >
       <div
-        class="fixed z-30 w-3/4 h-screen border-r  dark:border-gray-600 bg-gray-25 dark:bg-gray-800 md:w-2/3 lg:w-64 md:top-0 md:left-0 lg:hidden"
+        class="
+          fixed
+          z-30
+          w-3/4
+          h-screen
+          border-r
+          dark:border-gray-600
+          bg-gray-25
+          dark:bg-gray-800
+          md:w-2/3
+          lg:w-64
+          md:top-0 md:left-0
+          lg:hidden
+        "
         id="mobile-nav"
         v-if="sideBarOpen"
       >
@@ -17,7 +30,16 @@
             active-class="bg-gray-25 dark:bg-gray-800"
             to="/"
             @click.native="toggleSidebar()"
-            class="flex items-center w-full h-20 px-4 text-gray-800  hover:text-indigo-600 dark:hover:text-indigo-600 dark:text-indigo-200"
+            class="
+              flex
+              items-center
+              w-full
+              h-20
+              px-4
+              text-gray-800
+              hover:text-indigo-600
+              dark:hover:text-indigo-600 dark:text-indigo-200
+            "
           >
             <Logo class="ml-2" />
             <p class="text-3xl font-semibold">RUBRIC</p>
@@ -26,7 +48,17 @@
           <!-- Close Menu -->
           <button
             @click="toggleSidebar(), animateClose()"
-            class="flex mr-4 text-gray-700 align-middle rounded-lg  hover:text-indigo-600 dark:hover:text-red-400 focus:outline-none focus:ring focus:border-indigo-600 dark:text-indigo-200"
+            class="
+              flex
+              mr-4
+              text-gray-700
+              align-middle
+              rounded-lg
+              hover:text-indigo-600
+              dark:hover:text-red-400
+              focus:outline-none focus:ring focus:border-indigo-600
+              dark:text-indigo-200
+            "
             id="mobCloseBtn"
           >
             <XIcon class="w-12 h-12" />
@@ -37,16 +69,40 @@
       </div>
     </transition>
     <div
-      class="flex items-center justify-between w-full h-20 px-6 bg-white border-b  dark:border-gray-600 dark:bg-gray-900"
+      class="
+        flex
+        items-center
+        justify-between
+        w-full
+        h-20
+        px-6
+        bg-white
+        border-b
+        dark:border-gray-600 dark:bg-gray-900
+      "
     >
       <!-- left navbar -->
       <div class="flex">
         <!-- mobile hamburger OPEN -->
         <div
-          class="flex items-center mr-4 text-gray-600  dark:text-indigo-200 lg:hidden"
+          class="
+            flex
+            items-center
+            mr-4
+            text-gray-600
+            dark:text-indigo-200
+            lg:hidden
+          "
         >
           <button
-            class="rounded-lg  hover:text-indigo-600 dark:hover:text-red-400 focus:outline-none focus:ring focus:border-indigo-600 hover:border-white navbar-burger"
+            class="
+              rounded-lg
+              hover:text-indigo-600
+              dark:hover:text-red-400
+              focus:outline-none focus:ring focus:border-indigo-600
+              hover:border-white
+              navbar-burger
+            "
             @click="toggleSidebar()"
           >
             <MenuAlt2Icon class="w-10 h-10" />
@@ -54,7 +110,19 @@
         </div>
 
         <span
-          class="hidden p-3 text-xs font-bold text-gray-600 bg-blue-200 border-b-2 border-blue-300 rounded  md:flex align-left dark:text-indigo-200 dark:border-indigo-800 dark:bg-indigo-900"
+          class="
+            hidden
+            p-3
+            text-xs
+            font-bold
+            text-gray-600
+            bg-blue-200
+            border-b-2 border-blue-300
+            rounded
+            md:flex
+            align-left
+            dark:text-indigo-200 dark:border-indigo-800 dark:bg-indigo-900
+          "
           >Hey! Rubric is ALPHA software. Features may be broken and/or
           unstable. Please report issues! ✨</span
         >
@@ -66,14 +134,29 @@
       >
         <button
           @click="toggleTheme"
-          class="mr-4 rounded-lg  hover:text-indigo-600 dark:hover:text-red-400 focus:outline-none focus:ring focus:border-indigo-600"
+          class="
+            mr-4
+            rounded-lg
+            hover:text-indigo-600
+            dark:hover:text-red-400
+            focus:outline-none focus:ring focus:border-indigo-600
+          "
           title="Toggle Theme"
         >
           <SunIcon v-if="theme === 'dark'" class="w-8 h-8 duration-150" />
           <MoonIcon v-if="theme !== 'dark'" class="w-8 h-8 duration-150" />
         </button>
         <button
-          class="hidden p-1 mr-4 duration-150 rounded-lg  focus:outline-none focus:ring focus:border-indigo-600 hover:text-indigo-600 dark:hover:text-red-400"
+          class="
+            hidden
+            p-1
+            mr-4
+            duration-150
+            rounded-lg
+            focus:outline-none focus:ring focus:border-indigo-600
+            hover:text-indigo-600
+            dark:hover:text-red-400
+          "
         >
           <div class="flex px-0 leading-3">
             <BellIcon class="w-8 h-8 duration-150" />
@@ -81,7 +164,15 @@
           </div>
         </button>
         <button
-          class="p-0 duration-150 rounded-lg  focus:outline-none hover:text-indigo-600 focus:ring focus:border-indigo-600 dark:hover:text-red-400"
+          class="
+            p-0
+            duration-150
+            rounded-lg
+            focus:outline-none
+            hover:text-indigo-600
+            focus:ring focus:border-indigo-600
+            dark:hover:text-red-400
+          "
           @click.prevent="toggleDropdown"
         >
           <UserCircleIcon class="w-8 h-8 duration-150" />
@@ -95,19 +186,46 @@
       leave-active-class="swing-out-top-bck"
     >
       <div
-        class="absolute right-0 z-20 w-48 mr-6 text-gray-700 border border-t-0 rounded-b-lg shadow-xl  dark:border-gray-600 bg-gray-25 dark:bg-gray-700 dark:text-gray-400"
+        class="
+          absolute
+          right-0
+          z-20
+          w-48
+          mr-6
+          text-gray-700
+          border border-t-0
+          rounded-b-lg
+          shadow-xl
+          dark:border-gray-600
+          bg-gray-25
+          dark:bg-gray-700 dark:text-gray-400
+        "
         v-if="dropDownOpen"
       >
         <router-link
           v-if="isLoggedIn"
           to="/account"
-          class="block px-4 py-2  hover:bg-gray-200 dark:hover:bg-gray-500 dark:hover:text-gray-200"
+          class="
+            block
+            px-4
+            py-2
+            hover:bg-gray-200
+            dark:hover:bg-gray-500 dark:hover:text-gray-200
+          "
           >Account</router-link
         >
         <button
           v-if="isLoggedIn"
           @click="logout"
-          class="flex w-full px-4 py-2  flex-start hover:bg-gray-200 dark:hover:bg-gray-500 dark:hover:text-gray-200"
+          class="
+            flex
+            w-full
+            px-4
+            py-2
+            flex-start
+            hover:bg-gray-200
+            dark:hover:bg-gray-500 dark:hover:text-gray-200
+          "
           title="Log Out"
         >
           Logout
@@ -115,14 +233,26 @@
 
         <router-link
           to="/login"
-          class="block px-4 py-2  hover:bg-gray-200 dark:hover:bg-gray-500 dark:hover:text-gray-200"
+          class="
+            block
+            px-4
+            py-2
+            hover:bg-gray-200
+            dark:hover:bg-gray-500 dark:hover:text-gray-200
+          "
           v-if="!isLoggedIn"
           >Login</router-link
         >
 
         <router-link
           to="/register"
-          class="block px-4 py-2  hover:bg-gray-200 dark:hover:bg-gray-500 dark:hover:text-gray-200"
+          class="
+            block
+            px-4
+            py-2
+            hover:bg-gray-200
+            dark:hover:bg-gray-500 dark:hover:text-gray-200
+          "
           v-if="!isLoggedIn"
           >Register</router-link
         >
@@ -197,16 +327,13 @@ export default {
     },
     logout: function () {
       this.$store.dispatch("logout").then(() => {
-        // this.dropDownOpen = !this.dropDownOpen;
         if (this.$route.path !== "/") this.$router.push("/");
       });
     },
     toggleSidebar() {
-      // this.dropDownOpen = false;
       this.$store.dispatch("toggleSidebar");
     },
     animateClose() {
-      // this.dropDownOpen = false;
       document.getElementById("mobCloseBtn").classList.add("rotate-center");
       setTimeout(function () {
         if (document.getElementById("mobCloseBtn"))
