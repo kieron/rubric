@@ -20,7 +20,7 @@
           </p>
           <div class="flex justify-center mt-6 lg:justify-start">
             <router-link
-              class="flex items-center self-center h-16 px-4 mb-2 font-semibold text-white duration-150 bg-indigo-900 rounded-lg  hover:bg-indigo-500 focus:outline-none"
+              class="flex items-center self-center h-16 px-4 mb-2 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  hover:bg-indigo-500 focus:outline-none"
               to="/analysis"
               v-if="isLoggedIn"
               >SERP Analysis</router-link
