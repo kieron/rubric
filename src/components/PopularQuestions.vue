@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex-grow px-4 py-3 mt-2 bg-gray-100 border rounded dark:bg-gray-700 dark:border-gray-600"
+    class="flex-grow px-4 py-3 mt-2 bg-gray-100 border rounded  dark:bg-gray-700 dark:border-gray-600"
     v-if="data.length"
   >
     <h3 class="font-bold text-gray-700 dark:text-gray-300 text-md">
@@ -32,18 +32,45 @@
         :class="{ 'text-gray-400': header.weight === false }"
       >
         <div
-          class="relative flex py-0.5 px-4 m-1 hover-trigger text-sm font-bold leading-loose bg-indigo-100 border border-indigo-200 rounded transition duration-1000 ease-in-out"
+          class="
+            relative
+            flex
+            py-0.5
+            px-4
+            m-1
+            hover-trigger
+            text-sm
+            font-bold
+            leading-loose
+            bg-indigo-100
+            border border-indigo-200
+            rounded
+            transition
+            duration-1000
+            ease-in-out
+          "
         >
           <span class="">{{ header.header }}</span>
           <div
-            class="absolute pl-5 transition duration-1000 ease-in-out del-grad right-1"
+            class="absolute pl-5 transition duration-1000 ease-in-out  del-grad right-1"
           >
             <button
               class="del-header scale-in-center"
               @click="removeWeighted(index)"
             >
               <XCircleIcon
-                class="w-6 h-6 mb-0.5 text-gray-700 align-middle hover:text-red-400 del-header-icon transition duration-200 ease-in-out"
+                class="
+                  w-6
+                  h-6
+                  mb-0.5
+                  text-gray-700
+                  align-middle
+                  hover:text-red-400
+                  del-header-icon
+                  transition
+                  duration-200
+                  ease-in-out
+                "
               />
             </button>
           </div>
@@ -73,18 +100,45 @@
         :class="{ 'text-gray-400': header.weight === false }"
       >
         <div
-          class="relative flex py-0.5 px-4 m-1 hover-trigger text-sm font-bold leading-loose bg-indigo-100 border border-indigo-200 rounded transition duration-1000 ease-in-out"
+          class="
+            relative
+            flex
+            py-0.5
+            px-4
+            m-1
+            hover-trigger
+            text-sm
+            font-bold
+            leading-loose
+            bg-indigo-100
+            border border-indigo-200
+            rounded
+            transition
+            duration-1000
+            ease-in-out
+          "
         >
           <span class="">{{ header.header }}</span>
           <div
-            class="absolute pl-5 transition duration-1000 ease-in-out del-grad right-1"
+            class="absolute pl-5 transition duration-1000 ease-in-out  del-grad right-1"
           >
             <button
               class="text-indigo-300 del-header scale-in-center"
               @click="makeWeighted(index)"
             >
               <PlusCircleIcon
-                class="w-6 h-6 mb-0.5 text-gray-700 align-middle hover:text-green-400 del-header-icon transition duration-200 ease-in-out"
+                class="
+                  w-6
+                  h-6
+                  mb-0.5
+                  text-gray-700
+                  align-middle
+                  hover:text-green-400
+                  del-header-icon
+                  transition
+                  duration-200
+                  ease-in-out
+                "
               />
             </button>
           </div>

@@ -1,7 +1,7 @@
 const colors = require("tailwindcss/colors");
 
 module.exports = {
-  purge: [
+  content: [
     "./src/**/*.html",
     "./src/**/*.vue",
     "./src/**/*.jsx",
@@ -21,7 +21,7 @@ module.exports = {
         purple: {
           DEFAULT: "#7e3af2",
         },
-        bluegray: colors.blueGray,
+        bluegray: colors.slate,
       },
       transitionProperty: {
         width: "width",
