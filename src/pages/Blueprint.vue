@@ -98,6 +98,7 @@
           <button
             class="flex items-center self-center flex-grow w-full h-16 px-4 mt-3 mb-2 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  sm:w-auto hover:bg-indigo-500 focus:outline-none whitespace-nowrap"
             @click="saveBlueprint()"
+            :disabled="this.loader.saving === true"
             title="Save Blueprint"
             v-if="content"
           >
@@ -294,6 +295,7 @@ export default {
       loader: {
         loaded: true,
         loading: false,
+        saving: false,
       },
       successMessage: "",
       api_url: config.API_URL,
@@ -400,7 +402,9 @@ export default {
       }
     },
     saveBlueprint: async function () {
+      this.loader.saving = true;
       this.showSpinner("saveBlueprintIcon");
+
       try {
         const blueprint = {
           averageValues: this.haveblueprintPropData()
@@ -441,6 +445,7 @@ export default {
       } finally {
         this.hideSpinner("saveBlueprintIcon");
         this.autoSaving = true;
+        this.loader.saving = false;
       }
     },
     retrieve: async function (id) {
