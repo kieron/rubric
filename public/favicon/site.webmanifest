@@ -1,6 +1,7 @@
 {
     "name": "Rubric SEO",
     "short_name": "Rubric SEO",
+    "start_url": "https://app.rubricseo.com",
     "icons": [{
             "src": "/favicon/android-chrome-192x192.png",
             "sizes": "192x192",
