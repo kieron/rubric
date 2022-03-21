@@ -404,7 +404,6 @@
                     United Arab Emirates
                   </option>
                   <option value="United Kingdom">United Kingdom</option>
-                  <option value="United Kingdom">United Kingdom</option>
                   <option value="United States">United States</option>
                   <option value="United States Minor Outlying Islands">
                     United States Minor Outlying Islands
