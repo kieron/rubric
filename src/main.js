@@ -11,6 +11,7 @@ import Default from "@/layouts/Default";
 const view = (name) => () => import(`@/pages/${name}.vue`);
 
 import "@/assets/css/tailwind.css";
+import './registerServiceWorker'
 
 Vue.config.productionTip = false;
 Vue.use(LoadScript);
