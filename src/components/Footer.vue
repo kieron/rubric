@@ -1,31 +1,18 @@
 <template functional>
   <div
-    class="items-center justify-between w-full px-8 py-6 text-gray-700 border-t  dark:bg-gray-900 dark:border-gray-600 lg:flex"
+    class="items-center justify-between w-full px-8 py-6 text-sm border-t  dark:bg-gray-900 dark:border-gray-600 dark:text-gray-400 lg:flex"
   >
-    <p class="mb-2 lg:mb-0 dark:text-gray-400">
-      ©RUBRIC Copyright {{ currentYear }}
-    </p>
+    <p class="mb-2 lg:mb-0">©RUBRIC Copyright {{ new Date().getFullYear() }}</p>
 
-    <div class="flex text-sm text-gray-600 md:text-base">
-      <a
-        href="/tos"
-        class="mr-6  hover:text-gray-900 dark:text-gray-400 dark:hover:text-red-400"
+    <div class="flex">
+      <a href="/tos" class="mr-6 hover:text-gray-900 dark:hover:text-red-400"
         >Terms of Service</a
       >
       <router-link
         to="/privacy"
-        class="mr-6  hover:text-gray-900 dark:text-gray-400 dark:hover:text-red-400"
+        class="mr-6 hover:text-gray-900 dark:hover:text-red-400"
         >Privacy Policy</router-link
       >
     </div>
   </div>
 </template>
-<script>
-export default {
-  data() {
-    return {
-      currentYear: new Date().getFullYear(), // 2020
-    };
-  },
-};
-</script>
