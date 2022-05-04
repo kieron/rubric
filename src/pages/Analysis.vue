@@ -13,7 +13,7 @@
           SERP Analysis
         </h1>
         <p class="text-gray-800 dark:text-gray-300">
-          Find out who is ranking and why for any given search result.
+          Find out who is ranking and why for any given search result!
         </p>
         <hr class="mt-2" />
       </div>
