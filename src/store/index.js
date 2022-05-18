@@ -38,10 +38,14 @@ export default new Vuex.Store({
     auth_request(state) {
       state.status = "loading";
     },
-    auth_success(state, token, user) {
+    auth_success(state, payload) {
+      const {token,user} = payload
       state.status = "success";
+      console.log(token, user)
+      if (!token || !user) return;
       state.token = token;
       state.user = user;
+
     },
     auth_error(state, msg) {
       state.status = msg;
@@ -81,13 +85,75 @@ export default new Vuex.Store({
           } else {
             const token = data.user.token;
             const user = data.user;
+            console.log(token,user)
             delete user.password;
             localStorage.setItem("token", token);
             localStorage.setItem("user", JSON.stringify(user));
-            commit("auth_success", token, user);
+            commit("auth_success", {token, user});
           }
         } catch (error) {
           commit("auth_error", error);
+        }
+      })();
+    },
+    verifyAccount({ commit, state }, payload) {
+      const { email, mailToken } = payload;
+      return new (async () => {
+        commit("auth_request");
+        const url = `${state.api_url}/verifytoken/${email}/${mailToken}`;
+        const options = {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json;charset=UTF-8",
+          },
+        };
+        try {
+          const response = await fetch(url, options);
+
+          const data = await response.json();
+
+          if (data.error || !response.ok) {
+            commit("auth_error", data.error ? data.error : data.msg);
+            throw new Error(data.msg);
+          } else {
+            commit("auth_success");
+          }
+        } catch (error) {
+          commit("auth_error", error);
+          throw new Error(error.message);
+        }
+      })();
+    },
+    resendVerificationLink({ commit, state }, payload) {
+      const { email } = payload;
+      return new (async () => {
+        commit("auth_request");
+        const url = `${state.api_url}/retrytoken`;
+        const options = {
+          method: "POST",
+          body: JSON.stringify({
+            email,
+          }),
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json;charset=UTF-8",
+          },
+        };
+        try {
+          const response = await fetch(url, options);
+
+          const data = await response.json();
+
+          if (data.error || !response.ok) {
+            commit("auth_error", data.error ? data.error : data.msg);
+            throw new Error(data.msg);
+          } else {
+            commit("auth_success");
+          }
+        } catch (error) {
+          commit("auth_error", error);
+          throw new Error(error.message);
         }
       })();
     },
@@ -110,12 +176,13 @@ export default new Vuex.Store({
         if (data.error) {
           commit("auth_error", data.error);
         } else {
-          const token = data.user.token;
-          const user = data.user;
-          delete user.password;
-          localStorage.setItem("token", token);
-          localStorage.setItem("user", JSON.stringify(user));
-          commit("auth_success", token, user);
+          // const token = data.user.token;
+          // const user = data.user;
+          // delete user.password;
+          // localStorage.setItem("token", token);
+          // localStorage.setItem("user", JSON.stringify(user));
+          // commit("auth_success", token, user);
+          commit("auth_success");
         }
       })();
     },
