@@ -114,10 +114,10 @@ export default {
     LoadingSpinner,
   },
   computed: {
-    isLoggedIn: function () {
+    isLoggedIn: function() {
       return this.$store.getters.isLoggedIn;
     },
-    authStatus: function () {
+    authStatus: function() {
       return this.$store.getters.authStatus;
     },
   },
@@ -138,7 +138,7 @@ export default {
     };
   },
   methods: {
-    register: async function () {
+    register: async function() {
       if (!this.passwordComplexityError) {
         if (this.password === this.password_confirmation) {
           this.passwordMatchError = false;
@@ -150,7 +150,7 @@ export default {
           try {
             await this.$store.dispatch("register", data);
             if (this.$store.getters.authStatus === "success") {
-              this.$router.push("/account");
+              this.$router.push("/verification-message");
             }
           } catch (err) {
             console.log(err);
@@ -165,7 +165,7 @@ export default {
         document.getElementById("password").focus();
       }
     },
-    passwordStrength: function () {
+    passwordStrength: function() {
       const mediumRegex = new RegExp(
         "^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{8,})"
       );
@@ -178,7 +178,7 @@ export default {
     },
   },
   watch: {
-    password_confirmation: function () {
+    password_confirmation: function() {
       if (
         this.passwordMatchError &&
         this.password === this.password_confirmation

@@ -43,6 +43,16 @@ const routes = [
         component: view("Register"),
       },
       {
+        path: "/confirmation/:email/:token",
+        name: "Verify",
+        component: view("Verify"),
+      },
+      {
+        path: "/verification-message",
+        name: "VerifyMessage",
+        component: view("VerifyMessage"),
+      },
+      {
         path: "/account",
         name: "Account",
         component: view("Account"),
@@ -112,11 +122,16 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
+
   if (to.matched.some((record) => record.meta.requiresAuth)) {
+
     if (store.getters.isLoggedIn) {
       next();
       return;
     }
+    // if(from.name !== 'Register' && to.name === 'Verify'){
+    //   return 
+    // }
     next("/login");
   } else {
     next();
