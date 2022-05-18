@@ -38,7 +38,7 @@ export default new Vuex.Store({
     auth_request(state) {
       state.status = "loading";
     },
-    auth_success(state, payload) {
+    auth_success(state, payload = {token:null,user:null}) {
       const {token,user} = payload
       state.status = "success";
       console.log(token, user)
