@@ -51,9 +51,6 @@ const routes = [
         path: "/verification-message",
         name: "VerifyMessage",
         component: view("VerifyMessage"),
-        meta: {
-          requiresAuth: true,
-        }
       },
       {
         path: "/account",
@@ -132,9 +129,7 @@ router.beforeEach((to, from, next) => {
       next();
       return;
     }
-    // if(from.name !== 'Register' && to.name === 'Verify'){
-    //   return
-    // }
+
     next("/login");
   } else {
     next();

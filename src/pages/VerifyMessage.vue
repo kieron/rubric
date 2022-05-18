@@ -39,7 +39,7 @@ export default {
     },
   },
   mounted() {
-    // if (this.isLoggedIn === true) this.$router.push("/");
+    if (this.isLoggedIn === true) this.$router.push("/");
   },
   data() {
     return {
