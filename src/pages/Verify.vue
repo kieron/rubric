@@ -101,7 +101,7 @@ export default {
         await this.$store.dispatch("resendVerificationLink", { email });
   
         if (this.authStatus === "success") {
-          this.$router.push("/login");
+          this.$router.push("/verification-message");
         }
       } catch (err) {
         this.error = err.message
