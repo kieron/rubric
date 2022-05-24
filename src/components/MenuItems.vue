@@ -40,7 +40,7 @@
         to="/keyword-finder"
         title="Keyword Finder"
         @click.native="toggleSidebar()"
-        class="hidden items-center w-full h-10 pl-4 mb-2 text-gray-800 duration-150 rounded-lg cursor-pointer  dark:text-gray-300 dark:hover:text-indigo-200 hover:bg-gray-30 dark:hover:bg-gray-700"
+        class="flex items-center w-full h-10 pl-4 mb-2 text-gray-800 duration-150 rounded-lg cursor-pointer  dark:text-gray-300 dark:hover:text-indigo-200 hover:bg-gray-30 dark:hover:bg-gray-700"
       >
         <SparklesIcon class="w-6 h-6 mr-2" />
 
