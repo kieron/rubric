@@ -98,6 +98,15 @@ const routes = [
         },
       },
       {
+        path: "/keyword-finder",
+        name: "Keyword Finder",
+        component: view("Keywords"),
+        props: true,
+        meta: {
+          requiresAuth: true,
+        },
+      },
+      {
         path: "/privacy",
         name: "Privacy Policy",
         component: view("Privacy"),
