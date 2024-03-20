@@ -10,17 +10,17 @@
           >
             Welcome to <span class="text-indigo-600">Rubric</span>
           </h2>
-          <p class="mt-2 text-sm text-gray-500 md:text-base">
+          <p class="mt-2 text-lg text-gray-500 md:text-base">
             The API for this service has been switched off, and this site will no longer function. Thanks ChatGPT!
           </p>
           <!-- <p class="mt-2 text-sm text-gray-500 md:text-base">
             If you are a content creator, Rubric can help you create winning SEO
             content for your website. It's designed to help you maximise your
             efficiency even if you are not an expert in SEO.
-          </p> -->
+          </p> 
           <p class="mt-2 text-sm text-gray-500 md:text-base">
             Perform your first SERP Analysis now!
-          </p>
+          </p>-->
           <div class="flex justify-center mt-6 lg:justify-start">
             <router-link
               class="flex items-center self-center h-16 px-4 mb-2 font-semibold text-white duration-150 bg-indigo-600 rounded-lg  hover:bg-indigo-500 focus:outline-none"
